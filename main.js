@@ -1,31 +1,34 @@
-var req = new XMLHttpRequest();
+var reqUser = new XMLHttpRequest();
 var userData = {};
-var username;
-var apiURL;
 
-// only consume API if user has entered their battlenet id
-if (window.location.search) {
-	username = window.location.search;
-	username = username.replace("?username=", "");
-	username = username.replace("%23", "-");
-	apiURL = "https://owapi.net/api/v3/u/" + username + "/blob";
 
-	// GET request to api
-	req.open("GET", apiURL, true);
-	req.send();
+// ================
+// USER STATS API
+// ================
+
+// if userAPIURL exists, get user stats and build page with userdata
+if (getCookie("userAPIURL") != undefined) {
+	console.log(getCookie("userAPIURL"));
+		getUserStats();
 }
 
 
 
 
-req.addEventListener("readystatechange", processRequest, false);
 
 
+function getUserStats() {
+	reqUser.open("GET", getCookie("userAPIURL"), true);
+	reqUser.send();
 
-function processRequest(e) {
-	if (req.readyState === 4 && req.status == 200) {
+	reqUser.addEventListener("readystatechange", processUserRequest, false);
+}
+
+
+function processUserRequest(e) {
+	if (reqUser.readyState === 4 && reqUser.status == 200) {
 		console.log("processed api");
-		var res = JSON.parse(req.responseText);
+		var res = JSON.parse(reqUser.responseText);
 		if (res.us) {
 			userData = res.us;
 		} else if (res.eu) {
@@ -38,10 +41,12 @@ function processRequest(e) {
 			alert("ran into a problem");
 		}
 		console.log("about to call build function");
+
 		// create section for each checked hero
 		buildAllHeroSections(userData);
 	}
 }
+
 
 function buildAllHeroSections(userData) {
 	console.log("in build function")
@@ -56,3 +61,6 @@ function buildAllHeroSections(userData) {
 		originalHeroSection.parentNode.appendChild(newSection);
 	}
 }
+
+
+
