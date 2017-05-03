@@ -1,0 +1,28 @@
+/*body {
+	padding-top: 60px;
+}*/
+
+h1 {
+	text-align: center;
+}
+
+.btn:focus,.btn:active:focus,.btn.active:focus,
+.btn.focus,.btn:active.focus,.btn.active.focus {
+    outline: none;
+}
+
+/*.hero-icon {
+	color: black;
+	fill: black;
+	background-color: black;
+}*/
+
+.hero-icon {
+	font-size: 120px;
+	text-align: center;
+	line-height: 1.2;
+}
+
+.hero-section {
+	min-height: 400px;
+}

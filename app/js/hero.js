@@ -14,16 +14,27 @@ function getHero() {
 		}
 	}
 
-	// get hash value from url and only use the hero id
-	var heroID = window.location.hash;
-	heroID = heroID.replace("#", "");
+	// get hero name from query string
+	var heroName = window.location.search;
+	heroName = heroName.replace("?name=", "");
+
+	// find the hero object with matching name property
+	selectedHero = heroData.find(function(hero) {
+		return hero.name.toLowerCase() === heroName;
+	});
 
 	// create the page with the data from the hero
-	buildHeroSection(heroData[heroID]);
+	buildHeroSection(selectedHero);
+	setBackgroundImg(selectedHero);
 }
 
 function buildHeroSection(hero) {
 	for (var attribute in hero) {
 		$("h1").append("<p>" + hero[attribute] + "</p>");
 	}
+}
+
+function setBackgroundImg(hero) {
+	var bgImg = document.getElementById("hero-bg");
+	bgImg.classList.add("ohi-" + hero.name.toLowerCase());
 }

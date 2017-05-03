@@ -42,9 +42,13 @@ function processHeroRequest(e) {
 		// for each hero in the response, create cookie with their data
 		res.data.forEach(function(hero) {
 			var heroDataString = JSON.stringify(hero);
-			// remove errant semicolons for JSON purposes
-			heroDataString = heroDataString.replace(";", ".");
 			var cookieName = hero.name.toLowerCase();
+
+			// remove semicolons, accents, etc
+			cookieName = cookieName.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+			heroDataString = heroDataString.replace(";", ".");
+			heroDataString = heroDataString.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+
 			setCookie(cookieName, heroDataString, 7);
 		});
 	}

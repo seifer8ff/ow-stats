@@ -1,0 +1,25 @@
+{
+  "name": "ow-stats",
+  "version": "1.0.0",
+  "description": "A simple way to view your Overwatch stats across heroes.",
+  "main": "app/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seifer8ff/ow-stats.git"
+  },
+  "keywords": [
+    "Overwatch"
+  ],
+  "author": "Brady Mauermann-Peterson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seifer8ff/ow-stats/issues"
+  },
+  "homepage": "https://github.com/seifer8ff/ow-stats#readme",
+  "dependencies": {
+    "overwatch-heroes-icon-font": "^1.1.0"
+  }
+}
