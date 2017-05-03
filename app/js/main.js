@@ -170,7 +170,7 @@ function buildHeroSection(hero) {
 	// set id, hero name, and playtime (all heroes have this data)
 	newSection.id = hero;
 	heroIcon.classList.add("ohi-" + hero);
-	linkToHero.href = "/hero.html?name=" + hero;
+	linkToHero.href = "/hero?name=" + hero;
 	newSection.classList.remove("hidden");
 	heroName.textContent = hero;
 	playTime.textContent = "Playtime: " + userData.heroes.playtime.quickplay[hero];
