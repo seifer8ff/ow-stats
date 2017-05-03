@@ -1,21 +1,6 @@
 var reqHeroes = new XMLHttpRequest();
 
 
-// ================
-// USER STATS
-// ================
-// if we haven't stored the username in the cookie, get username, build url, and store in cookie
-if (getCookie("userAPIURL") === undefined) {
-	if (window.location.search) {
-		var username = window.location.search;
-		username = username.replace("?username=", "");
-		username = username.replace("%23", "-");
-		setCookie("username", username, 30);
-
-		var userAPIURL = "https://owapi.net/api/v3/u/" + username + "/blob";
-		setCookie("userAPIURL", userAPIURL, 30);
-	}
-}
 
 // ============
 // HERO INFO
@@ -45,9 +30,8 @@ function processHeroRequest(e) {
 			var cookieName = hero.name.toLowerCase();
 
 			// remove semicolons, accents, etc
-			cookieName = cookieName.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-			heroDataString = heroDataString.replace(";", ".");
-			heroDataString = heroDataString.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+			cookieName = normalizeString(cookieName);
+			heroDataString = normalizeString(heroDataString);
 
 			setCookie(cookieName, heroDataString, 7);
 		});
@@ -77,6 +61,21 @@ function getCookieArray() {
 		return parts.pop().split(";").shift();
 	} 
 	return parts;
+}
+
+// removed semicolons, accent marks, etc
+function normalizeString(string, removeExtras) {
+	var newString = string.replace(";", ".");
+	newString = newString.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+
+	if (removeExtras) {
+		// remove all whitespace
+		newString = newString.replace(/\s/g,'');
+		// remove ".", ":"
+		newString = newString.replace(/:|\./g, "");
+		newString = newString.toLowerCase();
+	}
+	return newString;
 }
 
 

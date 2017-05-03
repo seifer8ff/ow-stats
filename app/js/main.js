@@ -1,5 +1,31 @@
 var reqUser = new XMLHttpRequest();
 var userData = {};
+var heroDisplay = {
+	sombra: 	false,
+	mercy: 		true,
+	lucio: 		false,
+	dva: 		true,
+	symmetra: 	false,
+	widowmaker: false,
+	reaper: 	false,
+	tracer: 	true,
+	ana: 		false,
+	zenyatta: 	false,
+	junkrat: 	false,
+	roadhog: 	false,
+	zarya: 		false,
+	orisa: 		false,
+	pharah: 	false,
+	mccree: 	false,
+	torbjorn: 	false,
+	mei: 		true,
+	reinhardt: 	false,
+	hanzo: 		true,
+	genji: 		false,
+	winston: 	false,
+	bastion: 	false,
+	soldier76: 	true
+};
 
 
 // ================
@@ -8,16 +34,58 @@ var userData = {};
 
 // if userAPIURL exists, get user stats and build page with userdata
 if (getCookie("userAPIURL") != undefined) {
-	document.getElementById("idInput").classList.add("hidden");
 	getUserStats();
+} else {
+	// show the username form
+	document.getElementById("formUsername").classList.remove("hidden");
 }
 
-// get all checkboxes, and add listener for toggling
-var toggles = $(".hero-toggle");
-toggles.on("change", function() {
-	alert("changed");
-});
 
+window.onload=function() {
+	// get all checkboxes, and add listener for toggling
+	var toggles = $(".hero-toggle");
+	toggles.on("change", function() {
+		// get text on button
+		var toggledHero = normalizeString($(this).parent().text(), true);
+		// toggle button state
+		!this.checked;
+		// toggle display of hero
+		heroDisplay[toggledHero] = this.checked;
+		if (this.checked) {
+			// add section
+			buildHeroSection(toggledHero);
+		} else {
+			// remove section
+			removeHeroSection(toggledHero);
+		}
+	});
+	// override form submit to add username + url to cookie
+	document.getElementById("formUsername").onsubmit=function(e) {
+		e.preventDefault();
+		// get username
+		var username = document.getElementById("inputUsername").value;
+
+		// test with regex before continuing
+		if (!/\w+#\d+/.test(username)) {
+			alert("BATTLETAG format should match: Example#1234");
+			return false;
+		}
+
+		// format for API call
+		username = username.replace("#", "-");
+
+		// set cookie if username is valid format
+		setCookie("username", username, 30);
+		var userAPIURL = "https://owapi.net/api/v3/u/" + username + "/blob";
+		setCookie("userAPIURL", userAPIURL, 30);
+
+		// hide input box
+		this.classList.add("hidden");
+
+		// get user stats
+		getUserStats();
+	}
+}
 
 
 
@@ -50,59 +118,72 @@ function processUserRequest(e) {
 		console.log("about to call build function");
 
 		// create section for each checked hero
-		buildAllHeroSections(userData);
+		buildAllHeroSections();
 	}
 }
 
-
-function buildAllHeroSections(userData) {
+// for each hero in userData (that's toggled on), build a hero section
+function buildAllHeroSections() {
 	console.log("building hero sections");
-	var originalHeroSection = document.getElementById("originalHeroSection");
 	for (var hero in userData.heroes.playtime.quickplay) {
-		// clone template section
-		var newSection = originalHeroSection.cloneNode(true);
+		// if the hero display is toggled on
+		if (!heroDisplay[hero]) { continue; }
 
-		// get children elements
-		var heroName = newSection.getElementsByClassName("hero-name")[0];
-		var heroIcon = newSection.getElementsByClassName("hero-icon")[0];
-		var playTime = newSection.getElementsByClassName("hero-playTime")[0];
-		var elims = newSection.getElementsByClassName("hero-elims")[0];
-		var deaths = newSection.getElementsByClassName("hero-deaths")[0];
-		var damage = newSection.getElementsByClassName("hero-damage")[0];
-		var healing = newSection.getElementsByClassName("hero-healing")[0];
-		var linkToHero = newSection.getElementsByClassName("hero-link")[0];
+		buildHeroSection(hero);
+	}
+}
 
-		// set id, hero name, and playtime (all heroes have this data)
-		newSection.id = hero;
-		heroIcon.classList.add("ohi-" + hero);
-		linkToHero.href = "/hero.html?name=" + hero;
-		newSection.classList.remove("hidden");
-		heroName.textContent = hero;
-		playTime.textContent = "Playtime: " + userData.heroes.playtime.quickplay[hero];
+// build the hero section for a given hero
+function buildHeroSection(hero) {
+	// clone template section
+	var originalHeroSection = document.getElementById("originalHeroSection");
+	var newSection = originalHeroSection.cloneNode(true);
 
-		// only heroes with > 0 playtime have stats info
-		if (userData.heroes.stats.quickplay[hero]) {
-			elims.textContent = "Eliminations: " + userData.heroes.stats.quickplay[hero].average_stats.eliminations_average;
-			deaths.textContent = "Deaths: " + userData.heroes.stats.quickplay[hero].average_stats.deaths_average;
-			damage.textContent = "Average Damage: " + userData.heroes.stats.quickplay[hero].average_stats.damage_done_average;
-			// only healers have healing data
-			if (userData.heroes.stats.quickplay[hero].average_stats.healing_done_average) {
-				healing.textContent = "Healing: " + userData.heroes.stats.quickplay[hero].average_stats.healing_done_average;
-			} else {
-				healing.innerHTML = "";
-			}
+	// get children elements
+	var heroName = newSection.getElementsByClassName("hero-name")[0];
+	var heroIcon = newSection.getElementsByClassName("hero-icon")[0];
+	var playTime = newSection.getElementsByClassName("hero-playTime")[0];
+	var elims = newSection.getElementsByClassName("hero-elims")[0];
+	var deaths = newSection.getElementsByClassName("hero-deaths")[0];
+	var damage = newSection.getElementsByClassName("hero-damage")[0];
+	var healing = newSection.getElementsByClassName("hero-healing")[0];
+	var linkToHero = newSection.getElementsByClassName("hero-link")[0];
+
+	// set id, hero name, and playtime (all heroes have this data)
+	newSection.id = hero;
+	heroIcon.classList.add("ohi-" + hero);
+	linkToHero.href = "/hero.html?name=" + hero;
+	newSection.classList.remove("hidden");
+	heroName.textContent = hero;
+	playTime.textContent = "Playtime: " + userData.heroes.playtime.quickplay[hero];
+
+	// only heroes with > 0 playtime have stats info
+	if (userData.heroes.stats.quickplay[hero]) {
+		elims.textContent = "Eliminations: " + userData.heroes.stats.quickplay[hero].average_stats.eliminations_average;
+		deaths.textContent = "Deaths: " + userData.heroes.stats.quickplay[hero].average_stats.deaths_average;
+		damage.textContent = "Average Damage: " + userData.heroes.stats.quickplay[hero].average_stats.damage_done_average;
+		// only healers have healing data
+		if (userData.heroes.stats.quickplay[hero].average_stats.healing_done_average) {
+			healing.textContent = "Healing: " + userData.heroes.stats.quickplay[hero].average_stats.healing_done_average;
 		} else {
-			// if heroes don't have stat info available, remove the element
-			elims.innerHTML = "";
-			deaths.innerHTML = "";
-			damage.innerHTML = "";
 			healing.innerHTML = "";
 		}
-
-		// console.log(newSection);
-		// add each section to the DOM (could speed up by doing this one time)
-		originalHeroSection.parentNode.appendChild(newSection);
+	} else {
+		// if heroes don't have stat info available, remove the element
+		elims.innerHTML = "";
+		deaths.innerHTML = "";
+		damage.innerHTML = "";
+		healing.innerHTML = "";
 	}
+
+	// console.log(newSection);
+	// add each section to the DOM (could speed up by doing this one time)
+	originalHeroSection.parentNode.appendChild(newSection);
+}
+
+function removeHeroSection(hero) {
+	var heroSection = document.getElementById(hero);
+	heroSection.classList.add("hidden");
 }
 
 
