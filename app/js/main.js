@@ -34,17 +34,31 @@ var heroDisplay = {
 
 // if userAPIURL exists, get user stats and build page with userdata
 if (getCookie("userAPIURL") != undefined) {
+	document.getElementById("hero-grid").classList.remove("hidden");
 	getUserStats();
 } else {
 	// show the username form
 	document.getElementById("formUsername").classList.remove("hidden");
 }
 
+// pull heroes that are toggled on from cookie
+if (getCookie("userHeroDisplay") != undefined) {
+	heroDisplay = JSON.parse(getCookie("userHeroDisplay"));
+}
+
 
 window.onload=function() {
-	// get all checkboxes, and add listener for toggling
 	var toggles = $(".hero-toggle");
+	// if toggled on previously, set hero display buttons to active and 'checked'
+	toggles.each(function() {
+		var toggleName = normalizeString($(this).parent().text(), true);
+		if (heroDisplay[toggleName]) {
+			this.checked = true;
+			$(this).parent().addClass("active");
+		}
+	});
 	toggles.on("change", function() {
+		console.log("changed");
 		// get text on button
 		var toggledHero = normalizeString($(this).parent().text(), true);
 		// toggle button state
@@ -58,6 +72,9 @@ window.onload=function() {
 			// remove section
 			removeHeroSection(toggledHero);
 		}
+		// save toggle state to cookie
+		var heroDisplayString = JSON.stringify(heroDisplay);
+		setCookie("userHeroDisplay", heroDisplayString, 30);
 	});
 	// override form submit to add username + url to cookie
 	document.getElementById("formUsername").onsubmit=function(e) {
@@ -83,6 +100,7 @@ window.onload=function() {
 		this.classList.add("hidden");
 
 		// get user stats
+		document.getElementById("hero-grid").classList.remove("hidden");
 		getUserStats();
 	}
 }

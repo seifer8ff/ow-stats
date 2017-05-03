@@ -30,7 +30,7 @@ function processHeroRequest(e) {
 			var cookieName = hero.name.toLowerCase();
 
 			// remove semicolons, accents, etc
-			cookieName = normalizeString(cookieName);
+			cookieName = normalizeString(cookieName, true);
 			heroDataString = normalizeString(heroDataString);
 
 			setCookie(cookieName, heroDataString, 7);

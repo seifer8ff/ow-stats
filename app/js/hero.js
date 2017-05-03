@@ -20,12 +20,13 @@ function getHero() {
 
 	// find the hero object with matching name property
 	selectedHero = heroData.find(function(hero) {
-		return hero.name.toLowerCase() === heroName;
+		return normalizeString(hero.name, true).toLowerCase() === heroName;
 	});
+	console.log(selectedHero);
 
 	// create the page with the data from the hero
 	buildHeroSection(selectedHero);
-	setBackgroundImg(selectedHero);
+	setBackgroundImg(normalizeString(selectedHero.name, true).toLowerCase());
 }
 
 function buildHeroSection(hero) {
@@ -34,7 +35,7 @@ function buildHeroSection(hero) {
 	}
 }
 
-function setBackgroundImg(hero) {
+function setBackgroundImg(heroName) {
 	var bgImg = document.getElementById("hero-bg");
-	bgImg.classList.add("ohi-" + hero.name.toLowerCase());
+	bgImg.classList.add("ohi-" + heroName);
 }

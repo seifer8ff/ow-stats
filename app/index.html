@@ -90,85 +90,87 @@
 					</div>
 				</form>
 			</div>
-			<div class="col-sm-10 col-sm-offset-1">
-				<div class="btn-group btn-group-justified" data-toggle="buttons" aria-label="HeroSelect">
-					<label class="btn btn-default">
-						<input type="checkbox" class="hero-toggle" autocomplete="off">Genji
-					</label>
-					<label class="btn btn-default">
-						<input type="checkbox" class="hero-toggle" autocomplete="off">McCree
-					</label>
-					<label class="btn btn-default">
-						<input type="checkbox" class="hero-toggle" autocomplete="off">Reaper
-					</label>
-					<label class="btn btn-default active">
-						<input type="checkbox" class="hero-toggle" autocomplete="off" checked>Soldier: 76
-					</label>
-					<label class="btn btn-default">
-						<input type="checkbox" class="hero-toggle" autocomplete="off">Sombra
-					</label>
-					<label class="btn btn-default active">
-						<input type="checkbox" class="hero-toggle" autocomplete="off" checked>Tracer
-					</label>
+			<div class="hidden" id="hero-grid">
+				<div class="col-sm-10 col-sm-offset-1">
+					<div class="btn-group btn-group-justified" data-toggle="buttons" aria-label="HeroSelect">
+						<label class="btn btn-default">
+							<input type="checkbox" class="hero-toggle" autocomplete="off">Genji
+						</label>
+						<label class="btn btn-default">
+							<input type="checkbox" class="hero-toggle" autocomplete="off">McCree
+						</label>
+						<label class="btn btn-default">
+							<input type="checkbox" class="hero-toggle" autocomplete="off">Reaper
+						</label>
+						<label class="btn btn-default">
+							<input type="checkbox" class="hero-toggle" autocomplete="off">Soldier: 76
+						</label>
+						<label class="btn btn-default">
+							<input type="checkbox" class="hero-toggle" autocomplete="off">Sombra
+						</label>
+						<label class="btn btn-default">
+							<input type="checkbox" class="hero-toggle" autocomplete="off">Tracer
+						</label>
+					</div>
+					<div class="btn-group btn-group-justified" data-toggle="buttons" aria-label="HeroSelect">
+						<label class="btn btn-default">
+							<input type="checkbox" class="hero-toggle" autocomplete="off">Bastion
+						</label>
+						<label class="btn btn-default">
+							<input type="checkbox" class="hero-toggle" autocomplete="off">Hanzo
+						</label>
+						<label class="btn btn-default">
+							<input type="checkbox" class="hero-toggle" autocomplete="off">Junkrat
+						</label>
+						<label class="btn btn-default">
+							<input type="checkbox" class="hero-toggle" autocomplete="off">Mei
+						</label>
+						<label class="btn btn-default">
+							<input type="checkbox" class="hero-toggle" autocomplete="off">Torbjorn
+						</label>
+						<label class="btn btn-default">
+							<input type="checkbox" class="hero-toggle" autocomplete="off">Widowmaker
+						</label>
+					</div>
 				</div>
-				<div class="btn-group btn-group-justified" data-toggle="buttons" aria-label="HeroSelect">
-					<label class="btn btn-default">
-						<input type="checkbox" class="hero-toggle" autocomplete="off">Bastion
-					</label>
-					<label class="btn btn-default active">
-						<input type="checkbox" class="hero-toggle" autocomplete="off" checked>Hanzo
-					</label>
-					<label class="btn btn-default">
-						<input type="checkbox" class="hero-toggle" autocomplete="off">Junkrat
-					</label>
-					<label class="btn btn-default active">
-						<input type="checkbox" class="hero-toggle" autocomplete="off" checked>Mei
-					</label>
-					<label class="btn btn-default">
-						<input type="checkbox" class="hero-toggle" autocomplete="off">Torbjorn
-					</label>
-					<label class="btn btn-default">
-						<input type="checkbox" class="hero-toggle" autocomplete="off">Widowmaker
-					</label>
-				</div>
-			</div>
-			<div class="col-sm-10 col-sm-offset-1">
-				<div class="btn-group btn-group-justified" data-toggle="buttons" aria-label="HeroSelect">
-					<label class="btn btn-default active">
-						<input type="checkbox" class="hero-toggle" autocomplete="off" checked>D.VA
-					</label>
-					<label class="btn btn-default">
-						<input type="checkbox" class="hero-toggle" autocomplete="off">Orisa
-					</label>
-					<label class="btn btn-default">
-						<input type="checkbox" class="hero-toggle" autocomplete="off">Reinhardt
-					</label>
-					<label class="btn btn-default">
-						<input type="checkbox" class="hero-toggle" autocomplete="off">Roadhog
-					</label>
-					<label class="btn btn-default">
-						<input type="checkbox" class="hero-toggle" autocomplete="off">Winston
-					</label>
-					<label class="btn btn-default">
-						<input type="checkbox" class="hero-toggle" autocomplete="off">Zarya
-					</label>
-				</div>
-				<div class="btn-group btn-group-justified" data-toggle="buttons" aria-label="HeroSelect">
-					<label class="btn btn-default">
-						<input type="checkbox" class="hero-toggle" autocomplete="off">Ana
-					</label>
-					<label class="btn btn-default">
-						<input type="checkbox" class="hero-toggle" autocomplete="off">Lucio
-					</label>
-					<label class="btn btn-default active">
-						<input type="checkbox" class="hero-toggle" autocomplete="off" checked>Mercy
-					</label>
-					<label class="btn btn-default">
-						<input type="checkbox" class="hero-toggle" autocomplete="off">Symmetra
-					</label>
-					<label class="btn btn-default">
-						<input type="checkbox" class="hero-toggle" autocomplete="off">Zenyatta
-					</label>
+				<div class="col-sm-10 col-sm-offset-1">
+					<div class="btn-group btn-group-justified" data-toggle="buttons" aria-label="HeroSelect">
+						<label class="btn btn-default">
+							<input type="checkbox" class="hero-toggle" autocomplete="off">D.VA
+						</label>
+						<label class="btn btn-default">
+							<input type="checkbox" class="hero-toggle" autocomplete="off">Orisa
+						</label>
+						<label class="btn btn-default">
+							<input type="checkbox" class="hero-toggle" autocomplete="off">Reinhardt
+						</label>
+						<label class="btn btn-default">
+							<input type="checkbox" class="hero-toggle" autocomplete="off">Roadhog
+						</label>
+						<label class="btn btn-default">
+							<input type="checkbox" class="hero-toggle" autocomplete="off">Winston
+						</label>
+						<label class="btn btn-default">
+							<input type="checkbox" class="hero-toggle" autocomplete="off">Zarya
+						</label>
+					</div>
+					<div class="btn-group btn-group-justified" data-toggle="buttons" aria-label="HeroSelect">
+						<label class="btn btn-default">
+							<input type="checkbox" class="hero-toggle" autocomplete="off">Ana
+						</label>
+						<label class="btn btn-default">
+							<input type="checkbox" class="hero-toggle" autocomplete="off">Lucio
+						</label>
+						<label class="btn btn-default">
+							<input type="checkbox" class="hero-toggle" autocomplete="off">Mercy
+						</label>
+						<label class="btn btn-default">
+							<input type="checkbox" class="hero-toggle" autocomplete="off">Symmetra
+						</label>
+						<label class="btn btn-default">
+							<input type="checkbox" class="hero-toggle" autocomplete="off">Zenyatta
+						</label>
+					</div>
 				</div>
 			</div>
 		</div>
