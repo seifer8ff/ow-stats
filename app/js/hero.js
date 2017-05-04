@@ -5,24 +5,21 @@ getHero();
 
 function getHero() {
 	var heroData = getCookieArray();
+	// filter out non hero cookies (username, url, etc)
+	heroData = heroData.filter(function(n){ return !n.startsWith("user"); }); 
 	for (var i = 0; i < heroData.length; i++) {
-		// ensure we're not processing non-hero cookies
-		if (!heroData[i].includes("user")) {
-			// we only care about the actual data, not the name of the cookie
-			heroData[i] = heroData[i].split("=")[1];
-			heroData[i] = JSON.parse(heroData[i]);
-		}
+		// we only care about the actual data, not the name of the cookie
+		heroData[i] = heroData[i].split("=")[1];
+		heroData[i] = JSON.parse(heroData[i]);
 	}
 
 	// get hero name from query string
 	var heroName = window.location.search;
 	heroName = heroName.replace("?name=", "");
-
 	// find the hero object with matching name property
 	selectedHero = heroData.find(function(hero) {
 		return normalizeString(hero.name, true).toLowerCase() === heroName;
 	});
-	console.log(selectedHero);
 
 	// create the page with the data from the hero
 	buildHeroSection(selectedHero);
