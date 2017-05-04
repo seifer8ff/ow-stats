@@ -1,9 +1,53 @@
-/*body {
-	padding-top: 60px;
-}*/
+html {
+	min-height: 100%;
+}
+
+body {
+	padding-top: 85px;
+	min-height: 100%;
+}
 
 h1 {
 	text-align: center;
+}
+
+#ow-bg {
+	width: 100%;
+    height: 100%;
+    text-align: center;
+    position: fixed;
+    top: 35%;
+    font-size: 425px;
+    /*line-height: 400px;*/
+    opacity: .1;
+}
+
+#ow-bg:before {
+	content: url(../img/OW-logo.svg);
+}
+
+#hero-list.dropdown-menu{
+	min-width: 700px;
+}
+
+#hero-list.dropdown-menu>.list-inline>li>a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+
+#hero-list.dropdown-menu>.list-inline>li>a:hover {
+    background-color: rgba(221, 221, 221, 0.6);
+    background-image: none;
+    text-decoration: none;
+}
+
+.navbar-inverse {
+	background-color: #29364D;
 }
 
 .btn:focus,.btn:active:focus,.btn.active:focus,

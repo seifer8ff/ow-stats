@@ -19,7 +19,7 @@
 	  <link rel="stylesheet" type="text/css" href="./css/hero.css">
 </head>
 <body>
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
 	  <div class="container-fluid">
 	    <!-- Brand and toggle get grouped for better mobile display -->
 	    <div class="navbar-header">
@@ -29,43 +29,59 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </button>
-	      <a class="navbar-brand" href="#">Brand</a>
+	      <a class="navbar-brand" href="/">Overwatch Stats</a>
 	    </div>
 
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
-	        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-	        <li><a href="#">Link</a></li>
 	        <li class="dropdown">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-	          <ul class="dropdown-menu">
-	            <li><a href="#">Action</a></li>
-	            <li><a href="#">Another action</a></li>
-	            <li><a href="#">Something else here</a></li>
-	            <li role="separator" class="divider"></li>
-	            <li><a href="#">Separated link</a></li>
-	            <li role="separator" class="divider"></li>
-	            <li><a href="#">One more separated link</a></li>
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Heroes <span class="caret"></span></a>
+	          <ul class="dropdown-menu" id="hero-list">
+	          	<ul class="list-inline">
+	          		<li><a href="/hero.html?name=genji">Genji</a></li>
+		            <li><a href="/hero.html?name=mccree">McCree</a></li>
+		            <li><a href="/hero.html?name=pharah">Pharah</a></li>
+		            <li><a href="/hero.html?name=reaper">Reaper</a></li>
+		            <li><a href="/hero.html?name=soldier76">Soldier: 76</a></li>
+		            <li><a href="/hero.html?name=sombra">Sombra</a></li>
+		            <li><a href="/hero.html?name=tracer">Tracer</a></li>
+	          	</ul>
+	          	<li role="separator" class="divider"></li>
+	          	<ul class="list-inline">
+	          		<li><a href="/hero.html?name=bastion">Bastion</a></li>
+		            <li><a href="/hero.html?name=hanzo">Hanzo</a></li>
+		            <li><a href="/hero.html?name=junkrat">Junkrat</a></li>
+		            <li><a href="/hero.html?name=mei">Mei</a></li>
+		            <li><a href="/hero.html?name=torbjorn">Torbjorn</a></li>
+		            <li><a href="/hero.html?name=windowmaker">Widowmaker</a></li>
+	          	</ul>
+	          	<li role="separator" class="divider"></li>
+	          	<ul class="list-inline">
+	          		<li><a href="/hero.html?name=dva">D.VA</a></li>
+		            <li><a href="/hero.html?name=orisa">Orisa</a></li>
+		            <li><a href="/hero.html?name=reinhardt">Reinhardt</a></li>
+		            <li><a href="/hero.html?name=roadhog">Roadhog</a></li>
+		            <li><a href="/hero.html?name=winston">Winston</a></li>
+		            <li><a href="/hero.html?name=zarya">Zarya</a></li>
+	          	</ul>
+	          	<li role="separator" class="divider"></li>
+	          	<ul class="list-inline">
+	          		<li><a href="/hero.html?name=ana">Ana</a></li>
+		            <li><a href="/hero.html?name=lucio">Lucio</a></li>
+		            <li><a href="/hero.html?name=mercy">Mercy</a></li>
+		            <li><a href="/hero.html?name=symmetra">Symmetra</a></li>
+		            <li><a href="/hero.html?name=zenyatta">Zenyatta</a></li>
+	          	</ul>
 	          </ul>
 	        </li>
 	      </ul>
-	      <form class="navbar-form navbar-left">
-	        <div class="form-group">
-	          <input type="text" class="form-control" placeholder="Search">
-	        </div>
-	        <button type="submit" class="btn btn-default">Submit</button>
-	      </form>
 	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="#">Link</a></li>
+	        <li><a href="#">Login</a></li>
 	        <li class="dropdown">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Brady <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
-	            <li><a href="#">Action</a></li>
-	            <li><a href="#">Another action</a></li>
-	            <li><a href="#">Something else here</a></li>
-	            <li role="separator" class="divider"></li>
-	            <li><a href="#">Separated link</a></li>
+	            <li><a href="#">Logout</a></li>
 	          </ul>
 	        </li>
 	      </ul>
@@ -74,14 +90,27 @@
 	</nav>
 
 
-	 <!-- background "image" -->
-	<span class="" id="hero-bg"></span>
-
-
-	<div class="container">
+	<div class="container hero-container">
 		<div class="row">
-			<div class="col-sm-12">
-				<h1 class="name">Hero</h1>
+			<div class="col-sm-3 panel panel-default" id="hero-sidebar">
+				<h4>Real Name</h4>
+				<h3 id="hero-realName">Mei-Link Zhou</h3>
+				<h4>Age</h4>
+				<h3 id="hero-age">26</h3>
+				<h4>Affiliation</h4>
+				<h3 id="hero-affiliation">Overwatch</h3>
+				<h4>Base of Operations</h4>
+				<h3 id="hero-base">China</h3>
+			</div>
+			<div class="col-sm-8 col-sm-offset-1 panel panel-default" id="hero-main">
+				<div id="hero-img-container">
+					<span id="hero-img"></span>
+				</div>
+				<h1 id="hero-name">Hero</h1>
+				<h3 id="hero-desc">Hero Description</h3>
+				<h4 id="hero-health">Health</h4>
+				<h4 id="hero-armor">Armor</h4>
+				<h4 id="hero-shield">Shield</h4>
 			</div>
 		</div>
 	</div>

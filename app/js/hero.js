@@ -23,16 +23,37 @@ function getHero() {
 
 	// create the page with the data from the hero
 	buildHeroSection(selectedHero);
-	setBackgroundImg(normalizeString(selectedHero.name, true).toLowerCase());
+	setBackground(normalizeString(selectedHero.name, true).toLowerCase());
 }
 
 function buildHeroSection(hero) {
-	for (var attribute in hero) {
-		$("h1").append("<p>" + hero[attribute] + "</p>");
-	}
+	// var container = document.getElementsByClassName("hero-container")[0];
+	// var heroSidebar = document.getElementById("hero-sidebar");
+	// var heroMain = document.getElementById("hero-main");
+	var heroRealName = document.getElementById("hero-realName");
+	var heroAge = document.getElementById("hero-age");
+	var heroAffil = document.getElementById("hero-affiliation");
+	var heroBase = document.getElementById("hero-base");
+	var heroName = document.getElementById("hero-name");
+	var heroImg = document.getElementById("hero-img");
+	var heroDesc = document.getElementById("hero-desc");
+	var heroHealth = document.getElementById("hero-health");
+	var heroArmor = document.getElementById("hero-armor");
+	var heroShield = document.getElementById("hero-shield");
+
+	heroRealName.textContent = hero.real_name;
+	heroAge.textContent = hero.age;
+	heroAffil.textContent = hero.affiliation;
+	heroBase.textContent = hero.base_of_operations;
+	heroName.textContent = hero.name;
+	heroDesc.textContent = hero.description;
+	heroHealth.textContent = "Health: " + hero.health;
+	heroArmor.textContent = "Armor: " + hero.armour;
+	heroShield.textContent = "Shield: " + hero.shield;
+
+	heroImg.classList.add("ohi-" + normalizeString(hero.name, true).toLowerCase());
 }
 
-function setBackgroundImg(heroName) {
-	var bgImg = document.getElementById("hero-bg");
-	bgImg.classList.add("ohi-" + heroName);
+function setBackground(heroName) {
+	document.body.classList.add("body-" + heroName);
 }
