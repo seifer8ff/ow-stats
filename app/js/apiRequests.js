@@ -44,7 +44,6 @@ function setCookie(name, value, expireDays) {
     d.setTime(d.getTime() + (expireDays*24*60*60*1000));
     var expires = "expires="+d.toUTCString();
     value = encodeURI(value);
-    console.log("encode seems to work");
     document.cookie = name + "=" + value + "; " + expires;
 }
 
@@ -52,7 +51,6 @@ function getCookie(name) {
 	var value = "; " + document.cookie;
 	value = decodeURI(value);
 	var parts = value.split("; " + name + "=");
-	console.log("decode seems to work");
 	if (parts.length == 2) {
 		return parts.pop().split(";").shift();
 	} 
@@ -62,7 +60,6 @@ function getCookieArray() {
 	var value = document.cookie;
 	value = decodeURI(value);
 	var parts = value.split("; ");
-	console.log("decode seems to work");
 	if (parts.length == 2) {
 		return parts.pop().split(";").shift();
 	} 
