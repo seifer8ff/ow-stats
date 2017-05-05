@@ -27,27 +27,76 @@ h1 {
 }
 
 #hero-list.dropdown-menu{
-	min-width: 700px;
+	min-width: 450px;
 }
 
-#hero-list.dropdown-menu>.list-inline>li>a {
+#hero-list.dropdown-menu>.dropdown-inline {
+    display: inline-block;
+    list-style-type: none;
+    vertical-align: top;
+    padding: 0;
+}
+
+#hero-list.dropdown-menu>.dropdown-inline>li>a {
     display: block;
     padding: 3px 20px;
     clear: both;
     font-weight: 400;
     line-height: 1.42857143;
-    color: #333;
+    /*color: #333;*/
     white-space: nowrap;
 }
 
-#hero-list.dropdown-menu>.list-inline>li>a:hover {
-    background-color: rgba(221, 221, 221, 0.6);
+#hero-list.dropdown-menu>.dropdown-inline>li>a:hover {
+    background-color: rgba(249, 158, 26, 0.9);
     background-image: none;
     text-decoration: none;
 }
 
+.dropdown-inline.divider {
+    position: absolute;
+    top: 0;
+    overflow: hidden;
+    height: 90%;
+
+}
+
+.divider-vertical {
+    height: 100%;
+    border-left: 1px solid gray;     /* right or left is the same */
+    float: left;                     /* so BS grid doesn't break */
+    opacity: 0.5;                    /* optional */
+}
+
 .navbar-inverse {
 	background-color: #29364D;
+}
+
+.navbar-brand>img {
+    height: 100%;
+    width: auto;
+}
+
+.navbar-brand {
+    background-color: white;
+}
+
+.navbar-inverse .navbar-brand:hover, 
+.navbar-inverse .navbar-brand:focus {
+  background-color: rgba(249, 158, 26, 1);
+}
+
+.navbar-inverse .navbar-nav li a {
+    font-weight: 700;
+    color: #dddddd;
+}
+
+.navbar-nav .dropdown .dropdown-menu {
+    background-color: #3b4556;
+}
+
+.dropdown-header {
+    color: #a8a8a8;
 }
 
 .btn:focus,.btn:active:focus,.btn.active:focus,
