@@ -51,7 +51,7 @@ function buildHeroSection(hero) {
 	heroArmor.textContent = "Armor: " + hero.armour;
 	heroShield.textContent = "Shield: " + hero.shield;
 
-	heroImg.classList.add("ohi-" + normalizeString(hero.name, true).toLowerCase());
+	heroImg.src=("../img/ow-" + normalizeString(hero.name, true).toLowerCase() + "-full.jpg");
 }
 
 function setBackground(heroName) {

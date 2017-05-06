@@ -12,7 +12,7 @@
 }
 
 #hero-sidebar {
-	/*margin-top: 170px;*/
+	text-align: left;
 }
 
 .hero-container {
@@ -21,6 +21,10 @@
 
 .panel-default {
 	background-color: rgba(255, 255, 255, .5);
+}
+
+.dl-horizontal dt {
+  text-align: left;
 }
 
 
