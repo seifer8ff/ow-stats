@@ -1,5 +1,5 @@
 var reqUser = new XMLHttpRequest();
-var userData = {};
+var userStats = {};
 var heroDisplay = {
 	sombra: 	false,
 	mercy: 		true,
@@ -32,18 +32,32 @@ var heroDisplay = {
 // USER STATS API
 // ================
 
-// if userAPIURL exists, get user stats and build page with userdata
-if (getCookie("userAPIURL") != undefined) {
-	document.getElementById("hero-grid").classList.remove("hidden");
-	getUserStats();
-} else {
-	// show the username form
+// if userAPIURL hasn't been set, show battletag input
+if (getCookie("userAPIURL") === undefined) {
 	document.getElementById("formUsername").classList.remove("hidden");
 }
 
 // pull heroes that are toggled on from cookie
 if (getCookie("userHeroDisplay") != undefined) {
 	heroDisplay = JSON.parse(getCookie("userHeroDisplay"));
+}
+
+// if userStats have been saved to cookie, retrieve them for processing
+if (getCookie("userstatsana") != undefined) {
+	// get all cookies involving userstats
+	var statCookies = getCookieArray("userstats");
+	// parse each cookie and add it to userStats object
+	for (var i = 0; i < statCookies.length; i++) {
+		// we only care about the actual data, not the name of the cookie
+		statCookies[i] = statCookies[i].split("=")[1];
+
+		// parse cookie into object, and add object to userStats
+		var cookieObject = JSON.parse(statCookies[i]);
+		userStats[cookieObject.name] = cookieObject;
+	}
+	document.getElementById("hero-grid").classList.remove("hidden");
+	// build the page using the userStats object
+	buildAllHeroSections();
 }
 
 
@@ -61,15 +75,16 @@ window.onload=function() {
 		console.log("changed");
 		// get text on button
 		var toggledHero = normalizeString($(this).parent().text(), true);
-		// toggle button state
-		!this.checked;
+
 		// toggle display of hero
 		heroDisplay[toggledHero] = this.checked;
 		if (this.checked) {
-			// add section
+			// add section and update button state
+			$(this).parent().addClass("active");
 			buildHeroSection(toggledHero);
 		} else {
-			// remove section
+			// remove section and update button state
+			$(this).parent().removeClass("active");
 			removeHeroSection(toggledHero);
 		}
 		// save toggle state to cookie
@@ -109,41 +124,11 @@ window.onload=function() {
 
 
 
-function getUserStats() {
-	console.log("asking for hero stats");
-	reqUser.open("GET", getCookie("userAPIURL"), true);
-	reqUser.send();
 
-	reqUser.addEventListener("readystatechange", processUserRequest, false);
-}
-
-
-function processUserRequest(e) {
-	if (reqUser.readyState === 4 && reqUser.status == 200) {
-		console.log("received hero stats");
-		var res = JSON.parse(reqUser.responseText);
-		if (res.us) {
-			userData = res.us;
-		} else if (res.eu) {
-			userData = res.eu;
-		} else if (res.kr) {
-			userData = res.kr;
-		} else if (res.any) {
-			userData = res.any;
-		} else {
-			alert("ran into a problem");
-		}
-		console.log("about to call build function");
-
-		// create section for each checked hero
-		buildAllHeroSections();
-	}
-}
-
-// for each hero in userData (that's toggled on), build a hero section
+// for each hero in userStats (that's toggled on), build a hero section
 function buildAllHeroSections() {
 	console.log("building hero sections");
-	for (var hero in userData.heroes.playtime.quickplay) {
+	for (var hero in userStats) {
 		// if the hero display is toggled on
 		if (!heroDisplay[hero]) { continue; }
 
@@ -173,16 +158,16 @@ function buildHeroSection(hero) {
 	linkToHero.href = "/hero.html?name=" + hero;
 	newSection.classList.remove("hidden");
 	heroName.textContent = hero;
-	playTime.textContent = "Playtime: " + userData.heroes.playtime.quickplay[hero];
+	playTime.textContent = "Playtime: " + userStats[hero].playtime;
 
 	// only heroes with > 0 playtime have stats info
-	if (userData.heroes.stats.quickplay[hero]) {
-		elims.textContent = "Eliminations: " + userData.heroes.stats.quickplay[hero].average_stats.eliminations_average;
-		deaths.textContent = "Deaths: " + userData.heroes.stats.quickplay[hero].average_stats.deaths_average;
-		damage.textContent = "Average Damage: " + userData.heroes.stats.quickplay[hero].average_stats.damage_done_average;
+	if (userStats[hero].eliminations_average) {
+		elims.textContent = "Eliminations: " + userStats[hero].eliminations_average;
+		deaths.textContent = "Deaths: " + userStats[hero].deaths_average;
+		damage.textContent = "Average Damage: " + userStats[hero].damage_done_average;
 		// only healers have healing data
-		if (userData.heroes.stats.quickplay[hero].average_stats.healing_done_average) {
-			healing.textContent = "Healing: " + userData.heroes.stats.quickplay[hero].average_stats.healing_done_average;
+		if (userStats[hero].healing_done_average) {
+			healing.textContent = "Healing: " + userStats[hero].healing_done_average;
 		} else {
 			healing.innerHTML = "";
 		}

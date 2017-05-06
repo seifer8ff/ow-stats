@@ -4,9 +4,7 @@ getHero();
 
 
 function getHero() {
-	var heroData = getCookieArray();
-	// filter out non hero cookies (username, url, etc)
-	heroData = heroData.filter(function(n){ return !n.startsWith("user"); }); 
+	var heroData = getCookieArray("herodata");
 	for (var i = 0; i < heroData.length; i++) {
 		// we only care about the actual data, not the name of the cookie
 		heroData[i] = heroData[i].split("=")[1];
@@ -17,7 +15,7 @@ function getHero() {
 	var heroName = window.location.search;
 	heroName = heroName.replace("?name=", "");
 	// find the hero object with matching name property
-	selectedHero = heroData.find(function(hero) {
+	var selectedHero = heroData.find(function(hero) {
 		return normalizeString(hero.name, true).toLowerCase() === heroName;
 	});
 

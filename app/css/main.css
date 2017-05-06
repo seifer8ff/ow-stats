@@ -11,6 +11,88 @@ h1 {
 	text-align: center;
 }
 
+/*=======================*/
+/*bootstrap overrides */
+/*=======================*/
+
+.dropdown-inline.divider {
+    position: absolute;
+    top: 0;
+    overflow: hidden;
+    height: 90%;
+
+}
+
+.divider-vertical {
+    height: 100%;
+    border-left: 1px solid gray;     /* right or left is the same */
+    float: left;                     /* so BS grid doesn't break */
+    opacity: 0.5;                    /* optional */
+}
+
+.navbar-inverse {
+    background-color: #29364D;
+}
+
+.navbar-brand>img {
+    height: 100%;
+    width: auto;
+}
+
+.navbar-brand {
+    background-color: white;
+}
+
+.navbar-inverse .navbar-brand:hover, 
+.navbar-inverse .navbar-brand:focus {
+  background-color: rgba(249, 158, 26, 1);
+}
+
+.navbar-inverse .navbar-nav li a {
+    font-weight: 700;
+    color: #dddddd;
+}
+
+.navbar-nav .dropdown .dropdown-menu {
+    background-color: #3b4556;
+}
+
+.btn:focus,.btn:active:focus,.btn.active:focus,
+.btn.focus,.btn:active.focus,.btn.active.focus {
+    outline: none;
+}
+
+/*btn-group dropdown overrides*/
+.btn-group .dropdown-menu {
+    padding: 0;
+}
+
+ul > li > label {
+    width: 100%;
+}
+
+[data-toggle=buttons]>.btn input[type=checkbox], .dropdown-menu>li label input[type=checkbox], [data-toggle=buttons]>.btn input[type=radio], [data-toggle=buttons]>.btn-group>.btn input[type=checkbox], [data-toggle=buttons]>.btn-group>.btn input[type=radio] {
+    position: absolute;
+    clip: rect(0,0,0,0);
+    pointer-events: none;
+}
+
+.dropdown-menu>li:not(:first-child):not(:last-child):not(.dropdown-toggle)>label.btn {
+    border-radius: 0;
+}
+
+.dropdown-menu>li:first-child:not(:last-child):not(.dropdown-toggle)>label.btn {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.dropdown-menu>li:last-child:not(:first-child):not(.dropdown-toggle)>label.btn {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+/*======================*/
+
 #ow-bg {
 	width: 100%;
     height: 100%;
@@ -24,6 +106,10 @@ h1 {
 
 #ow-bg:before {
 	content: url(../img/OW-logo.svg);
+}
+
+#hero-grid {
+    text-align: center;
 }
 
 #hero-list.dropdown-menu{
@@ -53,55 +139,10 @@ h1 {
     text-decoration: none;
 }
 
-.dropdown-inline.divider {
-    position: absolute;
-    top: 0;
-    overflow: hidden;
-    height: 90%;
 
-}
-
-.divider-vertical {
-    height: 100%;
-    border-left: 1px solid gray;     /* right or left is the same */
-    float: left;                     /* so BS grid doesn't break */
-    opacity: 0.5;                    /* optional */
-}
-
-.navbar-inverse {
-	background-color: #29364D;
-}
-
-.navbar-brand>img {
-    height: 100%;
-    width: auto;
-}
-
-.navbar-brand {
-    background-color: white;
-}
-
-.navbar-inverse .navbar-brand:hover, 
-.navbar-inverse .navbar-brand:focus {
-  background-color: rgba(249, 158, 26, 1);
-}
-
-.navbar-inverse .navbar-nav li a {
-    font-weight: 700;
-    color: #dddddd;
-}
-
-.navbar-nav .dropdown .dropdown-menu {
-    background-color: #3b4556;
-}
 
 .dropdown-header {
     color: #a8a8a8;
-}
-
-.btn:focus,.btn:active:focus,.btn.active:focus,
-.btn.focus,.btn:active.focus,.btn.active.focus {
-    outline: none;
 }
 
 /*.hero-icon {
