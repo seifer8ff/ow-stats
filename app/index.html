@@ -111,7 +111,7 @@
 			<div class="col-sm-12">
 				<h1>Overwatch Stats</h1>
 			</div>
-			<div class="col-sm-6 col-sm-offset-3">
+			<div class="col-sm-12">
 				<form class="form-horizontal hidden" id="formUsername">
 					<div class="form-group">
 						<label for="username" class="col-sm-2 control-label">Battletag</label>
@@ -123,10 +123,10 @@
 				</form>
 			</div>
 			<div class="hidden" id="hero-grid">
-				<div class="col-sm-10 col-sm-offset-1">
-					<div class="btn-group">
-						<button type="button" class="btn">Offense</button>
-						<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<div class="col-xs-6 col-sm-2 col-sm-offset-2">
+					<div class="btn-group btn-group-toggle">
+						<button type="button" class="btn btn-default">OFFENSE</button>
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<span class="caret"></span>
 							<span class="sr-only">Toggle Dropdown</span>
 						</button>
@@ -168,9 +168,11 @@
 							</li>
 						</ul>
 					</div>
-					<div class="btn-group">
-						<button type="button" class="btn">Defense</button>
-						<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				</div>
+				<div class="col-xs-6 col-sm-2">
+					<div class="btn-group btn-group-toggle">
+						<button type="button" class="btn btn-default">DEFENSE</button>
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<span class="caret"></span>
 							<span class="sr-only">Toggle Dropdown</span>
 						</button>
@@ -207,9 +209,11 @@
 							</li>
 						</ul>
 					</div>
-					<div class="btn-group">
-						<button type="button" class="btn">Tank</button>
-						<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				</div>
+				<div class="col-xs-6 col-sm-2">
+					<div class="btn-group btn-group-toggle">
+						<button type="button" class="btn btn-default">TANK</button>
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<span class="caret"></span>
 							<span class="sr-only">Toggle Dropdown</span>
 						</button>
@@ -246,9 +250,11 @@
 							</li>
 						</ul>
 					</div>
-					<div class="btn-group">
-						<button type="button" class="btn">Support</button>
-						<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				</div>
+				<div class="col-xs-6 col-sm-2">
+					<div class="btn-group btn-group-toggle">
+						<button type="button" class="btn btn-default">SUPPORT</button>
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<span class="caret"></span>
 							<span class="sr-only">Toggle Dropdown</span>
 						</button>
@@ -288,15 +294,33 @@
 <!-- Hero display  -->
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-2 hero-section hidden" id="originalHeroSection">
-				<h3 class="hero-name">Ana</h3>
-				<span class="hero-icon"></span>
-				<p class="hero-playTime">1hr</p>
-				<p class="hero-elims">5</p>
-				<p class="hero-deaths">10</p>
-				<p class="hero-damage">6000</p>
-				<p class="hero-healing">4500</p>
-				<a class="hero-link" href="/hero.html?name=ana">See More</a>
+			<div class="col-sm-3 hero-section hidden" id="originalHeroSection">
+				<div class="panel panel-default">
+					<div class="hero-icon"></div>
+					<h3 class="hero-name text-center">Ana</h3>
+					<hr>
+					<p class="hero-playTime">
+						<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+						1hr
+					</p>
+					<div class="hero-stat-section hero-elims">
+						<div>Eliminations</div>
+						<div class="stat-bar" style="width:30%">&nbsp;</div>
+					</div>
+					<div class="hero-stat-section hero-deaths">
+						<div>Deaths</div>
+						<div class="stat-bar" style="width:60%">&nbsp;</div>
+					</div>
+					<div class="hero-stat-section hero-damage">
+						<div>Damage Done</div>
+						<div class="stat-bar" style="width:60%">&nbsp;</div>
+					</div>
+					<div class="hero-stat-section hero-healing">
+						<div>Healing</div>
+						<div class="stat-bar" style="width:60%">&nbsp;</div>
+					</div>
+					<a class="hero-link" href="/hero.html?name=ana">See More</a>
+				</div>
 			</div>
 		</div>
 	</div>

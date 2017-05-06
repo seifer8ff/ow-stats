@@ -11,9 +11,16 @@ h1 {
 	text-align: center;
 }
 
+
+
+
 /*=======================*/
 /*bootstrap overrides */
 /*=======================*/
+
+.panel-default {
+    background-color: rgba(255, 255, 255, .5);
+}
 
 .dropdown-inline.divider {
     position: absolute;
@@ -158,5 +165,31 @@ ul > li > label {
 }
 
 .hero-section {
-	min-height: 400px;
+	min-height: 570px;
+    /*text-align: center;*/
 }
+
+.hero-section>.panel {
+    padding: 10px;
+}
+
+.hero-stat-section {
+    margin-bottom: 10px;
+}
+
+.stat-bar {
+    color: #fff;
+    padding: 4px;
+    text-align: left;
+    background-color: #f99e1a;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.btn-group-toggle {
+    margin: 20px;
+}
+
+
+

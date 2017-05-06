@@ -146,10 +146,10 @@ function buildHeroSection(hero) {
 	var heroName = newSection.getElementsByClassName("hero-name")[0];
 	var heroIcon = newSection.getElementsByClassName("hero-icon")[0];
 	var playTime = newSection.getElementsByClassName("hero-playTime")[0];
-	var elims = newSection.getElementsByClassName("hero-elims")[0];
-	var deaths = newSection.getElementsByClassName("hero-deaths")[0];
-	var damage = newSection.getElementsByClassName("hero-damage")[0];
-	var healing = newSection.getElementsByClassName("hero-healing")[0];
+	var elims = newSection.getElementsByClassName("hero-elims")[0].childNodes[3];
+	var deaths = newSection.getElementsByClassName("hero-deaths")[0].childNodes[3];
+	var damage = newSection.getElementsByClassName("hero-damage")[0].childNodes[3];
+	var healing = newSection.getElementsByClassName("hero-healing")[0].childNodes[3];
 	var linkToHero = newSection.getElementsByClassName("hero-link")[0];
 
 	// set id, hero name, and playtime (all heroes have this data)
@@ -158,25 +158,25 @@ function buildHeroSection(hero) {
 	linkToHero.href = "/hero.html?name=" + hero;
 	newSection.classList.remove("hidden");
 	heroName.textContent = hero;
-	playTime.textContent = "Playtime: " + userStats[hero].playtime;
+	playTime.innerHTML = "<span class='glyphicon glyphicon-time' aria-hidden='true'></span> - " + userStats[hero].playtime + " hrs";
 
 	// only heroes with > 0 playtime have stats info
 	if (userStats[hero].eliminations_average) {
-		elims.textContent = "Eliminations: " + userStats[hero].eliminations_average;
-		deaths.textContent = "Deaths: " + userStats[hero].deaths_average;
-		damage.textContent = "Average Damage: " + userStats[hero].damage_done_average;
+		elims.textContent = userStats[hero].eliminations_average;
+		deaths.textContent = userStats[hero].deaths_average;
+		damage.textContent = userStats[hero].damage_done_average;
 		// only healers have healing data
 		if (userStats[hero].healing_done_average) {
-			healing.textContent = "Healing: " + userStats[hero].healing_done_average;
+			healing.textContent = userStats[hero].healing_done_average;
 		} else {
-			healing.innerHTML = "";
+			healing.parentNode.innerHTML = "";
 		}
 	} else {
 		// if heroes don't have stat info available, remove the element
-		elims.innerHTML = "";
-		deaths.innerHTML = "";
-		damage.innerHTML = "";
-		healing.innerHTML = "";
+		elims.parentNode.innerHTML = "";
+		deaths.parentNode.innerHTML = "";
+		damage.parentNode.innerHTML = "";
+		healing.parentNode.innerHTML = "";
 	}
 
 	// console.log(newSection);
