@@ -185,6 +185,19 @@ ul > li > label {
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
+    width: 100%;
+
+    -webkit-transition: width 1s ease-in-out;
+    -moz-transition: width 1s ease-in-out;
+    -o-transition: width 1s ease-in-out;
+    transition: width 1s ease-in-out;
+    -webkit-animation-name:stat-bar-anim;
+    -webkit-animation-duration:2s;
+    -webkit-animation-timing-function:ease-out;
+}
+
+@-webkit-keyframes stat-bar-anim {
+0% { width:0%; }
 }
 
 .btn-group-toggle {
