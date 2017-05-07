@@ -62,8 +62,30 @@ if (getCookie("userstatsana") != undefined) {
 	});
 }
 
-
+// click handlers
 window.onload=function() {
+	// manually trigger open and close of hero toggle dropdowns
+	$("#hero-grid .dropdown-toggle").on("click", function(e) {
+		$(this).parent().toggleClass('open');
+	});
+
+	// close hero toggles when clicking outside of dropdown
+	$("body").on("click", function (e) {
+		if (!$("#hero-grid .hero-toggle").is(e.target) && 
+		!$("#hero-grid label.btn").is(e.target)  && 
+		!$("#hero-grid span.caret").is(e.target) &&
+		!$("#hero-grid .dropdown-toggle").is(e.target)) {
+			$("#hero-grid .dropdown-menu").parent().removeClass("open");
+		}
+	});
+
+	// remove hero click handler
+	$(".hero-display").on("click", ".hero-remove", function() {
+		removeHeroSection(this.parentNode.parentNode.id, function() {
+				updateMaxStats();
+			});
+	});
+
 	var toggles = $(".hero-toggle");
 	// if toggled on previously, set hero display buttons to active and 'checked'
 	toggles.each(function() {
@@ -73,30 +95,33 @@ window.onload=function() {
 			$(this).parent().addClass("active");
 		}
 	});
-	toggles.on("change", function() {
-		// get text on button
+
+	// on toggle, update heroDisplay and build or remove hero section
+	toggles.on("change", function(e) {
 		var toggledHero = normalizeString($(this).parent().text(), true);
 		console.log("toggled: " + toggledHero);
 
-		// toggle display of hero
-		heroDisplay[toggledHero] = this.checked;
 		if (this.checked) {
-			// add section and update button state
+			// update toggle state and saved toggle states
+			heroDisplay[toggledHero] = true;
 			$(this).parent().addClass("active");
+
+			// save toggle states to cookie
+			var heroDisplayString = JSON.stringify(heroDisplay);
+			setCookie("userHeroDisplay", heroDisplayString, 30);
+
+			// build the toggle hero section 
 			buildHeroSection(toggledHero, function() {
 				updateMaxStats();
 			});
 		} else {
 			// remove section and update button state
-			$(this).parent().removeClass("active");
 			removeHeroSection(toggledHero, function() {
 				updateMaxStats();
 			});
 		}
-		// save toggle state to cookie
-		var heroDisplayString = JSON.stringify(heroDisplay);
-		setCookie("userHeroDisplay", heroDisplayString, 30);
 	});
+
 	// override form submit to add username + url to cookie
 	document.getElementById("formUsername").onsubmit=function(e) {
 		e.preventDefault();
@@ -127,10 +152,6 @@ window.onload=function() {
 }
 
 
-
-
-
-
 // for each hero in userStats (that's toggled on), build a hero section
 function buildAllHeroSections(callback) {
 	console.log("building all hero sections");
@@ -158,51 +179,6 @@ function buildHeroSection(hero, callback) {
 
 	if (callback && typeof callback === "function") {
 		callback();
-	}
-}
-
-function removeHeroSection(hero, callback) {
-	var heroSection = document.getElementById(hero);
-	heroSection.outerHTML = "";
-	delete heroSection;
-
-	if (callback && typeof callback === "function") {
-		callback();
-	}
-}
-
-function updateMaxStats() {
-	// reset max values
-	userStats.maxElims = 0;
-	userStats.maxDeaths = 0;
-	userStats.maxDamage = 0;
-	userStats.maxHealing = 0;
-
-	// for each selected hero, check to see if their stat is higher than current max
-	for (var hero in userStats) {
-		// if the hero display is toggled on
-		if (!heroDisplay[hero]) { continue; }
-
-		// find the max value of each stat
-		if (userStats[hero].eliminations_average > userStats.maxElims) {
-			userStats.maxElims = userStats[hero].eliminations_average;
-		}
-		if (userStats[hero].deaths_average > userStats.maxDeaths) {
-			userStats.maxDeaths = userStats[hero].deaths_average;
-		}
-		if (userStats[hero].damage_done_average > userStats.maxDamage) {
-			userStats.maxDamage = userStats[hero].damage_done_average;
-		}
-		if (userStats[hero].healing_done_average > userStats.maxHealing) {
-			userStats.maxHealing = userStats[hero].healing_done_average;
-		}
-	}
-
-	// now that we have the max stats for selected heroes, update their stat bar visuals (stat %of max)
-	for (var hero in userStats) {
-		if (!heroDisplay[hero]) { continue; }
-
-		updateStatBars(hero);
 	}
 }
 
@@ -255,6 +231,42 @@ function setHeroSectionProps(parentElem, hero, callback) {
 	}
 }
 
+// find and save max value of each stat for currently selected heroes
+function updateMaxStats() {
+	// reset max values
+	userStats.maxElims = 0;
+	userStats.maxDeaths = 0;
+	userStats.maxDamage = 0;
+	userStats.maxHealing = 0;
+
+	// for each selected hero, check to see if their stat is higher than current max
+	for (var hero in userStats) {
+		// if the hero display is toggled on
+		if (!heroDisplay[hero]) { continue; }
+
+		// find the max value of each stat
+		if (userStats[hero].eliminations_average > userStats.maxElims) {
+			userStats.maxElims = userStats[hero].eliminations_average;
+		}
+		if (userStats[hero].deaths_average > userStats.maxDeaths) {
+			userStats.maxDeaths = userStats[hero].deaths_average;
+		}
+		if (userStats[hero].damage_done_average > userStats.maxDamage) {
+			userStats.maxDamage = userStats[hero].damage_done_average;
+		}
+		if (userStats[hero].healing_done_average > userStats.maxHealing) {
+			userStats.maxHealing = userStats[hero].healing_done_average;
+		}
+	}
+
+	// now that we have the max stats for selected heroes, update their stat bar visuals (stat %of max)
+	for (var hero in userStats) {
+		if (!heroDisplay[hero]) { continue; }
+
+		updateStatBars(hero);
+	}
+}
+
 // updates bar sizes based on hero stat vs max value of stat
 function updateStatBars(hero) {
 	var parentElem = document.getElementById(hero);
@@ -263,12 +275,56 @@ function updateStatBars(hero) {
 	var damageBar = parentElem.getElementsByClassName("hero-damage")[0].childNodes[3];
 	var healingBar = parentElem.getElementsByClassName("hero-healing")[0].childNodes[3];
 
-	if (elimsBar) { elimsBar.style.width = userStats[hero].eliminations_average / userStats.maxElims * 100 + "%"; }
-	if (deathsBar) { deathsBar.style.width = userStats[hero].deaths_average / userStats.maxDeaths * 100 + "%"; }
-	if (damageBar) { damageBar.style.width = userStats[hero].damage_done_average / userStats.maxDamage * 100 + "%"; }
-	if (healingBar) { healingBar.style.width = userStats[hero].healing_done_average / userStats.maxHealing * 100 + "%"; }
+	if (elimsBar) { 
+		var width = calcStatBarWidth(userStats[hero].eliminations_average, userStats.maxElims);
+		elimsBar.style.width = width + "%"; 
+	}
+	if (deathsBar) { 
+		var width = calcStatBarWidth(userStats[hero].deaths_average, userStats.maxDeaths);
+		deathsBar.style.width = width + "%"; 
+	}
+	if (damageBar) { 
+		var width = calcStatBarWidth(userStats[hero].damage_done_average, userStats.maxDamage);
+		damageBar.style.width = width + "%"; 
+	}
+	if (healingBar) { 
+		var width = calcStatBarWidth(userStats[hero].healing_done_average, userStats.maxHealing);
+		healingBar.style.width = width + "%"; 
+	}
 }
 
+// calculates the new width of the stat bar, with a minimum value for readability
+function calcStatBarWidth(statValue, max) {
+	var width = statValue / max * 100;
+	if (width < 15) { width = 15 } 
+	return width;
+}
+
+// deletes the hero section from the dom for the given hero and updated hero display toggles
+function removeHeroSection(hero, callback) {
+	var heroSection = document.getElementById(hero);
+
+	// update saved toggle states
+	heroDisplay[hero] = false;
+	var heroDisplayString = JSON.stringify(heroDisplay);
+	setCookie("userHeroDisplay", heroDisplayString, 30);
+
+	// update state of hero toggle
+	var heroToggles = document.getElementsByClassName("hero-toggle");
+	for (var i = 0; i < heroToggles.length; i++) {
+		if (normalizeString(heroToggles[i].parentNode.textContent, true)  === hero) {
+			if (heroToggles[i].checked) { heroToggles[i].checked = false; }
+			heroToggles[i].parentNode.classList.remove("active");
+		}
+	}
+	// delete hero section entirely
+	heroSection.outerHTML = "";
+	delete heroSection;
+
+	if (callback && typeof callback === "function") {
+		callback();
+	}
+}
 
 
 

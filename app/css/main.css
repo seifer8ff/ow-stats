@@ -164,6 +164,12 @@ ul > li > label {
 	line-height: 1.2;
 }
 
+.hero-remove {
+    float: right;
+    font-size: 1.2em;
+    color: #f7615c;
+}
+
 .hero-section {
 	min-height: 570px;
     /*text-align: center;*/
