@@ -11,6 +11,10 @@ h1 {
 	text-align: center;
 }
 
+a:hover {
+    cursor: pointer;
+}
+
 
 
 
@@ -100,19 +104,45 @@ ul > li > label {
 
 /*======================*/
 
+.fade-in {
+    opacity: 0;
+    -webkit-animation: fade-in 0.5s;
+    -webkit-animation-fill-mode: forwards;
+    animation: fade-in 0.5s;
+    animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes fade-in {
+    100% { opacity: 1; }
+}@keyframes fade {
+    100% { opacity: 1; }
+}
+
+.fade-out {
+    opacity: 1;
+    -webkit-animation: fade-out 0.5s;
+    -webkit-animation-fill-mode: forwards;
+    animation: fade-out 0.5s;
+    animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes fade-out {
+    100% { opacity: 0; }
+}@keyframes fade-out {
+    100% { opacity: 0; }
+}
+
 #ow-bg {
 	width: 100%;
     height: 100%;
     text-align: center;
     position: fixed;
-    top: 35%;
-    font-size: 425px;
-    /*line-height: 400px;*/
-    opacity: .1;
+    top: 0;
+    opacity: .2;
 }
 
 #ow-bg:before {
-	content: url(../img/OW-logo.svg);
+	content: url(../img/OW-bg-pattern.svg);
 }
 
 #hero-grid {
@@ -141,9 +171,17 @@ ul > li > label {
 }
 
 #hero-list.dropdown-menu>.dropdown-inline>li>a:hover {
-    background-color: rgba(249, 158, 26, 0.9);
     background-image: none;
     text-decoration: none;
+}
+
+.dropdown-menu li a:hover {
+    background-color: rgba(249, 158, 26, 0.9);
+}
+
+
+#originalHeroSection {
+    display: none;
 }
 
 
@@ -168,6 +206,19 @@ ul > li > label {
     float: right;
     font-size: 1.2em;
     color: #f7615c;
+    transition: all 0.1s ease;
+}
+
+.hero-remove::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    
+}
+
+.hero-remove:hover {
+    font-size: 1.35em;
+    color: red;
 }
 
 .hero-section {

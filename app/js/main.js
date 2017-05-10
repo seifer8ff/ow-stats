@@ -35,6 +35,9 @@ var heroDisplay = {
 // if userAPIURL hasn't been set, show battletag input
 if (getCookie("userAPIURL") === undefined) {
 	document.getElementById("formUsername").classList.remove("hidden");
+	document.getElementById("login").classList.remove("hidden");
+} else {
+	document.getElementById("account-dropdown").classList.remove("hidden");
 }
 
 // pull heroes that are toggled on from cookie
@@ -149,6 +152,13 @@ window.onload=function() {
 		document.getElementById("hero-grid").classList.remove("hidden");
 		getUserStats();
 	}
+
+	// logout button click
+	$("#logout").on("click", function(e) {
+		deleteAllCookies(function() {
+			window.location.reload(false); 
+		});
+	});
 }
 
 
@@ -175,6 +185,7 @@ function buildHeroSection(hero, callback) {
 	setHeroSectionProps(newSection, hero, function() {
 		// add new section to the DOM (could speed up by doing this one time)
 		document.getElementById("originalHeroSection").parentNode.appendChild(newSection);
+		newSection.classList.add("fade-in");
 	});
 
 	if (callback && typeof callback === "function") {
@@ -186,7 +197,6 @@ function buildHeroSection(hero, callback) {
 function newHeroSection(originalElem, hero) {
 	var newSection = document.getElementById("originalHeroSection").cloneNode(true);
 	newSection.id = hero;
-	newSection.classList.remove("hidden");
 
 	return newSection;
 }
@@ -195,7 +205,7 @@ function newHeroSection(originalElem, hero) {
 function setHeroSectionProps(parentElem, hero, callback) {
 	var heroName = parentElem.getElementsByClassName("hero-name")[0];
 	var heroIcon = parentElem.getElementsByClassName("hero-icon")[0];
-	var playTime = parentElem.getElementsByClassName("hero-playTime")[0];
+	var playtime = parentElem.getElementsByClassName("hero-playtime")[0].childNodes[3];
 	var elims = parentElem.getElementsByClassName("hero-elims")[0].childNodes[3];
 	var deaths = parentElem.getElementsByClassName("hero-deaths")[0].childNodes[3];
 	var damage = parentElem.getElementsByClassName("hero-damage")[0].childNodes[3];
@@ -205,16 +215,16 @@ function setHeroSectionProps(parentElem, hero, callback) {
 	heroIcon.classList.add("ohi-" + hero);
 	linkToHero.href = "/hero.html?name=" + hero;
 	heroName.textContent = hero;
-	playTime.innerHTML = "<span class='glyphicon glyphicon-time' aria-hidden='true'></span> - " + userStats[hero].playtime + " hrs";
+	playtime.textContent = userStats[hero].playtime;
 
 	// If hero has any stat objects, then they have all stat objects
 	if (userStats[hero].eliminations_average) {
 		elims.textContent = Math.ceil(userStats[hero].eliminations_average);
-		deaths.textContent = userStats[hero].deaths_average;
-		damage.textContent = userStats[hero].damage_done_average;
+		deaths.textContent = Math.ceil(userStats[hero].deaths_average);
+		damage.textContent = Math.ceil(userStats[hero].damage_done_average);
 		// only healers have healing data
 		if (userStats[hero].healing_done_average) {
-			healing.textContent = userStats[hero].healing_done_average;
+			healing.textContent = Math.ceil(userStats[hero].healing_done_average);
 		} else {
 			healing.parentNode.innerHTML = "";
 		}
@@ -238,6 +248,7 @@ function updateMaxStats() {
 	userStats.maxDeaths = 0;
 	userStats.maxDamage = 0;
 	userStats.maxHealing = 0;
+	userStats.maxPlaytime = 0;
 
 	// for each selected hero, check to see if their stat is higher than current max
 	for (var hero in userStats) {
@@ -245,6 +256,9 @@ function updateMaxStats() {
 		if (!heroDisplay[hero]) { continue; }
 
 		// find the max value of each stat
+		if (userStats[hero].playtime > userStats.maxPlaytime) {
+			userStats.maxPlaytime = userStats[hero].playtime;
+		}
 		if (userStats[hero].eliminations_average > userStats.maxElims) {
 			userStats.maxElims = userStats[hero].eliminations_average;
 		}
@@ -270,11 +284,16 @@ function updateMaxStats() {
 // updates bar sizes based on hero stat vs max value of stat
 function updateStatBars(hero) {
 	var parentElem = document.getElementById(hero);
+	var playtimeBar = parentElem.getElementsByClassName("hero-playtime")[0].childNodes[3];
 	var elimsBar = parentElem.getElementsByClassName("hero-elims")[0].childNodes[3];
 	var deathsBar = parentElem.getElementsByClassName("hero-deaths")[0].childNodes[3];
 	var damageBar = parentElem.getElementsByClassName("hero-damage")[0].childNodes[3];
 	var healingBar = parentElem.getElementsByClassName("hero-healing")[0].childNodes[3];
 
+	if (playtimeBar) { 
+		var width = calcStatBarWidth(userStats[hero].playtime, userStats.maxPlaytime);
+		playtimeBar.style.width = width + "%"; 
+	}
 	if (elimsBar) { 
 		var width = calcStatBarWidth(userStats[hero].eliminations_average, userStats.maxElims);
 		elimsBar.style.width = width + "%"; 
@@ -317,9 +336,16 @@ function removeHeroSection(hero, callback) {
 			heroToggles[i].parentNode.classList.remove("active");
 		}
 	}
-	// delete hero section entirely
-	heroSection.outerHTML = "";
-	delete heroSection;
+
+	// fadeout hero section
+	heroSection.classList.add("fade-out");
+
+	// wait for one fadeout to end, then delete hero-section
+	setTimeout(function() {
+		heroSection.outerHTML = "";
+		delete heroSection;
+	}, 500);
+	
 
 	if (callback && typeof callback === "function") {
 		callback();

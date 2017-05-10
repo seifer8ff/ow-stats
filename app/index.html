@@ -88,11 +88,11 @@
 	        </li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="#">Login</a></li>
-	        <li class="dropdown">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Brady <span class="caret"></span></a>
+	        <li><a id="login" class="hidden">Login</a></li>
+	        <li class="dropdown hidden" id="account-dropdown">
+	          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Brady <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
-	            <li><a href="#">Logout</a></li>
+	            <li><a id="logout">Logout</a></li>
 	          </ul>
 	        </li>
 	      </ul>
@@ -101,7 +101,7 @@
 	</nav>
 
 
-	<!-- background "image" -->
+	<!-- background image -->
 	<span id="ow-bg"></span>
 
 
@@ -294,16 +294,16 @@
 <!-- Hero display  -->
 	<div class="container hero-display">
 		<div class="row">
-			<div class="col-xs-6 col-sm-3 hero-section hidden" id="originalHeroSection">
+			<div class="col-xs-6 col-sm-3 hero-section fade-in" id="originalHeroSection">
 				<div class="panel panel-default">
-					<span class="glyphicon glyphicon glyphicon-remove-circle hero-remove" aria-hidden="true"></span>
+					<span class="glyphicon glyphicon-remove-circle hero-remove" aria-hidden="true"></span>
 					<div class="hero-icon"></div>
 					<h3 class="hero-name text-center">Ana</h3>
 					<hr>
-					<p class="hero-playTime">
-						<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-						1hr
-					</p>
+					<div class="hero-stat-section hero-playtime">
+						<div>Playtime</div>
+						<div class="stat-bar">&nbsp;</div>
+					</div>
 					<div class="hero-stat-section hero-elims">
 						<div>Eliminations</div>
 						<div class="stat-bar">&nbsp;</div>

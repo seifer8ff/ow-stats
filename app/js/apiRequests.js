@@ -128,6 +128,21 @@ function getCookieArray(matchString) {
 	return cookies;
 }
 
+function deleteAllCookies(callback) {
+	// get all cookies
+	var cookies = getCookieArray();
+
+	// overwrite each cookie with 0 and a negative expiration date
+	for (var i = 0; i < cookies.length; i++) {
+		var cookieName = cookies[i].split("=")[0];
+
+		setCookie(cookieName, 0, -1);
+	}
+	if (callback && typeof callback === "function") {
+		callback();
+	}
+}
+
 // removed semicolons, accent marks, etc
 function normalizeString(string, removeExtras) {
 	var newString = string.replace(";", ".");
