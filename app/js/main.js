@@ -44,7 +44,7 @@ window.onload=function() {
 
 	if (getCookie("herodataana") === undefined) {
 		console.log("fetching hero data from api");
-		getHeroData();
+		requestHeroData();
 	} else if (document.body.dataset.title === "hero") {
 		initHeroPage();
 	}
@@ -53,8 +53,12 @@ window.onload=function() {
 
 	// show login or account links depending on if userAPIURL is saved to cookie
 	if (getCookie("userAPIURL") === undefined) {
-		document.getElementById("login").classList.remove("hidden");
+		if (document.body.dataset.title != "index") {
+			document.getElementById("login").classList.remove("hidden");
+		}
 	} else {
+		document.getElementById("username").childNodes[2].nodeValue = getCookie("username");
+		document.getElementById("account-icon").src = getCookie("useravatar");
 		document.getElementById("account-dropdown").classList.remove("hidden");
 	}
 
@@ -73,6 +77,97 @@ window.onload=function() {
 
 
 
+// ==============
+// API REQUESTS
+// ==============
+
+function requestUserStats() {
+	console.log("asking for user stats");
+	reqStats.open("GET", getCookie("userAPIURL"), true);
+	reqStats.send();
+
+	reqStats.addEventListener("readystatechange", processUserStatRequest, false);
+}
+
+function processUserStatRequest(e) {
+	if (reqStats.readyState === 4 && reqStats.status == 200) {
+		console.log("received hero stats");
+		var res = JSON.parse(reqStats.responseText);
+		if (res.us) {
+			res = res.us;
+		} else if (res.eu) {
+			res = res.eu;
+		} else if (res.kr) {
+			res = res.kr;
+		} else if (res.any) {
+			res = res.any;
+		} else {
+			alert("ran into a problem");
+		}
+		console.log("saving user stats to cookie");
+		var userStats = {};
+
+		// for each hero, save playtime and average stats
+		for (var hero in res.heroes.playtime.quickplay) {
+			// create empty object for each hero
+			userStats[hero] = {};
+			// if hero has quickplay data, store it
+			if (res.heroes.stats.quickplay[hero]) {
+				userStats[hero] = res.heroes.stats.quickplay[hero].average_stats;
+			}
+			userStats[hero].playtime =  res.heroes.playtime.quickplay[hero];
+			userStats[hero].name = hero;
+
+			// prepare object for storage and add to cookie
+			var heroStatString = JSON.stringify(userStats[hero]);
+			heroStatString = normalizeString(heroStatString);
+			setCookie("userstats" + hero, heroStatString, 1);
+		}
+
+		// save the user's avatar for navbar account link
+		userStats.avatar = res.stats.quickplay.overall_stats.avatar;
+
+		setCookie("useravatar", userStats.avatar, 1);
+
+		// setup index page now that we have data
+		if (document.body.dataset.title === "index") {
+			initIndexPage();
+		}
+	}
+}
+
+function requestHeroData() {
+	// GET request to api
+	reqHeroes.open("GET", "https://overwatch-api.net/api/v1/hero/", true);
+	reqHeroes.send();
+
+	reqHeroes.addEventListener("readystatechange", processHeroRequest, false);
+}
+
+function processHeroRequest(e) {
+	if (reqHeroes.readyState === 4 && reqHeroes.status == 200) {
+		var res = JSON.parse(reqHeroes.responseText);
+		// for each hero in the response, create cookie with their data
+		res.data.forEach(function(hero) {
+			var heroDataString = JSON.stringify(hero);
+			var cookieName = "heroData" + hero.name.toLowerCase();
+
+			// remove semicolons, accents, etc
+			cookieName = normalizeString(cookieName, true);
+			heroDataString = normalizeString(heroDataString);
+
+			setCookie(cookieName, heroDataString, 7);
+		});
+		// fill out hero section with api data
+		if (document.body.dataset.title === "hero") {
+			initHeroPage();
+		}
+	}
+}
+
+// =====================
+// INDEX PAGE FUNCTIONS 
+// =====================
 
 function initIndexPage() {
 	// pull heroes that are toggled on from cookie
@@ -82,10 +177,10 @@ function initIndexPage() {
 
 	// if userStats have been saved to cookie, retrieve them for processing
 	if (getCookie("userstatsana") != undefined) {
-		getUserStats();
+		userStats = getUserStats();
 
 		if (getCookie("herodataana") != undefined) {
-			getHeroInfo();
+			heroInfo = getHeroInfo();
 		}
 		document.getElementById("hero-grid").classList.remove("hidden");
 		// build the page using the userStats object
@@ -96,7 +191,12 @@ function initIndexPage() {
 
 	// if userAPIURL hasn't been set, show battletag input
 	if (getCookie("userAPIURL") === undefined) {
-		document.getElementById("formUsername").classList.remove("hidden");
+		document.getElementById("form-username").classList.remove("hidden");
+	} else {
+		document.getElementById("login").classList.add("hidden");
+		document.getElementById("username").childNodes[2].nodeValue = getCookie("username");
+		document.getElementById("account-icon").src = getCookie("useravatar");
+		document.getElementById("account-dropdown").classList.remove("hidden");
 	}
 
 	// manually trigger open and close of hero toggle dropdowns
@@ -158,7 +258,7 @@ function initIndexPage() {
 	});
 
 	// override form submit to add username + url to cookie
-	document.getElementById("formUsername").onsubmit=function(e) {
+	document.getElementById("form-username").onsubmit=function(e) {
 		e.preventDefault();
 		// get username
 		var username = document.getElementById("inputUsername").value;
@@ -183,130 +283,6 @@ function initIndexPage() {
 		// get user stats
 		document.getElementById("hero-grid").classList.remove("hidden");
 		requestUserStats();
-	}
-}
-
-function initHeroPage() {
-	// for hero page, build the hero section
-	getHeroInfo();
-	var thisHero = getHeroFromURL();
-	var heroSection = document.getElementById("hero");
-	heroSection.id = normalizeString(thisHero.name, true).toLowerCase();
-
-	setHeroBackground(normalizeString(thisHero.name, true).toLowerCase());
-
-	// create the page with the data from the hero
-	setHeroInfoProps(thisHero, function() {
-		if (getCookie("userstatsana") != undefined) {
-			getUserStats();
-			updateMaxStats(true);
-			setHeroStatProps(heroSection, normalizeString(thisHero.name, true));
-		}
-		heroSection.classList.add("fade-in");
-	});
-}
-
-function requestUserStats() {
-	console.log("asking for user stats");
-	reqStats.open("GET", getCookie("userAPIURL"), true);
-	reqStats.send();
-
-	reqStats.addEventListener("readystatechange", processUserStatRequest, false);
-}
-
-function processUserStatRequest(e) {
-	if (reqStats.readyState === 4 && reqStats.status == 200) {
-		console.log("received hero stats");
-		var res = JSON.parse(reqStats.responseText);
-		if (res.us) {
-			res = res.us;
-		} else if (res.eu) {
-			res = res.eu;
-		} else if (res.kr) {
-			res = res.kr;
-		} else if (res.any) {
-			res = res.any;
-		} else {
-			alert("ran into a problem");
-		}
-		console.log("saving user stats to cookie");
-		var userStats = {};
-
-		// for each hero, save playtime and average stats
-		for (var hero in res.heroes.playtime.quickplay) {
-			// create empty object for each hero
-			userStats[hero] = {};
-			// if hero has quickplay data, store it
-			if (res.heroes.stats.quickplay[hero]) {
-				userStats[hero] = res.heroes.stats.quickplay[hero].average_stats;
-			}
-			userStats[hero].playtime =  res.heroes.playtime.quickplay[hero];
-			userStats[hero].name = hero;
-
-			// prepare object for storage and add to cookie
-			var heroStatString = JSON.stringify(userStats[hero]);
-			heroStatString = normalizeString(heroStatString);
-			setCookie("userstats" + hero, heroStatString, 1);
-		}
-		// setup index page now that we have data
-		if (document.body.dataset.title === "index") {
-			initIndexPage();
-		}
-	}
-}
-
-function getUserStats() {
-	// get all cookies involving userstats
-	var statCookies = getCookieArray("userstats");
-	// parse each cookie and add it to userStats object
-	for (var i = 0; i < statCookies.length; i++) {
-		// we only care about the actual data, not the name of the cookie
-		statCookies[i] = statCookies[i].split("=")[1];
-
-		// parse cookie into object, and add object to userStats
-		var cookieObject = JSON.parse(statCookies[i]);
-		userStats[cookieObject.name] = cookieObject;
-	}
-}
-
-function getHeroInfo() {
-	// get all cookies involving userstats
-	var heroCookies = getCookieArray("herodata");
-	// parse each cookie and add it to userStats object
-	for (var i = 0; i < heroCookies.length; i++) {
-		// we only care about the actual data, not the name of the cookie
-		heroCookies[i] = heroCookies[i].split("=")[1];
-
-		// parse cookie into object, and add object to userStats
-		var cookieObject = JSON.parse(heroCookies[i]);
-		heroInfo[normalizeString(cookieObject.name, true)] = cookieObject;
-	}
-}
-
-function getHeroData() {
-	// GET request to api
-	reqHeroes.open("GET", "https://overwatch-api.net/api/v1/hero/", true);
-	reqHeroes.send();
-
-	reqHeroes.addEventListener("readystatechange", processHeroRequest, false);
-}
-
-function processHeroRequest(e) {
-	if (reqHeroes.readyState === 4 && reqHeroes.status == 200) {
-		var res = JSON.parse(reqHeroes.responseText);
-		// for each hero in the response, create cookie with their data
-		res.data.forEach(function(hero) {
-			var heroDataString = JSON.stringify(hero);
-			var cookieName = "heroData" + hero.name.toLowerCase();
-
-			// remove semicolons, accents, etc
-			cookieName = normalizeString(cookieName, true);
-			heroDataString = normalizeString(heroDataString);
-
-			setCookie(cookieName, heroDataString, 7);
-		});
-		// fill out hero section with api data
-		initHeroPage();
 	}
 }
 
@@ -367,27 +343,43 @@ function setHeroStatProps(parentElem, hero, callback) {
 	var damage = parentElem.getElementsByClassName("hero-damage")[0].childNodes[3];
 	var healing = parentElem.getElementsByClassName("hero-healing")[0].childNodes[3];
 
-	playtime.textContent = userStats[hero].playtime;
+	// check if we have any data for this hero
+	if (userStats[hero]) {
+		playtime.textContent = userStats[hero].playtime;
 
-	// If hero has any stat objects, then they have all stat objects
-	if (userStats[hero].eliminations_average) {
-		elims.textContent = Math.ceil(userStats[hero].eliminations_average);
-		deaths.textContent = Math.ceil(userStats[hero].deaths_average);
-		damage.textContent = Math.ceil(userStats[hero].damage_done_average);
-		// only healers have healing data
-		if (userStats[hero].healing_done_average) {
-			healing.textContent = Math.ceil(userStats[hero].healing_done_average);
+		// If hero has any stat objects, then they have all stat objects
+		if (userStats[hero].eliminations_average) {
+			elims.textContent = Math.ceil(userStats[hero].eliminations_average);
+			deaths.textContent = Math.ceil(userStats[hero].deaths_average);
+			damage.textContent = Math.ceil(userStats[hero].damage_done_average);
+			// only healers have healing data
+			if (userStats[hero].healing_done_average) {
+				healing.textContent = Math.ceil(userStats[hero].healing_done_average);
+			} else {
+				healing.parentNode.innerHTML = "";
+			}
 		} else {
+			// if heroes don't have stat info available, remove the element and unhide the message
+			parentElem.getElementsByClassName("hero-message")[0].classList.remove("hidden");
+			playtime.parentNode.classList.add("hidden");
+			elims.parentNode.innerHTML = "";
+			deaths.parentNode.innerHTML = "";
+			damage.parentNode.innerHTML = "";
 			healing.parentNode.innerHTML = "";
 		}
 	} else {
-		// if heroes don't have stat info available, remove the element
-		elims.parentNode.innerHTML = "";
-		deaths.parentNode.innerHTML = "";
-		damage.parentNode.innerHTML = "";
-		healing.parentNode.innerHTML = "";
+		if (getCookie("userAPIURL") === undefined) {
+			parentElem.getElementsByClassName("hero-message")[0].classList.remove("hidden");
+			parentElem.getElementsByClassName("hero-message")[0].childNodes[3].textContent = "Not Logged In!";
+			parentElem.getElementsByClassName("hero-message")[0].childNodes[7].textContent = "Log in to see this hero's statistics!";
+			playtime.parentNode.classList.add("hidden");
+			elims.parentNode.innerHTML = "";
+			deaths.parentNode.innerHTML = "";
+			damage.parentNode.innerHTML = "";
+			healing.parentNode.innerHTML = "";
+		}
 	}
-
+	
 	if (callback && typeof callback === "function") {
 		callback();
 	}
@@ -405,7 +397,7 @@ function updateMaxStats(allHeroes) {
 
 	// for each selected hero, check to see if their stat is higher than current max
 	for (var hero in userStats) {
-		// if the hero display is toggled on and we aren't getting average of all heroes
+		// if the hero display is toggled on and we aren't getting max of all heroes
 		if (!heroDisplay[hero] && !allHeroes) { continue; }
 
 		// find the max value of each stat
@@ -508,6 +500,29 @@ function removeHeroSection(hero, callback) {
 }
 
 
+// =====================
+// HERO PAGE FUNCTIONS
+// =====================
+
+function initHeroPage() {
+	// for hero page, build the hero section
+	heroInfo = getHeroInfo();
+	var thisHero = getHeroFromURL();
+	var heroSection = document.getElementById("hero");
+	heroSection.id = normalizeString(thisHero.name, true).toLowerCase();
+
+	setHeroBackground(normalizeString(thisHero.name, true).toLowerCase());
+
+	// create the page with the data from the hero
+	setHeroInfoProps(thisHero, function() {
+		if (getCookie("userstatsana") != undefined) {
+			userStats = getUserStats();
+			updateMaxStats(true);
+		} 
+		setHeroStatProps(heroSection, normalizeString(thisHero.name, true));
+		heroSection.classList.add("fade-in");
+	});
+}
 
 function getHeroFromURL() {
 	var heroData = getCookieArray("herodata");
@@ -529,9 +544,6 @@ function getHeroFromURL() {
 }
 
 function setHeroInfoProps(hero, callback) {
-	// var container = document.getElementsByClassName("hero-container")[0];
-	// var heroSidebar = document.getElementById("hero-sidebar");
-	// var heroMain = document.getElementById("hero-main");
 	var heroRealName = document.getElementById("hero-realName");
 	var heroAge = document.getElementById("hero-age");
 	var heroAffil = document.getElementById("hero-affiliation");
@@ -550,8 +562,17 @@ function setHeroInfoProps(hero, callback) {
 	heroName.textContent = hero.name;
 	heroDesc.textContent = hero.description;
 	heroHealth.textContent = "Health: " + hero.health;
-	heroArmor.textContent = "Armor: " + hero.armour;
-	heroShield.textContent = "Shield: " + hero.shield;
+
+	if (hero.armour != 0) {
+		heroArmor.textContent = "Armor: " + hero.armour;
+	} else {
+		heroArmor.innerHTML = "";
+	}
+	if (hero.shield != 0) {
+		heroShield.textContent = "Shield: " + hero.shield;
+	} else {
+		heroShield.innerHTML = "";
+	}
 
 	heroImg.src=("../img/ow-" + normalizeString(hero.name, true).toLowerCase() + "-full.jpg");
 
@@ -636,6 +657,39 @@ function normalizeString(string, removeExtras) {
 		newString = newString.toLowerCase();
 	}
 	return newString;
+}
+
+function getUserStats() {
+	var tempUserStats = {};
+	// get all cookies involving userstats + the user avatar
+	var statCookies = getCookieArray("userstats");
+
+	// parse each cookie and add it to userStats object
+	for (var i = 0; i < statCookies.length; i++) {
+		// we only care about the actual data, not the name of the cookie
+		statCookies[i] = statCookies[i].split("=")[1];
+
+		// parse cookie into object, and add object to userStats
+		var cookieObject = JSON.parse(statCookies[i]);
+		tempUserStats[cookieObject.name] = cookieObject;
+	}
+	return tempUserStats;
+}
+
+function getHeroInfo() {
+	var tempHeroInfo = {};
+	// get all cookies involving userstats
+	var heroCookies = getCookieArray("herodata");
+	// parse each cookie and add it to userStats object
+	for (var i = 0; i < heroCookies.length; i++) {
+		// we only care about the actual data, not the name of the cookie
+		heroCookies[i] = heroCookies[i].split("=")[1];
+
+		// parse cookie into object, and add object to userStats
+		var cookieObject = JSON.parse(heroCookies[i]);
+		tempHeroInfo[normalizeString(cookieObject.name, true)] = cookieObject;
+	}
+	return tempHeroInfo;
 }
 
 

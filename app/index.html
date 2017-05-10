@@ -17,314 +17,321 @@
 	  <link rel="stylesheet" type="text/css" href="./css/main.css">
 </head>
 <body data-title="index">
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container-fluid">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="/">
-					<img alt="Brand" src="../img/OW-banner.svg">
-				</a>
-			</div>
+	<header>
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/">
+						<img alt="Brand" src="../img/OW-banner.svg">
+					</a>
+				</div>
 
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Heroes <span class="caret"></span></a>
-						<ul class="dropdown-menu" id="hero-list">
-							<ul class="dropdown-inline">
-								<li class="dropdown-header">OFFENSE</li>
-								<li><a href="/hero.html?name=genji">Genji</a></li>
-								<li><a href="/hero.html?name=mccree">McCree</a></li>
-								<li><a href="/hero.html?name=pharah">Pharah</a></li>
-								<li><a href="/hero.html?name=reaper">Reaper</a></li>
-								<li><a href="/hero.html?name=soldier76">Soldier: 76</a></li>
-								<li><a href="/hero.html?name=sombra">Sombra</a></li>
-								<li><a href="/hero.html?name=tracer">Tracer</a></li>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Heroes <span class="caret"></span></a>
+							<ul class="dropdown-menu" id="hero-list">
+								<ul class="dropdown-inline">
+									<li class="dropdown-header">OFFENSE</li>
+									<li><a href="/hero.html?name=genji">Genji</a></li>
+									<li><a href="/hero.html?name=mccree">McCree</a></li>
+									<li><a href="/hero.html?name=pharah">Pharah</a></li>
+									<li><a href="/hero.html?name=reaper">Reaper</a></li>
+									<li><a href="/hero.html?name=soldier76">Soldier: 76</a></li>
+									<li><a href="/hero.html?name=sombra">Sombra</a></li>
+									<li><a href="/hero.html?name=tracer">Tracer</a></li>
+								</ul>
+								<ul class="dropdown-inline divider">
+									<li role="separator" class="divider-vertical"></li>
+								</ul>
+								<ul class="dropdown-inline">
+									<li class="dropdown-header">DEFENSE</li>
+									<li><a href="/hero.html?name=bastion">Bastion</a></li>
+									<li><a href="/hero.html?name=hanzo">Hanzo</a></li>
+									<li><a href="/hero.html?name=junkrat">Junkrat</a></li>
+									<li><a href="/hero.html?name=mei">Mei</a></li>
+									<li><a href="/hero.html?name=torbjorn">Torbjorn</a></li>
+									<li><a href="/hero.html?name=widowmaker">Widowmaker</a></li>
+								</ul>
+								<ul class="dropdown-inline divider">
+									<li role="separator" class="divider-vertical"></li>
+								</ul>
+								<ul class="dropdown-inline">
+									<li class="dropdown-header">TANK</li>
+									<li><a href="/hero.html?name=dva">D.VA</a></li>
+									<li><a href="/hero.html?name=orisa">Orisa</a></li>
+									<li><a href="/hero.html?name=reinhardt">Reinhardt</a></li>
+									<li><a href="/hero.html?name=roadhog">Roadhog</a></li>
+									<li><a href="/hero.html?name=winston">Winston</a></li>
+									<li><a href="/hero.html?name=zarya">Zarya</a></li>
+								</ul>
+								<ul class="dropdown-inline divider">
+									<li role="separator" class="divider-vertical"></li>
+								</ul>
+								<ul class="dropdown-inline">
+									<li class="dropdown-header">SUPPORT</li>
+									<li><a href="/hero.html?name=ana">Ana</a></li>
+									<li><a href="/hero.html?name=lucio">Lucio</a></li>
+									<li><a href="/hero.html?name=mercy">Mercy</a></li>
+									<li><a href="/hero.html?name=symmetra">Symmetra</a></li>
+									<li><a href="/hero.html?name=zenyatta">Zenyatta</a></li>
+								</ul>
 							</ul>
-							<ul class="dropdown-inline divider">
-								<li role="separator" class="divider-vertical"></li>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a id="login" class="hidden" href="/">Login</a></li>
+						<li class="dropdown hidden" id="account-dropdown">
+							<a class="dropdown-toggle" id="username" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<img id="account-icon" alt="AccountIcon" src="">
+								Username 
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a id="logout">Logout</a></li>
 							</ul>
-							<ul class="dropdown-inline">
-								<li class="dropdown-header">DEFENSE</li>
-								<li><a href="/hero.html?name=bastion">Bastion</a></li>
-								<li><a href="/hero.html?name=hanzo">Hanzo</a></li>
-								<li><a href="/hero.html?name=junkrat">Junkrat</a></li>
-								<li><a href="/hero.html?name=mei">Mei</a></li>
-								<li><a href="/hero.html?name=torbjorn">Torbjorn</a></li>
-								<li><a href="/hero.html?name=windowmaker">Widowmaker</a></li>
-							</ul>
-							<ul class="dropdown-inline divider">
-								<li role="separator" class="divider-vertical"></li>
-							</ul>
-							<ul class="dropdown-inline">
-								<li class="dropdown-header">TANK</li>
-								<li><a href="/hero.html?name=dva">D.VA</a></li>
-								<li><a href="/hero.html?name=orisa">Orisa</a></li>
-								<li><a href="/hero.html?name=reinhardt">Reinhardt</a></li>
-								<li><a href="/hero.html?name=roadhog">Roadhog</a></li>
-								<li><a href="/hero.html?name=winston">Winston</a></li>
-								<li><a href="/hero.html?name=zarya">Zarya</a></li>
-							</ul>
-							<ul class="dropdown-inline divider">
-								<li role="separator" class="divider-vertical"></li>
-							</ul>
-							<ul class="dropdown-inline">
-								<li class="dropdown-header">SUPPORT</li>
-								<li><a href="/hero.html?name=ana">Ana</a></li>
-								<li><a href="/hero.html?name=lucio">Lucio</a></li>
-								<li><a href="/hero.html?name=mercy">Mercy</a></li>
-								<li><a href="/hero.html?name=symmetra">Symmetra</a></li>
-								<li><a href="/hero.html?name=zenyatta">Zenyatta</a></li>
-							</ul>
-						</ul>
-					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a id="login" class="hidden">Login</a></li>
-					<li class="dropdown hidden" id="account-dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Username <span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a id="logout">Logout</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div><!-- /.navbar-collapse -->
-		</div><!-- /.container-fluid -->
-	</nav>
+						</li>
+					</ul>
+				</div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
+		</nav>
+	</header>
+	<main>
+		<!-- background image -->
+		<span id="ow-bg"></span>
 
-
-	<!-- background image -->
-	<span id="ow-bg"></span>
-
-
-	<!-- Hero Select + battle.net ID -->
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-12">
+		<!-- Hero Select + battle.net ID -->
+		<div class="container">
+			<div class="jumbotron hidden" id="form-username">
 				<h1>Overwatch Hero Statistics</h1>
-			</div>
-			<div class="col-sm-12">
-				<form class="form-horizontal hidden" id="formUsername">
-					<div class="form-group">
-						<label for="username" class="col-sm-2 control-label">Battletag</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="inputUsername" name="username" placeholder="exampleBattletag#1234" required>
-							<button type="submit" class="btn btn-default">Submit</button>
-						</div>
-					</div>
+				<hr>
+				<p class="text-center">Enter your Battletag to see statistics about the Heroes you use in Quickplay!</p>
+				<form class="form-inline">
+					<label for="username" class="control-label">Battletag</label>
+					<input type="text" class="form-control" id="inputUsername" name="username" placeholder="example#1234" required>
+					<button type="submit" class="btn btn-default">Submit</button>
 				</form>
 			</div>
-			<div class="hidden" id="hero-grid">
-				<div class="col-xs-6 col-sm-2 col-sm-offset-2">
-					<div class="btn-group btn-group-toggle">
-						<button type="button" class="btn btn-default">OFFENSE</button>
-						<button type="button" class="btn btn-default dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-							<span class="caret"></span>
-							<span class="sr-only">Toggle Dropdown</span>
-						</button>
-						<ul class="dropdown-menu">
-							<li>
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle" autocomplete="off">Genji
-								</label>
-							</li>
-							<li>
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle" autocomplete="off">McCree
-								</label>
-							</li>
-							<li>
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle" autocomplete="off">Pharah
-								</label>
-							</li>
-							<li>
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle" autocomplete="off">Reaper
-								</label>
-							</li>
-							<li>
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle" autocomplete="off">Soldier: 76
-								</label>
-							</li>
-							<li>
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle" autocomplete="off">Sombra
-								</label>
-							</li>
-							<li>
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle" autocomplete="off">Tracer
-								</label>
-							</li>
-						</ul>
+			<div class="row">
+				<div class="hidden" id="hero-grid">
+					<div class="col-xs-6 col-sm-2 col-sm-offset-2">
+						<div class="btn-group btn-group-toggle">
+							<button type="button" class="btn btn-default">OFFENSE</button>
+							<button type="button" class="btn btn-default dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+								<span class="caret"></span>
+								<span class="sr-only">Toggle Dropdown</span>
+							</button>
+							<ul class="dropdown-menu">
+								<li>
+									<label class="btn btn-default">
+										<input type="checkbox" class="hero-toggle" autocomplete="off">Genji
+									</label>
+								</li>
+								<li>
+									<label class="btn btn-default">
+										<input type="checkbox" class="hero-toggle" autocomplete="off">McCree
+									</label>
+								</li>
+								<li>
+									<label class="btn btn-default">
+										<input type="checkbox" class="hero-toggle" autocomplete="off">Pharah
+									</label>
+								</li>
+								<li>
+									<label class="btn btn-default">
+										<input type="checkbox" class="hero-toggle" autocomplete="off">Reaper
+									</label>
+								</li>
+								<li>
+									<label class="btn btn-default">
+										<input type="checkbox" class="hero-toggle" autocomplete="off">Soldier: 76
+									</label>
+								</li>
+								<li>
+									<label class="btn btn-default">
+										<input type="checkbox" class="hero-toggle" autocomplete="off">Sombra
+									</label>
+								</li>
+								<li>
+									<label class="btn btn-default">
+										<input type="checkbox" class="hero-toggle" autocomplete="off">Tracer
+									</label>
+								</li>
+							</ul>
+						</div>
 					</div>
-				</div>
-				<div class="col-xs-6 col-sm-2">
-					<div class="btn-group btn-group-toggle">
-						<button type="button" class="btn btn-default">DEFENSE</button>
-						<button type="button" class="btn btn-default dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-							<span class="caret"></span>
-							<span class="sr-only">Toggle Dropdown</span>
-						</button>
-						<ul class="dropdown-menu">
-							<li>
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle" autocomplete="off">Bastion
-								</label>
-							</li>
-							<li>
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle" autocomplete="off">Hanzo
-								</label>
-							</li>
-							<li>
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle" autocomplete="off">Junkrat
-								</label>
-							</li>
-							<li>
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle" autocomplete="off">Mei
-								</label>
-							</li>
-							<li>
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle" autocomplete="off">Torbjorn
-								</label>
-							</li>
-							<li>
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle" autocomplete="off">Widowmaker
-								</label>
-							</li>
-						</ul>
+					<div class="col-xs-6 col-sm-2">
+						<div class="btn-group btn-group-toggle">
+							<button type="button" class="btn btn-default">DEFENSE</button>
+							<button type="button" class="btn btn-default dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+								<span class="caret"></span>
+								<span class="sr-only">Toggle Dropdown</span>
+							</button>
+							<ul class="dropdown-menu">
+								<li>
+									<label class="btn btn-default">
+										<input type="checkbox" class="hero-toggle" autocomplete="off">Bastion
+									</label>
+								</li>
+								<li>
+									<label class="btn btn-default">
+										<input type="checkbox" class="hero-toggle" autocomplete="off">Hanzo
+									</label>
+								</li>
+								<li>
+									<label class="btn btn-default">
+										<input type="checkbox" class="hero-toggle" autocomplete="off">Junkrat
+									</label>
+								</li>
+								<li>
+									<label class="btn btn-default">
+										<input type="checkbox" class="hero-toggle" autocomplete="off">Mei
+									</label>
+								</li>
+								<li>
+									<label class="btn btn-default">
+										<input type="checkbox" class="hero-toggle" autocomplete="off">Torbjorn
+									</label>
+								</li>
+								<li>
+									<label class="btn btn-default">
+										<input type="checkbox" class="hero-toggle" autocomplete="off">Widowmaker
+									</label>
+								</li>
+							</ul>
+						</div>
 					</div>
-				</div>
-				<div class="col-xs-6 col-sm-2">
-					<div class="btn-group btn-group-toggle">
-						<button type="button" class="btn btn-default">TANK</button>
-						<button type="button" class="btn btn-default dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-							<span class="caret"></span>
-							<span class="sr-only">Toggle Dropdown</span>
-						</button>
-						<ul class="dropdown-menu">
-							<li>
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle" autocomplete="off">D.VA
-								</label>
-							</li>
-							<li>
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle" autocomplete="off">Orisa
-								</label>
-							</li>
-							<li>
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle" autocomplete="off">Reinhardt
-								</label>
-							</li>
-							<li>
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle" autocomplete="off">Roadhog
-								</label>
-							</li>
-							<li>
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle" autocomplete="off">Winston
-								</label>
-							</li>
-							<li>
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle" autocomplete="off">Zarya
-								</label>
-							</li>
-						</ul>
+					<div class="col-xs-6 col-sm-2">
+						<div class="btn-group btn-group-toggle">
+							<button type="button" class="btn btn-default">TANK</button>
+							<button type="button" class="btn btn-default dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+								<span class="caret"></span>
+								<span class="sr-only">Toggle Dropdown</span>
+							</button>
+							<ul class="dropdown-menu">
+								<li>
+									<label class="btn btn-default">
+										<input type="checkbox" class="hero-toggle" autocomplete="off">D.VA
+									</label>
+								</li>
+								<li>
+									<label class="btn btn-default">
+										<input type="checkbox" class="hero-toggle" autocomplete="off">Orisa
+									</label>
+								</li>
+								<li>
+									<label class="btn btn-default">
+										<input type="checkbox" class="hero-toggle" autocomplete="off">Reinhardt
+									</label>
+								</li>
+								<li>
+									<label class="btn btn-default">
+										<input type="checkbox" class="hero-toggle" autocomplete="off">Roadhog
+									</label>
+								</li>
+								<li>
+									<label class="btn btn-default">
+										<input type="checkbox" class="hero-toggle" autocomplete="off">Winston
+									</label>
+								</li>
+								<li>
+									<label class="btn btn-default">
+										<input type="checkbox" class="hero-toggle" autocomplete="off">Zarya
+									</label>
+								</li>
+							</ul>
+						</div>
 					</div>
-				</div>
-				<div class="col-xs-6 col-sm-2">
-					<div class="btn-group btn-group-toggle">
-						<button type="button" class="btn btn-default">SUPPORT</button>
-						<button type="button" class="btn btn-default dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-							<span class="caret"></span>
-							<span class="sr-only">Toggle Dropdown</span>
-						</button>
-						<ul class="dropdown-menu">
-							<li>
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle" autocomplete="off">Ana
-								</label>
-							</li>
-							<li>
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle" autocomplete="off">Lucio
-								</label>
-							</li>
-							<li>
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle" autocomplete="off">Mercy
-								</label>
-							</li>
-							<li>
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle" autocomplete="off">Symmetra
-								</label>
-							</li>
-							<li>
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle" autocomplete="off">Zenyatta
-								</label>
-							</li>
-						</ul>
+					<div class="col-xs-6 col-sm-2">
+						<div class="btn-group btn-group-toggle">
+							<button type="button" class="btn btn-default">SUPPORT</button>
+							<button type="button" class="btn btn-default dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+								<span class="caret"></span>
+								<span class="sr-only">Toggle Dropdown</span>
+							</button>
+							<ul class="dropdown-menu">
+								<li>
+									<label class="btn btn-default">
+										<input type="checkbox" class="hero-toggle" autocomplete="off">Ana
+									</label>
+								</li>
+								<li>
+									<label class="btn btn-default">
+										<input type="checkbox" class="hero-toggle" autocomplete="off">Lucio
+									</label>
+								</li>
+								<li>
+									<label class="btn btn-default">
+										<input type="checkbox" class="hero-toggle" autocomplete="off">Mercy
+									</label>
+								</li>
+								<li>
+									<label class="btn btn-default">
+										<input type="checkbox" class="hero-toggle" autocomplete="off">Symmetra
+									</label>
+								</li>
+								<li>
+									<label class="btn btn-default">
+										<input type="checkbox" class="hero-toggle" autocomplete="off">Zenyatta
+									</label>
+								</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-<!-- Hero display  -->
-	<div class="container hero-container">
-		<div class="row">
-			<div class="col-xs-6 col-sm-3 hero-section fade-in" id="originalHeroSection">
-				<div class="panel panel-default">
-					<span class="glyphicon glyphicon-remove-circle hero-remove" aria-hidden="true"></span>
-					<div class="hero-icon"></div>
-					<h3 class="hero-name text-center">Ana</h3>
-					<hr>
-					<div class="hero-stat-section hero-playtime">
-						<div>Playtime</div>
-						<div class="stat-bar">&nbsp;</div>
+	<!-- Hero display  -->
+		<div class="container hero-container">
+			<div class="row">
+				<article class="col-xs-6 col-sm-3 hero-section fade-in" id="originalHeroSection">
+					<div class="panel panel-default">
+						<span class="glyphicon glyphicon-remove-circle hero-remove" aria-hidden="true"></span>
+						<div class="hero-icon"></div>
+						<h3 class="hero-name text-center">Ana</h3>
+						<hr>
+						<section class="hero-stat-section hero-playtime">
+							<h5>Playtime</h5>
+							<div class="stat-bar">&nbsp;</div>
+						</section>
+						<section class="hero-stat-section hero-elims">
+							<h5>Eliminations</h5>
+							<div class="stat-bar">&nbsp;</div>
+						</section>
+						<section class="hero-stat-section hero-deaths">
+							<h5>Deaths</h5>
+							<div class="stat-bar">&nbsp;</div>
+						</section>
+						<section class="hero-stat-section hero-damage">
+							<h5>Damage Done</h5>
+							<div class="stat-bar">&nbsp;</div>
+						</section>
+						<section class="hero-stat-section hero-healing">
+							<h5>Healing</h5>
+							<div class="stat-bar">&nbsp;</div>
+						</section>
+						<section class="hero-stat-section hero-message hidden">
+							<span class="glyphicon glyphicon-alert" aria-hidden="true"></span>
+							<h4>No Playtime!</h4>
+							<hr>
+							<p>You need to play this hero more often in Quickplay to see statistics!</p>
+						</section>
+						<hr>
+						<a class="hero-link" href="/hero.html?name=ana">More Info</a>
 					</div>
-					<div class="hero-stat-section hero-elims">
-						<div>Eliminations</div>
-						<div class="stat-bar">&nbsp;</div>
-					</div>
-					<div class="hero-stat-section hero-deaths">
-						<div>Deaths</div>
-						<div class="stat-bar">&nbsp;</div>
-					</div>
-					<div class="hero-stat-section hero-damage">
-						<div>Damage Done</div>
-						<div class="stat-bar">&nbsp;</div>
-					</div>
-					<div class="hero-stat-section hero-healing">
-						<div>Healing</div>
-						<div class="stat-bar">&nbsp;</div>
-					</div>
-					<hr>
-					<a class="hero-link" href="/hero.html?name=ana">More Info</a>
-				</div>
+				</article>
 			</div>
 		</div>
-	</div>
+	</main>
 	
 
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
