@@ -13,12 +13,10 @@
 	  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 	  crossorigin="anonymous"></script>
 
-	  <script type="text/javascript" src="./js/apiRequests.js"></script>
 	  <link rel="stylesheet" type="text/css" href="./css/ohi_font.css">
 	  <link rel="stylesheet" type="text/css" href="./css/main.css">
-	  <link rel="stylesheet" type="text/css" href="./css/hero.css">
 </head>
-<body>
+<body data-title="hero">
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -60,7 +58,7 @@
 								<li><a href="/hero.html?name=junkrat">Junkrat</a></li>
 								<li><a href="/hero.html?name=mei">Mei</a></li>
 								<li><a href="/hero.html?name=torbjorn">Torbjorn</a></li>
-								<li><a href="/hero.html?name=windowmaker">Widowmaker</a></li>
+								<li><a href="/hero.html?name=widowmaker">Widowmaker</a></li>
 							</ul>
 							<ul class="dropdown-inline divider">
 								<li role="separator" class="divider-vertical"></li>
@@ -89,9 +87,9 @@
 					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a id="login" class="hidden">Login</a></li>
+					<li><a id="login" href="/" class="hidden">Login</a></li>
 					<li class="dropdown hidden" id="account-dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Brady <span class="caret"></span></a>
+						<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Username <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a id="logout">Logout</a></li>
 						</ul>
@@ -107,7 +105,7 @@
 
 	<div class="container hero-container">
 		<div class="row">
-			<div class="col-sm-4 panel panel-default" id="hero-sidebar">
+			<div class="col-sm-4 panel panel-default hero-section" id="hero">
 				<h1 id="hero-name"></h1>
 				<hr>
 				<dl class="dl-horizontal">
@@ -126,14 +124,35 @@
 				<h4 id="hero-health">Health</h4>
 				<h4 id="hero-armor">Armor</h4>
 				<h4 id="hero-shield">Shield</h4>
+				<hr>
+				<div class="hero-stat-section hero-playtime">
+					<div>Playtime</div>
+					<div class="stat-bar">&nbsp;</div>
+				</div>
+				<div class="hero-stat-section hero-elims">
+					<div>Eliminations</div>
+					<div class="stat-bar">&nbsp;</div>
+				</div>
+				<div class="hero-stat-section hero-deaths">
+					<div>Deaths</div>
+					<div class="stat-bar">&nbsp;</div>
+				</div>
+				<div class="hero-stat-section hero-damage">
+					<div>Damage Done</div>
+					<div class="stat-bar">&nbsp;</div>
+				</div>
+				<div class="hero-stat-section hero-healing">
+					<div>Healing</div>
+					<div class="stat-bar">&nbsp;</div>
+				</div>
 			</div>
 			<div class="col-sm-7 col-sm-offset-1" id="hero-main">
-				<img class="img-rounded img-responsive" id="hero-img" src="">
+				<img class="img-rounded img-responsive fade-in" id="hero-img" src="">
 			</div>
 		</div>
 	</div>
 
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="./js/hero.js"></script>
+	<script type="text/javascript" src="./js/main.js"></script>
 </body>
 </html>
