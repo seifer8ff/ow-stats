@@ -140,9 +140,11 @@ function processUserStatRequest(e) {
 			window.location.reload(false);
 		}
 	} else if (reqStats.readyState === 4 && reqStats.status === 0) {
-		console.log(reqStats);
+		// error response from api
 		deleteAllCookies("user", function() {
-			alert("BattleTag cannot be found. BattleTags are case sensitive, and must match the example format.");
+			// display battle tag not found alert
+			document.getElementById("battletag-format").classList.add("hidden");
+			document.getElementById("battletag-not-found").classList.remove("hidden");
 		});
 	}
 }
@@ -182,6 +184,11 @@ function processHeroRequest(e) {
 
 function initIndexPage() {
 	console.log("initializing index page");
+
+	// hide error messages on page load
+	document.getElementById("battletag-not-found").classList.add("hidden");
+	document.getElementById("battletag-format").classList.add("hidden");
+
 	// pull heroes that are toggled on from cookie
 	if (getCookie("userHeroDisplay") != undefined) {
 		heroDisplay = JSON.parse(getCookie("userHeroDisplay"));
@@ -277,7 +284,9 @@ function initIndexPage() {
 
 		// test with regex before continuing
 		if (!/\w+#\d+/.test(username)) {
-			alert("Invalid BattleTag format. BattleTag format should match: example#1234");
+			// remove old alerts, and alert if format is invalid
+			document.getElementById("battletag-not-found").classList.add("hidden");
+			document.getElementById("battletag-format").classList.remove("hidden");
 			return false;
 		}
 
@@ -517,20 +526,26 @@ function initHeroPage() {
 	// for hero page, build the hero section
 	heroInfo = getHeroInfo();
 	var thisHero = getHeroFromURL();
-	var heroSection = document.getElementById("hero");
-	heroSection.id = normalizeString(thisHero.name, true).toLowerCase();
 
-	setHeroBackground(normalizeString(thisHero.name, true).toLowerCase());
+	if (thisHero) {
+		var heroSection = document.getElementById("hero");
+		heroSection.id = normalizeString(thisHero.name, true).toLowerCase();
 
-	// create the page with the data from the hero
-	setHeroInfoProps(thisHero, function() {
-		if (getCookie("userstatsana") != undefined) {
-			userStats = getUserStats();
-			updateMaxStats(true);
-		} 
-		setHeroStatProps(heroSection, normalizeString(thisHero.name, true));
-		heroSection.classList.add("fade-in");
-	});
+		setHeroBackground(normalizeString(thisHero.name, true).toLowerCase());
+
+		// create the page with the data from the hero
+		setHeroInfoProps(thisHero, function() {
+			if (getCookie("userstatsana") != undefined) {
+				userStats = getUserStats();
+				updateMaxStats(true);
+			} 
+			setHeroStatProps(heroSection, normalizeString(thisHero.name, true));
+			heroSection.classList.add("fade-in");
+		});
+	} else {
+		document.getElementById("page-error").classList.remove("hidden");
+	}
+	
 }
 
 function getHeroFromURL() {

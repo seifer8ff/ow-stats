@@ -4,6 +4,7 @@ html {
 
 body {
 	padding-top: 85px;
+    padding-bottom: 25px;
 	min-height: 100%;
 }
 
@@ -66,7 +67,7 @@ a:hover {
 }
 
 #hero-list.dropdown-menu{
-	min-width: 450px;
+	min-width: 400px;
 }
 
 #hero-list.dropdown-menu>.dropdown-inline {
@@ -76,9 +77,13 @@ a:hover {
     padding: 0;
 }
 
+#hero-list.dropdown-menu>.dropdown-inline>li {
+    margin-left: 5px;
+}
+
 #hero-list.dropdown-menu>.dropdown-inline>li>a {
     display: block;
-    padding: 3px 20px;
+    padding: 3px 8px;
     clear: both;
     font-weight: 400;
     line-height: 1.42857143;
@@ -105,6 +110,10 @@ a:hover {
     display: none;
 }
 
+#page-error {
+    margin-top: 15%;
+}
+
 .dropdown-header {
     color: #a8a8a8;
 }
@@ -112,7 +121,7 @@ a:hover {
 .hero-icon {
 	font-size: 120px;
 	text-align: center;
-	line-height: 1.2;
+	line-height: 1;
 }
 
 .hero-message {
@@ -159,12 +168,14 @@ a:hover {
 }
 
 .hero-section {
-	min-height: 590px;
+	/*height: 590px;*/
     text-align: left;
     padding-bottom: 10px;
 }
 
 .hero-section>.panel {
+    position: relative;
+    height: 540px;
     padding: 10px;
 }
 
@@ -183,6 +194,13 @@ a:hover {
 }
 
 .hero-link {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 140px;
     display: block;
     text-align: center;
 }
@@ -251,6 +269,7 @@ a:hover {
     top: 0;
     overflow: hidden;
     height: 90%;
+    width: 1px;
 
 }
 
