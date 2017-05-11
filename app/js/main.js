@@ -68,7 +68,8 @@ window.onload=function() {
 
 	// logout button click
 	$("#logout").on("click", function(e) {
-		deleteAllCookies(function() {
+		console.log("trying to logout");
+		deleteAllCookies("", function() {
 			window.location.reload(false); 
 		});
 	});
@@ -90,8 +91,13 @@ function requestUserStats() {
 }
 
 function processUserStatRequest(e) {
-	if (reqStats.readyState === 4 && reqStats.status == 200) {
+	if (reqStats.readyState === 4 && reqStats.status === 200) {
 		console.log("received hero stats");
+
+		// hide input box and show hero grid
+		document.getElementById("form-username").classList.add("hidden");
+		document.getElementById("hero-grid").classList.remove("hidden");
+
 		var res = JSON.parse(reqStats.responseText);
 		if (res.us) {
 			res = res.us;
@@ -111,7 +117,7 @@ function processUserStatRequest(e) {
 		for (var hero in res.heroes.playtime.quickplay) {
 			// create empty object for each hero
 			userStats[hero] = {};
-			// if hero has quickplay data, store it
+			// if hero has quickplay data, store hero
 			if (res.heroes.stats.quickplay[hero]) {
 				userStats[hero] = res.heroes.stats.quickplay[hero].average_stats;
 			}
@@ -131,8 +137,13 @@ function processUserStatRequest(e) {
 
 		// setup index page now that we have data
 		if (document.body.dataset.title === "index") {
-			initIndexPage();
+			window.location.reload(false);
 		}
+	} else if (reqStats.readyState === 4 && reqStats.status === 0) {
+		console.log(reqStats);
+		deleteAllCookies("user", function() {
+			alert("BattleTag cannot be found. BattleTags are case sensitive, and must match the example format.");
+		});
 	}
 }
 
@@ -170,6 +181,7 @@ function processHeroRequest(e) {
 // =====================
 
 function initIndexPage() {
+	console.log("initializing index page");
 	// pull heroes that are toggled on from cookie
 	if (getCookie("userHeroDisplay") != undefined) {
 		heroDisplay = JSON.parse(getCookie("userHeroDisplay"));
@@ -265,7 +277,7 @@ function initIndexPage() {
 
 		// test with regex before continuing
 		if (!/\w+#\d+/.test(username)) {
-			alert("BATTLETAG format should match: Example#1234");
+			alert("Invalid BattleTag format. BattleTag format should match: example#1234");
 			return false;
 		}
 
@@ -277,11 +289,7 @@ function initIndexPage() {
 		var userAPIURL = "https://owapi.net/api/v3/u/" + username + "/blob";
 		setCookie("userAPIURL", userAPIURL, 30);
 
-		// hide input box
-		this.classList.add("hidden");
-
-		// get user stats
-		document.getElementById("hero-grid").classList.remove("hidden");
+		// attempt to request user stats from api
 		requestUserStats();
 	}
 }
@@ -304,7 +312,7 @@ function buildAllHeroSections(callback) {
 // build the hero section for a given hero
 function buildHeroSection(hero, callback) {
 	// clone template section
-	var newSection = newHeroSection(document.getElementById("originalHeroSection"), hero);
+	var newSection = newHeroSection(document.getElementById("hero-section-original"), hero);
 
 	// basic setup of index page's hero section
 	var heroName = newSection.getElementsByClassName("hero-name")[0];
@@ -318,7 +326,7 @@ function buildHeroSection(hero, callback) {
 	// update stat values of new section
 	setHeroStatProps(newSection, hero, function() {
 		// add new section to the DOM (could speed up by doing this one time)
-		document.getElementById("originalHeroSection").parentNode.appendChild(newSection);
+		document.getElementById("hero-section-original").parentNode.appendChild(newSection);
 		newSection.classList.add("fade-in");
 	});
 
@@ -329,7 +337,7 @@ function buildHeroSection(hero, callback) {
 
 // returns a cloned hero section, with id set to hero name
 function newHeroSection(originalElem, hero) {
-	var newSection = document.getElementById("originalHeroSection").cloneNode(true);
+	var newSection = document.getElementById("hero-section-original").cloneNode(true);
 	newSection.id = hero;
 
 	return newSection;
@@ -345,7 +353,7 @@ function setHeroStatProps(parentElem, hero, callback) {
 
 	// check if we have any data for this hero
 	if (userStats[hero]) {
-		playtime.textContent = userStats[hero].playtime;
+		playtime.textContent = Math.ceil(userStats[hero].playtime);
 
 		// If hero has any stat objects, then they have all stat objects
 		if (userStats[hero].eliminations_average) {
@@ -428,7 +436,7 @@ function updateStatBars() {
 
 	for (var i = 0; i < heroSections.length; i++) {
 		// the original section is hidden, so ignore it
-		if (heroSections[i].id === "originalHeroSection") { continue; }
+		if (heroSections[i].id === "hero-section-original") { continue; }
 		var hero = heroSections[i].id;
 		var playtimeBar = heroSections[i].getElementsByClassName("hero-playtime")[0].childNodes[3];
 		var elimsBar = heroSections[i].getElementsByClassName("hero-elims")[0].childNodes[3];
@@ -489,7 +497,8 @@ function removeHeroSection(hero, callback) {
 
 	// wait for one fadeout to end, then delete hero-section
 	setTimeout(function() {
-		heroSection.outerHTML = "";
+		heroSection.innerHTML = "";
+		heroSection.parentNode.removeChild(heroSection);
 		delete heroSection;
 	}, 550);
 	
@@ -613,7 +622,7 @@ function getCookieArray(matchString) {
 	var cookies = value.split("; ");
 
 	// if matchString has been provided, only return cookies that contain match string
-	if (matchString != undefined) {
+	if (matchString != undefined && matchString != "") {
 		var matchedCookies = [];
 		cookies.forEach(function(cookie) {
 			if (cookie.indexOf(matchString) !== -1) {
@@ -623,15 +632,18 @@ function getCookieArray(matchString) {
 		cookies = matchedCookies;
 	}
 
-	if (cookies.length == 2) {
-		return cookies.pop().split(";").shift();
-	} 
 	return cookies;
 }
 
-function deleteAllCookies(callback) {
-	// get all cookies
-	var cookies = getCookieArray();
+function deleteAllCookies(matchString, callback) {
+	var cookies;
+
+	// if match string has been provided only get cookies containing it
+	if (matchString != undefined && typeof matchString != "function") {
+		cookies = getCookieArray(matchString);
+	} else {
+		cookies = getCookieArray();
+	}
 
 	// overwrite each cookie with 0 and a negative expiration date
 	for (var i = 0; i < cookies.length; i++) {
@@ -652,7 +664,6 @@ function normalizeString(string, removeExtras) {
 	if (removeExtras) {
 		// remove all whitespace
 		newString = newString.replace(/\s/g,'');
-		// remove ".", ":"
 		newString = newString.replace(/:|\./g, "");
 		newString = newString.toLowerCase();
 	}
