@@ -92,7 +92,6 @@ function requestUserStats() {
 
 function processUserStatRequest(e) {
 	if (reqStats.readyState === 4 && reqStats.status === 200) {
-		console.log("received hero stats");
 
 		var res = JSON.parse(reqStats.responseText);
 		if (res.us) {
@@ -135,6 +134,7 @@ function processUserStatRequest(e) {
 			window.location.reload(false);
 		}
 	} else if (reqStats.readyState === 4 && reqStats.status === 0) {
+		console.log("response error");
 		// error response from api (either incorrect battletag or too many requests)
 		deleteAllCookies("user", function() {
 			// display battle tag not found alert
@@ -182,8 +182,6 @@ function initIndexPage() {
 
 	// hide error messages on page load
 	hideAlert();
-	// document.getElementById("battletag-not-found").classList.add("hidden");
-	// document.getElementById("battletag-format").classList.add("hidden");
 
 	// pull heroes that are toggled on from cookie
 	if (getCookie("userHeroDisplay") != undefined) {
@@ -281,6 +279,7 @@ function initIndexPage() {
 
 	// override form submit to add username + url to cookie
 	document.getElementById("form-username").onsubmit=function(e) {
+		console.log("form submitted");
 		e.preventDefault();
 		// get username
 		var username = document.getElementById("inputUsername").value;
@@ -289,8 +288,6 @@ function initIndexPage() {
 		if (!/\w+#\d+/.test(username)) {
 			// show format alert if format is invalid
 			showAlert("battletag-format");
-			// document.getElementById("battletag-not-found").classList.add("hidden");
-			// document.getElementById("battletag-format").classList.remove("hidden");
 			return false;
 		}
 
