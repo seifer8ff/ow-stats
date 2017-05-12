@@ -103,14 +103,20 @@
 		<!-- background image -->
 		<span id="ow-bg"></span>
 
+		 <!-- error messages -->
+		<div class="container">
+			<div class="alert alert-danger hidden fade-in" id="battletag-not-found" role="alert">There was an error requesting statistics for that BattleTag. Double check your BattleTag, and try again later.</div>
+			<div class="alert alert-danger hidden fade-in" id="battletag-format" role="alert">Invalid BattleTag format. BattleTag format should match: example#1234</div>
+		</div>
+		
 		<!-- Hero Select + battle.net ID -->
 		<div class="container">
 			<div class="jumbotron hidden" id="form-username">
 				<h1>Overwatch Hero Statistics</h1>
 				<hr>
-				<p class="text-center">Enter your Battletag to see statistics about the Heroes you use in Quickplay!</p>
+				<p class="text-center">Enter your BattleTag to see statistics about the Heroes you use in Quickplay!</p>
 				<form class="form-inline">
-					<label for="username" class="control-label">Battletag</label>
+					<label for="username" class="control-label">BattleTag</label>
 					<input type="text" class="form-control" id="inputUsername" name="username" placeholder="example#1234" required>
 					<button type="submit" class="btn btn-default">Submit</button>
 				</form>
