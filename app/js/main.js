@@ -141,6 +141,7 @@ function processUserStatRequest(e) {
 			showAlert("battletag-not-found");
 		});
 	}
+	$("#modal-loading").modal("hide");
 }
 
 function requestHeroData() {
@@ -303,6 +304,10 @@ function initIndexPage() {
 
 		// attempt to request user stats from api
 		requestUserStats();
+		$("#modal-loading").modal({
+			backdrop: "static",
+			keyboard: false
+		});
 	}
 }
 
