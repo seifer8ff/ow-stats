@@ -94,10 +94,6 @@ function processUserStatRequest(e) {
 	if (reqStats.readyState === 4 && reqStats.status === 200) {
 		console.log("received hero stats");
 
-		// hide input box and show hero grid
-		document.getElementById("form-username").classList.add("hidden");
-		document.getElementById("hero-grid").classList.remove("hidden");
-
 		var res = JSON.parse(reqStats.responseText);
 		if (res.us) {
 			res = res.us;
@@ -111,40 +107,38 @@ function processUserStatRequest(e) {
 			alert("ran into a problem");
 		}
 		console.log("saving user stats to cookie");
-		var userStats = {};
+		var tempUserStats = {};
 
 		// for each hero, save playtime and average stats
 		for (var hero in res.heroes.playtime.quickplay) {
 			// create empty object for each hero
-			userStats[hero] = {};
+			tempUserStats[hero] = {};
 			// if hero has quickplay data, store hero
 			if (res.heroes.stats.quickplay[hero]) {
-				userStats[hero] = res.heroes.stats.quickplay[hero].average_stats;
+				tempUserStats[hero] = res.heroes.stats.quickplay[hero].average_stats;
 			}
-			userStats[hero].playtime =  res.heroes.playtime.quickplay[hero];
-			userStats[hero].name = hero;
+			tempUserStats[hero].playtime =  res.heroes.playtime.quickplay[hero];
+			tempUserStats[hero].name = hero;
 
 			// prepare object for storage and add to cookie
-			var heroStatString = JSON.stringify(userStats[hero]);
+			var heroStatString = JSON.stringify(tempUserStats[hero]);
 			heroStatString = normalizeString(heroStatString);
 			setCookie("userstats" + hero, heroStatString, 1);
 		}
 
 		// save the user's avatar for navbar account link
-		userStats.avatar = res.stats.quickplay.overall_stats.avatar;
-
-		setCookie("useravatar", userStats.avatar, 1);
+		tempUserStats.avatar = res.stats.quickplay.overall_stats.avatar;
+		setCookie("useravatar", tempUserStats.avatar, 1);
 
 		// setup index page now that we have data
 		if (document.body.dataset.title === "index") {
 			window.location.reload(false);
 		}
 	} else if (reqStats.readyState === 4 && reqStats.status === 0) {
-		// error response from api
+		// error response from api (either incorrect battletag or too many requests)
 		deleteAllCookies("user", function() {
 			// display battle tag not found alert
-			document.getElementById("battletag-format").classList.add("hidden");
-			document.getElementById("battletag-not-found").classList.remove("hidden");
+			showAlert("battletag-not-found");
 		});
 	}
 }
@@ -186,8 +180,9 @@ function initIndexPage() {
 	console.log("initializing index page");
 
 	// hide error messages on page load
-	document.getElementById("battletag-not-found").classList.add("hidden");
-	document.getElementById("battletag-format").classList.add("hidden");
+	hideAlert();
+	// document.getElementById("battletag-not-found").classList.add("hidden");
+	// document.getElementById("battletag-format").classList.add("hidden");
 
 	// pull heroes that are toggled on from cookie
 	if (getCookie("userHeroDisplay") != undefined) {
@@ -240,9 +235,8 @@ function initIndexPage() {
 			});
 	});
 
-	var toggles = $(".hero-toggle");
 	// if toggled on previously, set hero display buttons to active and 'checked'
-	toggles.each(function() {
+	$(".hero-toggle").each(function() {
 		var toggleName = normalizeString($(this).parent().text(), true);
 		if (heroDisplay[toggleName]) {
 			this.checked = true;
@@ -251,28 +245,36 @@ function initIndexPage() {
 	});
 
 	// on toggle, update heroDisplay and build or remove hero section
-	toggles.on("change", function(e) {
-		var toggledHero = normalizeString($(this).parent().text(), true);
-		console.log("toggled: " + toggledHero);
+	$(".hero-toggle").on("change", function(e) {
+		if (!this.disabled) {
+			// store toggle for callbacks, and disable toggle until finished
+			thisToggle = this;
+			thisToggle.disabled = true;
 
-		if (this.checked) {
-			// update toggle state and saved toggle states
-			heroDisplay[toggledHero] = true;
-			$(this).parent().addClass("active");
+			var toggledHero = normalizeString($(this).parent().text(), true);
+			console.log("toggled: " + toggledHero);
 
-			// save toggle states to cookie
-			var heroDisplayString = JSON.stringify(heroDisplay);
-			setCookie("userHeroDisplay", heroDisplayString, 30);
+			if (this.checked) {
+				// update toggle state and saved toggle states
+				heroDisplay[toggledHero] = true;
+				$(this).parent().addClass("active");
 
-			// build the toggle hero section 
-			buildHeroSection(toggledHero, function() {
-				updateMaxStats(false);
-			});
-		} else {
-			// remove section and update button state
-			removeHeroSection(toggledHero, function() {
-				updateMaxStats(false);
-			});
+				// save toggle states to cookie
+				var heroDisplayString = JSON.stringify(heroDisplay);
+				setCookie("userHeroDisplay", heroDisplayString, 30);
+
+				// build the toggle hero section 
+				buildHeroSection(toggledHero, function() {
+					updateMaxStats(false);
+					thisToggle.disabled = false;
+				});
+			} else {
+				// remove section and update button state
+				removeHeroSection(toggledHero, function() {
+					updateMaxStats(false);
+					thisToggle.disabled = false;
+				});
+			}
 		}
 	});
 
@@ -284,9 +286,10 @@ function initIndexPage() {
 
 		// test with regex before continuing
 		if (!/\w+#\d+/.test(username)) {
-			// remove old alerts, and alert if format is invalid
-			document.getElementById("battletag-not-found").classList.add("hidden");
-			document.getElementById("battletag-format").classList.remove("hidden");
+			// show format alert if format is invalid
+			showAlert("battletag-format");
+			// document.getElementById("battletag-not-found").classList.add("hidden");
+			// document.getElementById("battletag-format").classList.remove("hidden");
 			return false;
 		}
 
@@ -476,13 +479,6 @@ function updateStatBars() {
 	}	
 }
 
-// calculates the new width of the stat bar, with a minimum value for readability
-function calcStatBarWidth(statValue, max) {
-	var width = statValue / max * 100;
-	if (width < 15) { width = 15 } 
-	return width;
-}
-
 // deletes the hero section from the dom for the given hero and updated hero display toggles
 function removeHeroSection(hero, callback) {
 	var heroSection = document.getElementById(hero);
@@ -509,12 +505,11 @@ function removeHeroSection(hero, callback) {
 		heroSection.innerHTML = "";
 		heroSection.parentNode.removeChild(heroSection);
 		delete heroSection;
-	}, 550);
-	
 
-	if (callback && typeof callback === "function") {
-		callback();
-	}
+		if (callback && typeof callback === "function") {
+			callback();
+		}
+	}, 550);
 }
 
 
@@ -618,13 +613,13 @@ function setCookie(name, value, expireDays) {
     var d = new Date();
     d.setTime(d.getTime() + (expireDays*24*60*60*1000));
     var expires = "expires="+d.toUTCString();
-    value = encodeURI(value);
+    value = encodeURIComponent(value);
     document.cookie = name + "=" + value + "; " + expires;
 }
 
 function getCookie(name) {
 	var value = "; " + document.cookie;
-	value = decodeURI(value);
+	value = decodeURIComponent(value);
 	var parts = value.split("; " + name + "=");
 	if (parts.length == 2) {
 		return parts.pop().split(";").shift();
@@ -633,9 +628,14 @@ function getCookie(name) {
 
 function getCookieArray(matchString) {
 	var value = document.cookie;
-	value = decodeURI(value);
+	// split by semicolon before we've decoded them back into the strings
 	var cookies = value.split("; ");
 
+	// now that the cookie is split up, decode them
+	for (var i = 0; i < cookies.length; i++) {
+		cookies[i] = decodeURIComponent(cookies[i]);
+	}
+	
 	// if matchString has been provided, only return cookies that contain match string
 	if (matchString != undefined && matchString != "") {
 		var matchedCookies = [];
@@ -653,7 +653,7 @@ function getCookieArray(matchString) {
 function deleteAllCookies(matchString, callback) {
 	var cookies;
 
-	// if match string has been provided only get cookies containing it
+	// if match string has been provided, only get cookies containing it
 	if (matchString != undefined && typeof matchString != "function") {
 		cookies = getCookieArray(matchString);
 	} else {
@@ -673,8 +673,7 @@ function deleteAllCookies(matchString, callback) {
 
 // removed semicolons, accent marks, etc
 function normalizeString(string, removeExtras) {
-	var newString = string.replace(";", ".");
-	newString = newString.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+	var newString = string.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
 
 	if (removeExtras) {
 		// remove all whitespace
@@ -686,6 +685,8 @@ function normalizeString(string, removeExtras) {
 }
 
 function getUserStats() {
+	console.log("getting user stats");
+
 	var tempUserStats = {};
 	// get all cookies involving userstats + the user avatar
 	var statCookies = getCookieArray("userstats");
@@ -703,6 +704,8 @@ function getUserStats() {
 }
 
 function getHeroInfo() {
+	console.log("getting hero info");
+
 	var tempHeroInfo = {};
 	// get all cookies involving userstats
 	var heroCookies = getCookieArray("herodata");
@@ -716,6 +719,36 @@ function getHeroInfo() {
 		tempHeroInfo[normalizeString(cookieObject.name, true)] = cookieObject;
 	}
 	return tempHeroInfo;
+}
+
+// calculates the new width of the stat bar, with a minimum value for readability
+function calcStatBarWidth(statValue, max) {
+	var width = statValue / max * 100;
+	if (width < 15) { width = 15 } 
+	return width;
+}
+
+function showAlert (id) {
+	// if id parameter is valid, hide all alerts, then show the given alert (to trigger fade in)
+	if (id && typeof id === "string") {
+		hideAlert();
+		setTimeout(function() {
+			document.getElementById(id).classList.remove("hidden");
+		}, 200);
+	}
+}
+
+function hideAlert(id) {
+	// if id parameter is given and is valid, hide that alert
+	if (id && typeof id === "string") {
+		document.getElementById(id).classList.add("hidden");
+	} else {
+		// if no id is given, hide all alerts
+		var alerts = document.getElementsByClassName("alert");
+		for (var i = 0; i < alerts.length; i++) {
+			alerts[i].classList.add("hidden");
+		}
+	}
 }
 
 

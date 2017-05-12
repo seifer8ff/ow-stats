@@ -62,12 +62,20 @@ a:hover {
 	content: url(../img/OW-bg-pattern.svg);
 }
 
+#account-icon {
+    height: 40px;
+    margin-right: 10px;
+    margin-top: -15px;
+    margin-bottom: -15px;
+    border-radius: 6px;
+}
+
 #hero-grid {
     text-align: center;
 }
 
 #hero-list.dropdown-menu{
-	min-width: 400px;
+	min-width: 420px;
 }
 
 #hero-list.dropdown-menu>.dropdown-inline {
@@ -240,14 +248,6 @@ a:hover {
 
 .btn-group-toggle {
     margin: 20px;
-}
-
-#account-icon {
-    height: 40px;
-    margin-right: 10px;
-    margin-top: -15px;
-    margin-bottom: -15px;
-    border-radius: 6px;
 }
 
 
