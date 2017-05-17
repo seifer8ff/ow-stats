@@ -127,7 +127,7 @@ function processUserStatRequest(response) {
 					tempUserStats[hero][stat] = Math.ceil(tempUserStats[hero][stat]);
 				}
 			}
-			tempUserStats[hero].playtime =  res.heroes.playtime.quickplay[hero];
+			tempUserStats[hero].playtime =  Math.ceil(res.heroes.playtime.quickplay[hero] * 10 ) / 10;
 			tempUserStats[hero].name = hero;
 
 			// save hero to cookie
@@ -587,25 +587,26 @@ function updateStatBars() {
 
 		if (userStats[hero].playtime) {
 			var playtimeBar = heroSections[i].getElementsByClassName("hero-playtime")[0].childNodes[3];
-			var elimsBar = heroSections[i].getElementsByClassName("hero-elims")[0].childNodes[3];
-			var deathsBar = heroSections[i].getElementsByClassName("hero-deaths")[0].childNodes[3];
-			var damageBar = heroSections[i].getElementsByClassName("hero-damage")[0].childNodes[3];
-
 			var width = calcStatBarWidth(userStats[hero].playtime, userStats.maxPlaytime);
 			playtimeBar.style.width = width + "%"; 
-
+		}
+		if (userStats[hero].eliminations_average) {
+			var elimsBar = heroSections[i].getElementsByClassName("hero-elims")[0].childNodes[3];
 			var width = calcStatBarWidth(userStats[hero].eliminations_average, userStats.maxElims);
 			elimsBar.style.width = width + "%"; 
-
+		}
+		if (userStats[hero].deaths_average) {
+			var deathsBar = heroSections[i].getElementsByClassName("hero-deaths")[0].childNodes[3];
 			var width = calcStatBarWidth(userStats[hero].deaths_average, userStats.maxDeaths);
 			deathsBar.style.width = width + "%"; 
-
+		}
+		if (userStats[hero].damage_done_average) {
+			var damageBar = heroSections[i].getElementsByClassName("hero-damage")[0].childNodes[3];
 			var width = calcStatBarWidth(userStats[hero].damage_done_average, userStats.maxDamage);
 			damageBar.style.width = width + "%"; 
 		}
 		if (userStats[hero].healing_done_average) {
 			var healingBar = heroSections[i].getElementsByClassName("hero-healing")[0].childNodes[3];
-			
 			var width = calcStatBarWidth(userStats[hero].healing_done_average, userStats.maxHealing);
 			healingBar.style.width = width + "%"; 
 		}

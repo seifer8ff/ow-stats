@@ -4,12 +4,18 @@
 	<dl class="dl-horizontal">
 		<dt>Real Name</dt>
 		<dd>{{heroInfo.real_name}}</dd>
-		<dt>Age</dt>
-		<dd>{{heroInfo.age}}</dd>
-		<dt>Prior Affiliation</dt>
-		<dd>{{heroInfo.affiliation}}</dd>
-		<dt>Base of Operations</dt>
-		<dd>{{heroInfo.base_of_operations}}</dd>
+		{{#if heroInfo.age}}
+			<dt>Age</dt>
+			<dd>{{heroInfo.age}}</dd>
+		{{/if}}
+		{{#if heroInfo.affiliation}}
+			<dt>Prior Affiliation</dt>
+			<dd>{{heroInfo.affiliation}}</dd>
+		{{/if}}
+		{{#if heroInfo.base_of_operations}}
+			<dt>Base of Operations</dt>
+			<dd>{{heroInfo.base_of_operations}}</dd>
+		{{/if}}
 	</dl>
 	<hr>
 	<p>{{heroInfo.description}}</p>

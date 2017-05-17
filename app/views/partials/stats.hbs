@@ -4,22 +4,30 @@
 	{{else}}
 	<h6 class="section-label text-uppercase">Hero VS Selected</h6>
 {{/if}}
-<section class="hero-stat-section hero-playtime">
-	<h5>Playtime</h5>
-	<div class="stat-bar">{{userStats.playtime}}</div>
-</section>
-<section class="hero-stat-section hero-elims">
-	<h5>Eliminations</h5>
-	<div class="stat-bar">{{userStats.eliminations_average}}</div>
-</section>
-<section class="hero-stat-section hero-deaths">
-	<h5>Deaths</h5>
-	<div class="stat-bar">{{userStats.deaths_average}}</div>
-</section>
-<section class="hero-stat-section hero-damage">
-	<h5>Damage Done</h5>
-	<div class="stat-bar">{{userStats.damage_done_average}}</div>
-</section>
+{{#if userStats.playtime}}
+	<section class="hero-stat-section hero-playtime">
+		<h5>Playtime</h5>
+		<div class="stat-bar">{{userStats.playtime}}</div>
+	</section>
+{{/if}}
+{{#if userStats.eliminations_average}}
+	<section class="hero-stat-section hero-elims">
+		<h5>Eliminations</h5>
+		<div class="stat-bar">{{userStats.eliminations_average}}</div>
+	</section>
+{{/if}}
+{{#if userStats.deaths_average}}
+	<section class="hero-stat-section hero-deaths">
+		<h5>Deaths</h5>
+		<div class="stat-bar">{{userStats.deaths_average}}</div>
+	</section>
+{{/if}}
+{{#if userStats.damage_done_average}}
+	<section class="hero-stat-section hero-damage">
+		<h5>Damage Done</h5>
+		<div class="stat-bar">{{userStats.damage_done_average}}</div>
+	</section>
+{{/if}}
 {{#if userStats.healing_done_average}}
 	<section class="hero-stat-section hero-healing">
 		<h5>Healing</h5>
