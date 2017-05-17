@@ -1,0 +1,22 @@
+<section class="hero-stat-section hero-playtime">
+	<h5>Playtime</h5>
+	<div class="stat-bar">{{playtime}}</div>
+</section>
+<section class="hero-stat-section hero-elims">
+	<h5>Eliminations</h5>
+	<div class="stat-bar">{{eliminations_average}}</div>
+</section>
+<section class="hero-stat-section hero-deaths">
+	<h5>Deaths</h5>
+	<div class="stat-bar">{{deaths_average}}</div>
+</section>
+<section class="hero-stat-section hero-damage">
+	<h5>Damage Done</h5>
+	<div class="stat-bar">{{damage_done_average}}</div>
+</section>
+{{#if healing_done_average}}
+	<section class="hero-stat-section hero-healing">
+		<h5>Healing</h5>
+		<div class="stat-bar">{{healing_done_average}}</div>
+	</section>
+{{/if}}

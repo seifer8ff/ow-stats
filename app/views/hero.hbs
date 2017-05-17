@@ -1,0 +1,15 @@
+<article class="col-xs-6 col-sm-3 hero-section fade-in" id="{{name}}">
+	<div class="panel panel-default">
+		<span class="glyphicon glyphicon-remove-circle hero-remove" aria-hidden="true"></span>
+		<div class="hero-icon ohi-{{name}}"></div>
+		<h3 class="hero-name text-center">{{name}}</h3>
+		<hr>
+		{{#if playtime}}
+			{{> stats}}
+		{{else}}
+			{{> noPlaytime}}
+		{{/if}}
+		<hr>
+		<a class="hero-link" href="/hero.html?name={{name}}">More Info</a>
+	</div>
+</article>

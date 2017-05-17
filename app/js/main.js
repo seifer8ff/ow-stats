@@ -1,33 +1,12 @@
-var reqHeroes = new XMLHttpRequest();
-var reqStats = new XMLHttpRequest();
 var userStats = {};
 var heroInfo = {};
-var heroDisplay = {
-	sombra: 	false,
-	mercy: 		true,
-	lucio: 		false,
-	dva: 		true,
-	symmetra: 	false,
-	widowmaker: false,
-	reaper: 	false,
-	tracer: 	true,
-	ana: 		false,
-	zenyatta: 	false,
-	junkrat: 	false,
-	roadhog: 	false,
-	zarya: 		false,
-	orisa: 		false,
-	pharah: 	false,
-	mccree: 	false,
-	torbjorn: 	false,
-	mei: 		true,
-	reinhardt: 	false,
-	hanzo: 		true,
-	genji: 		false,
-	winston: 	false,
-	bastion: 	false,
-	soldier76: 	true
-};
+var heroDisplay = [
+	"tracer",
+	"soldier76",
+	"dva",
+	"mei",
+	"lucio"
+];
 
 
 
@@ -36,7 +15,31 @@ window.onload=function() {
 	if (getCookie("userstatsana") === undefined && getCookie("userAPIURL") != undefined) {
 		// username has been entered, but stats need to be refreshed
 		console.log("fetching user stats from api");
-		requestUserStats();
+		// attempt to request user stats from api
+		makeRequest("GET", getCookie("userAPIURL"))
+		.then(function(response) {
+			return processUserStatRequest(response);
+		})
+		.then(function() {
+			// setup index page now that we have data
+			if (document.body.dataset.title === "index") {
+				console.log("reload now");
+				window.location.reload(false);
+			}
+		})
+		.catch(function(err) {
+			console.log("request error - status: " + err.status);
+			// error response from api (either incorrect battletag or too many requests)
+			deleteAllCookies("user", function() {
+				// display battle tag not found alert
+				showAlert("battletag-not-found");
+				$("#modal-loading").modal("hide");
+			});
+		});
+		$("#modal-loading").modal({
+			backdrop: "static",
+			keyboard: false
+		});
 	} else if (document.body.dataset.title === "index") {
 		// stats have already been saved to cookie
 		initIndexPage();
@@ -44,12 +47,22 @@ window.onload=function() {
 
 	if (getCookie("herodataana") === undefined) {
 		console.log("fetching hero data from api");
-		requestHeroData();
+		makeRequest("GET", "https://overwatch-api.net/api/v1/hero/")
+		.then(function(response) {
+			return processHeroRequest(response);
+		})
+		.then(function() {
+			// fill out hero section with api data
+			if (document.body.dataset.title === "hero") {
+				initHeroPage();
+			}
+		})
+		.catch(function(err) {
+			console.log("could not get hero info");
+		});
 	} else if (document.body.dataset.title === "hero") {
 		initHeroPage();
 	}
-
-	
 
 	// show login or account links depending on if userAPIURL is saved to cookie
 	if (getCookie("userAPIURL") === undefined) {
@@ -82,18 +95,9 @@ window.onload=function() {
 // API REQUESTS
 // ==============
 
-function requestUserStats() {
-	console.log("asking for user stats");
-	reqStats.open("GET", getCookie("userAPIURL"), true);
-	reqStats.send();
-
-	reqStats.addEventListener("readystatechange", processUserStatRequest, false);
-}
-
-function processUserStatRequest(e) {
-	if (reqStats.readyState === 4 && reqStats.status === 200) {
-
-		var res = JSON.parse(reqStats.responseText);
+function processUserStatRequest(response) {
+	return new Promise(function(resolve, reject) {
+		var res = JSON.parse(response);
 		if (res.us) {
 			res = res.us;
 		} else if (res.eu) {
@@ -103,9 +107,9 @@ function processUserStatRequest(e) {
 		} else if (res.any) {
 			res = res.any;
 		} else {
-			alert("ran into a problem");
+			console.log("No stats for user");
 		}
-		console.log("saving user stats to cookie");
+		console.log("processing stat response");
 		var tempUserStats = {};
 
 		// for each hero, save playtime and average stats
@@ -115,48 +119,38 @@ function processUserStatRequest(e) {
 			// if hero has quickplay data, store hero
 			if (res.heroes.stats.quickplay[hero]) {
 				tempUserStats[hero] = res.heroes.stats.quickplay[hero].average_stats;
+
+				// round stats to next highest int
+				for (var stat in tempUserStats[hero]) {
+					tempUserStats[hero][stat] = Math.ceil(tempUserStats[hero][stat]);
+				}
 			}
 			tempUserStats[hero].playtime =  res.heroes.playtime.quickplay[hero];
 			tempUserStats[hero].name = hero;
 
-			// prepare object for storage and add to cookie
+			// save hero to cookie
 			var heroStatString = JSON.stringify(tempUserStats[hero]);
 			heroStatString = normalizeString(heroStatString);
 			setCookie("userstats" + hero, heroStatString, 1);
 		}
-
 		// save the user's avatar for navbar account link
-		tempUserStats.avatar = res.stats.quickplay.overall_stats.avatar;
-		setCookie("useravatar", tempUserStats.avatar, 1);
+		setCookie("useravatar", res.stats.quickplay.overall_stats.avatar, 1);
 
-		// setup index page now that we have data
-		if (document.body.dataset.title === "index") {
-			window.location.reload(false);
+		if (Object.keys(tempUserStats).length != 0 && tempUserStats.constructor === Object) {
+			resolve(tempUserStats);
+		} else {
+			reject(tempUserStats);
 		}
-	} else if (reqStats.readyState === 4 && reqStats.status === 0) {
-		console.log("response error");
-		// error response from api (either incorrect battletag or too many requests)
-		deleteAllCookies("user", function() {
-			// display battle tag not found alert
-			showAlert("battletag-not-found");
-		});
-	}
-	$("#modal-loading").modal("hide");
+	});
 }
 
-function requestHeroData() {
-	// GET request to api
-	reqHeroes.open("GET", "https://overwatch-api.net/api/v1/hero/", true);
-	reqHeroes.send();
-
-	reqHeroes.addEventListener("readystatechange", processHeroRequest, false);
-}
-
-function processHeroRequest(e) {
-	if (reqHeroes.readyState === 4 && reqHeroes.status == 200) {
-		var res = JSON.parse(reqHeroes.responseText);
+function processHeroRequest(response) {
+	console.log("processing Hero info");
+	return new Promise(function(resolve, reject) {
+		var res = JSON.parse(response).data;
+		console.log(res);
 		// for each hero in the response, create cookie with their data
-		res.data.forEach(function(hero) {
+		res.forEach(function(hero) {
 			var heroDataString = JSON.stringify(hero);
 			var cookieName = "heroData" + hero.name.toLowerCase();
 
@@ -166,11 +160,8 @@ function processHeroRequest(e) {
 
 			setCookie(cookieName, heroDataString, 7);
 		});
-		// fill out hero section with api data
-		if (document.body.dataset.title === "hero") {
-			initHeroPage();
-		}
-	}
+		resolve(res);
+	});
 }
 
 // =====================
@@ -237,7 +228,7 @@ function initIndexPage() {
 	// if toggled on previously, set hero display buttons to active and 'checked'
 	$(".hero-toggle").each(function() {
 		var toggleName = normalizeString($(this).parent().text(), true);
-		if (heroDisplay[toggleName]) {
+		if (heroDisplay.indexOf(toggleName) > -1) {
 			this.checked = true;
 			$(this).parent().addClass("active");
 		}
@@ -255,7 +246,7 @@ function initIndexPage() {
 
 			if (this.checked) {
 				// update toggle state and saved toggle states
-				heroDisplay[toggledHero] = true;
+				heroDisplay.push(toggledHero);
 				$(this).parent().addClass("active");
 
 				// save toggle states to cookie
@@ -263,7 +254,7 @@ function initIndexPage() {
 				setCookie("userHeroDisplay", heroDisplayString, 30);
 
 				// build the toggle hero section 
-				buildHeroSection(toggledHero, function() {
+				buildHeroSection(userStats[toggledHero], function() {
 					updateMaxStats(false);
 					thisToggle.disabled = false;
 				});
@@ -300,7 +291,26 @@ function initIndexPage() {
 		setCookie("userAPIURL", userAPIURL, 30);
 
 		// attempt to request user stats from api
-		requestUserStats();
+		makeRequest("GET", getCookie("userAPIURL"))
+		.then(function(response) {
+			return processUserStatRequest(response);
+		})
+		.then(function() {
+			// setup index page now that we have data
+			if (document.body.dataset.title === "index") {
+				console.log("reload now");
+				window.location.reload(false);
+			}
+		})
+		.catch(function(err) {
+			console.log("request error - status: " + err.status);
+			// error response from api (either incorrect battletag or too many requests)
+			deleteAllCookies("user", function() {
+				// display battle tag not found alert
+				showAlert("battletag-not-found");
+				$("#modal-loading").modal("hide");
+			});
+		});
 		$("#modal-loading").modal({
 			backdrop: "static",
 			keyboard: false
@@ -311,12 +321,10 @@ function initIndexPage() {
 // for each hero in userStats (that's toggled on), build a hero section
 function buildAllHeroSections(callback) {
 	console.log("building all hero sections");
-	for (var hero in userStats) {
-		// if the hero display is toggled on
-		if (!heroDisplay[hero]) { continue; }
-
-		buildHeroSection(hero);
-	}
+	heroDisplay.forEach(function(hero) {
+		// pass the hero object through
+		buildHeroSection(userStats[hero]);
+	});
 
 	if (callback && typeof callback === "function") {
 		callback();
@@ -325,83 +333,11 @@ function buildAllHeroSections(callback) {
 
 // build the hero section for a given hero
 function buildHeroSection(hero, callback) {
-	// clone template section
-	var newSection = newHeroSection(document.getElementById("hero-section-original"), hero);
+	// build new section from handlebars template
+	var newSection = OW.templates.hero(hero);
 
-	// basic setup of index page's hero section
-	var heroName = newSection.getElementsByClassName("hero-name")[0];
-	var heroIcon = newSection.getElementsByClassName("hero-icon")[0];
-	var linkToHero = newSection.getElementsByClassName("hero-link")[0];
+	document.getElementById("hero-section-parent").insertAdjacentHTML("beforeend", newSection);
 
-	heroIcon.classList.add("ohi-" + hero);
-	linkToHero.href = "/hero.html?name=" + hero;
-	heroName.textContent = heroInfo[hero].name;
-
-	// update stat values of new section
-	setHeroStatProps(newSection, hero, function() {
-		// add new section to the DOM (could speed up by doing this one time)
-		document.getElementById("hero-section-original").parentNode.appendChild(newSection);
-		newSection.classList.add("fade-in");
-	});
-
-	if (callback && typeof callback === "function") {
-		callback();
-	}
-}
-
-// returns a cloned hero section, with id set to hero name
-function newHeroSection(originalElem, hero) {
-	var newSection = document.getElementById("hero-section-original").cloneNode(true);
-	newSection.id = hero;
-
-	return newSection;
-}
-
-// sets all stat values for hero section + misc other data like hero img and link
-function setHeroStatProps(parentElem, hero, callback) {
-	var playtime = parentElem.getElementsByClassName("hero-playtime")[0].childNodes[3];
-	var elims = parentElem.getElementsByClassName("hero-elims")[0].childNodes[3];
-	var deaths = parentElem.getElementsByClassName("hero-deaths")[0].childNodes[3];
-	var damage = parentElem.getElementsByClassName("hero-damage")[0].childNodes[3];
-	var healing = parentElem.getElementsByClassName("hero-healing")[0].childNodes[3];
-
-	// check if we have any data for this hero
-	if (userStats[hero]) {
-		playtime.textContent = Math.ceil(userStats[hero].playtime);
-
-		// If hero has any stat objects, then they have all stat objects
-		if (userStats[hero].eliminations_average) {
-			elims.textContent = Math.ceil(userStats[hero].eliminations_average);
-			deaths.textContent = Math.ceil(userStats[hero].deaths_average);
-			damage.textContent = Math.ceil(userStats[hero].damage_done_average);
-			// only healers have healing data
-			if (userStats[hero].healing_done_average) {
-				healing.textContent = Math.ceil(userStats[hero].healing_done_average);
-			} else {
-				healing.parentNode.innerHTML = "";
-			}
-		} else {
-			// if heroes don't have stat info available, remove the element and unhide the message
-			parentElem.getElementsByClassName("hero-message")[0].classList.remove("hidden");
-			playtime.parentNode.classList.add("hidden");
-			elims.parentNode.innerHTML = "";
-			deaths.parentNode.innerHTML = "";
-			damage.parentNode.innerHTML = "";
-			healing.parentNode.innerHTML = "";
-		}
-	} else {
-		if (getCookie("userAPIURL") === undefined) {
-			parentElem.getElementsByClassName("hero-message")[0].classList.remove("hidden");
-			parentElem.getElementsByClassName("hero-message")[0].childNodes[3].textContent = "Not Logged In!";
-			parentElem.getElementsByClassName("hero-message")[0].childNodes[7].textContent = "Log in to see this hero's statistics!";
-			playtime.parentNode.classList.add("hidden");
-			elims.parentNode.innerHTML = "";
-			deaths.parentNode.innerHTML = "";
-			damage.parentNode.innerHTML = "";
-			healing.parentNode.innerHTML = "";
-		}
-	}
-	
 	if (callback && typeof callback === "function") {
 		callback();
 	}
@@ -419,8 +355,8 @@ function updateMaxStats(allHeroes) {
 
 	// for each selected hero, check to see if their stat is higher than current max
 	for (var hero in userStats) {
-		// if the hero display is toggled on and we aren't getting max of all heroes
-		if (!heroDisplay[hero] && !allHeroes) { continue; }
+		// if the hero display is not toggled on and we aren't getting max of all heroes
+		if (heroDisplay.indexOf(hero) < 0 && !allHeroes) { continue; }
 
 		// find the max value of each stat
 		if (userStats[hero].playtime > userStats.maxPlaytime) {
@@ -452,29 +388,28 @@ function updateStatBars() {
 		// the original section is hidden, so ignore it
 		if (heroSections[i].id === "hero-section-original") { continue; }
 		var hero = heroSections[i].id;
-		var playtimeBar = heroSections[i].getElementsByClassName("hero-playtime")[0].childNodes[3];
-		var elimsBar = heroSections[i].getElementsByClassName("hero-elims")[0].childNodes[3];
-		var deathsBar = heroSections[i].getElementsByClassName("hero-deaths")[0].childNodes[3];
-		var damageBar = heroSections[i].getElementsByClassName("hero-damage")[0].childNodes[3];
-		var healingBar = heroSections[i].getElementsByClassName("hero-healing")[0].childNodes[3];
 
-		if (playtimeBar) { 
+		if (userStats[hero].playtime) {
+			var playtimeBar = heroSections[i].getElementsByClassName("hero-playtime")[0].childNodes[3];
+			var elimsBar = heroSections[i].getElementsByClassName("hero-elims")[0].childNodes[3];
+			var deathsBar = heroSections[i].getElementsByClassName("hero-deaths")[0].childNodes[3];
+			var damageBar = heroSections[i].getElementsByClassName("hero-damage")[0].childNodes[3];
+
 			var width = calcStatBarWidth(userStats[hero].playtime, userStats.maxPlaytime);
 			playtimeBar.style.width = width + "%"; 
-		}
-		if (elimsBar) { 
+
 			var width = calcStatBarWidth(userStats[hero].eliminations_average, userStats.maxElims);
 			elimsBar.style.width = width + "%"; 
-		}
-		if (deathsBar) { 
+
 			var width = calcStatBarWidth(userStats[hero].deaths_average, userStats.maxDeaths);
 			deathsBar.style.width = width + "%"; 
-		}
-		if (damageBar) { 
+
 			var width = calcStatBarWidth(userStats[hero].damage_done_average, userStats.maxDamage);
 			damageBar.style.width = width + "%"; 
 		}
-		if (healingBar) { 
+		if (userStats[hero].healing_done_average) {
+			var healingBar = heroSections[i].getElementsByClassName("hero-healing")[0].childNodes[3];
+			
 			var width = calcStatBarWidth(userStats[hero].healing_done_average, userStats.maxHealing);
 			healingBar.style.width = width + "%"; 
 		}
@@ -485,8 +420,8 @@ function updateStatBars() {
 function removeHeroSection(hero, callback) {
 	var heroSection = document.getElementById(hero);
 
-	// update saved toggle states
-	heroDisplay[hero] = false;
+	// remove hero from display array and save to cookie
+	heroDisplay.splice(heroDisplay.indexOf(hero), 1);
 	var heroDisplayString = JSON.stringify(heroDisplay);
 	setCookie("userHeroDisplay", heroDisplayString, 30);
 
@@ -524,25 +459,24 @@ function initHeroPage() {
 	heroInfo = getHeroInfo();
 	var thisHero = getHeroFromURL();
 
+	// if there's a valid hero in query string, set background and build hero info section. Else display error page
 	if (thisHero) {
-		var heroSection = document.getElementById("hero");
-		heroSection.id = normalizeString(thisHero.name, true).toLowerCase();
-
 		setHeroBackground(normalizeString(thisHero.name, true).toLowerCase());
 
-		// create the page with the data from the hero
-		setHeroInfoProps(thisHero, function() {
-			if (getCookie("userstatsana") != undefined) {
-				userStats = getUserStats();
-				updateMaxStats(true);
-			} 
-			setHeroStatProps(heroSection, normalizeString(thisHero.name, true));
-			heroSection.classList.add("fade-in");
-		});
+		if (getCookie("userstatsana") != undefined) {
+			userStats = getUserStats();
+			updateMaxStats(true);
+		}
+		// pass in both hero info and user stats for hero
+		var context = {heroInfo: thisHero, userStats: userStats[normalizeString(thisHero.name, true).toLowerCase()]};
+
+		// build hero info section and add to DOM
+		var newSection = OW.templates.heroInfo(context);
+		document.getElementById("hero-section-parent").insertAdjacentHTML("beforeend", newSection);
+		updateStatBars();
 	} else {
 		document.getElementById("page-error").classList.remove("hidden");
 	}
-	
 }
 
 function getHeroFromURL() {
@@ -564,44 +498,6 @@ function getHeroFromURL() {
 	return selectedHero;
 }
 
-function setHeroInfoProps(hero, callback) {
-	var heroRealName = document.getElementById("hero-realName");
-	var heroAge = document.getElementById("hero-age");
-	var heroAffil = document.getElementById("hero-affiliation");
-	var heroBase = document.getElementById("hero-base");
-	var heroName = document.getElementById("hero-name");
-	var heroImg = document.getElementById("hero-img");
-	var heroDesc = document.getElementById("hero-desc");
-	var heroHealth = document.getElementById("hero-health");
-	var heroArmor = document.getElementById("hero-armor");
-	var heroShield = document.getElementById("hero-shield");
-
-	heroRealName.textContent = hero.real_name;
-	heroAge.textContent = hero.age;
-	heroAffil.textContent = hero.affiliation;
-	heroBase.textContent = hero.base_of_operations;
-	heroName.textContent = hero.name;
-	heroDesc.textContent = hero.description;
-	heroHealth.textContent = "Health: " + hero.health;
-
-	if (hero.armour != 0) {
-		heroArmor.textContent = "Armor: " + hero.armour;
-	} else {
-		heroArmor.innerHTML = "";
-	}
-	if (hero.shield != 0) {
-		heroShield.textContent = "Shield: " + hero.shield;
-	} else {
-		heroShield.innerHTML = "";
-	}
-
-	heroImg.src=("../img/ow-" + normalizeString(hero.name, true).toLowerCase() + "-full.jpg");
-
-	if (callback && typeof callback === "function") {
-		callback();
-	}
-}
-
 function setHeroBackground(heroName) {
 	document.body.classList.add("body-" + heroName);
 }
@@ -611,12 +507,16 @@ function setHeroBackground(heroName) {
 // ==================
 // UTILITY FUNCTIONS
 // ==================
-function setCookie(name, value, expireDays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (expireDays*24*60*60*1000));
-    var expires = "expires="+d.toUTCString();
-    value = encodeURIComponent(value);
-    document.cookie = name + "=" + value + "; " + expires;
+function setCookie(name, value, days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+days*24*60*60*1000);
+		var expires = "; expires=" + date.toGMTString();
+	} else {
+		var expires = "";
+	}
+	value = encodeURIComponent(value);
+	document.cookie = name + "=" + value + expires;
 }
 
 function getCookie(name) {
@@ -751,6 +651,34 @@ function hideAlert(id) {
 			alerts[i].classList.add("hidden");
 		}
 	}
+}
+
+function makeRequest (method, url) {
+	return new Promise(function(resolve, reject) {
+		var xhr = new XMLHttpRequest();
+		xhr.open(method, url);
+		console.log(url);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4) {
+				if (xhr.status == 200) {
+					console.log("got response");
+					resolve(xhr.response);
+				} else {
+					reject({
+						status: this.status,
+						statusText: xhr.statusText
+					});
+				}
+			}
+		}
+		xhr.onerror = function() {
+			reject({
+				status: this.status,
+				statusText: xhr.statusText
+			});
+		}
+		xhr.send();
+	});
 }
 
 

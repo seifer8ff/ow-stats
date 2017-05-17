@@ -1,0 +1,29 @@
+<div class="col-sm-4 panel panel-default hero-section fade-in" id="{{userStats.name}}">
+	<h1>{{heroInfo.name}}</h1>
+	<hr>
+	<dl class="dl-horizontal">
+		<dt>Real Name</dt>
+		<dd>{{heroInfo.real_name}}</dd>
+		<dt>Age</dt>
+		<dd>{{heroInfo.age}}</dd>
+		<dt>Prior Affiliation</dt>
+		<dd>{{heroInfo.affiliation}}</dd>
+		<dt>Base of Operations</dt>
+		<dd>{{heroInfo.base_of_operations}}</dd>
+	</dl>
+	<hr>
+	<p>{{heroInfo.description}}</p>
+	<hr>
+	<h4 id="hero-health">Health: {{heroInfo.health}}</h4>
+	<h4 id="hero-armor">Armor: {{heroInfo.armour}}</h4>
+	<h4 id="hero-shield">Shield: {{heroInfo.shield}}</h4>
+	<hr>
+	{{#if userStats.playtime}}
+		{{> stats userStats}}
+	{{else}}
+		{{> noPlaytime}}
+	{{/if}}
+</div>
+<div class="col-sm-7 col-sm-offset-1" id="hero-main">
+	<img class="img-rounded img-responsive fade-in" id="hero-img" src="../img/ow-{{userStats.name}}-full.jpg">
+</div>

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<title>Overwatch Stats</title>
 	
@@ -310,51 +310,16 @@
 
 	<!-- Hero display  -->
 		<div class="container hero-container">
-			<div class="row">
-				<article class="col-xs-6 col-sm-3 hero-section fade-in" id="hero-section-original">
-					<div class="panel panel-default">
-						<span class="glyphicon glyphicon-remove-circle hero-remove" aria-hidden="true"></span>
-						<div class="hero-icon"></div>
-						<h3 class="hero-name text-center">Ana</h3>
-						<hr>
-						<section class="hero-stat-section hero-playtime">
-							<h5>Playtime</h5>
-							<div class="stat-bar">&nbsp;</div>
-						</section>
-						<section class="hero-stat-section hero-elims">
-							<h5>Eliminations</h5>
-							<div class="stat-bar">&nbsp;</div>
-						</section>
-						<section class="hero-stat-section hero-deaths">
-							<h5>Deaths</h5>
-							<div class="stat-bar">&nbsp;</div>
-						</section>
-						<section class="hero-stat-section hero-damage">
-							<h5>Damage Done</h5>
-							<div class="stat-bar">&nbsp;</div>
-						</section>
-						<section class="hero-stat-section hero-healing">
-							<h5>Healing</h5>
-							<div class="stat-bar">&nbsp;</div>
-						</section>
-						<section class="hero-stat-section hero-message hidden">
-							<span class="glyphicon glyphicon-alert" aria-hidden="true"></span>
-							<h4>No Playtime!</h4>
-							<hr>
-							<p>You need to play this hero more often in Quickplay to see statistics!</p>
-						</section>
-						<hr>
-						<a class="hero-link" href="/hero.html?name=ana">More Info</a>
-					</div>
-				</article>
-			</div>
+			<div class="row" id="hero-section-parent"/>
 		</div>
 	</main>
 	
 	<!--build:js js/main.min.js -->
 		<script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="./js/bootstrap.js"></script>
+		<script type="text/javascript" src="./js/vendor/handlebars/handlebars.runtime.js"></script>
 		<script type="text/javascript" src="./js/main.js"></script>
 	<!-- endbuild -->
+	<script type="text/javascript" src="./views/templates.js"></script>
 </body>
 </html>
