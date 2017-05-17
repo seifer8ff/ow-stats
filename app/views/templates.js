@@ -1,3 +1,6 @@
+Handlebars.registerPartial("noPlaytime", Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<hr>\n<section class=\"hero-stat-section hero-message\">\n	<span class=\"glyphicon glyphicon-alert\" aria-hidden=\"true\"></span>\n	<h4>No Playtime!</h4>\n	<hr>\n	<p>You need to play this hero more often in Quickplay to see statistics!</p>\n</section>";
+},"useData":true}));
 this["OW"] = this["OW"] || {};
 this["OW"]["templates"] = this["OW"]["templates"] || {};
 this["OW"]["templates"]["hero"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
@@ -23,9 +26,6 @@ this["OW"]["templates"]["hero"] = Handlebars.template({"1":function(container,de
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.name : stack1), depth0))
     + "\">More Info</a>\n		</div>\n	</div>\n</article>";
 },"usePartial":true,"useData":true});
-Handlebars.registerPartial("noPlaytime", Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<hr>\n<section class=\"hero-stat-section hero-message\">\n	<span class=\"glyphicon glyphicon-alert\" aria-hidden=\"true\"></span>\n	<h4>No Playtime!</h4>\n	<hr>\n	<p>You need to play this hero more often in Quickplay to see statistics!</p>\n</section>";
-},"useData":true}));
 Handlebars.registerPartial("stats", Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     return "	<h6 class=\"section-label text-uppercase\">Hero VS All</h6>\n";
 },"3":function(container,depth0,helpers,partials,data) {

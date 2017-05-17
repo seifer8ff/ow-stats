@@ -1,21 +1,28 @@
 var userStats = {};
 var heroInfo = {};
-var heroDisplay = [
-	"tracer",
-	"soldier76",
-	"dva",
-	"mei",
-	"lucio"
-];
+var heroDisplay = [];
 
 
 
 window.onload=function() {
-
-	// if we don't have user stats, but have the required URL, request from the stats api
 	userStats = getUserStats();
 	heroInfo = getHeroInfo();
+	heroDisplay = JSON.parse(getCookie("userHeroDisplay"));
 
+
+	// set heroDisplay to default value if it doesn't exist in cookie or has no values
+	if (heroDisplay === null || heroDisplay.length === 0) {
+		heroDisplay = [
+			"tracer",
+			"dva",
+			"mei",
+			"mercy"
+		];
+		var heroDisplayString = JSON.stringify(heroDisplay);
+		setCookie("userHeroDisplay", heroDisplayString, 30);
+	}
+
+	// if we don't have user stats, but have the required URL, request from the stats api
 	if (userStats === null && getCookie("userAPIURL") !== null) {
 		requestUserStats();
 	} else if (document.body.dataset.title === "index") {
@@ -66,10 +73,6 @@ window.onload=function() {
 function requestUserStats() {
 	makeRequest("GET", getCookie("userAPIURL"))
 	.then(function(response) {
-		// save the initial hero display array to the cookie 
-		var heroDisplayString = JSON.stringify(heroDisplay);
-		setCookie("userHeroDisplay", heroDisplayString, 30);
-
 		// process stats and save them to cookie
 		return processUserStatRequest(response);
 	})
