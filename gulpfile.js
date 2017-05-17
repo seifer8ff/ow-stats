@@ -17,9 +17,8 @@ var declare = require('gulp-declare');
 var browserSync = require('browser-sync').create();
 
 
+// compiles templates and partial templates, then combines them and outputs to templates.js
 gulp.task('handlebars', function() {
-  // Assume all partials start with an underscore
-  // You could also put them in a folder such as source/templates/partials/*.hbs
   var partials = gulp.src(['app/views/partials/*.hbs'])
     .pipe(handlebars({
       handlebars: require('handlebars')

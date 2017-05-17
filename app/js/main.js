@@ -14,6 +14,8 @@ window.onload=function() {
 
 	// if we don't have user stats, but have the required URL, request from the stats api
 	userStats = getUserStats();
+	heroInfo = getHeroInfo();
+
 	if (userStats === null && getCookie("userAPIURL") !== null) {
 		requestUserStats();
 	} else if (document.body.dataset.title === "index") {
@@ -21,7 +23,6 @@ window.onload=function() {
 	}
 
 	// if we don't have hero info, request from the hero api
-	heroInfo = getHeroInfo();
 	if (heroInfo === null) {
 		requestHeroInfo();
 	} else if (document.body.dataset.title === "hero") {
@@ -282,7 +283,11 @@ function initIndexPage() {
 // build the hero section for a given hero
 function buildHeroSection(hero, callback) {
 	// build new section from handlebars template
-	var newSection = OW.templates.hero(hero);
+	var context = {userStats: hero};
+	if (heroInfo !== null) {
+		context.heroInfo = heroInfo[hero.name];
+	}
+	var newSection = OW.templates.hero(context);
 
 	document.getElementById("hero-section-parent").insertAdjacentHTML("beforeend", newSection);
 
@@ -299,9 +304,6 @@ function removeHeroSection(hero, callback) {
 	heroDisplay.splice(heroDisplay.indexOf(hero), 1);
 	var heroDisplayString = JSON.stringify(heroDisplay);
 	setCookie("userHeroDisplay", heroDisplayString, 30);
-
-	// anytime the heroDisplay array is changed, we need to get max stats of chosen heroes
-	updateMaxStats(false);
 
 	// update state of hero toggle
 	var heroToggles = document.getElementsByClassName("hero-toggle");
@@ -321,6 +323,9 @@ function removeHeroSection(hero, callback) {
 		heroSection.parentNode.removeChild(heroSection);
 		delete heroSection;
 
+		// anytime the heroDisplay array is changed, we need to get max stats of chosen heroes
+		updateMaxStats(false);
+
 		if (callback && typeof callback === "function") {
 			callback();
 		}
@@ -334,11 +339,11 @@ function addHeroSection(hero, callback) {
 	var heroDisplayString = JSON.stringify(heroDisplay);
 	setCookie("userHeroDisplay", heroDisplayString, 30);
 
-	// anytime the heroDisplay array is changed, we need to get max stats of chosen heroes
-	updateMaxStats(false);
-
 	// build the new hero section 
 	buildHeroSection(userStats[hero]);
+
+	// anytime the heroDisplay array is changed, we need to get max stats of chosen heroes
+	updateMaxStats(false);
 
 	if (callback && typeof callback === "function") {
 		callback();
@@ -360,14 +365,15 @@ function initHeroPage() {
 
 		// pass in both hero info and user stats (if available) to heroInfo template
 		var context = {heroInfo: thisHero, name: normalizeString(thisHero.name, true).toLowerCase()};
-		if (getUserStats() !== null) {
+		if (userStats !== null) {
 			context.userStats = userStats[normalizeString(thisHero.name, true).toLowerCase()];
 		}
 
 		// build hero info section and add to DOM
 		var newSection = OW.templates.heroInfo(context);
 		document.getElementById("hero-section-parent").insertAdjacentHTML("beforeend", newSection);
-		if (getUserStats() !== null) {
+
+		if (userStats !== null) {
 			updateMaxStats(true);
 		}
 	} else {
