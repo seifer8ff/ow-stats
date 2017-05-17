@@ -3,17 +3,56 @@ var gulp = require('gulp');
 
 // Include Our Plugins
 var concat = require('gulp-concat');
+var merge = require('merge-stream');
+var path = require('path');
 var uglify = require('gulp-uglify');
 var gulpIf = require('gulp-if');
 var rename = require('gulp-rename');
 var useref = require('gulp-useref');
 var cssnano = require('gulp-cssnano');
 var imagemin = require('gulp-imagemin');
+var handlebars = require('gulp-handlebars');
+var wrap = require('gulp-wrap');
+var declare = require('gulp-declare');
 var browserSync = require('browser-sync').create();
+
+
+gulp.task('handlebars', function() {
+  // Assume all partials start with an underscore
+  // You could also put them in a folder such as source/templates/partials/*.hbs
+  var partials = gulp.src(['app/views/partials/*.hbs'])
+    .pipe(handlebars({
+      handlebars: require('handlebars')
+    }))
+    .pipe(wrap('Handlebars.registerPartial(<%= processPartialName(file.relative) %>, Handlebars.template(<%= contents %>));', {}, {
+      imports: {
+        processPartialName: function(fileName) {
+          // Strip the extension and the underscore
+          // Escape the output with JSON.stringify
+          return JSON.stringify(path.basename(fileName, '.js'));
+        }
+      }
+    }));
+
+  var templates = gulp.src('app/views/*.hbs')
+    .pipe(handlebars({
+      handlebars: require('handlebars')
+    }))
+    .pipe(wrap('Handlebars.template(<%= contents %>)'))
+    .pipe(declare({
+      namespace: 'OW.templates',
+      noRedeclare: true // Avoid duplicate declarations
+    }));
+
+  // Output both the partials and the templates as build/js/templates.js
+  return merge(partials, templates)
+    .pipe(concat('templates.js'))
+    .pipe(gulp.dest('app/views'));
+});
 
 // Concatenate & Minify JS & CSS
 gulp.task('useref', function(){
-  return gulp.src('app/*.html')
+    return gulp.src('app/*.html')
     .pipe(useref())
     // Minifies only if it's a JavaScript file
     .pipe(gulpIf('*.js', uglify()))
@@ -48,6 +87,9 @@ gulp.task('browserSync', function() {
 // Watch Files For Changes and reload browser
 gulp.task('watch', ['browserSync'], function() {
     gulp.watch('app/*.html', browserSync.reload); 
+    gulp.watch('app/views/*.hbs', ['handlebars']); 
+    gulp.watch('app/views/partials/*.hbs', ['handlebars']); 
+    gulp.watch('app/views/*.js', browserSync.reload);
     gulp.watch('app/js/*.js', browserSync.reload); 
     gulp.watch('app/css/*.css', browserSync.reload); 
 });
