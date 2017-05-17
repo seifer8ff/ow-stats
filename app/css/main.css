@@ -188,9 +188,15 @@ a:hover {
     padding-bottom: 10px;
 }
 
+/* index page*/
 .hero-section>.panel {
     position: relative;
     height: 570px;
+}
+
+/* hero page */
+.hero-section.panel {
+    min-height: 760px;
 }
 
 .hero-section>h1 {
@@ -215,8 +221,24 @@ a:hover {
     margin-bottom: 8px;
 }
 
+/* padding for absolutely positioned link at bottom */
+.hero-stat-section:last-of-type {
+    margin-bottom: 70px;
+}
+
 .hero-stat-section > .stat-bar {
     line-height: 1em;
+}
+
+#hero-section-parent img {
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    max-height: 760px;
+}
+
+.hero-aside {
+    max-height: 760px;
 }
 
 .hero-link {
@@ -394,15 +416,6 @@ ul > li > label {
 
 #hero {
     opacity: 0;
-}
-
-#hero-img-container {
-    text-align: center;
-    margin: 15px;
-}
-
-#hero-img {
-    font-size: 380px;
 }
 
 .dl-horizontal dt {

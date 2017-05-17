@@ -26,51 +26,6 @@ this["OW"]["templates"]["hero"] = Handlebars.template({"1":function(container,de
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.name : stack1), depth0))
     + "\">More Info</a>\n		</div>\n	</div>\n</article>";
 },"usePartial":true,"useData":true});
-Handlebars.registerPartial("stats", Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    return "	<h6 class=\"section-label text-uppercase\">Hero VS All</h6>\n";
-},"3":function(container,depth0,helpers,partials,data) {
-    return "	<h6 class=\"section-label text-uppercase\">Hero VS Selected</h6>\n";
-},"5":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "	<section class=\"hero-stat-section hero-playtime\">\n		<h5>Playtime</h5>\n		<div class=\"stat-bar\">"
-    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.playtime : stack1), depth0))
-    + "</div>\n	</section>\n";
-},"7":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "	<section class=\"hero-stat-section hero-elims\">\n		<h5>Eliminations</h5>\n		<div class=\"stat-bar\">"
-    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.eliminations_average : stack1), depth0))
-    + "</div>\n	</section>\n";
-},"9":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "	<section class=\"hero-stat-section hero-deaths\">\n		<h5>Deaths</h5>\n		<div class=\"stat-bar\">"
-    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.deaths_average : stack1), depth0))
-    + "</div>\n	</section>\n";
-},"11":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "	<section class=\"hero-stat-section hero-damage\">\n		<h5>Damage Done</h5>\n		<div class=\"stat-bar\">"
-    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.damage_done_average : stack1), depth0))
-    + "</div>\n	</section>\n";
-},"13":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "	<section class=\"hero-stat-section hero-healing\">\n		<h5>Healing</h5>\n		<div class=\"stat-bar\">"
-    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.healing_done_average : stack1), depth0))
-    + "</div>\n	</section>\n";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "<hr>\n"
-    + ((stack1 = helpers["if"].call(depth0,(depth0 != null ? depth0.heroPage : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(depth0,((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.playtime : stack1),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(depth0,((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.eliminations_average : stack1),{"name":"if","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(depth0,((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.deaths_average : stack1),{"name":"if","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(depth0,((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.damage_done_average : stack1),{"name":"if","hash":{},"fn":container.program(11, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(depth0,((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.healing_done_average : stack1),{"name":"if","hash":{},"fn":container.program(13, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-},"useData":true}));
 this["OW"]["templates"]["heroInfo"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -116,7 +71,7 @@ this["OW"]["templates"]["heroInfo"] = Handlebars.template({"1":function(containe
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=container.escapeExpression, alias4=container.lambda;
 
-  return "<div class=\"col-sm-4 panel panel-default hero-section fade-in\" id=\""
+  return "<div class=\"col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-5 col-lg-4 panel panel-default hero-section fade-in\" id=\""
     + alias3(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"name","hash":{},"data":data}) : helper)))
     + "\">\n	<h1>"
     + alias3(alias4(((stack1 = (depth0 != null ? depth0.heroInfo : depth0)) != null ? stack1.name : stack1), depth0))
@@ -134,7 +89,52 @@ this["OW"]["templates"]["heroInfo"] = Handlebars.template({"1":function(containe
     + ((stack1 = helpers["if"].call(depth0,((stack1 = (depth0 != null ? depth0.heroInfo : depth0)) != null ? stack1.armour : stack1),{"name":"if","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ((stack1 = helpers["if"].call(depth0,((stack1 = (depth0 != null ? depth0.heroInfo : depth0)) != null ? stack1.shield : stack1),{"name":"if","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ((stack1 = helpers["if"].call(depth0,(depth0 != null ? depth0.userStats : depth0),{"name":"if","hash":{},"fn":container.program(11, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "</div>\n<aside class=\"col-sm-7 col-sm-offset-1\" id=\"hero-main\">\n	<img class=\"img-rounded img-responsive fade-in\" id=\"hero-img\" src=\"../img/ow-"
+    + "	<div class=\"hero-link\">\n		<hr>\n		<a href=\"/\">Back to Heroes</a>\n	</div>\n</div>\n<aside class=\"col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-6 col-md-offset-1 col-lg-7 col-lg-offset-1 hero-aside\">\n	<img class=\"img-rounded img-responsive fade-in\" id=\"hero-img\" src=\"../img/ow-"
     + alias3(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"name","hash":{},"data":data}) : helper)))
     + "-full.jpg\">\n</aside>";
 },"usePartial":true,"useData":true});
+Handlebars.registerPartial("stats", Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    return "	<h6 class=\"section-label text-uppercase\">Hero VS All</h6>\n";
+},"3":function(container,depth0,helpers,partials,data) {
+    return "	<h6 class=\"section-label text-uppercase\">Hero VS Selected</h6>\n";
+},"5":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "	<section class=\"hero-stat-section hero-playtime\">\n		<h5>Playtime</h5>\n		<div class=\"stat-bar\">"
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.playtime : stack1), depth0))
+    + "</div>\n	</section>\n";
+},"7":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "	<section class=\"hero-stat-section hero-elims\">\n		<h5>Eliminations</h5>\n		<div class=\"stat-bar\">"
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.eliminations_average : stack1), depth0))
+    + "</div>\n	</section>\n";
+},"9":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "	<section class=\"hero-stat-section hero-deaths\">\n		<h5>Deaths</h5>\n		<div class=\"stat-bar\">"
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.deaths_average : stack1), depth0))
+    + "</div>\n	</section>\n";
+},"11":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "	<section class=\"hero-stat-section hero-damage\">\n		<h5>Damage Done</h5>\n		<div class=\"stat-bar\">"
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.damage_done_average : stack1), depth0))
+    + "</div>\n	</section>\n";
+},"13":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "	<section class=\"hero-stat-section hero-healing\">\n		<h5>Healing</h5>\n		<div class=\"stat-bar\">"
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.healing_done_average : stack1), depth0))
+    + "</div>\n	</section>\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "<hr>\n"
+    + ((stack1 = helpers["if"].call(depth0,(depth0 != null ? depth0.heroPage : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(depth0,((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.playtime : stack1),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(depth0,((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.eliminations_average : stack1),{"name":"if","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(depth0,((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.deaths_average : stack1),{"name":"if","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(depth0,((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.damage_done_average : stack1),{"name":"if","hash":{},"fn":container.program(11, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(depth0,((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.healing_done_average : stack1),{"name":"if","hash":{},"fn":container.program(13, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"useData":true}));
