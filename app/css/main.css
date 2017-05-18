@@ -244,10 +244,17 @@ label.btn input[type=checkbox] {
     margin-bottom: 70px;
 }
 
-#hero-section-parent img {
+.hero-img {
     margin-left: auto;
     margin-right: auto;
     width: auto;
+}
+
+.hero-img.visible-xs {
+    max-height: 200px;
+}
+
+#hero-section-parent aside .hero-img {
     max-height: 760px;
 }
 

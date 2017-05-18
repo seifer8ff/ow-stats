@@ -120,7 +120,7 @@ this["OW"]["templates"]["heroInfo"] = Handlebars.template({"1":function(containe
     + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
     + "\">\n	<h1>"
     + alias4(alias5(((stack1 = (depth0 != null ? depth0.heroInfo : depth0)) != null ? stack1.name : stack1), depth0))
-    + "</h1>\n	<hr class=\"visible-xs\">\n	<img class=\"visible-xs img-rounded img-responsive fade-in\" id=\"hero-img\" src=\"../img/ow-"
+    + "</h1>\n	<hr class=\"visible-xs\">\n	<img class=\"visible-xs img-rounded img-responsive hero-img fade-in\" src=\"../img/ow-"
     + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
     + "-full.jpg\">\n	<hr>\n	<dl class=\"dl-horizontal\">\n		<dt>Real Name</dt>\n		<dd>"
     + alias4(alias5(((stack1 = (depth0 != null ? depth0.heroInfo : depth0)) != null ? stack1.real_name : stack1), depth0))
@@ -136,7 +136,7 @@ this["OW"]["templates"]["heroInfo"] = Handlebars.template({"1":function(containe
     + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.heroInfo : depth0)) != null ? stack1.armour : stack1),{"name":"if","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.heroInfo : depth0)) != null ? stack1.shield : stack1),{"name":"if","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.userStats : depth0),{"name":"if","hash":{},"fn":container.program(11, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "	<div class=\"hero-link\">\n		<hr>\n		<a href=\"/\">Back to Heroes</a>\n	</div>\n</article>\n<aside class=\"hidden-xs col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-6 col-md-offset-1 col-lg-7 col-lg-offset-1 hero-aside\">\n	<img class=\"img-rounded img-responsive fade-in\" id=\"hero-img\" src=\"../img/ow-"
+    + "	<div class=\"hero-link\">\n		<hr>\n		<a href=\"/\">Back to Heroes</a>\n	</div>\n</article>\n<aside class=\"hidden-xs col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-6 col-md-offset-1 col-lg-7 col-lg-offset-1 hero-aside\">\n	<img class=\"img-rounded img-responsive hero-img fade-in\" src=\"../img/ow-"
     + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
     + "-full.jpg\">\n</aside>";
 },"usePartial":true,"useData":true});
