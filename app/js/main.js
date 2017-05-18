@@ -13,10 +13,10 @@ window.onload=function() {
 	// set heroDisplay to default value if it doesn't exist in cookie or has no values
 	if (heroDisplay === null || heroDisplay.length === 0) {
 		heroDisplay = [
-			"tracer",
-			"dva",
-			"mei",
-			"mercy"
+		"tracer",
+		"dva",
+		"mei",
+		"mercy"
 		];
 		var heroDisplayString = JSON.stringify(heroDisplay);
 		setCookie("userHeroDisplay", heroDisplayString, 30);
@@ -611,7 +611,7 @@ function updateStatBars() {
 function calcStatBarWidth(statValue, max) {
 	var width = statValue / max * 100;
 	if (width < 15) { width = 15 } 
-	return width;
+		return width;
 }
 
 function showAlert (id) {
