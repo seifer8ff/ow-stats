@@ -95,5 +95,15 @@ gulp.task('watch', ['browserSync'], function() {
     gulp.watch('app/css/*.css', browserSync.reload); 
 });
 
+// build task
+gulp.task('build', function() {
+  gulp.run('handlebars'); 
+  gulp.run('useref'); 
+  gulp.run('fonts'); 
+  gulp.run('images'); 
+});
+
 // Default Task
 gulp.task('default', ['watch']);
+
+
