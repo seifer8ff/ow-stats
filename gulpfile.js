@@ -6,6 +6,7 @@ var concat = require('gulp-concat');
 var merge = require('merge-stream');
 var path = require('path');
 var uglify = require('gulp-uglify');
+var stripDebug = require('gulp-strip-debug');
 var gulpIf = require('gulp-if');
 var rename = require('gulp-rename');
 var useref = require('gulp-useref');
@@ -53,7 +54,8 @@ gulp.task('handlebars', function() {
 gulp.task('useref', function(){
     return gulp.src('app/*.html')
     .pipe(useref())
-    // Minifies only if it's a JavaScript file
+    // strips debug and minifies only if it's a JavaScript file
+    .pipe(gulpIf('*.js', stripDebug()))
     .pipe(gulpIf('*.js', uglify()))
     .pipe(gulp.dest('dist'))
     // Minifies only if it's a CSS file
