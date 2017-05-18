@@ -116,7 +116,7 @@ this["OW"]["templates"]["heroInfo"] = Handlebars.template({"1":function(containe
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=container.escapeExpression, alias4=container.lambda;
 
-  return "<div class=\"col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-5 col-lg-4 panel panel-default hero-section fade-in\" id=\""
+  return "<article class=\"col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-5 col-lg-4 panel panel-default hero-section fade-in\" id=\""
     + alias3(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"name","hash":{},"data":data}) : helper)))
     + "\">\n	<h1>"
     + alias3(alias4(((stack1 = (depth0 != null ? depth0.heroInfo : depth0)) != null ? stack1.name : stack1), depth0))
@@ -136,7 +136,7 @@ this["OW"]["templates"]["heroInfo"] = Handlebars.template({"1":function(containe
     + ((stack1 = helpers["if"].call(depth0,((stack1 = (depth0 != null ? depth0.heroInfo : depth0)) != null ? stack1.armour : stack1),{"name":"if","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ((stack1 = helpers["if"].call(depth0,((stack1 = (depth0 != null ? depth0.heroInfo : depth0)) != null ? stack1.shield : stack1),{"name":"if","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ((stack1 = helpers["if"].call(depth0,(depth0 != null ? depth0.userStats : depth0),{"name":"if","hash":{},"fn":container.program(11, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "	<div class=\"hero-link\">\n		<hr>\n		<a href=\"/\">Back to Heroes</a>\n	</div>\n</div>\n<aside class=\"hidden-xs col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-6 col-md-offset-1 col-lg-7 col-lg-offset-1 hero-aside\">\n	<img class=\"img-rounded img-responsive fade-in\" id=\"hero-img\" src=\"../img/ow-"
+    + "	<div class=\"hero-link\">\n		<hr>\n		<a href=\"/\">Back to Heroes</a>\n	</div>\n</article>\n<aside class=\"hidden-xs col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-6 col-md-offset-1 col-lg-7 col-lg-offset-1 hero-aside\">\n	<img class=\"img-rounded img-responsive fade-in\" id=\"hero-img\" src=\"../img/ow-"
     + alias3(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"name","hash":{},"data":data}) : helper)))
     + "-full.jpg\">\n</aside>";
 },"usePartial":true,"useData":true});

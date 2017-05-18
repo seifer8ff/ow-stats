@@ -16,6 +16,24 @@ a:hover {
     cursor: pointer;
 }
 
+ul > li > label {
+    width: 100%;
+}
+
+label.btn input[type=checkbox] {
+    position: absolute;
+    clip: rect(0,0,0,0);
+    pointer-events: none;
+}
+
+#hero {
+    opacity: 0;
+}
+
+.dl-horizontal dt {
+  text-align: left;
+}
+
 .form-control {
     font-size: 16px;
 }
@@ -397,16 +415,6 @@ hr {
     padding: 0;
 }
 
-ul > li > label {
-    width: 100%;
-}
-
-label.btn input[type=checkbox] {
-    position: absolute;
-    clip: rect(0,0,0,0);
-    pointer-events: none;
-}
-
 .dropdown-menu>li:not(:first-child):not(:last-child):not(.dropdown-toggle)>label.btn {
     border-radius: 0;
 }
@@ -419,24 +427,6 @@ label.btn input[type=checkbox] {
 .dropdown-menu>li:last-child:not(:first-child):not(.dropdown-toggle)>label.btn {
     border-top-right-radius: 0;
     border-top-left-radius: 0;
-}
-
-/*=======================*/
-/*BOOTSTRAP OVERRIDES END */
-/*=======================*/
-
-
-
-/*================
-  HERO PAGE
- ===============*/
-
-#hero {
-    opacity: 0;
-}
-
-.dl-horizontal dt {
-  text-align: left;
 }
 
 

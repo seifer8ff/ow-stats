@@ -56,7 +56,7 @@ window.onload=function() {
 
 	// logout button click
 	$("#logout").on("click", function(e) {
-		console.log("trying to logout");
+		console.log("logging out");
 		deleteAllCookies("", function() {
 			window.location.reload(false); 
 		});
@@ -83,14 +83,18 @@ function requestUserStats() {
 		}
 	})
 	.catch(function(err) {
-		console.log("request error - status: " + err.status);
 		// error response from api (either incorrect battletag or too many requests)
+		console.log("request error - status: " + err.status);
+		
+		// remove all user stats related cookies to prevent repeat requests
 		deleteAllCookies("user", function() {
 			// display battle tag not found alert
 			showAlert("battletag-not-found");
 			$("#modal-loading").modal("hide");
 		});
 	});
+
+	// while making api request, display loading modal
 	$("#modal-loading").modal({
 		backdrop: "static",
 		keyboard: false
@@ -138,6 +142,7 @@ function processUserStatRequest(response) {
 		// save the user's avatar for navbar account link
 		setCookie("useravatar", res.stats.quickplay.overall_stats.avatar, 1);
 
+		// resolve if tempUserStats is not empty
 		if (Object.keys(tempUserStats).length != 0 && tempUserStats.constructor === Object) {
 			resolve(tempUserStats);
 		} else {
@@ -206,21 +211,6 @@ function initIndexPage() {
 		updateMaxStats(false);
 	}
 
-	// manually trigger open and close of hero toggle dropdowns
-	$(".hero-grid .dropdown-toggle").on("click", function(e) {
-		$(this).parent().toggleClass('open');
-	});
-
-	// close hero toggles when clicking outside of dropdown
-	// $("body").on("click", function (e) {
-	// 	if (!$(".hero-grid .hero-toggle").is(e.target) && 
-	// 	!$(".hero-grid label.btn").is(e.target)  && 
-	// 	!$(".hero-grid span.caret").is(e.target) &&
-	// 	!$(".hero-grid .dropdown-toggle").is(e.target)) {
-	// 		$(".hero-grid .dropdown-menu").parent().removeClass("open");
-	// 	}
-	// });
-
 	// remove hero click handler
 	$(".hero-container").on("click", ".hero-remove", function() {
 		removeHeroSection(this.parentNode.parentNode.id);
@@ -239,8 +229,7 @@ function initIndexPage() {
 	$(".hero-toggle").on("change", function(e) {
 		if (!this.disabled) {
 			// store toggle for callbacks, and disable toggle until finished
-			thisToggle = this;
-			thisToggle.disabled = true;
+			this.disabled = true;
 
 			var toggledHero = normalizeString($(this).parent().text(), true);
 			console.log("toggled: " + toggledHero);
@@ -248,13 +237,13 @@ function initIndexPage() {
 			if (this.checked) {
 				$(this).parent().addClass("active");
 				addHeroSection(toggledHero, function() {
-					thisToggle.disabled = false;
-				});
+					this.disabled = false;
+				}.bind(this));
 			} else {
 				// remove section and update button state
 				removeHeroSection(toggledHero, function() {
-					thisToggle.disabled = false;
-				});
+					this.disabled = false;
+				}.bind(this));
 			}
 		}
 	});
@@ -273,11 +262,13 @@ function initIndexPage() {
 			return false;
 		}
 
-		// format for API call
+		// add valid username (original format) to cookie
+		setCookie("username", username, 30);
+
+		// reformat username for API call
 		username = username.replace("#", "-");
 
-		// set cookie if username is valid format
-		setCookie("username", username, 30);
+		// create api url with formatted username
 		var userAPIURL = "https://owapi.net/api/v3/u/" + username + "/blob";
 		setCookie("userAPIURL", userAPIURL, 30);
 
