@@ -1,0 +1,123 @@
+@font-face {
+  font-family: 'ow-font';
+  src:  url('../fonts/ow-font.eot?t2knxl');
+  src:  url('../fonts/ow-font.eot?t2knxl#iefix') format('embedded-opentype'),
+    url('../fonts/ow-font.ttf?t2knxl') format('truetype'),
+    url('../fonts/ow-font.woff?t2knxl') format('woff'),
+    url('../fonts/ow-font.svg?t2knxl#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'ow-font' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-ow-bastion:before {
+  content: "\e900";
+  
+}
+.icon-ow-dva:before {
+  content: "\e901";
+  
+}
+.icon-ow-genji:before {
+  content: "\e902";
+  
+}
+.icon-ow-hanzo:before {
+  content: "\e903";
+  
+}
+.icon-ow-junkrat:before {
+  content: "\e904";
+  
+}
+.icon-ow-logo .path1:before {
+  content: "\e905";
+  color: rgb(243, 158, 50);
+}
+.icon-ow-logo .path2:before {
+  content: "\e906";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-ow-lucio:before {
+  content: "\e907";
+  
+}
+.icon-ow-mccree:before {
+  content: "\e908";
+  
+}
+.icon-ow-mei:before {
+  content: "\e909";
+  
+}
+.icon-ow-mercy:before {
+  content: "\e90a";
+  
+}
+.icon-ow-orisa:before {
+  content: "\e90b";
+  
+}
+.icon-ow-pharah:before {
+  content: "\e90c";
+  
+}
+.icon-ow-reaper:before {
+  content: "\e90d";
+  
+}
+.icon-ow-reinhardt:before {
+  content: "\e90e";
+  
+}
+.icon-ow-roadhog:before {
+  content: "\e90f";
+  
+}
+.icon-ow-soldier76:before {
+  content: "\e910";
+  
+}
+.icon-ow-symmetra:before {
+  content: "\e911";
+  
+}
+.icon-ow-torbjorn:before {
+  content: "\e912";
+  
+}
+.icon-ow-tracer:before {
+  content: "\e913";
+  
+}
+.icon-ow-widowmaker:before {
+  content: "\e914";
+  
+}
+.icon-ow-winston:before {
+  content: "\e915";
+  
+}
+.icon-ow-zarya:before {
+  content: "\e916";
+  
+}
+.icon-ow-zenyatta:before {
+  content: "\e917";
+  
+}
