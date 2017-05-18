@@ -74,10 +74,6 @@ a:hover {
     border-radius: 6px;
 }
 
-#hero-grid {
-    text-align: center;
-}
-
 #hero-list.dropdown-menu{
 	min-width: 420px;
 }
@@ -315,6 +311,20 @@ a:hover {
 }
 
 
+ /*lightish blue: #405275*/
+.hero-grid .well {
+    background-color: rgba(255, 255, 255, .5);
+    margin-bottom: 40px;
+}
+
+.nav-tabs li.active>a {
+    background-color: white;
+}
+
+.nav-tabs li:not(.active)>a:hover {
+    background-color: rgba(255, 255, 255, .3);
+}
+
 
 /*=======================*/
 /*BOOTSTRAP OVERRIDES START */
@@ -391,7 +401,7 @@ ul > li > label {
     width: 100%;
 }
 
-[data-toggle=buttons]>.btn input[type=checkbox], .dropdown-menu>li label input[type=checkbox], [data-toggle=buttons]>.btn input[type=radio], [data-toggle=buttons]>.btn-group>.btn input[type=checkbox], [data-toggle=buttons]>.btn-group>.btn input[type=radio] {
+label.btn input[type=checkbox] {
     position: absolute;
     clip: rect(0,0,0,0);
     pointer-events: none;

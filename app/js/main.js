@@ -193,7 +193,10 @@ function initIndexPage() {
 
 	// if user stats have been retrieved, display the hero toggles and build hero sections
 	if (userStats !== null) {
-		document.getElementById("hero-grid").classList.remove("hidden");
+		var heroGrids = document.getElementsByClassName("hero-grid");
+		for (var i = 0; i < heroGrids.length; i++) {
+			heroGrids[i].classList.remove("hidden");
+		}
 
 		heroDisplay = JSON.parse(getCookie("userHeroDisplay"));
 		heroDisplay.forEach(function(hero) {
@@ -204,19 +207,19 @@ function initIndexPage() {
 	}
 
 	// manually trigger open and close of hero toggle dropdowns
-	$("#hero-grid .dropdown-toggle").on("click", function(e) {
+	$(".hero-grid .dropdown-toggle").on("click", function(e) {
 		$(this).parent().toggleClass('open');
 	});
 
 	// close hero toggles when clicking outside of dropdown
-	$("body").on("click", function (e) {
-		if (!$("#hero-grid .hero-toggle").is(e.target) && 
-		!$("#hero-grid label.btn").is(e.target)  && 
-		!$("#hero-grid span.caret").is(e.target) &&
-		!$("#hero-grid .dropdown-toggle").is(e.target)) {
-			$("#hero-grid .dropdown-menu").parent().removeClass("open");
-		}
-	});
+	// $("body").on("click", function (e) {
+	// 	if (!$(".hero-grid .hero-toggle").is(e.target) && 
+	// 	!$(".hero-grid label.btn").is(e.target)  && 
+	// 	!$(".hero-grid span.caret").is(e.target) &&
+	// 	!$(".hero-grid .dropdown-toggle").is(e.target)) {
+	// 		$(".hero-grid .dropdown-menu").parent().removeClass("open");
+	// 	}
+	// });
 
 	// remove hero click handler
 	$(".hero-container").on("click", ".hero-remove", function() {
