@@ -14,11 +14,14 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "app/js/vendor",
+    "app/vendor",
     "test",
     "tests"
   ],
   "dependencies": {
-    "handlebars": "4.0.0"
+    "handlebars": "4.0.0",
+    "bluebird": "^3.5.0",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1"
   }
 }
