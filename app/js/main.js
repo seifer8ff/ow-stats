@@ -476,7 +476,7 @@ function deleteAllCookies(matchString, callback) {
 
 // remove semicolons, accent marks, etc
 function normalizeString(string, removeExtras) {
-	var newString = string.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+	var newString = unorm.nfd(string).replace(/[\u0300-\u036f]/g, "");
 
 	if (removeExtras) {
 		// remove all whitespace
