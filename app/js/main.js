@@ -377,6 +377,8 @@ function initHeroPage() {
 		var context = {heroInfo: thisHero, name: normalizeString(thisHero.name, true).toLowerCase()};
 		if (userStats !== null) {
 			context.userStats = userStats[normalizeString(thisHero.name, true).toLowerCase()];
+		} else {
+			context.noStats = true;
 		}
 
 		// build hero info section and add to DOM

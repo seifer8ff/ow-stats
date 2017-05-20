@@ -29,11 +29,15 @@
 	{{#if heroInfo.shield}}
 		<h4 id="hero-shield">Shield: {{heroInfo.shield}}</h4>
 	{{/if}}
-	{{#if userStats}}
-		{{#if userStats.playtime}}
-			{{> stats heroPage=true}}
-		{{else}}
-			{{> noPlaytime}}
+	{{#if noStats}}
+		{{> noStats}}
+	{{else}}
+		{{#if userStats}}
+			{{#if userStats.playtime}}
+				{{> stats heroPage=true}}
+			{{else}}
+				{{> noPlaytime}}
+			{{/if}}
 		{{/if}}
 	{{/if}}
 	<div class="hero-link">
