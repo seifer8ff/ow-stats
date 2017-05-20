@@ -16,7 +16,7 @@ this["OW"]["templates"]["hero"] = Handlebars.template({"1":function(container,de
 
   return "<article class=\"col-xs-6 col-sm-3 hero-section fade-in\" id=\""
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.name : stack1), depth0))
-    + "\">\n	<div class=\"panel panel-default\">\n		<span class=\"glyphicon glyphicon-remove-circle hero-remove\" aria-hidden=\"true\"></span>\n		<div class=\"hidden-xs hero-icon icon-ow-"
+    + "\">\n	<div class=\"panel panel-default\">\n		<span class=\"glyphicon glyphicon-remove-circle hero-remove\" aria-hidden=\"true\"></span>\n		<div class=\"hidden-xs hero-icon ohi-"
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.name : stack1), depth0))
     + "\"></div>\n		<h3 class=\"hero-name text-center\">"
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.heroInfo : depth0)) != null ? stack1.name : stack1), depth0))
