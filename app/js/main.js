@@ -5,12 +5,12 @@ var heroDisplay = [];
 
 
 window.onload=function() {
-	userStats = getUserStats();
-	heroInfo = getHeroInfo();
-	heroDisplay = JSON.parse(getCookie("userHeroDisplay"));
+	userStats = JSON.parse(getLocalStorage("userStats"));
+	heroInfo = JSON.parse(getLocalStorage("heroInfo"));
+	heroDisplay = JSON.parse(getLocalStorage("userHeroDisplay"));
 
 
-	// set heroDisplay to default value if it doesn't exist in cookie or has no values
+	// set heroDisplay to default value if it doesn't exist in local storage or has no values
 	if (heroDisplay === null || heroDisplay.length === 0) {
 		heroDisplay = [
 		"tracer",
@@ -19,11 +19,11 @@ window.onload=function() {
 		"mercy"
 		];
 		var heroDisplayString = JSON.stringify(heroDisplay);
-		setCookie("userHeroDisplay", heroDisplayString, 30);
+		setLocalStorage("userHeroDisplay", heroDisplayString, 30);
 	}
 
 	// if we don't have user stats, but have the required URL, request from the stats api
-	if (userStats === null && getCookie("userAPIURL") !== null) {
+	if (userStats === null && getLocalStorage("userAPIURL") !== null) {
 		requestUserStats();
 	} else if (document.body.dataset.title === "index") {
 		initIndexPage();
@@ -36,8 +36,8 @@ window.onload=function() {
 		initHeroPage();
 	}
 
-	// show login or account links depending on if userAPIURL is saved to cookie
-	if (getCookie("userAPIURL") === null) {
+	// show login or account links depending on if userAPIURL is saved to local storage
+	if (getLocalStorage("userAPIURL") === null) {
 		if (document.body.dataset.title != "index") {
 			document.getElementById("login").classList.remove("hidden");
 		} else {
@@ -45,8 +45,8 @@ window.onload=function() {
 			document.getElementById("login").classList.add("hidden");
 		}
 	} else {
-		document.getElementById("username").childNodes[2].nodeValue = getCookie("username");
-		document.getElementById("account-icon").src = getCookie("useravatar");
+		document.getElementById("username").childNodes[2].nodeValue = getLocalStorage("username");
+		document.getElementById("account-icon").src = getLocalStorage("userAvatar");
 		document.getElementById("account-dropdown").classList.remove("hidden");
 	}
 
@@ -57,7 +57,7 @@ window.onload=function() {
 	// logout button click
 	$("#logout").on("click", function(e) {
 		console.log("logging out");
-		deleteAllCookies("", function() {
+		clearLocalStorage(function() {
 			window.location.reload(false); 
 		});
 	});
@@ -71,9 +71,9 @@ window.onload=function() {
 // ==============
 
 function requestUserStats() {
-	makeRequest("GET", getCookie("userAPIURL"))
+	makeRequest("GET", getLocalStorage("userAPIURL"))
 	.then(function(response) {
-		// process stats and save them to cookie
+		// process stats and save them to local storage
 		return processUserStatRequest(response);
 	})
 	.then(function() {
@@ -86,11 +86,15 @@ function requestUserStats() {
 		// error response from api (either incorrect battletag or too many requests)
 		console.log("request error - status: " + err.status);
 		
-		// remove all user stats related cookies to prevent repeat requests
-		deleteAllCookies("user", function() {
-			// display battle tag not found alert
-			showAlert("battletag-not-found");
-			$("#modal-loading").modal("hide");
+		// remove user data from local storage to prevent repeat requests
+		removeLocalStorage("userAPIURL", function() {
+			removeLocalStorage("username", function() {
+				removeLocalStorage("userStats");
+
+				// display battle tag not found alert
+				showAlert("battletag-not-found");
+				$("#modal-loading").modal("hide");
+			});
 		});
 	});
 
@@ -133,14 +137,16 @@ function processUserStatRequest(response) {
 			}
 			tempUserStats[hero].playtime =  Math.ceil(res.heroes.playtime.quickplay[hero] * 10 ) / 10;
 			tempUserStats[hero].name = hero;
-
-			// save hero to cookie
-			var heroStatString = JSON.stringify(tempUserStats[hero]);
-			heroStatString = normalizeString(heroStatString);
-			setCookie("userstats" + hero, heroStatString, 1);
 		}
+
+		// save user stats to local storage
+		var heroStatString = JSON.stringify(tempUserStats);
+		heroStatString = normalizeString(heroStatString);
+		setLocalStorage("userStats", heroStatString, 1);
+
+
 		// save the user's avatar for navbar account link
-		setCookie("useravatar", res.stats.quickplay.overall_stats.avatar, 1);
+		setLocalStorage("userAvatar", res.stats.quickplay.overall_stats.avatar, 1);
 
 		// resolve if tempUserStats is not empty
 		if (Object.keys(tempUserStats).length != 0 && tempUserStats.constructor === Object) {
@@ -164,25 +170,27 @@ function requestHeroInfo() {
 	})
 	.catch(function(err) {
 		console.log("could not get hero info");
+		console.log(err);
 	});
 }
 
 function processHeroRequest(response) {
 	console.log("processing Hero info");
 	return new Promise(function(resolve) {
+		var tempHeroInfo = {};
 		var res = JSON.parse(response).data;
-		// for each hero in the response, create cookie with their data
+
+		// create a hero info object with objects name matching hero name
 		res.forEach(function(hero) {
-			var heroDataString = JSON.stringify(hero);
-			var cookieName = "heroData" + hero.name.toLowerCase();
-
-			// remove semicolons, accents, etc
-			cookieName = normalizeString(cookieName, true);
-			heroDataString = normalizeString(heroDataString);
-
-			setCookie(cookieName, heroDataString, 7);
+			var heroName = normalizeString(hero.name, true);
+			tempHeroInfo[heroName] = hero;
 		});
-		resolve(res);
+
+		// prepare hero info data and save to local storage
+		var heroInfoString = JSON.stringify(tempHeroInfo);
+		setLocalStorage("heroInfo", heroInfoString, 7);
+
+		resolve(tempHeroInfo);
 	});
 }
 
@@ -203,7 +211,7 @@ function initIndexPage() {
 			heroGrids[i].classList.remove("hidden");
 		}
 
-		heroDisplay = JSON.parse(getCookie("userHeroDisplay"));
+		heroDisplay = JSON.parse(getLocalStorage("userHeroDisplay"));
 		heroDisplay.forEach(function(hero) {
 			// pass the hero object through
 			buildHeroSection(userStats[hero]);
@@ -248,7 +256,7 @@ function initIndexPage() {
 		}
 	});
 
-	// override form submit to add username + url to cookie
+	// override form submit to add username + url to local storage
 	document.getElementById("form-username").onsubmit=function(e) {
 		console.log("form submitted");
 		e.preventDefault();
@@ -262,15 +270,15 @@ function initIndexPage() {
 			return false;
 		}
 
-		// add valid username (original format) to cookie
-		setCookie("username", username, 30);
+		// add valid username (original format) to local storage
+		setLocalStorage("username", username, 30);
 
 		// reformat username for API call
 		username = username.replace("#", "-");
 
 		// create api url with formatted username
 		var userAPIURL = "https://owapi.net/api/v3/u/" + username + "/blob";
-		setCookie("userAPIURL", userAPIURL, 30);
+		setLocalStorage("userAPIURL", userAPIURL, 30);
 
 		// request user stats from api
 		requestUserStats();
@@ -297,10 +305,10 @@ function buildHeroSection(hero, callback) {
 function removeHeroSection(hero, callback) {
 	var heroSection = document.getElementById(hero);
 
-	// remove hero from display array and save to cookie
+	// remove hero from display array and save updated object to local storage
 	heroDisplay.splice(heroDisplay.indexOf(hero), 1);
 	var heroDisplayString = JSON.stringify(heroDisplay);
-	setCookie("userHeroDisplay", heroDisplayString, 30);
+	setLocalStorage("userHeroDisplay", heroDisplayString, 30);
 
 	// update state of hero toggle
 	var heroToggles = document.getElementsByClassName("hero-toggle");
@@ -331,10 +339,10 @@ function removeHeroSection(hero, callback) {
 
 // adds the hero section to the dom for the given hero and updates hero display array
 function addHeroSection(hero, callback) {
-	// add hero from display array and save to cookie
+	// add hero from display array and save updated object to local storage
 	heroDisplay.push(hero);
 	var heroDisplayString = JSON.stringify(heroDisplay);
-	setCookie("userHeroDisplay", heroDisplayString, 30);
+	setLocalStorage("userHeroDisplay", heroDisplayString, 30);
 
 	// build the new hero section 
 	buildHeroSection(userStats[hero]);
@@ -353,6 +361,11 @@ function addHeroSection(hero, callback) {
 // =====================
 
 function initHeroPage() {
+	// hero Info may not exist due to logging out from the hero page
+	if (!heroInfo) {
+		heroInfo = JSON.parse(getLocalStorage("heroInfo"));
+	}
+
 	// for hero page, build the hero section
 	var thisHero = getHeroFromURL();
 
@@ -379,22 +392,11 @@ function initHeroPage() {
 }
 
 function getHeroFromURL() {
-	var heroData = getCookieArray("herodata");
-	for (var i = 0; i < heroData.length; i++) {
-		// we only care about the actual data, not the name of the cookie
-		heroData[i] = heroData[i].split("=")[1];
-		heroData[i] = JSON.parse(heroData[i]);
-	}
-
 	// get hero name from query string
 	var heroName = window.location.search;
 	heroName = heroName.replace("?name=", "");
-	// find the hero object with matching name property
-	var selectedHero = heroData.find(function(hero) {
-		return normalizeString(hero.name, true).toLowerCase() === heroName;
-	});
 
-	return selectedHero;
+	return heroInfo[heroName];
 }
 
 function setHeroBackground(heroName) {
@@ -406,71 +408,72 @@ function setHeroBackground(heroName) {
 // ==================
 // UTILITY FUNCTIONS
 // ==================
-function setCookie(name, value, days) {
-	if (days) {
-		var date = new Date();
-		date.setTime(date.getTime()+days*24*60*60*1000);
-		var expires = "; expires=" + date.toGMTString();
-	} else {
-		var expires = "";
+
+function setLocalStorage(name, value, daysTillExpire) {
+    if (!daysTillExpire) { 
+    	var daysTillExpire = 1; // default to one day
 	}
-	value = encodeURIComponent(value);
-	document.cookie = name + "=" + value + expires;
+
+    var secondsToExpire = daysTillExpire*24*60*60;
+
+    var date = new Date();
+    var expire = Math.round((date.setSeconds(date.getSeconds()+secondsToExpire))/1000);
+
+    value = encodeURIComponent(value);
+
+    localStorage.setItem(name, value);
+    localStorage.setItem(name+'_time', expire);
 }
 
-function getCookie(name) {
-	var value = "; " + document.cookie;
-	value = decodeURIComponent(value);
-	var parts = value.split("; " + name + "=");
-	if (parts.length == 2) {
-		return parts.pop().split(";").shift();
-	} else {
-		return null;
+function removeLocalStorage(name, callback) {
+    localStorage.removeItem(name);
+    localStorage.removeItem(name + "_time");
+
+    if (callback && typeof callback === "function") {
+		callback();
 	}
 }
 
-function getCookieArray(matchString) {
-	var value = document.cookie;
-	// split by semicolon before we've decoded them back into the strings
-	var cookies = value.split("; ");
+function clearLocalStorage(callback) {
+	localStorage.clear();
 
-	// now that the cookie is split up, decode them
-	for (var i = 0; i < cookies.length; i++) {
-		cookies[i] = decodeURIComponent(cookies[i]);
-	}
-	
-	// if matchString has been provided, only return cookies that contain match string
-	if (matchString !== undefined && matchString !== "") {
-		var matchedCookies = [];
-		cookies.forEach(function(cookie) {
-			if (cookie.indexOf(matchString) !== -1) {
-				matchedCookies.push(cookie);
-			}
-		});
-		cookies = matchedCookies;
-	}
-
-	return cookies;
-}
-
-function deleteAllCookies(matchString, callback) {
-	var cookies;
-
-	// if match string has been provided, only get cookies containing it
-	if (matchString !== undefined && typeof matchString !== "function") {
-		cookies = getCookieArray(matchString);
-	} else {
-		cookies = getCookieArray();
-	}
-
-	// overwrite each cookie with 0 and a negative expiration date
-	for (var i = 0; i < cookies.length; i++) {
-		var cookieName = cookies[i].split("=")[0];
-
-		setCookie(cookieName, 0, -1);
-	}
 	if (callback && typeof callback === "function") {
 		callback();
+	}
+}
+
+function statusLocalStorage(name) {
+
+    var date = new Date();
+    var current = Math.round(+date/1000);
+
+    // Get Schedule
+    var storedTime = localStorage.getItem(name + "_time");
+    if (!storedTime) { 
+    	var storedTime = 0; 
+    }
+
+    // Expired
+    if (storedTime < current) {
+
+        // Remove
+        removeLocalStorage(name);
+
+        return false;
+
+    } else {
+
+        return true;
+    }
+}
+
+function getLocalStorage(name) {
+	if (statusLocalStorage(name)) {
+		var value = localStorage.getItem(name);
+		value = decodeURIComponent(value);
+		return value;
+	} else {
+		return null;
 	}
 }
 
@@ -485,54 +488,6 @@ function normalizeString(string, removeExtras) {
 		newString = newString.toLowerCase();
 	}
 	return newString;
-}
-
-// get user stats from cookie, or return null if there are no user stats in cookie
-function getUserStats() {
-	console.log("getting user stats");
-
-	var tempUserStats = {};
-	// get all cookies involving userstats + the user avatar
-	var statCookies = getCookieArray("userstats");
-
-	if (statCookies.length <= 0) {
-		return null;
-	}
-
-	// parse each cookie and add it to userStats object
-	for (var i = 0; i < statCookies.length; i++) {
-		// we only care about the actual data, not the name of the cookie
-		statCookies[i] = statCookies[i].split("=")[1];
-
-		// parse cookie into object, and add object to userStats
-		var cookieObject = JSON.parse(statCookies[i]);
-		tempUserStats[cookieObject.name] = cookieObject;
-	}
-	return tempUserStats;
-}
-
-// get hero info from cookie, or return null if is no hero info in cookie
-function getHeroInfo() {
-	console.log("getting hero info");
-
-	var tempHeroInfo = {};
-	// get all cookies involving hero info
-	var heroCookies = getCookieArray("herodata");
-
-	if (heroCookies.length <= 0) {
-		return null;
-	}
-
-	// parse each cookie and add it to userStats object
-	for (var i = 0; i < heroCookies.length; i++) {
-		// we only care about the actual data, not the name of the cookie
-		heroCookies[i] = heroCookies[i].split("=")[1];
-
-		// parse cookie into object, and add object to userStats
-		var cookieObject = JSON.parse(heroCookies[i]);
-		tempHeroInfo[normalizeString(cookieObject.name, true)] = cookieObject;
-	}
-	return tempHeroInfo;
 }
 
 // find and save max value of each stat for currently selected heroes
