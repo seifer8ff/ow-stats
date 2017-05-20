@@ -204,7 +204,7 @@ label.btn input[type=checkbox] {
 
 /* hero page */
 .hero-section.panel {
-    min-height: 760px;
+    min-height: 780px;
 }
 
 .hero-name {
@@ -239,20 +239,15 @@ label.btn input[type=checkbox] {
     margin-bottom: 8px;
 }
 
-/* padding for absolutely positioned link at bottom */
-.hero-stat-section:last-of-type {
-    margin-bottom: 70px;
-}
-
 .hero-img {
     margin-left: auto;
     margin-right: auto;
     width: auto;
-    max-height: 760px;
+    max-height: 780px;
 }
 
 .hero-aside {
-    max-height: 760px;
+    max-height: 780px;
 }
 
 .hero-link {
@@ -356,7 +351,7 @@ hr {
 .panel-default {
     background-color: rgba(255, 255, 255, .5);
     padding: 10px;
-    padding-bottom: 50px;
+    padding-bottom: 70px;
 }
 
 .jumbotron {
