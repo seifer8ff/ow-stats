@@ -1,3 +1,4 @@
 # UNTRACKED DIRECTORIES
 node_modules/
 app/vendor
+dist/
