@@ -1,6 +1,3 @@
-Handlebars.registerPartial("noPlaytime", Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<hr>\n<section class=\"hero-stat-section hero-message\">\n	<span class=\"glyphicon glyphicon-alert\" aria-hidden=\"true\"></span>\n	<h4>No Playtime!</h4>\n	<hr>\n	<p>Play this hero more often in Quick Play to see statistics!</p>\n</section>";
-},"useData":true}));
 this["OW"] = this["OW"] || {};
 this["OW"]["templates"] = this["OW"]["templates"] || {};
 this["OW"]["templates"]["hero"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
@@ -22,12 +19,12 @@ this["OW"]["templates"]["hero"] = Handlebars.template({"1":function(container,de
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.heroInfo : depth0)) != null ? stack1.name : stack1), depth0))
     + "</h3>\n"
     + ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.playtime : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
-    + "		<div class=\"hero-link\">\n			<hr>\n			<a href=\"/hero.html?name="
+    + "		<div class=\"hero-link\">\n			<hr>\n			<a href=\"/hero?name="
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.name : stack1), depth0))
     + "\">More Info</a>\n		</div>\n	</div>\n</article>";
 },"usePartial":true,"useData":true});
-Handlebars.registerPartial("noStats", Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<hr>\n<section class=\"hero-stat-section hero-message\">\n	<span class=\"glyphicon glyphicon-alert\" aria-hidden=\"true\"></span>\n	<h4>No Stats!</h4>\n	<hr>\n	<p>Connect a BattleTag to get statistics for this hero!</p>\n</section>";
+Handlebars.registerPartial("noPlaytime", Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<hr>\n<section class=\"hero-stat-section hero-message\">\n	<span class=\"glyphicon glyphicon-alert\" aria-hidden=\"true\"></span>\n	<h4>No Playtime!</h4>\n	<hr>\n	<p>Play this hero more often in Quick Play to see statistics!</p>\n</section>";
 },"useData":true}));
 this["OW"]["templates"]["heroInfo"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1;
@@ -106,6 +103,9 @@ this["OW"]["templates"]["heroInfo"] = Handlebars.template({"1":function(containe
     + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
     + "-full.jpg\">\n</aside>";
 },"usePartial":true,"useData":true});
+Handlebars.registerPartial("noStats", Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<hr>\n<section class=\"hero-stat-section hero-message\">\n	<span class=\"glyphicon glyphicon-alert\" aria-hidden=\"true\"></span>\n	<h4>No Stats!</h4>\n	<hr>\n	<p>Connect a BattleTag to get statistics for this hero!</p>\n</section>";
+},"useData":true}));
 Handlebars.registerPartial("stats", Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     return "	<h6 class=\"section-label text-uppercase\">Hero VS All</h6>\n";
 },"3":function(container,depth0,helpers,partials,data) {
