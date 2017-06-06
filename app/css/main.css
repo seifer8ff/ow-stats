@@ -48,7 +48,7 @@ label.btn input[type=checkbox] {
 
 @-webkit-keyframes fade-in {
     100% { opacity: 1; }
-}@keyframes fade {
+}@keyframes fade-in {
     100% { opacity: 1; }
 }
 
