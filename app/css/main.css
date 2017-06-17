@@ -96,18 +96,18 @@ label.btn input[type=checkbox] {
 	min-width: 420px;
 }
 
-#hero-list.dropdown-menu>.dropdown-inline {
+#hero-list.dropdown-menu .dropdown-inline {
     display: inline-block;
     list-style-type: none;
     vertical-align: top;
     padding: 0;
 }
 
-#hero-list.dropdown-menu>.dropdown-inline>li {
+#hero-list.dropdown-menu .dropdown-inline>li {
     margin-left: 5px;
 }
 
-#hero-list.dropdown-menu>.dropdown-inline>li>a {
+#hero-list.dropdown-menu .dropdown-inline>li>a {
     display: block;
     padding: 3px 8px;
     clear: both;
@@ -117,7 +117,7 @@ label.btn input[type=checkbox] {
     white-space: nowrap;
 }
 
-#hero-list.dropdown-menu>.dropdown-inline>li>a:hover {
+#hero-list.dropdown-menu .dropdown-inline>li>a:hover {
     background-image: none;
     text-decoration: none;
 }
@@ -129,6 +129,28 @@ label.btn input[type=checkbox] {
 
 #modal-loading {
     top: 20%;
+    text-transform: uppercase;
+}
+
+.glyphicon.loading {
+    font-size: 7em;
+    animation: spin 1s infinite linear;
+    -webkit-animation: spin2 1s infinite linear;
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+.modal-body .glyphicon {
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .dropdown-menu li a:hover {
@@ -307,23 +329,6 @@ label.btn input[type=checkbox] {
     margin: 20px;
 }
 
-.glyphicon.loading {
-    font-size: 2.3em;
-    animation: spin 1s infinite linear;
-    -webkit-animation: spin2 1s infinite linear;
-}
-
-@keyframes spin {
-    from { transform: scale(1) rotate(0deg);}
-    to { transform: scale(1) rotate(360deg);}
-}
-
-@-webkit-keyframes spin2 {
-    from { -webkit-transform: rotate(0deg);}
-    to { -webkit-transform: rotate(360deg);}
-}
-
-
  /*lightish blue: #405275*/
 .hero-grid .well {
     background-color: rgba(255, 255, 255, .5);
@@ -411,16 +416,16 @@ hr {
     padding: 0;
 }
 
-.dropdown-menu>li:not(:first-child):not(:last-child):not(.dropdown-toggle)>label.btn {
+.dropdown-menu>.dropdown-menu-container>li:not(:first-child):not(:last-child):not(.dropdown-toggle)>label.btn {
     border-radius: 0;
 }
 
-.dropdown-menu>li:first-child:not(:last-child):not(.dropdown-toggle)>label.btn {
+.dropdown-menu>.dropdown-menu-container>li:first-child:not(:last-child):not(.dropdown-toggle)>label.btn {
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
 
-.dropdown-menu>li:last-child:not(:first-child):not(.dropdown-toggle)>label.btn {
+.dropdown-menu>.dropdown-menu-container>li:last-child:not(:first-child):not(.dropdown-toggle)>label.btn {
     border-top-right-radius: 0;
     border-top-left-radius: 0;
 }
