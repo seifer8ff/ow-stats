@@ -128,7 +128,7 @@ function processUserStatRequest(response) {
 			tempUserStats[hero] = {};
 			// if hero has quickplay data, store hero
 			if (res.heroes.stats.quickplay[hero]) {
-				tempUserStats[hero] = res.heroes.stats.quickplay[hero].average_stats;
+				tempUserStats[hero] = res.heroes.stats.quickplay[hero].general_stats;
 
 				// round stats to next highest int
 				for (var stat in tempUserStats[hero]) {
@@ -497,7 +497,7 @@ function updateMaxStats(allHeroes) {
 	console.log("updating max stats")
 	// reset max values
 	userStats.maxElims = 0;
-	userStats.maxDeaths = 0;
+	userStats.maxMedals = 0;
 	userStats.maxDamage = 0;
 	userStats.maxHealing = 0;
 	userStats.maxPlaytime = 0;
@@ -511,17 +511,17 @@ function updateMaxStats(allHeroes) {
 		if (userStats[hero].playtime > userStats.maxPlaytime) {
 			userStats.maxPlaytime = userStats[hero].playtime;
 		}
-		if (userStats[hero].eliminations_average > userStats.maxElims) {
-			userStats.maxElims = userStats[hero].eliminations_average;
+		if (userStats[hero].eliminations_per_life > userStats.maxElims) {
+			userStats.maxElims = userStats[hero].eliminations_per_life;
 		}
-		if (userStats[hero].deaths_average > userStats.maxDeaths) {
-			userStats.maxDeaths = userStats[hero].deaths_average;
+		if (userStats[hero].medals > userStats.maxMedals) {
+			userStats.maxMedals = userStats[hero].medals;
 		}
-		if (userStats[hero].damage_done_average > userStats.maxDamage) {
-			userStats.maxDamage = userStats[hero].damage_done_average;
+		if (userStats[hero].all_damage_done_avg_per_10_min > userStats.maxDamage) {
+			userStats.maxDamage = userStats[hero].all_damage_done_avg_per_10_min;
 		}
-		if (userStats[hero].healing_done_average > userStats.maxHealing) {
-			userStats.maxHealing = userStats[hero].healing_done_average;
+		if (userStats[hero].healing_done_avg_per_10_min > userStats.maxHealing) {
+			userStats.maxHealing = userStats[hero].healing_done_avg_per_10_min;
 		}
 	}
 	// now that we have the max stats for selected heroes, update their stat bar visuals (stat %of max)
@@ -541,24 +541,24 @@ function updateStatBars() {
 			var width = calcStatBarWidth(userStats[hero].playtime, userStats.maxPlaytime);
 			playtimeBar.style.width = width + "%"; 
 		}
-		if (userStats[hero].eliminations_average) {
+		if (userStats[hero].eliminations_per_life) {
 			var elimsBar = heroSections[i].getElementsByClassName("hero-elims")[0].childNodes[3];
-			var width = calcStatBarWidth(userStats[hero].eliminations_average, userStats.maxElims);
+			var width = calcStatBarWidth(userStats[hero].eliminations_per_life, userStats.maxElims);
 			elimsBar.style.width = width + "%"; 
 		}
-		if (userStats[hero].deaths_average) {
-			var deathsBar = heroSections[i].getElementsByClassName("hero-deaths")[0].childNodes[3];
-			var width = calcStatBarWidth(userStats[hero].deaths_average, userStats.maxDeaths);
-			deathsBar.style.width = width + "%"; 
+		if (userStats[hero].medals) {
+			var medalsBar = heroSections[i].getElementsByClassName("hero-medals")[0].childNodes[3];
+			var width = calcStatBarWidth(userStats[hero].medals, userStats.maxMedals);
+			medalsBar.style.width = width + "%"; 
 		}
-		if (userStats[hero].damage_done_average) {
+		if (userStats[hero].all_damage_done_avg_per_10_min) {
 			var damageBar = heroSections[i].getElementsByClassName("hero-damage")[0].childNodes[3];
-			var width = calcStatBarWidth(userStats[hero].damage_done_average, userStats.maxDamage);
+			var width = calcStatBarWidth(userStats[hero].all_damage_done_avg_per_10_min, userStats.maxDamage);
 			damageBar.style.width = width + "%"; 
 		}
-		if (userStats[hero].healing_done_average) {
+		if (userStats[hero].healing_done_avg_per_10_min) {
 			var healingBar = heroSections[i].getElementsByClassName("hero-healing")[0].childNodes[3];
-			var width = calcStatBarWidth(userStats[hero].healing_done_average, userStats.maxHealing);
+			var width = calcStatBarWidth(userStats[hero].healing_done_avg_per_10_min, userStats.maxHealing);
 			healingBar.style.width = width + "%"; 
 		}
 	}	

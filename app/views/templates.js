@@ -1,3 +1,6 @@
+Handlebars.registerPartial("noPlaytime", Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<hr>\n<section class=\"hero-stat-section hero-message\">\n	<span class=\"glyphicon glyphicon-alert\" aria-hidden=\"true\"></span>\n	<h4>No Playtime!</h4>\n	<hr>\n	<p>Play this hero more often in Quick Play to see statistics!</p>\n</section>";
+},"useData":true}));
 this["OW"] = this["OW"] || {};
 this["OW"]["templates"] = this["OW"]["templates"] || {};
 this["OW"]["templates"]["hero"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
@@ -23,9 +26,6 @@ this["OW"]["templates"]["hero"] = Handlebars.template({"1":function(container,de
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.name : stack1), depth0))
     + "\">More Info</a>\n		</div>\n	</div>\n</article>";
 },"usePartial":true,"useData":true});
-Handlebars.registerPartial("noPlaytime", Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<hr>\n<section class=\"hero-stat-section hero-message\">\n	<span class=\"glyphicon glyphicon-alert\" aria-hidden=\"true\"></span>\n	<h4>No Playtime!</h4>\n	<hr>\n	<p>Play this hero more often in Quick Play to see statistics!</p>\n</section>";
-},"useData":true}));
 this["OW"]["templates"]["heroInfo"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -119,26 +119,26 @@ Handlebars.registerPartial("stats", Handlebars.template({"1":function(container,
 },"7":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return "	<section class=\"hero-stat-section hero-elims\">\n		<h5>Eliminations</h5>\n		<div class=\"stat-bar\">"
-    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.eliminations_average : stack1), depth0))
+  return "	<section class=\"hero-stat-section hero-medals\">\n		<h5>Medals</h5>\n		<div class=\"stat-bar\">"
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.medals : stack1), depth0))
     + "</div>\n	</section>\n";
 },"9":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return "	<section class=\"hero-stat-section hero-deaths\">\n		<h5>Deaths</h5>\n		<div class=\"stat-bar\">"
-    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.deaths_average : stack1), depth0))
+  return "	<section class=\"hero-stat-section hero-elims\">\n		<h5>Eliminations Per Life</h5>\n		<div class=\"stat-bar\">"
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.eliminations_per_life : stack1), depth0))
     + "</div>\n	</section>\n";
 },"11":function(container,depth0,helpers,partials,data) {
     var stack1;
 
   return "	<section class=\"hero-stat-section hero-damage\">\n		<h5>Damage Done</h5>\n		<div class=\"stat-bar\">"
-    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.damage_done_average : stack1), depth0))
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.all_damage_done_avg_per_10_min : stack1), depth0))
     + "</div>\n	</section>\n";
 },"13":function(container,depth0,helpers,partials,data) {
     var stack1;
 
   return "	<section class=\"hero-stat-section hero-healing\">\n		<h5>Healing</h5>\n		<div class=\"stat-bar\">"
-    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.healing_done_average : stack1), depth0))
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.healing_done_avg_per_10_min : stack1), depth0))
     + "</div>\n	</section>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
@@ -146,8 +146,8 @@ Handlebars.registerPartial("stats", Handlebars.template({"1":function(container,
   return "<hr>\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.heroPage : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
     + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.playtime : stack1),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.eliminations_average : stack1),{"name":"if","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.deaths_average : stack1),{"name":"if","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.damage_done_average : stack1),{"name":"if","hash":{},"fn":container.program(11, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.healing_done_average : stack1),{"name":"if","hash":{},"fn":container.program(13, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.medals : stack1),{"name":"if","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.eliminations_per_life : stack1),{"name":"if","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.all_damage_done_avg_per_10_min : stack1),{"name":"if","hash":{},"fn":container.program(11, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.userStats : depth0)) != null ? stack1.healing_done_avg_per_10_min : stack1),{"name":"if","hash":{},"fn":container.program(13, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
 },"useData":true}));
