@@ -90,8 +90,7 @@ var apiHero = (function() {
 		console.log('saving hero data');
 		return new Promise(function(resolve) {
 			// prepare hero info data and save to local storage
-			var heroesString = JSON.stringify(heroes);
-			Store.setLocal('heroes', heroesString, 7 * 60 * 60 * 1000);
+			Store.setLocal('heroes', heroes, 7 * 60 * 60 * 1000);
 			settings.heroes = heroes;
 			console.log('resolving');
 			return resolve(heroes);

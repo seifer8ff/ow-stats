@@ -10,11 +10,7 @@ var heroMultiple = (function() {
 
 
 	function initPage() {
-		// for (hero in settings.heroes) {
-		// 	console.log(hero);
-		// 	buildHeroSection(hero.stats);
-		// }
-		// updateMaxStats(false);
+		// sort heroes by role for display in hero select section
 		let offense = [], defense = [], tank = [], support = [];
 		for (hero in settings.heroes) {
 			let thisHero = settings.heroes[hero];
@@ -28,23 +24,11 @@ var heroMultiple = (function() {
 				case 'tank':
 					tank.push(thisHero);
 					break;
-				case 'offense':
+				case 'support':
 					support.push(thisHero);
 					break;
 			}
 		}
-		// let offense = Array.from(settings.heroes).filter(function(key) {
-		// 	return settings.heroes[key].role === 'offense';
-		// });
-		// let defense = Object.keys(settings.heroes).filter(function(key) {
-		// 	return settings.heroes[key].role === 'defense';
-		// });
-		// let tank = Object.keys(settings.heroes).filter(function(key) {
-		// 	return settings.heroes[key].role === 'tank';
-		// });
-		// let support = Object.keys(settings.heroes).filter(function(key) {
-		// 	return settings.heroes[key].role === 'support';
-		// });
 		var context = { 
 			heroes: settings.heroes, 
 			offense: offense, defense: defense, 
@@ -54,85 +38,77 @@ var heroMultiple = (function() {
 		var newSection = OW.templates.heroMultiple(context);
 
 		document.body.insertAdjacentHTML("afterbegin", newSection);
-	}
 
-	// build the hero section for a given hero
-	function buildHeroSection(hero) {
-		return new Promise(function(resolve) {
-			// build new section from handlebars template
-			var context = {hero: hero};
-			var newSection = OW.templates.heroMultiple(context);
-
-			document.body.insertAdjacentHTML("afterbegin", newSection);
-		})
+		initEventListeners();
 	}
 
 
 	function initEventListeners() {
 		// remove hero click handler
 		$(".hero-container").on("click", ".hero-remove", function() {
-			removeHeroSection(this.parentNode.parentNode.id);
+			let hero = settings.heroes[this.dataset.hero];
+			toggleHero(hero);
 		});
 
-		// if toggled on previously, set hero display buttons to active and 'checked'
-		// $(".hero-toggle").each(function() {
-		// 	var toggleName = normalizeString($(this).parent().text(), true);
-		// 	if (heroDisplay.indexOf(toggleName) > -1) {
-		// 		this.checked = true;
-		// 		$(this).parent().addClass("active");
-		// 	}
-		// });
-
 		// on toggle, update heroDisplay and build or remove hero section
-		// $(".hero-toggle").on("change", function(e) {
-		// 	if (!this.disabled) {
-		// 		// store toggle for callbacks, and disable toggle until finished
-		// 		this.disabled = true;
+		$(".hero-toggle").on("change", function(e) {
+			if (!this.disabled) {
+				let hero = settings.heroes[this.dataset.hero];
+				toggleHero(hero);
+			}
+		});
+	}
 
-		// 		var toggledHero = normalizeString($(this).parent().text(), true);
-		// 		console.log("toggled: " + toggledHero);
+	function toggleHero(hero) {
+		return new Promise(function(resolve) {
+			console.log(hero);
 
-		// 		if (this.checked) {
-		// 			$(this).parent().addClass("active");
-		// 			addHeroSection(toggledHero, function() {
-		// 				this.disabled = false;
-		// 			}.bind(this));
-		// 		} else {
-		// 			// remove section and update button state
-		// 			removeHeroSection(toggledHero, function() {
-		// 				this.disabled = false;
-		// 			}.bind(this));
-		// 		}
-		// 	}
-		// });
+			let heroToggle = document.querySelector("[data-hero=" + hero.normalizedName + "]");
+			heroToggle.disabled = true;
+			heroToggle.checked = !heroToggle.checked;
+			heroToggle.parentNode.classList.toggle("active");
 
-		// override form submit to add username + url to local storage
-		// document.getElementById("form-username").onsubmit=function(e) {
-		// 	console.log("form submitted");
-		// 	e.preventDefault();
-		// 	// get username
-		// 	var username = document.getElementById("inputUsername").value;
+			hero.compare = !hero.compare;
+			Store.setLocal("heroes", settings.heroes, 7 * 60 * 60 * 1000);
 
-		// 	// test with regex before continuing
-		// 	if (!/\w+#\d+/.test(username)) {
-		// 		// show format alert if format is invalid
-		// 		showAlert("battletag-format");
-		// 		return false;
-		// 	}
+			if (hero.compare) {
+				addHeroSection(hero);
+			} else {
+				removeHeroSection(hero);
+			}
+			// anytime the heroDisplay array is changed, we need to get max stats of chosen heroes
+			// updateMaxStats(false);
 
-		// 	// add valid username (original format) to local storage
-		// 	setLocalStorage("username", username, 30);
+			heroToggle.disabled = false;
+			return resolve(hero);
+		})
+	}
 
-		// 	// reformat username for API call
-		// 	username = username.replace("#", "-");
 
-		// 	// create api url with formatted username
-		// 	var userAPIURL = "https://owapi.net/api/v3/u/" + username + "/blob";
-		// 	setLocalStorage("userAPIURL", userAPIURL, 30);
+	// adds the hero section to the dom for the given hero and updates hero display array
+	function addHeroSection(hero) {
+		var context = { hero: hero };
+		var newSection = Handlebars.partials.heroSummary(context);
 
-		// 	// request user stats from api
-		// 	requestUserStats();
-		// }
+		document.getElementById("hero-multiple-parent").insertAdjacentHTML("beforeend", newSection);
+	}
+
+	// deletes the hero section from the dom for the given hero and updates hero display array
+	function removeHeroSection(hero) {
+		var heroSection = document.getElementById(hero.normalizedName);
+
+		// fadeout hero section
+		heroSection.classList.add("fade-out");
+
+		// wait for css fadeout to end, then delete hero-section
+		setTimeout(function() {
+			heroSection.innerHTML = "";
+			heroSection.parentNode.removeChild(heroSection);
+			delete heroSection;
+
+			// anytime the heroDisplay array is changed, we need to get max stats of chosen heroes
+			// updateMaxStats(false);
+		}, 550);
 	}
 
 	

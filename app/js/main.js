@@ -12,6 +12,10 @@
 	function init() {
 		// initEventListeners();
 
+		if (!settings.user && !window.location.href.includes('login')) {
+			window.location.href = "/login";
+		}
+
 		if (!settings.heroes || Store.isExpired("heroes")) {
 			apiHero.getHeroData()
 			.then(heroes => {

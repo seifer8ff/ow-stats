@@ -13,10 +13,10 @@
 			<div class="col-xs-12">
 				<div class="tab-content well">
 					<div role="tabpanel" class="tab-pane active" id="hero-grid-offense">
-						<div class="btn-group btn-group-justified" role="group" aria-label="heroes"></div>
+						<div class="btn-group btn-group-justified" role="group" aria-label="heroes">
 							{{#each offense}}
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle">{{this.name}}
+								<label class="btn btn-default {{#if this.compare}}active{{/if}}">
+									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{this.compare}}>{{this.name}}
 								</label>
 							{{/each}}
 						</div>
@@ -24,8 +24,8 @@
 					<div role="tabpanel" class="tab-pane" id="hero-grid-defense">
 						<div class="btn-group btn-group-justified" role="group" aria-label="heroes">
 							{{#each defense}}
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle">{{this.name}}
+								<label class="btn btn-default {{#if this.compare}}active{{/if}}">
+									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{this.compare}}>{{this.name}}
 								</label>
 							{{/each}}
 						</div>
@@ -33,8 +33,8 @@
 					<div role="tabpanel" class="tab-pane" id="hero-grid-tank">
 						<div class="btn-group btn-group-justified" role="group" aria-label="heroes">
 							{{#each tank}}
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle">{{this.name}}
+								<label class="btn btn-default {{#if this.compare}}active{{/if}}">
+									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{this.compare}}>{{this.name}}
 								</label>
 							{{/each}}
 						</div>
@@ -42,8 +42,8 @@
 					<div role="tabpanel" class="tab-pane" id="hero-grid-support">
 						<div class="btn-group btn-group-justified" role="group" aria-label="heroes">
 							{{#each support}}
-								<label class="btn btn-default">
-									<input type="checkbox" class="hero-toggle">{{this.name}}
+								<label class="btn btn-default {{#if this.compare}}active{{/if}}">
+									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{this.compare}}>{{this.name}}
 								</label>
 							{{/each}}
 						</div>
@@ -53,117 +53,6 @@
 		</div>
 	</div>
 </div>
-
-
-
-
-
-{{!-- <div class="row hidden-sm hidden-xs">
-	<div class="hidden hero-grid">
-		<div class="row">
-			<div class="col-xs-12">
-				<ul class="nav nav-tabs" role="tablist">
-					<li role="presentation" class="active"><a href="#hero-grid-offense" aria-controls="hero-grid-offense" role="tab" data-toggle="tab">OFFENSE</a></li>
-					<li role="presentation"><a href="#hero-grid-defense" aria-controls="hero-grid-defense" role="tab" data-toggle="tab">DEFENSE</a></li>
-					<li role="presentation"><a href="#hero-grid-tank" aria-controls="hero-grid-tank" role="tab" data-toggle="tab">TANK</a></li>
-					<li role="presentation"><a href="#hero-grid-support" aria-controls="hero-grid-support" role="tab" data-toggle="tab">SUPPORT</a></li>
-				</ul>
-			</div>
-			<div class="col-xs-12">
-				<div class="tab-content well">
-					<div role="tabpanel" class="tab-pane active" id="hero-grid-offense">
-						<div class="btn-group btn-group-justified" role="group" aria-label="heroes">
-							<label class="btn btn-default">
-								<input type="checkbox" class="hero-toggle">Genji
-							</label>
-							<label class="btn btn-default">
-								<input type="checkbox" class="hero-toggle">McCree
-							</label>
-							<label class="btn btn-default">
-								<input type="checkbox" class="hero-toggle">Pharah
-							</label>
-							<label class="btn btn-default">
-								<input type="checkbox" class="hero-toggle">Reaper
-							</label>
-							<label class="btn btn-default">
-								<input type="checkbox" class="hero-toggle">Soldier: 76
-							</label>
-							<label class="btn btn-default">
-								<input type="checkbox" class="hero-toggle">Sombra
-							</label>
-							<label class="btn btn-default">
-								<input type="checkbox" class="hero-toggle">Tracer
-							</label>
-						</div>
-					</div>
-					<div role="tabpanel" class="tab-pane" id="hero-grid-defense">
-						<div class="btn-group btn-group-justified" role="group" aria-label="heroes">
-							<label class="btn btn-default">
-								<input type="checkbox" class="hero-toggle">Bastion
-							</label>
-							<label class="btn btn-default">
-								<input type="checkbox" class="hero-toggle">Hanzo
-							</label>
-							<label class="btn btn-default">
-								<input type="checkbox" class="hero-toggle">Junkrat
-							</label>
-							<label class="btn btn-default">
-								<input type="checkbox" class="hero-toggle">Mei
-							</label>
-							<label class="btn btn-default">
-								<input type="checkbox" class="hero-toggle">Torbjorn
-							</label>
-							<label class="btn btn-default">
-								<input type="checkbox" class="hero-toggle">Widowmaker
-							</label>
-						</div>
-					</div>
-					<div role="tabpanel" class="tab-pane" id="hero-grid-tank">
-						<div class="btn-group btn-group-justified" role="group" aria-label="heroes">
-							<label class="btn btn-default">
-								<input type="checkbox" class="hero-toggle">D.VA
-							</label>
-							<label class="btn btn-default">
-								<input type="checkbox" class="hero-toggle">Orisa
-							</label>
-							<label class="btn btn-default">
-								<input type="checkbox" class="hero-toggle">Reinhardt
-							</label>
-							<label class="btn btn-default">
-								<input type="checkbox" class="hero-toggle">Roadhog
-							</label>
-							<label class="btn btn-default">
-								<input type="checkbox" class="hero-toggle">Winston
-							</label>
-							<label class="btn btn-default">
-								<input type="checkbox" class="hero-toggle">Zarya
-							</label>
-						</div>
-					</div>
-					<div role="tabpanel" class="tab-pane" id="hero-grid-support">
-						<div class="btn-group btn-group-justified" role="group" aria-label="heroes">
-							<label class="btn btn-default">
-								<input type="checkbox" class="hero-toggle">Ana
-							</label>
-							<label class="btn btn-default">
-								<input type="checkbox" class="hero-toggle">Lucio
-							</label>
-							<label class="btn btn-default">
-								<input type="checkbox" class="hero-toggle">Mercy
-							</label>
-							<label class="btn btn-default">
-								<input type="checkbox" class="hero-toggle">Symmetra
-							</label>
-							<label class="btn btn-default">
-								<input type="checkbox" class="hero-toggle">Zenyatta
-							</label>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div> --}}
 
 <!-- MOBILE HERO SELECT -->
 {{!-- <div class="row visible-sm visible-xs">

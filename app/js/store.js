@@ -12,7 +12,7 @@ var Store =  (function() {
 
 	function setLocal(key, data, timeToExpire) {
 		var obj = {
-			data: data,
+			data: JSON.stringify(data),
 			expires: new Date().getTime() + timeToExpire
 		}
 		localStorage.setItem(key, JSON.stringify(obj));

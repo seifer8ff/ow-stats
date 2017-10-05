@@ -1,19 +1,23 @@
 var apiStats = (function() {
 	
 	var settings = {
-		heroStatsURL: "https://owapi.net/api/v3/u/seifer8ff-1184/blob",
 		user: Store.getLocal('user'),
 		heroes: Store.getLocal('heroes'),
 	}
 
 
-	function init(heroes) {
-		settings.heroes = heroes;
+	function init(heroes, user) {
+		if (heroes) {
+			settings.heroes = heroes;
+		}
+		if (user) {
+			settings.user = user;
+		}
 	}
 
 	function getUserStats() {
 		return new Promise(function(resolve, reject) {
-			XHR.makeRequest("GET", settings.heroStatsURL)
+			XHR.makeRequest("GET", settings.user.url)
 			.then(res => JSON.parse(res))
 			.then(rawStats => filterUserRegion(rawStats))
 			.then(rawStats => processUserStats(rawStats))
@@ -82,8 +86,7 @@ var apiStats = (function() {
 		console.log('saving hero data');
 		return new Promise(function(resolve) {
 			// prepare hero info data and save to local storage
-			var heroesString = JSON.stringify(heroes);
-			Store.setLocal('heroes', heroesString, 7 * 60 * 60 * 1000);
+			Store.setLocal('heroes', heroes, 7 * 60 * 60 * 1000);
 			return resolve(heroes);
 		});
 	}
