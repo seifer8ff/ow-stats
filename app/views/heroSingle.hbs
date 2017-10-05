@@ -49,7 +49,7 @@
 					{{> noStats}}
 				{{else}}
 					{{#if thisHero.stats.playtime}}
-						{{> stats heroPage=true}}
+						{{> stats thisHero heroPage=true}}
 					{{else}}
 						{{> noPlaytime}}
 					{{/if}}
