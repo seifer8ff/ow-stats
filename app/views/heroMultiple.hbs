@@ -1,0 +1,27 @@
+<header>
+	{{> header}}
+</header>
+<main>
+	<div class="container hero-container">
+		<div class="row">
+			{{#each heroes}}
+			<article class="col-xs-6 col-sm-3 hero-section fade-in" id="{{this.name}}">
+				<div class="panel panel-default">
+					<span class="glyphicon glyphicon-remove-circle hero-remove" aria-hidden="true"></span>
+					<div class="hidden-xs hero-icon ohi-{{this.normalizedName}}"></div>
+					<h3 class="hero-name text-center">{{this.name}}</h3>
+					{{#if this.stats.playtime}}
+						{{> stats}}
+					{{else}}
+						{{> noPlaytime}}
+					{{/if}}
+					<div class="hero-link">
+						<hr>
+						<a href="/hero?name={{this.normalizedName}}">More Info</a>
+					</div>
+				</div>
+			</article>
+			{{/each}}
+		</div>
+	</div>
+</main>

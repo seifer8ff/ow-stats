@@ -1,0 +1,87 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/">
+				<img alt="Brand" src="../img/OW-banner.svg">
+			</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Heroes <span class="caret"></span></a>
+					<ul class="dropdown-menu" id="hero-list">
+						<li>
+							<ul class="dropdown-inline">
+								<li class="dropdown-header section-label">OFFENSE</li>
+								<li><a href="/hero?name=genji">Genji</a></li>
+								<li><a href="/hero?name=mccree">McCree</a></li>
+								<li><a href="/hero?name=pharah">Pharah</a></li>
+								<li><a href="/hero?name=reaper">Reaper</a></li>
+								<li><a href="/hero?name=soldier76">Soldier: 76</a></li>
+								<li><a href="/hero?name=sombra">Sombra</a></li>
+								<li><a href="/hero?name=tracer">Tracer</a></li>
+							</ul>
+							<ul class="dropdown-inline divider">
+								<li role="separator" class="divider-vertical"></li>
+							</ul>
+							<ul class="dropdown-inline">
+								<li class="dropdown-header section-label">DEFENSE</li>
+								<li><a href="/hero?name=bastion">Bastion</a></li>
+								<li><a href="/hero?name=hanzo">Hanzo</a></li>
+								<li><a href="/hero?name=junkrat">Junkrat</a></li>
+								<li><a href="/hero?name=mei">Mei</a></li>
+								<li><a href="/hero?name=torbjorn">Torbjorn</a></li>
+								<li><a href="/hero?name=widowmaker">Widowmaker</a></li>
+							</ul>
+							<ul class="dropdown-inline divider">
+								<li role="separator" class="divider-vertical"></li>
+							</ul>
+							<ul class="dropdown-inline">
+								<li class="dropdown-header section-label">TANK</li>
+								<li><a href="/hero?name=dva">D.VA</a></li>
+								<li><a href="/hero?name=orisa">Orisa</a></li>
+								<li><a href="/hero?name=reinhardt">Reinhardt</a></li>
+								<li><a href="/hero?name=roadhog">Roadhog</a></li>
+								<li><a href="/hero?name=winston">Winston</a></li>
+								<li><a href="/hero?name=zarya">Zarya</a></li>
+							</ul>
+							<ul class="dropdown-inline divider">
+								<li role="separator" class="divider-vertical"></li>
+							</ul>
+							<ul class="dropdown-inline">
+								<li class="dropdown-header section-label">SUPPORT</li>
+								<li><a href="/hero?name=ana">Ana</a></li>
+								<li><a href="/hero?name=lucio">Lucio</a></li>
+								<li><a href="/hero?name=mercy">Mercy</a></li>
+								<li><a href="/hero?name=symmetra">Symmetra</a></li>
+								<li><a href="/hero?name=zenyatta">Zenyatta</a></li>
+							</ul>
+						</li>
+					</ul>	
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a id="login" class="hidden" href="/">Get Stats</a></li>
+				<li class="dropdown hidden" id="account-dropdown">
+					<a class="dropdown-toggle" id="username" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+						<img id="account-icon" alt="AccountIcon" src="../img/OW-logo.svg">
+						Username 
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a id="logout">Switch User</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+</nav>

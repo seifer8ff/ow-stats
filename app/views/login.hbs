@@ -1,0 +1,24 @@
+<header>
+	{{> header}}
+</header>
+<main>
+	<!-- error messages -->
+	<div class="container">
+		<div class="alert alert-danger hidden fade-in" id="battletag-not-found" role="alert">There was an error requesting statistics for that BattleTag. Double check your BattleTag, and try again later.</div>
+		<div class="alert alert-danger hidden fade-in" id="battletag-format" role="alert">Invalid BattleTag format. BattleTag format should match: example#1234</div>
+	</div>
+
+	<!-- login form -->
+	<div class="container">
+		<section class="jumbotron" id="form-username">
+			<h1>Overwatch Hero Statistics</h1>
+			<hr>
+			<p class="text-center">Enter your BattleTag to see statistics about the Heroes you use in Quick Play!</p>
+			<form class="form-inline">
+				<label for="inputUsername" class="control-label">BattleTag</label>
+				<input type="text" class="form-control" id="inputUsername" name="username" placeholder="example#1234" required>
+				<button type="submit" class="btn btn-default">Get Stats</button>
+			</form>
+		</section>
+	</div>
+</main>
