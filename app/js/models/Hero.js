@@ -21,6 +21,10 @@ var Hero = function(options) {
 		playtime: options.playtime || null
 	}
 
+	if (this.normalizedName === 'junkrat' || this.normalizedName === 'symmetra' || this.normalizedName === 'mercy') {
+		this.compare = true;
+	}
+
 	function normalizeString(string, removeExtras) {
 		var newString = unorm.nfd(string).replace(/[\u0300-\u036f]/g, "");
 

@@ -4,6 +4,7 @@ var heroMultiple = (function() {
 		heroStatsURL: "https://owapi.net/api/v3/u/username/blob",
 		user: Store.getLocal('user'),
 		heroes: Store.getLocal('heroes'),
+		maxStats: {}
 	} 
 
 
