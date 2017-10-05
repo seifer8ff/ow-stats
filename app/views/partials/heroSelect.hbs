@@ -1,5 +1,64 @@
 <!-- DESKTOP HERO SELECT -->
 <div class="row hidden-sm hidden-xs">
+	<div class="hero-grid">
+		<div class="row">
+			<div class="col-xs-12">
+				<ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active"><a href="#hero-grid-offense" aria-controls="hero-grid-offense" role="tab" data-toggle="tab">OFFENSE</a></li>
+					<li role="presentation"><a href="#hero-grid-defense" aria-controls="hero-grid-defense" role="tab" data-toggle="tab">DEFENSE</a></li>
+					<li role="presentation"><a href="#hero-grid-tank" aria-controls="hero-grid-tank" role="tab" data-toggle="tab">TANK</a></li>
+					<li role="presentation"><a href="#hero-grid-support" aria-controls="hero-grid-support" role="tab" data-toggle="tab">SUPPORT</a></li>
+				</ul>
+			</div>
+			<div class="col-xs-12">
+				<div class="tab-content well">
+					<div role="tabpanel" class="tab-pane active" id="hero-grid-offense">
+						<div class="btn-group btn-group-justified" role="group" aria-label="heroes"></div>
+							{{#each offense}}
+								<label class="btn btn-default">
+									<input type="checkbox" class="hero-toggle">{{this.name}}
+								</label>
+							{{/each}}
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="hero-grid-defense">
+						<div class="btn-group btn-group-justified" role="group" aria-label="heroes">
+							{{#each defense}}
+								<label class="btn btn-default">
+									<input type="checkbox" class="hero-toggle">{{this.name}}
+								</label>
+							{{/each}}
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="hero-grid-tank">
+						<div class="btn-group btn-group-justified" role="group" aria-label="heroes">
+							{{#each tank}}
+								<label class="btn btn-default">
+									<input type="checkbox" class="hero-toggle">{{this.name}}
+								</label>
+							{{/each}}
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="hero-grid-support">
+						<div class="btn-group btn-group-justified" role="group" aria-label="heroes">
+							{{#each support}}
+								<label class="btn btn-default">
+									<input type="checkbox" class="hero-toggle">{{this.name}}
+								</label>
+							{{/each}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+{{!-- <div class="row hidden-sm hidden-xs">
 	<div class="hidden hero-grid">
 		<div class="row">
 			<div class="col-xs-12">
@@ -104,10 +163,10 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> --}}
 
 <!-- MOBILE HERO SELECT -->
-<div class="row visible-sm visible-xs">
+{{!-- <div class="row visible-sm visible-xs">
 	<div class="hidden hero-grid">
 		<div class="row">
 			<div class="col-xs-12">
@@ -242,5 +301,4 @@
 			</div>
 		</div>
 	</div>
-</div>
-</div>
+</div> --}}

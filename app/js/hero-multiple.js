@@ -15,7 +15,42 @@ var heroMultiple = (function() {
 		// 	buildHeroSection(hero.stats);
 		// }
 		// updateMaxStats(false);
-		var context = { heroes: settings.heroes };
+		let offense = [], defense = [], tank = [], support = [];
+		for (hero in settings.heroes) {
+			let thisHero = settings.heroes[hero];
+			switch(thisHero.role) {
+				case 'offense':
+					offense.push(thisHero);
+					break;
+				case 'defense':
+					defense.push(thisHero);
+					break;
+				case 'tank':
+					tank.push(thisHero);
+					break;
+				case 'offense':
+					support.push(thisHero);
+					break;
+			}
+		}
+		// let offense = Array.from(settings.heroes).filter(function(key) {
+		// 	return settings.heroes[key].role === 'offense';
+		// });
+		// let defense = Object.keys(settings.heroes).filter(function(key) {
+		// 	return settings.heroes[key].role === 'defense';
+		// });
+		// let tank = Object.keys(settings.heroes).filter(function(key) {
+		// 	return settings.heroes[key].role === 'tank';
+		// });
+		// let support = Object.keys(settings.heroes).filter(function(key) {
+		// 	return settings.heroes[key].role === 'support';
+		// });
+		var context = { 
+			heroes: settings.heroes, 
+			offense: offense, defense: defense, 
+			tank: tank, 
+			support: support 
+		};
 		var newSection = OW.templates.heroMultiple(context);
 
 		document.body.insertAdjacentHTML("afterbegin", newSection);

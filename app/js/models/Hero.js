@@ -2,6 +2,7 @@ var Hero = function(options) {
 	this.name = options.name;
 	this.normalizedName = normalizeString(options.name, true);
 	this.icon = '';
+	this.role = '';
 	this.compare = false;
 	this.data = {
 		realName: options.realName || null,
