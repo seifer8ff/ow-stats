@@ -8,6 +8,11 @@ body {
 	min-height: 100%;
 }
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 h1 {
 	text-align: center;
 }
@@ -96,8 +101,12 @@ label.btn input[type=checkbox] {
     border-radius: 6px;
 }
 
-#hero-list.dropdown-menu{
-	min-width: 420px;
+.dropdown {
+    overflow: hidden;
+}
+
+#hero-list.dropdown-menu {
+    min-width: 420px;
 }
 
 #hero-list.dropdown-menu .dropdown-inline {
