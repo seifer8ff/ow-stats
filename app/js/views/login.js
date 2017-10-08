@@ -29,6 +29,8 @@ var login = (function() {
 		console.log("form submitted");
 		e.preventDefault();
 
+		utils.hideAlert();
+
 		let newUser = new User({
 			username: document.getElementById("inputUsername").value
 		});
@@ -36,7 +38,7 @@ var login = (function() {
 		// test with regex before continuing
 		if (!/\w+#\d+/.test(newUser.username)) {
 			// show format alert if format is invalid
-			showAlert("battletag-format");
+			utils.showAlert("battletag-format");
 			return false;
 		}
 
@@ -51,6 +53,9 @@ var login = (function() {
 		.then(heroes => apiStats.init(heroes, settings.user))
 		.then(() => apiStats.getUserStats())
 		.then(() => redirect())
+		.catch(err => {
+			utils.showAlert("battletag-not-found");
+		})
 	}
 
 	function redirect() {

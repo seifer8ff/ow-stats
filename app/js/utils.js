@@ -5,7 +5,12 @@ var utils = (function() {
 
 	// find and save max value of each stat for currently selected heroes
 	function updateMaxStats(user, heroes, allHeroes) {
-		console.log("updating max stats")
+		console.log("updating max stats");
+
+		if (!user || !heroes) {
+			return null;
+		}
+
 		// reset max values
 		user.maxStats.elims.value = 0;
 		user.maxStats.medals.value = 0;
@@ -55,13 +60,38 @@ var utils = (function() {
 			return width;
 	}
 
+	function showAlert (id) {
+		// if id parameter is valid, hide all alerts, then show the given alert (to trigger fade in)
+		if (id && typeof id === "string") {
+			hideAlert();
+			setTimeout(function() {
+				document.getElementById(id).classList.remove("hidden");
+			}, 200);
+		}
+	}
+	
+	function hideAlert(id) {
+		// if id parameter is given and is valid, hide that alert
+		if (id && typeof id === "string") {
+			document.getElementById(id).classList.add("hidden");
+		} else {
+			// if no id is given, hide all alerts
+			var alerts = document.getElementsByClassName("alert");
+			for (var i = 0; i < alerts.length; i++) {
+				alerts[i].classList.add("hidden");
+			}
+		}
+	}
+
 	
 
 
 
 	return {
 		updateMaxStats: updateMaxStats,
-		updateStatBars: updateStatBars
+		updateStatBars: updateStatBars,
+		showAlert: showAlert,
+		hideAlert: hideAlert
 	}
 
 }());

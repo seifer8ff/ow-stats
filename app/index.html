@@ -23,6 +23,13 @@
 	<meta property="og:description" content="View and compare Overwatch hero stats.">
 	<meta property="og:site_name" content="Overwatch Stats">
 
+	<script>
+		// redirect to login page if user is not logged in
+		if (!localStorage.getItem("user") && !window.location.href.includes('login') && !window.location.href.includes('hero')) {
+			window.location.href = "/login";
+		}
+	</script>
+
 	<!--build:css css/styles.min.css-->
 	<link rel="stylesheet" type="text/css" href="./vendor/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="./css/ohi_font.css">
