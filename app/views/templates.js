@@ -17,24 +17,12 @@ Handlebars.registerPartial("header", Handlebars.template({"1":function(container
 },"useData":true}));
 this["OW"] = this["OW"] || {};
 this["OW"]["templates"] = this["OW"]["templates"] || {};
-this["OW"]["templates"]["heroMultiple"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.compare : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-},"2":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return ((stack1 = container.invokePartial(partials.heroSummary,depth0,{"name":"heroSummary","hash":{"hero":depth0},"data":data,"indent":"\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+this["OW"]["templates"]["error"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
   return "<header>\n"
     + ((stack1 = container.invokePartial(partials.header,depth0,{"name":"header","data":data,"indent":"\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-    + "</header>\n<main>\n	<div class=\"container\">\n"
-    + ((stack1 = container.invokePartial(partials.heroSelect,depth0,{"name":"heroSelect","data":data,"indent":"\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-    + "	</div>\n	<div class=\"container hero-container\">\n		<div class=\"row\" id=\"hero-multiple-parent\">\n"
-    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.heroes : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "		</div>\n	</div>\n</main>";
+    + "</header>\n<main>\n	<!-- background image -->\n	<span id=\"ow-bg\"></span>\n\n	<!-- error section -->\n	<div class=\"container\">\n		<div class=\"jumbotron\" id=\"page-error\">\n			<h2 class=\"text-center\">Page Not Found</h2>\n			<hr>\n			<p class=\"text-center\">Something went wrong. The page you're looking for cannot be found.</p>\n		</div>\n	</div>\n</main>";
 },"usePartial":true,"useData":true});
 Handlebars.registerPartial("heroSelect", Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
@@ -63,6 +51,50 @@ Handlebars.registerPartial("heroSelect", Handlebars.template({"1":function(conta
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.support : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "						</div>\n					</div>\n				</div>\n			</div>\n		</div>\n	</div>\n</div>\n\n<!-- MOBILE HERO SELECT -->\n";
 },"useData":true}));
+this["OW"]["templates"]["heroMultiple"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.compare : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"2":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return ((stack1 = container.invokePartial(partials.heroSummary,depth0,{"name":"heroSummary","hash":{"hero":depth0},"data":data,"indent":"\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "<header>\n"
+    + ((stack1 = container.invokePartial(partials.header,depth0,{"name":"header","data":data,"indent":"\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+    + "</header>\n<main>\n	<!-- background image -->\n	<span id=\"ow-bg\"></span>\n	\n	<div class=\"container\">\n"
+    + ((stack1 = container.invokePartial(partials.heroSelect,depth0,{"name":"heroSelect","data":data,"indent":"\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+    + "	</div>\n	<div class=\"container hero-container\">\n		<div class=\"row\" id=\"hero-multiple-parent\">\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.heroes : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "		</div>\n	</div>\n</main>";
+},"usePartial":true,"useData":true});
+Handlebars.registerPartial("heroSummary", Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return ((stack1 = container.invokePartial(partials.stats,depth0,{"name":"stats","data":data,"indent":"\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
+},"3":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return ((stack1 = container.invokePartial(partials.noPlaytime,depth0,{"name":"noPlaytime","data":data,"indent":"\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "<article class=\"col-xs-6 col-sm-3 hero-section fade-in\" id=\""
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.normalizedName : stack1), depth0))
+    + "\">\n	<div class=\"panel panel-default\">\n		<span class=\"glyphicon glyphicon-remove-circle hero-remove\" aria-hidden=\"true\" data-hero=\""
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.normalizedName : stack1), depth0))
+    + "\"></span>\n		<div class=\"hidden-xs hero-icon ohi-"
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.normalizedName : stack1), depth0))
+    + "\"></div>\n		<h3 class=\"hero-name text-center\">"
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.name : stack1), depth0))
+    + "</h3>\n"
+    + ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.stats : stack1)) != null ? stack1.playtime : stack1)) != null ? stack1.value : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
+    + "		<div class=\"hero-link\">\n			<hr>\n			<a href=\"/hero?name="
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.normalizedName : stack1), depth0))
+    + "\">More Info</a>\n		</div>\n	</div>\n</article>";
+},"usePartial":true,"useData":true}));
 this["OW"]["templates"]["heroSingle"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -114,7 +146,7 @@ this["OW"]["templates"]["heroSingle"] = Handlebars.template({"1":function(contai
 
   return "<header>\n"
     + ((stack1 = container.invokePartial(partials.header,depth0,{"name":"header","data":data,"indent":"\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-    + "</header>\n<main>\n	<span id=\"ow-bg\"></span>\n\n\n	<div class=\"container hero-container\">\n		<div class=\"row\">\n			<article class=\"col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-5 col-lg-4 panel panel-default hero-section fade-in\" id=\""
+    + "</header>\n<main>\n	<span id=\"ow-bg\"></span>\n\n	<div class=\"container hero-container\">\n		<div class=\"row\">\n			<article class=\"col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-5 col-lg-4 panel panel-default hero-section fade-in\" id=\""
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.normalizedName : stack1), depth0))
     + "\">\n				<h1>"
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.name : stack1), depth0))
@@ -138,37 +170,12 @@ this["OW"]["templates"]["heroSingle"] = Handlebars.template({"1":function(contai
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.normalizedName : stack1), depth0))
     + "-full.jpg\">\n			</aside>\n		</div>\n	</div>\n</main>";
 },"usePartial":true,"useData":true});
-Handlebars.registerPartial("heroSummary", Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return ((stack1 = container.invokePartial(partials.stats,depth0,{"name":"stats","data":data,"indent":"\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
-},"3":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return ((stack1 = container.invokePartial(partials.noPlaytime,depth0,{"name":"noPlaytime","data":data,"indent":"\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
-
-  return "<article class=\"col-xs-6 col-sm-3 hero-section fade-in\" id=\""
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.normalizedName : stack1), depth0))
-    + "\">\n	<div class=\"panel panel-default\">\n		<span class=\"glyphicon glyphicon-remove-circle hero-remove\" aria-hidden=\"true\" data-hero=\""
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.normalizedName : stack1), depth0))
-    + "\"></span>\n		<div class=\"hidden-xs hero-icon ohi-"
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.normalizedName : stack1), depth0))
-    + "\"></div>\n		<h3 class=\"hero-name text-center\">"
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.name : stack1), depth0))
-    + "</h3>\n"
-    + ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.stats : stack1)) != null ? stack1.playtime : stack1)) != null ? stack1.value : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
-    + "		<div class=\"hero-link\">\n			<hr>\n			<a href=\"/hero?name="
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.normalizedName : stack1), depth0))
-    + "\">More Info</a>\n		</div>\n	</div>\n</article>";
-},"usePartial":true,"useData":true}));
 this["OW"]["templates"]["login"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
   return "<header>\n"
     + ((stack1 = container.invokePartial(partials.header,depth0,{"name":"header","data":data,"indent":"\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-    + "</header>\n<main>\n	<!-- error messages -->\n	<div class=\"container\">\n		<div class=\"alert alert-danger hidden fade-in\" id=\"battletag-not-found\" role=\"alert\">There was an error requesting statistics for that BattleTag. Double check your BattleTag, and try again later.</div>\n		<div class=\"alert alert-danger hidden fade-in\" id=\"battletag-format\" role=\"alert\">Invalid BattleTag format. BattleTag format should match: example#1234</div>\n	</div>\n\n	<!-- login form -->\n	<div class=\"container\">\n		<section class=\"jumbotron\" id=\"form-username\">\n			<h1>Overwatch Hero Statistics</h1>\n			<hr>\n			<p class=\"text-center\">Enter your BattleTag to see statistics about the Heroes you use in Quick Play!</p>\n			<form class=\"form-inline\">\n				<label for=\"inputUsername\" class=\"control-label\">BattleTag</label>\n				<input type=\"text\" class=\"form-control\" id=\"inputUsername\" name=\"username\" placeholder=\"example#1234\" required>\n				<button type=\"submit\" class=\"btn btn-default\">Get Stats</button>\n			</form>\n		</section>\n	</div>\n</main>\n";
+    + "</header>\n<main>\n	<!-- background image -->\n	<span id=\"ow-bg\"></span>\n\n	<!-- error messages -->\n	<div class=\"container\">\n		<div class=\"alert alert-danger hidden fade-in\" id=\"battletag-not-found\" role=\"alert\">There was an error requesting statistics for that BattleTag. Double check your BattleTag, and try again later.</div>\n		<div class=\"alert alert-danger hidden fade-in\" id=\"battletag-format\" role=\"alert\">Invalid BattleTag format. BattleTag format should match: example#1234</div>\n	</div>\n\n	<!-- login form -->\n	<div class=\"container\">\n		<section class=\"jumbotron\" id=\"form-username\">\n			<h1>Overwatch Hero Statistics</h1>\n			<hr>\n			<p class=\"text-center\">Enter your BattleTag to see statistics about the Heroes you use in Quick Play!</p>\n			<form class=\"form-inline\">\n				<label for=\"inputUsername\" class=\"control-label\">BattleTag</label>\n				<input type=\"text\" class=\"form-control\" id=\"inputUsername\" name=\"username\" placeholder=\"example#1234\" required>\n				<button type=\"submit\" class=\"btn btn-default\">Get Stats</button>\n			</form>\n		</section>\n	</div>\n</main>\n";
 },"usePartial":true,"useData":true});
 Handlebars.registerPartial("loader", Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<div class=\"loader\">\n	<div class=\"spinner\"></div>\n</div>";
