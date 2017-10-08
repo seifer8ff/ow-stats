@@ -101,10 +101,6 @@ label.btn input[type=checkbox] {
     border-radius: 6px;
 }
 
-.dropdown {
-    overflow: hidden;
-}
-
 #hero-list.dropdown-menu {
     min-width: 420px;
 }
