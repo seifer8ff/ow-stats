@@ -70,17 +70,20 @@
 				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a id="login" class="hidden" href="/">Get Stats</a></li>
-				<li class="dropdown hidden" id="account-dropdown">
-					<a class="dropdown-toggle" id="username" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-						<img id="account-icon" alt="AccountIcon" src="../img/OW-logo.svg">
-						Username 
-						<span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu">
-						<li><a id="logout">Switch User</a></li>
-					</ul>
-				</li>
+				{{#if user }}
+					<li class="dropdown" id="account-dropdown">
+						<a class="dropdown-toggle" id="username" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							<img id="account-icon" alt="AccountIcon" src="{{user.icon}}">
+							{{user.username}} 
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a id="logout">Switch User</a></li>
+						</ul>
+					</li>
+				{{else}}
+					<li><a id="login" href="/login">Get Stats</a></li>
+				{{/if}}
 			</ul>
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->

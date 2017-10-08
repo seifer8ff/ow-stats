@@ -9,7 +9,9 @@ var login = (function() {
 
 	function initPage() {
 		console.log('building login page');
-		var context = { };
+		var context = {
+			user: settings.user
+		 };
 
 		// build login section and add to DOM
 		var newSection = OW.templates.login(context);

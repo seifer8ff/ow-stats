@@ -10,8 +10,6 @@
 
 	
 	function init() {
-		// initEventListeners();
-
 		if (!settings.heroes || Store.isExpired("heroes")) {
 			apiHero.getHeroData()
 			.then(heroes => {
@@ -28,22 +26,9 @@
 			.then(() => initPage())
 		} else {
 			initPage()
+			initEventListeners();
 		}
 	}
-
-
-	// function initHeader() {
-	// 	// show login or account links depending on if userAPIURL is saved to local storage
-	// 	if (getLocalStorage("heroStatsURL") === null) {
-	// 		document.getElementById("form-username").classList.remove("hidden");
-	// 		document.getElementById("login").classList.add("hidden");
-	// 	} else {
-	// 		document.getElementById("username").childNodes[2].nodeValue = getLocalStorage("username");
-	// 		document.getElementById("account-icon").src = getLocalStorage("userAvatar");
-	// 		document.getElementById("account-dropdown").classList.remove("hidden");
-	// 	}
-	// }
-
 
 	function initPage() {
 		if (document.body.dataset.title === "hero-single") {
@@ -59,12 +44,14 @@
 
 	function initEventListeners() {
 		// logout button click
-		$("#logout").on("click", function(e) {
-			console.log("logging out");
-			clearLocalStorage(function() {
+		let logout = document.getElementById("logout");
+		if (logout) {
+			logout.addEventListener("click", (e) => {
+				console.log("logging out");
+				localStorage.clear();
 				window.location.reload(false); 
 			});
-		});
+		}
 	}
 
 }());

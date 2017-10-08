@@ -18,7 +18,11 @@ var heroSingle = (function() {
 			setHeroBackground(thisHeroName);
 	
 			// pass in both hero info and user stats (if available) to heroInfo template
-			var context = { heroes: settings.heroes, hero: thisHero };
+			var context = { 
+				user: settings.user,
+				heroes: settings.heroes, 
+				hero: thisHero 
+			}
 			if (!thisHero.stats.playtime) {
 				context.noUser = true;
 			}

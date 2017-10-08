@@ -29,6 +29,7 @@ var heroMultiple = (function() {
 			}
 		}
 		var context = { 
+			user: settings.user,
 			heroes: settings.heroes, 
 			offense: offense, defense: defense, 
 			tank: tank, 
