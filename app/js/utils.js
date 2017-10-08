@@ -83,6 +83,23 @@ var utils = (function() {
 		}
 	}
 
+	function showLoader() {
+		var context = { }
+
+		var newLoader = Handlebars.partials.loader(context);
+		document.body.insertAdjacentHTML("beforeend", newLoader);
+	}
+
+	function hideLoader() {
+		let loaders = document.getElementsByClassName("loader");
+
+		for (let i = 0; i < loaders.length; i++) {
+			loaders[i].innerHTML = "";
+			loaders[i].parentNode.removeChild(loaders[i]);
+			delete loaders[i];
+		}
+	}
+
 	
 
 
@@ -91,7 +108,9 @@ var utils = (function() {
 		updateMaxStats: updateMaxStats,
 		updateStatBars: updateStatBars,
 		showAlert: showAlert,
-		hideAlert: hideAlert
+		hideAlert: hideAlert,
+		showLoader: showLoader,
+		hideLoader: hideLoader
 	}
 
 }());

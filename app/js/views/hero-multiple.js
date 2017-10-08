@@ -75,6 +75,7 @@ var heroMultiple = (function() {
 
 			if (hero.compare) {
 				addHeroSection(hero);
+				heroToggle.disabled = false;
 			} else {
 				removeHeroSection(hero);
 			}
@@ -82,7 +83,6 @@ var heroMultiple = (function() {
 			settings.user = utils.updateMaxStats(settings.user, settings.heroes, false);
 			utils.updateStatBars(settings.user);
 
-			heroToggle.disabled = false;
 			return resolve(hero);
 		})
 	}
@@ -108,6 +108,8 @@ var heroMultiple = (function() {
 			heroSection.innerHTML = "";
 			heroSection.parentNode.removeChild(heroSection);
 			delete heroSection;
+			let heroToggle = document.querySelector("[data-hero=" + hero.normalizedName + "]");
+			heroToggle.disabled = false;
 		}, 550);
 	}
 

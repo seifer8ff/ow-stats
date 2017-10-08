@@ -127,32 +127,6 @@ label.btn input[type=checkbox] {
     text-align: center;
 }
 
-#modal-loading {
-    top: 20%;
-    text-transform: uppercase;
-}
-
-.glyphicon.loading {
-    font-size: 7em;
-    animation: spin 1s infinite linear;
-    -webkit-animation: spin2 1s infinite linear;
-}
-
-@keyframes spin {
-    from { transform: scale(1) rotate(0deg);}
-    to { transform: scale(1) rotate(360deg);}
-}
-
-@-webkit-keyframes spin2 {
-    from { -webkit-transform: rotate(0deg);}
-    to { -webkit-transform: rotate(360deg);}
-}
-
-.modal-body .glyphicon {
-    padding-top: 30px;
-    padding-bottom: 30px;
-}
-
 .dropdown-menu li a:hover {
     background-color: rgba(249, 158, 26, 0.9);
 }
@@ -342,6 +316,42 @@ label.btn input[type=checkbox] {
 .nav-tabs li:not(.active)>a:hover {
     background-color: rgba(255, 255, 255, .3);
 }
+
+.loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.65);
+    text-align: center;
+}
+
+.loader .spinner {
+    position: relative;
+    top: 35%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 16px solid #29364D; /* Light grey */
+    border-top: 16px solid #f99e1a; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+
 
 
 /*=======================*/

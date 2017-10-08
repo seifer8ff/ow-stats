@@ -46,16 +46,18 @@ var login = (function() {
 
 		newUser.url = settings.heroStatsURL.replace("username", newUser.username);
 		newUser.url = newUser.url.replace("#", "-");
-		console.log(newUser.url);
 
 		settings.user = newUser;
 		Store.setLocal("user", newUser, 60 * 60 * 60 * 1000);
 
+		utils.showLoader();
 		apiHero.getHeroData()
 		.then(heroes => apiStats.init(heroes, settings.user))
 		.then(() => apiStats.getUserStats())
 		.then(() => redirect())
 		.catch(err => {
+			localStorage.removeItem("user");
+			utils.hideLoader();
 			utils.showAlert("battletag-not-found");
 		})
 	}

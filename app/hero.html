@@ -32,47 +32,34 @@
 <body data-title="hero-single">
 	<header></header>
 	<main>
-		<!-- loading modal -->
-		<div class="modal fade" id="modal-loading" tabindex="-1" role="dialog" aria-label="loading bar">
-			<div class="modal-dialog modal-sm" role="document">
-				<div class="modal-content">
-					<div class="modal-body">
-						<div class="text-center">
-							<span class="glyphicon glyphicon-refresh loading" aria-hidden="true"></span>
-						</div>
-					</div>
-				</div><!-- /.modal-content -->
-			</div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
+		<!-- background image -->
+		<span id="ow-bg"></span>
 
-			<!-- background image -->
-			<span id="ow-bg"></span>
+		<!-- Hero display  -->
+		<div class="container">
+			<div class="row" id="content"></div>
+		</div>
+	</main>
 
-			<!-- Hero display  -->
-			<div class="container">
-				<div class="row" id="content"></div>
-			</div>
-		</main>
+	<!--build:js js/main.min.js -->
+	<script type="text/javascript" src="./vendor/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="./vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="./vendor/bluebird/js/browser/bluebird.min.js"></script>
+	<script type="text/javascript" src="./vendor/unorm/lib/unorm.js"></script>
+	<script type="text/javascript" src="./vendor/handlebars/handlebars.runtime.min.js"></script>
+	<script type="text/javascript" src="./views/templates.js"></script>
+	<script type="text/javascript" src="./js/lib/store.js"></script>
+	<script type="text/javascript" src="./js/lib/xhr.js"></script>
+	<script type="text/javascript" src="./js/models/Hero.js"></script>
+	<script type="text/javascript" src="./js/models/User.js"></script>
+	<script type="text/javascript" src="./js/utils.js"></script>
+	<script type="text/javascript" src="./js/api/api-hero.js"></script>
+	<script type="text/javascript" src="./js/api/api-stats.js"></script>
+	<script type="text/javascript" src="./js/views/hero-single.js"></script>
+	<script type="text/javascript" src="./js/views/hero-multiple.js"></script>
+	<script type="text/javascript" src="./js/views/login.js"></script>
+	<script type="text/javascript" src="./js/main.js"></script>
+	<!-- endbuild -->
 
-		<!--build:js js/main.min.js -->
-		<script type="text/javascript" src="./vendor/jquery/dist/jquery.min.js"></script>
-		<script type="text/javascript" src="./vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="./vendor/bluebird/js/browser/bluebird.min.js"></script>
-		<script type="text/javascript" src="./vendor/unorm/lib/unorm.js"></script>
-		<script type="text/javascript" src="./vendor/handlebars/handlebars.runtime.min.js"></script>
-		<script type="text/javascript" src="./views/templates.js"></script>
-		<script type="text/javascript" src="./js/lib/store.js"></script>
-		<script type="text/javascript" src="./js/lib/xhr.js"></script>
-		<script type="text/javascript" src="./js/models/Hero.js"></script>
-		<script type="text/javascript" src="./js/models/User.js"></script>
-		<script type="text/javascript" src="./js/utils.js"></script>
-		<script type="text/javascript" src="./js/api/api-hero.js"></script>
-		<script type="text/javascript" src="./js/api/api-stats.js"></script>
-		<script type="text/javascript" src="./js/views/hero-single.js"></script>
-		<script type="text/javascript" src="./js/views/hero-multiple.js"></script>
-		<script type="text/javascript" src="./js/views/login.js"></script>
-		<script type="text/javascript" src="./js/main.js"></script>
-		<!-- endbuild -->
-	
 </body>
 </html>
