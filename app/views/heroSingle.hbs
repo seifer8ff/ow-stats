@@ -48,7 +48,7 @@
 				{{#if noUser }}
 					{{> noStats}}
 				{{else}}
-					{{#if hero.stats.playtime}}
+					{{#if hero.stats.playtime.value}}
 						{{> stats this=hero heroPage=true}}
 					{{else}}
 						{{> noPlaytime}}

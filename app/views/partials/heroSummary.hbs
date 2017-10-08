@@ -3,7 +3,7 @@
 		<span class="glyphicon glyphicon-remove-circle hero-remove" aria-hidden="true" data-hero="{{hero.normalizedName}}"></span>
 		<div class="hidden-xs hero-icon ohi-{{hero.normalizedName}}"></div>
 		<h3 class="hero-name text-center">{{hero.name}}</h3>
-		{{#if hero.stats.playtime}}
+		{{#if hero.stats.playtime.value}}
 			{{> stats}}
 		{{else}}
 			{{> noPlaytime}}

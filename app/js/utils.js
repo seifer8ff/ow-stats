@@ -1,0 +1,68 @@
+var utils = (function() {
+	
+	var settings = {
+	} 
+
+	// find and save max value of each stat for currently selected heroes
+	function updateMaxStats(user, heroes, allHeroes) {
+		console.log("updating max stats")
+		// reset max values
+		user.maxStats.elims.value = 0;
+		user.maxStats.medals.value = 0;
+		user.maxStats.heroDamage.value = 0;
+		user.maxStats.healing.value = 0;
+		user.maxStats.playtime.value = 0;
+
+		// for each selected hero, check to see if their stat is higher than current max
+		for (var hero in heroes) {
+			let thisHero = heroes[hero];
+
+			// only consider heroes toggled on for comparison unless allHeroes is true
+			if (!thisHero.compare && !allHeroes) { 
+				continue;
+			}
+
+			for (stat in user.maxStats) {
+				let maxValue = user.maxStats[stat].value;
+				let thisHeroValue = thisHero.stats[stat].value;
+
+				if (thisHeroValue > maxValue) {
+					user.maxStats[stat].value = thisHeroValue;
+				}
+			}
+		}
+		return user;
+	}
+
+	// updates bar sizes based on hero stat vs max value of stat
+	function updateStatBars(user) {
+		console.log("updating stat bars");
+		let statBars = document.getElementsByClassName("stat-bar");
+
+		for (let i = 0; i < statBars.length; i++) {
+			let thisStat = statBars[i].dataset.stat;
+			let thisStatValue = Number(statBars[i].textContent);
+			let width = calcStatBarWidth(thisStatValue, user.maxStats[thisStat].value);
+
+			statBars[i].style.width = width + "%"; 
+		}
+	}
+
+	// calculates the new width of the stat bar, with a minimum value for readability
+	function calcStatBarWidth(statValue, max) {
+		var width = statValue / max * 100;
+		if (width < 15) { width = 15 } 
+			return width;
+	}
+
+	
+
+
+
+	return {
+		updateMaxStats: updateMaxStats,
+		updateStatBars: updateStatBars
+	}
+
+}());
+

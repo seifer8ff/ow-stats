@@ -12,7 +12,8 @@
 	function init() {
 		// initEventListeners();
 
-		if (!settings.user && !window.location.href.includes('login')) {
+		// redirect to login page if user is not logged in
+		if (!settings.user && !window.location.href.includes('login') && !window.location.href.includes('hero')) {
 			window.location.href = "/login";
 		}
 
@@ -22,8 +23,13 @@
 				settings.heroes = heroes;
 				return heroes;
 			})
-			.then(heroes => apiStats.init(heroes))
-			.then(() => apiStats.getUserStats())
+			.then(heroes => {
+				// only get user stats if we have a user saved
+				if (settings.user) {
+					apiStats.init(heroes, settings.user)
+					.then(() => apiStats.getUserStats())
+				}
+			})
 			.then(() => initPage())
 		} else {
 			initPage()

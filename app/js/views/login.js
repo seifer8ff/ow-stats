@@ -48,7 +48,7 @@ var login = (function() {
 		Store.setLocal("user", newUser, 60 * 60 * 60 * 1000);
 
 		apiHero.getHeroData()
-		.then(heroes => apiStats.init(heroes, newUser))
+		.then(heroes => apiStats.init(heroes, settings.user))
 		.then(() => apiStats.getUserStats())
 		.then(() => redirect())
 	}

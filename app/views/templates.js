@@ -1,6 +1,3 @@
-Handlebars.registerPartial("header", Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<nav class=\"navbar navbar-inverse navbar-fixed-top\">\n	<div class=\"container-fluid\">\n		<!-- Brand and toggle get grouped for better mobile display -->\n		<div class=\"navbar-header\">\n			<button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">\n				<span class=\"sr-only\">Toggle navigation</span>\n				<span class=\"icon-bar\"></span>\n				<span class=\"icon-bar\"></span>\n				<span class=\"icon-bar\"></span>\n			</button>\n			<a class=\"navbar-brand\" href=\"/\">\n				<img alt=\"Brand\" src=\"../img/OW-banner.svg\">\n			</a>\n		</div>\n\n		<!-- Collect the nav links, forms, and other content for toggling -->\n		<div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n			<ul class=\"nav navbar-nav\">\n				<li class=\"dropdown\">\n					<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Heroes <span class=\"caret\"></span></a>\n					<ul class=\"dropdown-menu\" id=\"hero-list\">\n						<li>\n							<ul class=\"dropdown-inline\">\n								<li class=\"dropdown-header section-label\">OFFENSE</li>\n								<li><a href=\"/hero?name=genji\">Genji</a></li>\n								<li><a href=\"/hero?name=mccree\">McCree</a></li>\n								<li><a href=\"/hero?name=pharah\">Pharah</a></li>\n								<li><a href=\"/hero?name=reaper\">Reaper</a></li>\n								<li><a href=\"/hero?name=soldier76\">Soldier: 76</a></li>\n								<li><a href=\"/hero?name=sombra\">Sombra</a></li>\n								<li><a href=\"/hero?name=tracer\">Tracer</a></li>\n							</ul>\n							<ul class=\"dropdown-inline divider\">\n								<li role=\"separator\" class=\"divider-vertical\"></li>\n							</ul>\n							<ul class=\"dropdown-inline\">\n								<li class=\"dropdown-header section-label\">DEFENSE</li>\n								<li><a href=\"/hero?name=bastion\">Bastion</a></li>\n								<li><a href=\"/hero?name=hanzo\">Hanzo</a></li>\n								<li><a href=\"/hero?name=junkrat\">Junkrat</a></li>\n								<li><a href=\"/hero?name=mei\">Mei</a></li>\n								<li><a href=\"/hero?name=torbjorn\">Torbjorn</a></li>\n								<li><a href=\"/hero?name=widowmaker\">Widowmaker</a></li>\n							</ul>\n							<ul class=\"dropdown-inline divider\">\n								<li role=\"separator\" class=\"divider-vertical\"></li>\n							</ul>\n							<ul class=\"dropdown-inline\">\n								<li class=\"dropdown-header section-label\">TANK</li>\n								<li><a href=\"/hero?name=dva\">D.VA</a></li>\n								<li><a href=\"/hero?name=orisa\">Orisa</a></li>\n								<li><a href=\"/hero?name=reinhardt\">Reinhardt</a></li>\n								<li><a href=\"/hero?name=roadhog\">Roadhog</a></li>\n								<li><a href=\"/hero?name=winston\">Winston</a></li>\n								<li><a href=\"/hero?name=zarya\">Zarya</a></li>\n							</ul>\n							<ul class=\"dropdown-inline divider\">\n								<li role=\"separator\" class=\"divider-vertical\"></li>\n							</ul>\n							<ul class=\"dropdown-inline\">\n								<li class=\"dropdown-header section-label\">SUPPORT</li>\n								<li><a href=\"/hero?name=ana\">Ana</a></li>\n								<li><a href=\"/hero?name=lucio\">Lucio</a></li>\n								<li><a href=\"/hero?name=mercy\">Mercy</a></li>\n								<li><a href=\"/hero?name=symmetra\">Symmetra</a></li>\n								<li><a href=\"/hero?name=zenyatta\">Zenyatta</a></li>\n							</ul>\n						</li>\n					</ul>	\n				</li>\n			</ul>\n			<ul class=\"nav navbar-nav navbar-right\">\n				<li><a id=\"login\" class=\"hidden\" href=\"/\">Get Stats</a></li>\n				<li class=\"dropdown hidden\" id=\"account-dropdown\">\n					<a class=\"dropdown-toggle\" id=\"username\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n						<img id=\"account-icon\" alt=\"AccountIcon\" src=\"../img/OW-logo.svg\">\n						Username \n						<span class=\"caret\"></span>\n					</a>\n					<ul class=\"dropdown-menu\">\n						<li><a id=\"logout\">Switch User</a></li>\n					</ul>\n				</li>\n			</ul>\n		</div><!-- /.navbar-collapse -->\n	</div><!-- /.container-fluid -->\n</nav>";
-},"useData":true}));
 this["OW"] = this["OW"] || {};
 this["OW"]["templates"] = this["OW"]["templates"] || {};
 this["OW"]["templates"]["heroMultiple"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
@@ -22,32 +19,8 @@ this["OW"]["templates"]["heroMultiple"] = Handlebars.template({"1":function(cont
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.heroes : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "		</div>\n	</div>\n</main>";
 },"usePartial":true,"useData":true});
-Handlebars.registerPartial("heroSelect", Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
-
-  return "								<label class=\"btn btn-default "
-    + ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.compare : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\">\n									<input type=\"checkbox\" class=\"hero-toggle\" data-hero=\""
-    + alias2(alias1((depth0 != null ? depth0.normalizedName : depth0), depth0))
-    + "\" checked="
-    + alias2(alias1((depth0 != null ? depth0.compare : depth0), depth0))
-    + ">"
-    + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
-    + "\n								</label>\n";
-},"2":function(container,depth0,helpers,partials,data) {
-    return "active";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
-
-  return "<!-- DESKTOP HERO SELECT -->\n<div class=\"row hidden-sm hidden-xs\">\n	<div class=\"hero-grid\">\n		<div class=\"row\">\n			<div class=\"col-xs-12\">\n				<ul class=\"nav nav-tabs\" role=\"tablist\">\n					<li role=\"presentation\" class=\"active\"><a href=\"#hero-grid-offense\" aria-controls=\"hero-grid-offense\" role=\"tab\" data-toggle=\"tab\">OFFENSE</a></li>\n					<li role=\"presentation\"><a href=\"#hero-grid-defense\" aria-controls=\"hero-grid-defense\" role=\"tab\" data-toggle=\"tab\">DEFENSE</a></li>\n					<li role=\"presentation\"><a href=\"#hero-grid-tank\" aria-controls=\"hero-grid-tank\" role=\"tab\" data-toggle=\"tab\">TANK</a></li>\n					<li role=\"presentation\"><a href=\"#hero-grid-support\" aria-controls=\"hero-grid-support\" role=\"tab\" data-toggle=\"tab\">SUPPORT</a></li>\n				</ul>\n			</div>\n			<div class=\"col-xs-12\">\n				<div class=\"tab-content well\">\n					<div role=\"tabpanel\" class=\"tab-pane active\" id=\"hero-grid-offense\">\n						<div class=\"btn-group btn-group-justified\" role=\"group\" aria-label=\"heroes\">\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.offense : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "						</div>\n					</div>\n					<div role=\"tabpanel\" class=\"tab-pane\" id=\"hero-grid-defense\">\n						<div class=\"btn-group btn-group-justified\" role=\"group\" aria-label=\"heroes\">\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.defense : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "						</div>\n					</div>\n					<div role=\"tabpanel\" class=\"tab-pane\" id=\"hero-grid-tank\">\n						<div class=\"btn-group btn-group-justified\" role=\"group\" aria-label=\"heroes\">\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tank : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "						</div>\n					</div>\n					<div role=\"tabpanel\" class=\"tab-pane\" id=\"hero-grid-support\">\n						<div class=\"btn-group btn-group-justified\" role=\"group\" aria-label=\"heroes\">\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.support : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "						</div>\n					</div>\n				</div>\n			</div>\n		</div>\n	</div>\n</div>\n\n<!-- MOBILE HERO SELECT -->\n";
+Handlebars.registerPartial("header", Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<nav class=\"navbar navbar-inverse navbar-fixed-top\">\n	<div class=\"container-fluid\">\n		<!-- Brand and toggle get grouped for better mobile display -->\n		<div class=\"navbar-header\">\n			<button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">\n				<span class=\"sr-only\">Toggle navigation</span>\n				<span class=\"icon-bar\"></span>\n				<span class=\"icon-bar\"></span>\n				<span class=\"icon-bar\"></span>\n			</button>\n			<a class=\"navbar-brand\" href=\"/\">\n				<img alt=\"Brand\" src=\"../img/OW-banner.svg\">\n			</a>\n		</div>\n\n		<!-- Collect the nav links, forms, and other content for toggling -->\n		<div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n			<ul class=\"nav navbar-nav\">\n				<li class=\"dropdown\">\n					<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Heroes <span class=\"caret\"></span></a>\n					<ul class=\"dropdown-menu\" id=\"hero-list\">\n						<li>\n							<ul class=\"dropdown-inline\">\n								<li class=\"dropdown-header section-label\">OFFENSE</li>\n								<li><a href=\"/hero?name=genji\">Genji</a></li>\n								<li><a href=\"/hero?name=mccree\">McCree</a></li>\n								<li><a href=\"/hero?name=pharah\">Pharah</a></li>\n								<li><a href=\"/hero?name=reaper\">Reaper</a></li>\n								<li><a href=\"/hero?name=soldier76\">Soldier: 76</a></li>\n								<li><a href=\"/hero?name=sombra\">Sombra</a></li>\n								<li><a href=\"/hero?name=tracer\">Tracer</a></li>\n							</ul>\n							<ul class=\"dropdown-inline divider\">\n								<li role=\"separator\" class=\"divider-vertical\"></li>\n							</ul>\n							<ul class=\"dropdown-inline\">\n								<li class=\"dropdown-header section-label\">DEFENSE</li>\n								<li><a href=\"/hero?name=bastion\">Bastion</a></li>\n								<li><a href=\"/hero?name=hanzo\">Hanzo</a></li>\n								<li><a href=\"/hero?name=junkrat\">Junkrat</a></li>\n								<li><a href=\"/hero?name=mei\">Mei</a></li>\n								<li><a href=\"/hero?name=torbjorn\">Torbjorn</a></li>\n								<li><a href=\"/hero?name=widowmaker\">Widowmaker</a></li>\n							</ul>\n							<ul class=\"dropdown-inline divider\">\n								<li role=\"separator\" class=\"divider-vertical\"></li>\n							</ul>\n							<ul class=\"dropdown-inline\">\n								<li class=\"dropdown-header section-label\">TANK</li>\n								<li><a href=\"/hero?name=dva\">D.VA</a></li>\n								<li><a href=\"/hero?name=orisa\">Orisa</a></li>\n								<li><a href=\"/hero?name=reinhardt\">Reinhardt</a></li>\n								<li><a href=\"/hero?name=roadhog\">Roadhog</a></li>\n								<li><a href=\"/hero?name=winston\">Winston</a></li>\n								<li><a href=\"/hero?name=zarya\">Zarya</a></li>\n							</ul>\n							<ul class=\"dropdown-inline divider\">\n								<li role=\"separator\" class=\"divider-vertical\"></li>\n							</ul>\n							<ul class=\"dropdown-inline\">\n								<li class=\"dropdown-header section-label\">SUPPORT</li>\n								<li><a href=\"/hero?name=ana\">Ana</a></li>\n								<li><a href=\"/hero?name=lucio\">Lucio</a></li>\n								<li><a href=\"/hero?name=mercy\">Mercy</a></li>\n								<li><a href=\"/hero?name=symmetra\">Symmetra</a></li>\n								<li><a href=\"/hero?name=zenyatta\">Zenyatta</a></li>\n							</ul>\n						</li>\n					</ul>	\n				</li>\n			</ul>\n			<ul class=\"nav navbar-nav navbar-right\">\n				<li><a id=\"login\" class=\"hidden\" href=\"/\">Get Stats</a></li>\n				<li class=\"dropdown hidden\" id=\"account-dropdown\">\n					<a class=\"dropdown-toggle\" id=\"username\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n						<img id=\"account-icon\" alt=\"AccountIcon\" src=\"../img/OW-logo.svg\">\n						Username \n						<span class=\"caret\"></span>\n					</a>\n					<ul class=\"dropdown-menu\">\n						<li><a id=\"logout\">Switch User</a></li>\n					</ul>\n				</li>\n			</ul>\n		</div><!-- /.navbar-collapse -->\n	</div><!-- /.container-fluid -->\n</nav>";
 },"useData":true}));
 this["OW"]["templates"]["heroSingle"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1;
@@ -86,7 +59,7 @@ this["OW"]["templates"]["heroSingle"] = Handlebars.template({"1":function(contai
 },"13":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = ((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.stats : stack1)) != null ? stack1.playtime : stack1),{"name":"if","hash":{},"fn":container.program(14, data, 0),"inverse":container.program(16, data, 0),"data":data})) != null ? stack1 : "");
+  return ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.stats : stack1)) != null ? stack1.playtime : stack1)) != null ? stack1.value : stack1),{"name":"if","hash":{},"fn":container.program(14, data, 0),"inverse":container.program(16, data, 0),"data":data})) != null ? stack1 : "");
 },"14":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -131,6 +104,33 @@ this["OW"]["templates"]["login"] = Handlebars.template({"compiler":[7,">= 4.0.0"
     + ((stack1 = container.invokePartial(partials.header,depth0,{"name":"header","data":data,"indent":"\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
     + "</header>\n<main>\n	<!-- error messages -->\n	<div class=\"container\">\n		<div class=\"alert alert-danger hidden fade-in\" id=\"battletag-not-found\" role=\"alert\">There was an error requesting statistics for that BattleTag. Double check your BattleTag, and try again later.</div>\n		<div class=\"alert alert-danger hidden fade-in\" id=\"battletag-format\" role=\"alert\">Invalid BattleTag format. BattleTag format should match: example#1234</div>\n	</div>\n\n	<!-- login form -->\n	<div class=\"container\">\n		<section class=\"jumbotron\" id=\"form-username\">\n			<h1>Overwatch Hero Statistics</h1>\n			<hr>\n			<p class=\"text-center\">Enter your BattleTag to see statistics about the Heroes you use in Quick Play!</p>\n			<form class=\"form-inline\">\n				<label for=\"inputUsername\" class=\"control-label\">BattleTag</label>\n				<input type=\"text\" class=\"form-control\" id=\"inputUsername\" name=\"username\" placeholder=\"example#1234\" required>\n				<button type=\"submit\" class=\"btn btn-default\">Get Stats</button>\n			</form>\n		</section>\n	</div>\n</main>\n";
 },"usePartial":true,"useData":true});
+Handlebars.registerPartial("heroSelect", Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "								<label class=\"btn btn-default "
+    + ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.compare : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\">\n									<input type=\"checkbox\" class=\"hero-toggle\" data-hero=\""
+    + alias2(alias1((depth0 != null ? depth0.normalizedName : depth0), depth0))
+    + "\" checked="
+    + alias2(alias1((depth0 != null ? depth0.compare : depth0), depth0))
+    + ">"
+    + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
+    + "\n								</label>\n";
+},"2":function(container,depth0,helpers,partials,data) {
+    return "active";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
+
+  return "<!-- DESKTOP HERO SELECT -->\n<div class=\"row hidden-sm hidden-xs\">\n	<div class=\"hero-grid\">\n		<div class=\"row\">\n			<div class=\"col-xs-12\">\n				<ul class=\"nav nav-tabs\" role=\"tablist\">\n					<li role=\"presentation\" class=\"active\"><a href=\"#hero-grid-offense\" aria-controls=\"hero-grid-offense\" role=\"tab\" data-toggle=\"tab\">OFFENSE</a></li>\n					<li role=\"presentation\"><a href=\"#hero-grid-defense\" aria-controls=\"hero-grid-defense\" role=\"tab\" data-toggle=\"tab\">DEFENSE</a></li>\n					<li role=\"presentation\"><a href=\"#hero-grid-tank\" aria-controls=\"hero-grid-tank\" role=\"tab\" data-toggle=\"tab\">TANK</a></li>\n					<li role=\"presentation\"><a href=\"#hero-grid-support\" aria-controls=\"hero-grid-support\" role=\"tab\" data-toggle=\"tab\">SUPPORT</a></li>\n				</ul>\n			</div>\n			<div class=\"col-xs-12\">\n				<div class=\"tab-content well\">\n					<div role=\"tabpanel\" class=\"tab-pane active\" id=\"hero-grid-offense\">\n						<div class=\"btn-group btn-group-justified\" role=\"group\" aria-label=\"heroes\">\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.offense : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "						</div>\n					</div>\n					<div role=\"tabpanel\" class=\"tab-pane\" id=\"hero-grid-defense\">\n						<div class=\"btn-group btn-group-justified\" role=\"group\" aria-label=\"heroes\">\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.defense : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "						</div>\n					</div>\n					<div role=\"tabpanel\" class=\"tab-pane\" id=\"hero-grid-tank\">\n						<div class=\"btn-group btn-group-justified\" role=\"group\" aria-label=\"heroes\">\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tank : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "						</div>\n					</div>\n					<div role=\"tabpanel\" class=\"tab-pane\" id=\"hero-grid-support\">\n						<div class=\"btn-group btn-group-justified\" role=\"group\" aria-label=\"heroes\">\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.support : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "						</div>\n					</div>\n				</div>\n			</div>\n		</div>\n	</div>\n</div>\n\n<!-- MOBILE HERO SELECT -->\n";
+},"useData":true}));
 Handlebars.registerPartial("heroSummary", Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -151,7 +151,7 @@ Handlebars.registerPartial("heroSummary", Handlebars.template({"1":function(cont
     + "\"></div>\n		<h3 class=\"hero-name text-center\">"
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.name : stack1), depth0))
     + "</h3>\n"
-    + ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = ((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.stats : stack1)) != null ? stack1.playtime : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.stats : stack1)) != null ? stack1.playtime : stack1)) != null ? stack1.value : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
     + "		<div class=\"hero-link\">\n			<hr>\n			<a href=\"/hero?name="
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.normalizedName : stack1), depth0))
     + "\">More Info</a>\n		</div>\n	</div>\n</article>";
@@ -169,41 +169,21 @@ Handlebars.registerPartial("stats", Handlebars.template({"1":function(container,
 },"5":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return "	<section class=\"hero-stat-section hero-playtime\">\n		<h5>Playtime</h5>\n		<div class=\"stat-bar\">"
-    + container.escapeExpression(container.lambda(((stack1 = ((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.stats : stack1)) != null ? stack1.playtime : stack1), depth0))
-    + "</div>\n	</section>\n";
-},"7":function(container,depth0,helpers,partials,data) {
-    var stack1;
+  return ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.value : depth0),{"name":"if","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"6":function(container,depth0,helpers,partials,data) {
+    var helper, alias1=container.lambda, alias2=container.escapeExpression;
 
-  return "	<section class=\"hero-stat-section hero-medals\">\n		<h5>Medals</h5>\n		<div class=\"stat-bar\">"
-    + container.escapeExpression(container.lambda(((stack1 = ((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.stats : stack1)) != null ? stack1.medals : stack1), depth0))
-    + "</div>\n	</section>\n";
-},"9":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "	<section class=\"hero-stat-section hero-elims\">\n		<h5>Eliminations Per Life</h5>\n		<div class=\"stat-bar\">"
-    + container.escapeExpression(container.lambda(((stack1 = ((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.stats : stack1)) != null ? stack1.elims : stack1), depth0))
-    + "</div>\n	</section>\n";
-},"11":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "	<section class=\"hero-stat-section hero-damage\">\n		<h5>Hero Damage Done</h5>\n		<div class=\"stat-bar\">"
-    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.heroDamage : stack1), depth0))
-    + "</div>\n	</section>\n";
-},"13":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "	<section class=\"hero-stat-section hero-healing\">\n		<h5>Healing</h5>\n		<div class=\"stat-bar\">"
-    + container.escapeExpression(container.lambda(((stack1 = ((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.stats : stack1)) != null ? stack1.healing : stack1), depth0))
-    + "</div>\n	</section>\n";
+  return "		<section class=\"hero-stat-section\">\n			<h5>"
+    + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
+    + "</h5>\n			<div class=\"stat-bar\" data-stat=\""
+    + alias2(((helper = (helper = helpers.key || (data && data.key)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"key","hash":{},"data":data}) : helper)))
+    + "\">"
+    + alias2(alias1((depth0 != null ? depth0.value : depth0), depth0))
+    + "</div>\n		</section>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
   return "<hr>\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.heroPage : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = ((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.stats : stack1)) != null ? stack1.playtime : stack1),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = ((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.stats : stack1)) != null ? stack1.medals : stack1),{"name":"if","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = ((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.stats : stack1)) != null ? stack1.elims : stack1),{"name":"if","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.heroDamage : stack1),{"name":"if","hash":{},"fn":container.program(11, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = ((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.stats : stack1)) != null ? stack1.healing : stack1),{"name":"if","hash":{},"fn":container.program(13, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.stats : stack1),{"name":"each","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
 },"useData":true}));

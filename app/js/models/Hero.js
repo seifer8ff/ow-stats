@@ -15,11 +15,26 @@ var Hero = function(options) {
 		shield: options.shield || null
 	}
 	this.stats = {
-		elims: options.elims || null,
-		medals: options.medals || null,
-		heroDamage: options.heroDamage || null,
-		healing: options.healing || null,
-		playtime: options.playtime || null
+		elims: {
+			value: options.elims || null,
+			name: 'Eliminations'
+		},
+		medals: {
+			value: options.medals || null,
+			name: 'Medals'
+		},
+		heroDamage: {
+			value: options.heroDamage || null,
+			name: 'Hero Damage'
+		},
+		healing: {
+			value: options.healing || null,
+			name: 'Healing'
+		},
+		playtime: {
+			value: options.playtime || null,
+			name: 'Playtime'
+		},
 	}
 
 	if (this.normalizedName === 'junkrat' || this.normalizedName === 'symmetra' || this.normalizedName === 'mercy') {
