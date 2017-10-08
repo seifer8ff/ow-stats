@@ -1,0 +1,20 @@
+<header>
+	{{> header}}
+</header>
+<main>
+	<!-- background image -->
+	<span id="ow-bg"></span>
+	
+	<div class="container">
+		{{> heroSelect}}
+	</div>
+	<div class="container hero-container">
+		<div class="row" id="hero-multiple-parent">
+			{{#each heroes}}
+				{{#if this.compare}}
+					{{> heroSummary hero=this}}
+				{{/if}}
+			{{/each}}
+		</div>
+	</div>
+</main>

@@ -4,33 +4,11 @@
 	{{else}}
 	<h6 class="section-label text-uppercase">Hero VS Selected</h6>
 {{/if}}
-{{#if userStats.playtime}}
-	<section class="hero-stat-section hero-playtime">
-		<h5>Playtime</h5>
-		<div class="stat-bar">{{userStats.playtime}}</div>
-	</section>
-{{/if}}
-{{#if userStats.medals}}
-	<section class="hero-stat-section hero-medals">
-		<h5>Medals</h5>
-		<div class="stat-bar">{{userStats.medals}}</div>
-	</section>
-{{/if}}
-{{#if userStats.eliminations_per_life}}
-	<section class="hero-stat-section hero-elims">
-		<h5>Eliminations Per Life</h5>
-		<div class="stat-bar">{{userStats.eliminations_per_life}}</div>
-	</section>
-{{/if}}
-{{#if userStats.all_damage_done_avg_per_10_min}}
-	<section class="hero-stat-section hero-damage">
-		<h5>Damage Done</h5>
-		<div class="stat-bar">{{userStats.all_damage_done_avg_per_10_min}}</div>
-	</section>
-{{/if}}
-{{#if userStats.healing_done_avg_per_10_min}}
-	<section class="hero-stat-section hero-healing">
-		<h5>Healing</h5>
-		<div class="stat-bar">{{userStats.healing_done_avg_per_10_min}}</div>
-	</section>
-{{/if}}
+{{#each hero.stats}}
+	{{#if this.value}}
+		<section class="hero-stat-section">
+			<h5>{{this.name}}</h5>
+			<div class="stat-bar" data-stat="{{@key}}">{{this.value}}</div>
+		</section>
+	{{/if}}
+{{/each}}
