@@ -20,6 +20,10 @@ ul > li > label {
     width: 100%;
 }
 
+ul > li > label.btn {
+    border-radius: 0;
+}
+
 label.btn input[type=checkbox] {
     position: absolute;
     clip: rect(0,0,0,0);
@@ -306,6 +310,10 @@ label.btn input[type=checkbox] {
  /*lightish blue: #405275*/
 .hero-grid .well {
     background-color: rgba(255, 255, 255, .5);
+    margin-bottom: 0;
+}
+
+.hero-grid {
     margin-bottom: 40px;
 }
 

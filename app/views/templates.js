@@ -38,6 +38,18 @@ Handlebars.registerPartial("heroSelect", Handlebars.template({"1":function(conta
     + "\n								</label>\n";
 },"2":function(container,depth0,helpers,partials,data) {
     return "active";
+},"4":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "							<li>\n								<label class=\"btn btn-default "
+    + ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.compare : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\">\n									<input type=\"checkbox\" class=\"hero-toggle\" data-hero=\""
+    + alias2(alias1((depth0 != null ? depth0.normalizedName : depth0), depth0))
+    + "\" checked="
+    + alias2(alias1((depth0 != null ? depth0.compare : depth0), depth0))
+    + ">"
+    + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
+    + "\n								</label>\n							</li>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
@@ -49,7 +61,15 @@ Handlebars.registerPartial("heroSelect", Handlebars.template({"1":function(conta
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tank : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "						</div>\n					</div>\n					<div role=\"tabpanel\" class=\"tab-pane\" id=\"hero-grid-support\">\n						<div class=\"btn-group btn-group-justified\" role=\"group\" aria-label=\"heroes\">\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.support : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "						</div>\n					</div>\n				</div>\n			</div>\n		</div>\n	</div>\n</div>\n\n<!-- MOBILE HERO SELECT -->\n";
+    + "						</div>\n					</div>\n				</div>\n			</div>\n		</div>\n	</div>\n</div>\n\n\n<!-- MOBILE HERO SELECT -->\n<div class=\"row visible-sm visible-xs\">\n	<div class=\"hero-grid mobile\">\n		<div class=\"row\">\n			<div class=\"col-xs-12 text-center\">\n				<div class=\"btn-group\">\n					<button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n						OFFENSE <span class=\"caret\"></span>\n					</button>\n					<ul class=\"dropdown-menu\">\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.offense : depth0),{"name":"each","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "					</ul>\n				</div>\n				<div class=\"btn-group\">\n					<button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n						DEFENSE <span class=\"caret\"></span>\n					</button>\n					<ul class=\"dropdown-menu\">\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.defense : depth0),{"name":"each","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "					</ul>\n				</div>\n				<div class=\"btn-group\">\n					<button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n						TANK <span class=\"caret\"></span>\n					</button>\n					<ul class=\"dropdown-menu\">\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tank : depth0),{"name":"each","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "					</ul>\n				</div>\n				<div class=\"btn-group\">\n					<button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n						SUPPORT <span class=\"caret\"></span>\n					</button>\n					<ul class=\"dropdown-menu\">\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.support : depth0),{"name":"each","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "					</ul>\n				</div>\n			</div>\n		</div>\n	</div>\n</div>\n\n\n\n\n\n\n\n<!-- MOBILE HERO SELECT -->\n";
 },"useData":true}));
 this["OW"]["templates"]["heroMultiple"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1;
@@ -170,6 +190,9 @@ this["OW"]["templates"]["heroSingle"] = Handlebars.template({"1":function(contai
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.normalizedName : stack1), depth0))
     + "-full.jpg\">\n			</aside>\n		</div>\n	</div>\n</main>";
 },"usePartial":true,"useData":true});
+Handlebars.registerPartial("loader", Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<div class=\"loader\">\n	<div class=\"spinner\"></div>\n</div>";
+},"useData":true}));
 this["OW"]["templates"]["login"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -177,9 +200,6 @@ this["OW"]["templates"]["login"] = Handlebars.template({"compiler":[7,">= 4.0.0"
     + ((stack1 = container.invokePartial(partials.header,depth0,{"name":"header","data":data,"indent":"\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
     + "</header>\n<main>\n	<!-- background image -->\n	<span id=\"ow-bg\"></span>\n\n	<!-- error messages -->\n	<div class=\"container\">\n		<div class=\"alert alert-danger hidden fade-in\" id=\"battletag-not-found\" role=\"alert\">There was an error requesting statistics for that BattleTag. Double check your BattleTag, and try again later.</div>\n		<div class=\"alert alert-danger hidden fade-in\" id=\"battletag-format\" role=\"alert\">Invalid BattleTag format. BattleTag format should match: example#1234</div>\n	</div>\n\n	<!-- login form -->\n	<div class=\"container\">\n		<section class=\"jumbotron\" id=\"form-username\">\n			<h1>Overwatch Hero Statistics</h1>\n			<hr>\n			<p class=\"text-center\">Enter your BattleTag to see statistics about the Heroes you use in Quick Play!</p>\n			<form class=\"form-inline\">\n				<label for=\"inputUsername\" class=\"control-label\">BattleTag</label>\n				<input type=\"text\" class=\"form-control\" id=\"inputUsername\" name=\"username\" placeholder=\"example#1234\" required>\n				<button type=\"submit\" class=\"btn btn-default\">Get Stats</button>\n			</form>\n		</section>\n	</div>\n</main>\n";
 },"usePartial":true,"useData":true});
-Handlebars.registerPartial("loader", Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<div class=\"loader\">\n	<div class=\"spinner\"></div>\n</div>";
-},"useData":true}));
 Handlebars.registerPartial("noPlaytime", Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<hr>\n<section class=\"hero-stat-section hero-message\">\n	<span class=\"glyphicon glyphicon-alert\" aria-hidden=\"true\"></span>\n	<h4>No Playtime!</h4>\n	<hr>\n	<p>Play this hero more often in Quick Play to see statistics!</p>\n</section>";
 },"useData":true}));

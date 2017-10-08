@@ -65,17 +65,21 @@ var heroMultiple = (function() {
 		return new Promise(function(resolve) {
 			console.log(hero);
 
-			let heroToggle = document.querySelector("[data-hero=" + hero.normalizedName + "]");
-			heroToggle.disabled = true;
-			heroToggle.checked = !heroToggle.checked;
-			heroToggle.parentNode.classList.toggle("active");
+			let heroToggles = document.querySelectorAll("[data-hero=" + hero.normalizedName + "]");
+			for (let i = 0; i < heroToggles.length; i++) {
+				heroToggles[i].disabled = true;
+				heroToggles[i].checked = !heroToggles[i].checked;
+				heroToggles[i].parentNode.classList.toggle("active");
+			}
 
 			hero.compare = !hero.compare;
 			Store.setLocal("heroes", settings.heroes, 7 * 60 * 60 * 1000);
 
 			if (hero.compare) {
 				addHeroSection(hero);
-				heroToggle.disabled = false;
+				for (let i = 0; i < heroToggles.length; i++) {
+					heroToggles[i].disabled = false;
+				}
 			} else {
 				removeHeroSection(hero);
 			}
@@ -108,8 +112,10 @@ var heroMultiple = (function() {
 			heroSection.innerHTML = "";
 			heroSection.parentNode.removeChild(heroSection);
 			delete heroSection;
-			let heroToggle = document.querySelector("[data-hero=" + hero.normalizedName + "]");
-			heroToggle.disabled = false;
+			let heroToggles = document.querySelectorAll("[data-hero=" + hero.normalizedName + "]");
+			for (let i = 0; i < heroToggles.length; i++) {
+				heroToggles[i].disabled = false;
+			}
 		}, 550);
 	}
 

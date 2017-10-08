@@ -54,6 +54,79 @@
 	</div>
 </div>
 
+
+<!-- MOBILE HERO SELECT -->
+<div class="row visible-sm visible-xs">
+	<div class="hero-grid mobile">
+		<div class="row">
+			<div class="col-xs-12 text-center">
+				<div class="btn-group">
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						OFFENSE <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						{{#each offense}}
+							<li>
+								<label class="btn btn-default {{#if this.compare}}active{{/if}}">
+									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{this.compare}}>{{this.name}}
+								</label>
+							</li>
+						{{/each}}
+					</ul>
+				</div>
+				<div class="btn-group">
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						DEFENSE <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						{{#each defense}}
+							<li>
+								<label class="btn btn-default {{#if this.compare}}active{{/if}}">
+									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{this.compare}}>{{this.name}}
+								</label>
+							</li>
+						{{/each}}
+					</ul>
+				</div>
+				<div class="btn-group">
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						TANK <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						{{#each tank}}
+							<li>
+								<label class="btn btn-default {{#if this.compare}}active{{/if}}">
+									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{this.compare}}>{{this.name}}
+								</label>
+							</li>
+						{{/each}}
+					</ul>
+				</div>
+				<div class="btn-group">
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						SUPPORT <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						{{#each support}}
+							<li>
+								<label class="btn btn-default {{#if this.compare}}active{{/if}}">
+									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{this.compare}}>{{this.name}}
+								</label>
+							</li>
+						{{/each}}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
 <!-- MOBILE HERO SELECT -->
 {{!-- <div class="row visible-sm visible-xs">
 	<div class="hidden hero-grid">
