@@ -6,6 +6,18 @@ var heroSingle = (function() {
 		heroes: Store.getLocal("heroes")
 	} 
 
+	
+
+
+	function init(heroes, user) {
+		if (heroes) {
+			settings.heroes = heroes;
+		}
+		if (user) {
+			settings.user = user;
+		}
+	}
+
 	function initPage() {
 		console.log('building hero page');
 		// for hero page, build the hero section
@@ -53,6 +65,7 @@ var heroSingle = (function() {
 
 
 	return {
+		init: init,
 		initPage: initPage
 	}
 }());

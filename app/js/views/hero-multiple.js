@@ -8,8 +8,19 @@ var heroMultiple = (function() {
 
 
 
+
+	function init(heroes, user) {
+		if (heroes) {
+			settings.heroes = heroes;
+		}
+		if (user) {
+			settings.user = user;
+		}
+	}
+
 	function initPage() {
 		// sort heroes by role for display in hero select section
+		console.log('initializing multiple hero page');
 		let offense = [], defense = [], tank = [], support = [];
 		for (hero in settings.heroes) {
 			let thisHero = settings.heroes[hero];
@@ -124,6 +135,7 @@ var heroMultiple = (function() {
 
 
 	return {
+		init: init,
 		initPage: initPage
 	}
 

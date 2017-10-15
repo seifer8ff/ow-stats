@@ -23,7 +23,7 @@ var apiStats = (function() {
 			.then(rawStats => processHeroStats(rawStats))
 			.then(rawStats => processUserStats(rawStats, false))
 			.then(() => {
-				return resolve();
+				return resolve(settings.user);
 			})
 			.catch(err => {
 				console.log("could not get user stats");
@@ -81,7 +81,7 @@ var apiStats = (function() {
 		return new Promise(function(resolve, reject) {
 			settings.user.icon = rawStats.stats.quickplay.overall_stats.avatar;
 			utils.updateMaxStats(settings.user, settings.heroes, true);
-			Store.setLocal("user", settings.user, 60 * 60 * 60 * 1000)
+			Store.setLocal("user", settings.user, 60 * 60 * 60 * 1000);
 
 			return resolve(settings.user);
 		});

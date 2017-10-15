@@ -98,6 +98,7 @@ gulp.task('watch', ['browserSync'], function() {
     gulp.watch('app/views/partials/*.hbs', ['handlebars']); 
     gulp.watch('app/views/*.js', browserSync.reload);
     gulp.watch('app/js/*.js', browserSync.reload); 
+    gulp.watch('app/js/**/*.js', browserSync.reload); 
     gulp.watch('app/css/*.css', browserSync.reload); 
 });
 
