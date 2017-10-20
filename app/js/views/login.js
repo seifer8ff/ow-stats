@@ -15,7 +15,7 @@ var login = (function() {
 
 		// build login section and add to DOM
 		var newSection = OW.templates.login(context);
-		document.body.insertAdjacentHTML("afterbegin", newSection);
+		document.body.querySelector("main").insertAdjacentHTML("beforeend", newSection);
 
 		initEventListeners();
 	}

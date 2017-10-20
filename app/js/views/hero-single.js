@@ -6,7 +6,7 @@ var heroSingle = (function() {
 		heroes: Store.getLocal("heroes")
 	} 
 
-	
+
 
 
 	function init(heroes, user) {
@@ -38,7 +38,7 @@ var heroSingle = (function() {
 	
 			// build hero info section and add to DOM
 			var newSection = OW.templates.heroSingle(context);
-			document.body.insertAdjacentHTML("afterbegin", newSection);
+			document.body.querySelector("main").insertAdjacentHTML("beforeend", newSection);
 	
 			if (thisHero.stats.playtime.value !== null) {
 				settings.user = utils.updateMaxStats(settings.user, settings.heroes, true);
@@ -50,7 +50,7 @@ var heroSingle = (function() {
 	
 			// add error message to DOM
 			var errorSection = OW.templates.error(context);
-			document.body.insertAdjacentHTML("afterbegin", errorSection);
+			document.body.querySelector("main").insertAdjacentHTML("beforeend", errorSection);
 		}
 	}
 

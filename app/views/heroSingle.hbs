@@ -1,59 +1,52 @@
-<header>
-	{{> header}}
-</header>
-<main>
-	<span id="ow-bg"></span>
-
-	<div class="container hero-container">
-		<div class="row">
-			<article class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-5 col-lg-4 panel panel-default hero-section fade-in" id="{{ hero.normalizedName }}">
-				<h1>{{hero.name}}</h1>
-				<hr class="visible-xs">
-				<img class="visible-xs img-rounded img-responsive hero-img fade-in" src="../img/ow-{{ hero.normalizedName }}-full.jpg">
-				<hr>
-				<dl class="dl-horizontal">
-					<dt>Real Name</dt>
-					<dd>{{hero.data.realName}}</dd>
-					{{#if hero.data.age}}
-						<dt>Age</dt>
-						<dd>{{hero.data.age}}</dd>
-					{{/if}}
-					{{#if hero.data.affiliation}}
-						<dt>Prior Affiliation</dt>
-						<dd>{{hero.data.affiliation}}</dd>
-					{{/if}}
-					{{#if hero.data.base}}
-						<dt>Base of Operations</dt>
-						<dd>{{hero.data.base}}</dd>
-					{{/if}}
-				</dl>
-				<hr>
-				<p>{{hero.data.description}}</p>
-				<hr>
-				<h4 id="hero-health">Health: {{hero.data.health}}</h4>
-				{{#if hero.data.armor}}
-					<h4 id="hero-armor">Armor: {{hero.data.armor}}</h4>
+<div class="container hero-container">
+	<div class="row">
+		<article class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-5 col-lg-4 panel panel-default hero-section fade-in" id="{{ hero.normalizedName }}">
+			<h1>{{hero.name}}</h1>
+			<hr class="visible-xs">
+			<img class="visible-xs img-rounded img-responsive hero-img fade-in" src="../img/ow-{{ hero.normalizedName }}-full.jpg">
+			<hr>
+			<dl class="dl-horizontal">
+				<dt>Real Name</dt>
+				<dd>{{hero.data.realName}}</dd>
+				{{#if hero.data.age}}
+					<dt>Age</dt>
+					<dd>{{hero.data.age}}</dd>
 				{{/if}}
-				{{#if hero.data.shield}}
-					<h4 id="hero-shield">Shield: {{hero.data.shield}}</h4>
+				{{#if hero.data.affiliation}}
+					<dt>Prior Affiliation</dt>
+					<dd>{{hero.data.affiliation}}</dd>
 				{{/if}}
-				{{#if noUser }}
-					{{> noStats}}
+				{{#if hero.data.base}}
+					<dt>Base of Operations</dt>
+					<dd>{{hero.data.base}}</dd>
+				{{/if}}
+			</dl>
+			<hr>
+			<p>{{hero.data.description}}</p>
+			<hr>
+			<h4 id="hero-health">Health: {{hero.data.health}}</h4>
+			{{#if hero.data.armor}}
+				<h4 id="hero-armor">Armor: {{hero.data.armor}}</h4>
+			{{/if}}
+			{{#if hero.data.shield}}
+				<h4 id="hero-shield">Shield: {{hero.data.shield}}</h4>
+			{{/if}}
+			{{#if noUser }}
+				{{> noStats}}
+			{{else}}
+				{{#if hero.stats.playtime.value}}
+					{{> stats this=hero heroPage=true}}
 				{{else}}
-					{{#if hero.stats.playtime.value}}
-						{{> stats this=hero heroPage=true}}
-					{{else}}
-						{{> noPlaytime}}
-					{{/if}}
+					{{> noPlaytime}}
 				{{/if}}
-				<div class="hero-link">
-					<hr>
-					<a href="/">Back to Heroes</a>
-				</div>
-			</article>
-			<aside class="hidden-xs col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-6 col-md-offset-1 col-lg-7 col-lg-offset-1 hero-aside">
-				<img class="img-rounded img-responsive hero-img fade-in" src="../img/ow-{{ hero.normalizedName }}-full.jpg">
-			</aside>
-		</div>
+			{{/if}}
+			<div class="hero-link">
+				<hr>
+				<a href="/">Back to Heroes</a>
+			</div>
+		</article>
+		<aside class="hidden-xs col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-6 col-md-offset-1 col-lg-7 col-lg-offset-1 hero-aside">
+			<img class="img-rounded img-responsive hero-img fade-in" src="../img/ow-{{ hero.normalizedName }}-full.jpg">
+		</aside>
 	</div>
-</main>
+</div>

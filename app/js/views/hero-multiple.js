@@ -48,7 +48,7 @@ var heroMultiple = (function() {
 		};
 		var newSection = OW.templates.heroMultiple(context);
 
-		document.body.insertAdjacentHTML("afterbegin", newSection);
+		document.body.querySelector("main").insertAdjacentHTML("beforeend", newSection);
 		settings.user = utils.updateMaxStats(settings.user, settings.heroes, false);
 		utils.updateStatBars(settings.user);
 

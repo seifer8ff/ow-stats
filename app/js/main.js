@@ -39,14 +39,26 @@
 
 	function initPage() {
 		if (document.body.dataset.title === "hero-single") {
+			initHeader(settings.heroes, settings.user);
 			heroSingle.init(settings.heroes, settings.user);
 			heroSingle.initPage();
 		} else if (document.body.dataset.title === "hero-multiple" && settings.user) {
+			initHeader(settings.heroes, settings.user);
 			heroMultiple.init(settings.heroes, settings.user);
 			heroMultiple.initPage();
 		} else if (document.body.dataset.title === "login") {
 			login.initPage();
 		}
+	}
+
+	function initHeader(heroes, user) {
+		var context = { 
+			user: user,
+			heroes: heroes
+		};
+		var newSection = Handlebars.partials.header(context);
+
+		document.body.querySelector(".collapse.navbar-collapse").insertAdjacentHTML("beforeend", newSection);
 	}
 
 
