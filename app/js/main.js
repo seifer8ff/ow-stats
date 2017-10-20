@@ -38,12 +38,11 @@
 	}
 
 	function initPage() {
+		initHeader(settings.heroes, settings.user);
 		if (document.body.dataset.title === "hero-single") {
-			initHeader(settings.heroes, settings.user);
 			heroSingle.init(settings.heroes, settings.user);
 			heroSingle.initPage();
 		} else if (document.body.dataset.title === "hero-multiple" && settings.user) {
-			initHeader(settings.heroes, settings.user);
 			heroMultiple.init(settings.heroes, settings.user);
 			heroMultiple.initPage();
 		} else if (document.body.dataset.title === "login") {
@@ -53,7 +52,7 @@
 
 	function initHeader(heroes, user) {
 		let sortedHeroes = utils.sortHeroes(settings.heroes);
-		
+
 		var context = { 
 			user: user,
 			heroes: heroes,
