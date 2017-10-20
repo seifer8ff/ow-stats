@@ -87,10 +87,6 @@ label.btn input[type=checkbox] {
     border-radius: 6px;
 }
 
-#hero-list.dropdown-menu {
-    min-width: 420px;
-}
-
 #hero-list.dropdown-menu .dropdown-inline {
     display: inline-block;
     list-style-type: none;
@@ -386,6 +382,10 @@ hr {
     border-left: 1px solid gray;     /* right or left is the same */
     float: left;                     /* so BS grid doesn't break */
     opacity: 0.5;                    /* optional */
+}
+
+.navbar {
+    min-width: 400px;
 }
 
 .navbar-inverse {
