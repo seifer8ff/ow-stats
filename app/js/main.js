@@ -52,9 +52,12 @@
 	}
 
 	function initHeader(heroes, user) {
+		let sortedHeroes = utils.sortHeroes(settings.heroes);
+		
 		var context = { 
 			user: user,
-			heroes: heroes
+			heroes: heroes,
+			sortedHeroes: sortedHeroes
 		};
 		var newSection = Handlebars.partials.header(context);
 

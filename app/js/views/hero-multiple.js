@@ -19,32 +19,15 @@ var heroMultiple = (function() {
 	}
 
 	function initPage() {
-		// sort heroes by role for display in hero select section
 		console.log('initializing multiple hero page');
-		let offense = [], defense = [], tank = [], support = [];
-		for (hero in settings.heroes) {
-			let thisHero = settings.heroes[hero];
-			switch(thisHero.role) {
-				case 'offense':
-					offense.push(thisHero);
-					break;
-				case 'defense':
-					defense.push(thisHero);
-					break;
-				case 'tank':
-					tank.push(thisHero);
-					break;
-				case 'support':
-					support.push(thisHero);
-					break;
-			}
-		}
+
+		// sort heroes by role for display in hero select section
+		let sortedHeroes = utils.sortHeroes(settings.heroes);
+		
 		var context = { 
 			user: settings.user,
 			heroes: settings.heroes, 
-			offense: offense, defense: defense, 
-			tank: tank, 
-			support: support 
+			sortedHeroes: sortedHeroes
 		};
 		var newSection = OW.templates.heroMultiple(context);
 

@@ -14,7 +14,7 @@
 				<div class="tab-content well">
 					<div role="tabpanel" class="tab-pane active" id="hero-grid-offense">
 						<div class="btn-group btn-group-justified" role="group" aria-label="heroes">
-							{{#each offense}}
+							{{#each sortedHeroes.offense}}
 								<label class="btn btn-default {{#if this.compare}}active{{/if}}">
 									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{this.compare}}>{{this.name}}
 								</label>
@@ -23,7 +23,7 @@
 					</div>
 					<div role="tabpanel" class="tab-pane" id="hero-grid-defense">
 						<div class="btn-group btn-group-justified" role="group" aria-label="heroes">
-							{{#each defense}}
+							{{#each sortedHeroes.defense}}
 								<label class="btn btn-default {{#if this.compare}}active{{/if}}">
 									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{this.compare}}>{{this.name}}
 								</label>
@@ -32,7 +32,7 @@
 					</div>
 					<div role="tabpanel" class="tab-pane" id="hero-grid-tank">
 						<div class="btn-group btn-group-justified" role="group" aria-label="heroes">
-							{{#each tank}}
+							{{#each sortedHeroes.tank}}
 								<label class="btn btn-default {{#if this.compare}}active{{/if}}">
 									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{this.compare}}>{{this.name}}
 								</label>
@@ -41,7 +41,7 @@
 					</div>
 					<div role="tabpanel" class="tab-pane" id="hero-grid-support">
 						<div class="btn-group btn-group-justified" role="group" aria-label="heroes">
-							{{#each support}}
+							{{#each sortedHeroes.support}}
 								<label class="btn btn-default {{#if this.compare}}active{{/if}}">
 									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{this.compare}}>{{this.name}}
 								</label>

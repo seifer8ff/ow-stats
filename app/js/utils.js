@@ -60,6 +60,33 @@ var utils = (function() {
 			return width;
 	}
 
+	function sortHeroes(heroes) {
+		let sortedHeroes = {
+			offense: [],
+			defense: [],
+			tank: [],
+			support: []
+		}
+		for (hero in heroes) {
+			let thisHero = heroes[hero];
+			switch(thisHero.role) {
+				case 'offense':
+				sortedHeroes.offense.push(thisHero);
+					break;
+				case 'defense':
+				sortedHeroes.defense.push(thisHero);
+					break;
+				case 'tank':
+				sortedHeroes.tank.push(thisHero);
+					break;
+				case 'support':
+				sortedHeroes.support.push(thisHero);
+					break;
+			}
+		}
+		return sortedHeroes;
+	}
+
 	function showAlert (id) {
 		// if id parameter is valid, hide all alerts, then show the given alert (to trigger fade in)
 		if (id && typeof id === "string") {
@@ -107,6 +134,7 @@ var utils = (function() {
 	return {
 		updateMaxStats: updateMaxStats,
 		updateStatBars: updateStatBars,
+		sortHeroes: sortHeroes,
 		showAlert: showAlert,
 		hideAlert: hideAlert,
 		showLoader: showLoader,
