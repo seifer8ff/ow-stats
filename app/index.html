@@ -25,7 +25,7 @@
 
 	<script>
 		// redirect to login page if user is not logged in
-		if (!localStorage.getItem("user") && !window.location.href.includes('login') && !window.location.href.includes('hero')) {
+		if (!localStorage.getItem("user") && window.location.href.indexOf('login') === -1 && !window.location.href.includes('hero')) {
 			window.location.href = "/login";
 		}
 	</script>
@@ -63,15 +63,15 @@
 	</main>
 
 	<!--build:js js/vendor.min.js -->
+	<script type="text/javascript" src="../node_modules/babel-polyfill/dist/polyfill.js"></script>
 	<script type="text/javascript" src="./vendor/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="./vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="./vendor/bluebird/js/browser/bluebird.min.js"></script>
 	<script type="text/javascript" src="./vendor/unorm/lib/unorm.js"></script>
 	<script type="text/javascript" src="./vendor/handlebars/handlebars.runtime.min.js"></script>
 	<script type="text/javascript" src="./views/templates.js"></script>
 	<!-- endbuild -->
 
-	<!--build:js js/main-trans.min.js -->
+	<!--build:js js/main.trans.min.js -->
 	<script type="text/javascript" src="./js/lib/store.js"></script>
 	<script type="text/javascript" src="./js/lib/xhr.js"></script>
 	<script type="text/javascript" src="./js/models/Hero.js"></script>

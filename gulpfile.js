@@ -57,7 +57,7 @@ gulp.task('useref', function(){
     .pipe(useref())
     // strips debug and minifies only if it's a JavaScript file
     .pipe(gulpIf('*.js', stripDebug()))
-    .pipe(gulpIf('*.main-trans.min.js', babel({
+    .pipe(gulpIf('*.trans.min.js', babel({
       presets: ['env']
     })))
     .pipe(gulpIf('*.js', uglify()))

@@ -19,11 +19,27 @@
     "url": "https://github.com/seifer8ff/ow-stats/issues"
   },
   "homepage": "https://github.com/seifer8ff/ow-stats#readme",
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "browsers": [
+              "last 2 versions"
+            ]
+          },
+          "debug": false
+        }
+      ]
+    ]
+  },
   "dependencies": {
     "overwatch-heroes-icon-font": "^1.2.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "browser-sync": "^2.18.8",
     "gulp": "^3.9.1",
