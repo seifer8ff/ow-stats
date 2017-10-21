@@ -27,7 +27,7 @@ var utils = (function() {
 				continue;
 			}
 
-			for (stat in user.maxStats) {
+			for (var stat in user.maxStats) {
 				let maxValue = user.maxStats[stat].value;
 				let thisHeroValue = thisHero.stats[stat].value;
 
@@ -67,7 +67,7 @@ var utils = (function() {
 			tank: [],
 			support: []
 		}
-		for (hero in heroes) {
+		for (var hero in heroes) {
 			let thisHero = heroes[hero];
 			switch(thisHero.role) {
 				case 'offense':
