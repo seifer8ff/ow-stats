@@ -15,6 +15,7 @@ var imagemin = require('gulp-imagemin');
 var handlebars = require('gulp-handlebars');
 var wrap = require('gulp-wrap');
 var declare = require('gulp-declare');
+var babel = require('gulp-babel');
 var browserSync = require('browser-sync').create();
 
 
@@ -56,6 +57,9 @@ gulp.task('useref', function(){
     .pipe(useref())
     // strips debug and minifies only if it's a JavaScript file
     .pipe(gulpIf('*.js', stripDebug()))
+    .pipe(gulpIf('*.main-trans.min.js', babel({
+      presets: ['env']
+    })))
     .pipe(gulpIf('*.js', uglify()))
     .pipe(gulp.dest('dist'))
     // Minifies only if it's a CSS file

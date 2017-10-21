@@ -106,7 +106,6 @@ var heroMultiple = (function() {
 		setTimeout(function() {
 			heroSection.innerHTML = "";
 			heroSection.parentNode.removeChild(heroSection);
-			delete heroSection;
 			let heroToggles = document.querySelectorAll("[data-hero=" + hero.normalizedName + "]");
 			for (let i = 0; i < heroToggles.length; i++) {
 				heroToggles[i].disabled = false;

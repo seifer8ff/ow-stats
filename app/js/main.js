@@ -59,6 +59,7 @@
 			sortedHeroes: sortedHeroes
 		};
 		var newSection = Handlebars.partials.header(context);
+		
 
 		document.body.querySelector(".collapse.navbar-collapse").insertAdjacentHTML("beforeend", newSection);
 	}
