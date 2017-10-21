@@ -23,12 +23,13 @@ var heroMultiple = (function() {
 
 		// sort heroes by role for display in hero select section
 		let sortedHeroes = utils.sortHeroes(settings.heroes);
-		
+
 		var context = { 
 			user: settings.user,
 			heroes: settings.heroes, 
 			sortedHeroes: sortedHeroes
 		};
+
 		var newSection = OW.templates.heroMultiple(context);
 
 		document.body.querySelector("main").insertAdjacentHTML("beforeend", newSection);

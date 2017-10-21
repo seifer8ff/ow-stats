@@ -388,6 +388,10 @@ hr {
     min-width: 400px;
 }
 
+#hero-list.dropdown-menu {
+    min-width: 404px;
+}
+
 .navbar-inverse {
     background-color: #29364D;
 }

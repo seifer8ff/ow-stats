@@ -65,7 +65,7 @@
 						OFFENSE <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu">
-						{{#each offense}}
+						{{#each sortedHeroes.offense}}
 							<li>
 								<label class="btn btn-default {{#if this.compare}}active{{/if}}">
 									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{this.compare}}>{{this.name}}
@@ -79,7 +79,7 @@
 						DEFENSE <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu">
-						{{#each defense}}
+						{{#each sortedHeroes.defense}}
 							<li>
 								<label class="btn btn-default {{#if this.compare}}active{{/if}}">
 									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{this.compare}}>{{this.name}}
@@ -93,7 +93,7 @@
 						TANK <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu">
-						{{#each tank}}
+						{{#each sortedHeroes.tank}}
 							<li>
 								<label class="btn btn-default {{#if this.compare}}active{{/if}}">
 									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{this.compare}}>{{this.name}}
@@ -107,7 +107,7 @@
 						SUPPORT <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu">
-						{{#each support}}
+						{{#each sortedHeroes.support}}
 							<li>
 								<label class="btn btn-default {{#if this.compare}}active{{/if}}">
 									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{this.compare}}>{{this.name}}
