@@ -23,7 +23,7 @@ var apiStats = (function() {
 			.then(rawStats => processHeroStats(rawStats))
 			.then(rawStats => processUserStats(rawStats, false))
 			.then(() => {
-				return resolve(settings.user);
+				return resolve(settings.heroes);
 			})
 			.catch(err => {
 				console.log("could not get user stats");

@@ -21,10 +21,10 @@
 				// only get user stats if we have a user saved
 				if (settings.user) {
 					apiStats.init(heroes, settings.user);
-					return apiStats.getUserStats().then(user => {
-						console.log('setting user to this user');
-						settings.user = user;
-						return user;
+					return apiStats.getUserStats().then(heroes => {
+						settings.heroes = heroes;
+						settings.user = Store.getLocal("user");
+						return heroes;
 					})
 				}
 			})
