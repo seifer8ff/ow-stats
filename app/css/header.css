@@ -1,0 +1,125 @@
+ul > li > label {
+    width: 100%;
+}
+
+ul > li > label.btn {
+    border-radius: 0;
+}
+
+label.btn input[type=checkbox] {
+    position: absolute;
+    clip: rect(0,0,0,0);
+    pointer-events: none;
+}
+
+#account-icon {
+    height: 40px;
+    margin-right: 10px;
+    margin-top: -15px;
+    margin-bottom: -15px;
+    border-radius: 6px;
+}
+
+#hero-list.dropdown-menu .dropdown-inline {
+    display: inline-block;
+    list-style-type: none;
+    vertical-align: top;
+    padding: 0;
+}
+
+#hero-list.dropdown-menu .dropdown-inline>li {
+    margin-left: 5px;
+}
+
+#hero-list.dropdown-menu .dropdown-inline>li>a {
+    display: block;
+    padding: 3px 8px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    /*color: #333;*/
+    white-space: nowrap;
+}
+
+#hero-list.dropdown-menu .dropdown-inline>li>a:hover {
+    background-image: none;
+    text-decoration: none;
+}
+
+.dropdown-menu li a:hover {
+    background-color: rgba(249, 158, 26, 0.9);
+}
+
+.dropdown-inline.divider {
+    position: absolute;
+    top: 0;
+    overflow: hidden;
+    height: 90%;
+    width: 1px;
+
+}
+
+.divider-vertical {
+    height: 100%;
+    border-left: 1px solid gray;     /* right or left is the same */
+    float: left;                     /* so BS grid doesn't break */
+    opacity: 0.5;                    /* optional */
+}
+
+.navbar {
+    min-width: 400px;
+}
+
+#hero-list.dropdown-menu {
+    min-width: 404px;
+}
+
+.navbar-inverse {
+    background-color: #29364D;
+}
+
+.navbar-brand>img {
+    height: 100%;
+    width: auto;
+}
+
+.navbar-brand {
+    background-color: white;
+}
+
+.navbar-inverse .navbar-brand:hover, 
+.navbar-inverse .navbar-brand:focus {
+  background-color: rgba(249, 158, 26, 1);
+}
+
+.navbar-inverse .navbar-nav li a {
+    font-weight: 700;
+    color: #dddddd;
+}
+
+.navbar-nav .dropdown .dropdown-menu {
+    background-color: #405275;
+}
+
+
+/*================
+  MEDIA QUERIES
+ ===============*/
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+}
+
+
+

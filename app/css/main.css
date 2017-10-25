@@ -22,13 +22,13 @@ a:hover {
     cursor: pointer;
 }
 
-ul > li > label {
+/* ul > li > label {
     width: 100%;
 }
 
 ul > li > label.btn {
     border-radius: 0;
-}
+} */
 
 label.btn input[type=checkbox] {
     position: absolute;
@@ -36,263 +36,13 @@ label.btn input[type=checkbox] {
     pointer-events: none;
 }
 
-#hero {
-    opacity: 0;
-}
-
-.dl-horizontal dt {
-  text-align: left;
-}
-
-.form-control {
-    font-size: 16px;
-}
-
-.fade-in {
-    opacity: 0;
-    -webkit-animation: fade-in 0.5s;
-    -webkit-animation-fill-mode: forwards;
-    animation: fade-in 0.5s;
-    animation-fill-mode: forwards;
-}
-
-@-webkit-keyframes fade-in {
-    100% { opacity: 1; }
-}@keyframes fade-in {
-    100% { opacity: 1; }
-}
-
-.fade-out {
-    opacity: 1;
-    -webkit-animation: fade-out 0.5s;
-    -webkit-animation-fill-mode: forwards;
-    animation: fade-out 0.5s;
-    animation-fill-mode: forwards;
-}
-
-@-webkit-keyframes fade-out {
-    100% { opacity: 0; }
-}@keyframes fade-out {
-    100% { opacity: 0; }
-}
-
-.hero-container {
-    text-align: center;
-}
-
-#account-icon {
-    height: 40px;
-    margin-right: 10px;
-    margin-top: -15px;
-    margin-bottom: -15px;
-    border-radius: 6px;
-}
-
-#hero-list.dropdown-menu .dropdown-inline {
-    display: inline-block;
-    list-style-type: none;
-    vertical-align: top;
-    padding: 0;
-}
-
-#hero-list.dropdown-menu .dropdown-inline>li {
-    margin-left: 5px;
-}
-
-#hero-list.dropdown-menu .dropdown-inline>li>a {
-    display: block;
-    padding: 3px 8px;
-    clear: both;
-    font-weight: 400;
-    line-height: 1.42857143;
-    /*color: #333;*/
-    white-space: nowrap;
-}
-
-#hero-list.dropdown-menu .dropdown-inline>li>a:hover {
-    background-image: none;
-    text-decoration: none;
-}
-
 #form-username {
     margin-top: 3%;
     text-align: center;
 }
 
-.dropdown-menu li a:hover {
-    background-color: rgba(249, 158, 26, 0.9);
-}
-
-
-#hero-section-original {
-    display: none;
-}
-
-#page-error {
+.error {
     margin-top: 15%;
-}
-
-.section-label {
-    color: #a8a8a8;
-}
-
-.hero-message {
-    text-align: center;
-}
-
-.hero-message .glyphicon-alert {
-    color: #f7615c;
-    font-size: 3em;
-    margin-bottom: 8px;
-    -webkit-animation: jiggle 0.5s ease-in-out 2 alternate;
-    -moz-animation: jiggle 0.5s ease-in-out 2 alternate;
-    -o-animation: jiggle 0.5s ease-in-out 2 alternate;
-    animation: jiggle 0.5s ease-in-out 2 alternate;
-}
-
-@-webkit-keyframes jiggle {
-    100%   { -webkit-transform: scale(1.25); }
-}@-moz-keyframes jiggle {
-    100%   { -moz-transform: scale(1.25); }
-}@-o-keyframes jiggle {
-    100%   { -o-transform: scale(1.25); }
-}@keyframes jiggle {
-    100%   { transform: scale(1.25); }
-}
-
-.hero-remove {
-    float: right;
-    font-size: 1.2em;
-    color: #f7615c;
-    transition: all 0.1s ease;
-}
-
-.hero-remove::before {
-    position: absolute;
-    top: 0;
-    right: 0;
-    
-}
-
-.hero-remove:hover {
-    font-size: 1.35em;
-    color: red;
-}
-
-.hero-section {
-    text-align: left;
-    padding-bottom: 10px;
-}
-
-/* index page*/
-.hero-section>.panel {
-    position: relative;
-    height: 370px;
-}
-
-/* hero page */
-.hero-section.panel {
-    min-height: 780px;
-}
-
-.hero-name {
-    margin-top: 10px;
-}
-
-.hero-icon {
-    font-size: 120px;
-    text-align: center;
-    line-height: 1;
-}
-
-.hero-section>h1 {
-    margin-top: 0px;
-}
-
-.hero-section h5 {
-    font-weight: 400;
-    margin-top: 12px;
-    margin-bottom: 2px;
-}
-
-.hero-section .section-label {
-    color: #777;
-    text-align: center;
-    font-weight: 400;
-    font-size: 11px;
-    margin: 0;
-}
-
-.hero-stat-section {
-    margin-bottom: 8px;
-}
-
-.hero-img {
-    margin-left: auto;
-    margin-right: auto;
-    width: auto;
-    max-height: 780px;
-}
-
-.hero-aside {
-    max-height: 780px;
-}
-
-.hero-link {
-    position: absolute;
-    bottom: 10px;
-    left: 0.5em;
-    right: 0.5em;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    text-align: center;
-}
-
-.hero-link a {
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-}
-
-.hero-link>a:hover {
-    text-decoration: none;
-    background-color: white;
-    transition: background-color, 0.4s, ease;
-}
-
-.stat-bar {
-    color: #fff;
-    padding: 4px;
-    text-align: left;
-    background-color: #f99e1a;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px;
-    width: 100%;
-    line-height: 0.7em;
-    font-size: 12px;
-
-    -webkit-transition: width 1s ease-in-out;
-    -moz-transition: width 1s ease-in-out;
-    -o-transition: width 1s ease-in-out;
-    transition: width 1s ease-in-out;
-    -webkit-animation-name:stat-bar-anim;
-    -webkit-animation-duration:2s;
-    -webkit-animation-timing-function:ease-out;
-}
-
-.hero-stat-section:nth-child(even) .stat-bar {
-    background-color: #405275;
-}
-
-@-webkit-keyframes stat-bar-anim {
-0% { width:0%; }
-}
-
-.btn-group-toggle {
-    margin: 20px;
 }
 
  /*lightish blue: #405275*/
@@ -303,14 +53,6 @@ label.btn input[type=checkbox] {
 
 .hero-grid {
     margin-bottom: 40px;
-}
-
-.nav-tabs li.active>a {
-    background-color: white;
-}
-
-.nav-tabs li:not(.active)>a:hover {
-    background-color: rgba(255, 255, 255, .3);
 }
 
 .loader {
@@ -369,57 +111,6 @@ hr {
     background-color: rgba(255, 255, 255, .5);
 }
 
-.dropdown-inline.divider {
-    position: absolute;
-    top: 0;
-    overflow: hidden;
-    height: 90%;
-    width: 1px;
-
-}
-
-.divider-vertical {
-    height: 100%;
-    border-left: 1px solid gray;     /* right or left is the same */
-    float: left;                     /* so BS grid doesn't break */
-    opacity: 0.5;                    /* optional */
-}
-
-.navbar {
-    min-width: 400px;
-}
-
-#hero-list.dropdown-menu {
-    min-width: 404px;
-}
-
-.navbar-inverse {
-    background-color: #29364D;
-}
-
-.navbar-brand>img {
-    height: 100%;
-    width: auto;
-}
-
-.navbar-brand {
-    background-color: white;
-}
-
-.navbar-inverse .navbar-brand:hover, 
-.navbar-inverse .navbar-brand:focus {
-  background-color: rgba(249, 158, 26, 1);
-}
-
-.navbar-inverse .navbar-nav li a {
-    font-weight: 700;
-    color: #dddddd;
-}
-
-.navbar-nav .dropdown .dropdown-menu {
-    background-color: #405275;
-}
-
 .btn:focus,.btn:active:focus,.btn.active:focus,
 .btn.focus,.btn:active.focus,.btn.active.focus {
     outline: none;
@@ -455,21 +146,6 @@ hr {
     hr {
         margin-top: 20px;
         margin-bottom: 20px;
-    }
-
-    .hero-name {
-        margin-top: 20px;
-    }
-
-    .hero-section>.panel {
-        position: relative;
-        height: 570px;
-    }
-
-    .stat-bar {
-        padding: 4px;
-        line-height: 1em;
-        font-size: 14px;
     }
 
 }
