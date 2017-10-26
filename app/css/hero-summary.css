@@ -174,7 +174,7 @@ a.panel {
 
 
 
-a.panel:hover {
+a.panel:hover, a.panel:focus, a.panel:active {
     text-decoration: none;
 }
 
@@ -199,7 +199,7 @@ a.panel:hover {
     transition: transform 0.5s;
 }
 
-a.panel:hover .overlay {
+a.panel:hover .overlay, a.panel:focus .overlay, a.panel:active .overlay {
     transform: scaleY(1);
 }
 
