@@ -1,16 +1,18 @@
-<article class="col-xs-6 col-sm-3 hero-section fade-in" id="{{hero.normalizedName}}">
-	<div class="panel panel-default">
-		<span class="glyphicon glyphicon-remove-circle hero-remove" aria-hidden="true" data-hero="{{hero.normalizedName}}"></span>
-		<div class="hidden-xs hero-icon ohi-{{hero.normalizedName}}"></div>
-		<h3 class="hero-name text-center">{{hero.name}}</h3>
-		{{#if hero.stats.playtime.value}}
-			{{> stats}}
-		{{else}}
-			{{> noPlaytime}}
-		{{/if}}
-		<div class="hero-link">
-			<hr>
-			<a href="/hero?name={{hero.normalizedName}}">More Info</a>
+<article class="col-xs-6 col-sm-3 fade-in" id="{{hero.normalizedName}}">
+	<a href="/hero?name={{hero.normalizedName}}" class="panel panel-main fill">
+		<div class="summary-head">
+			<div class="overlay {{hero.normalizedName}}"></div>
+			<span class="glyphicon glyphicon-remove-circle hero-remove" aria-hidden="true" data-hero="{{hero.normalizedName}}"></span>
+			<div class="hidden-xs hero-icon ohi-{{hero.normalizedName}}"></div>
+			<h3 class="hero-name text-center">{{hero.name}}</h3>
 		</div>
-	</div>
+		<hr class="tight">
+		<div class="summary-body">
+			{{#if hero.stats.playtime.value}}
+				{{> stats}}
+			{{else}}
+				{{> noPlaytime}}
+			{{/if}}
+		</div>
+	</a>
 </article>

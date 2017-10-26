@@ -90,8 +90,6 @@ label.btn input[type=checkbox] {
 }
 
 
-
-
 /*=======================*/
 /*BOOTSTRAP OVERRIDES START */
 /*=======================*/
@@ -101,9 +99,9 @@ hr {
     margin-bottom: 10px;
 }
 
-.panel-default {
+.panel-main {
     background-color: rgba(255, 255, 255, .5);
-    padding: 10px;
+    padding: 0px;
     padding-bottom: 70px;
 }
 

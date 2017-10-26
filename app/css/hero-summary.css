@@ -36,16 +36,17 @@
 
 .hero-message {
     text-align: center;
+    overflow: visible;
 }
 
 .hero-message .glyphicon-alert {
     color: #f7615c;
     font-size: 3em;
     margin-bottom: 8px;
-    -webkit-animation: jiggle 0.5s ease-in-out 2 alternate;
-    -moz-animation: jiggle 0.5s ease-in-out 2 alternate;
-    -o-animation: jiggle 0.5s ease-in-out 2 alternate;
-    animation: jiggle 0.5s ease-in-out 2 alternate;
+    -webkit-animation: jiggle 0.5s ease-in-out 4 alternate;
+    -moz-animation: jiggle 0.5s ease-in-out 4 alternate;
+    -o-animation: jiggle 0.5s ease-in-out 4 alternate;
+    animation: jiggle 0.5s ease-in-out 4 alternate;
 }
 
 @-webkit-keyframes jiggle {
@@ -63,13 +64,13 @@
     font-size: 1.2em;
     color: #f7615c;
     transition: all 0.1s ease;
+    z-index: 10;
 }
 
 .hero-remove::before {
     position: absolute;
     top: 0;
     right: 0;
-    
 }
 
 .hero-remove:hover {
@@ -77,43 +78,32 @@
     color: red;
 }
 
-.hero-section {
+.hero {
     text-align: left;
     padding-bottom: 10px;
 }
 
-/* index page*/
-.hero-section>.panel {
-    position: relative;
-    height: 370px;
-}
-
-/* hero page */
-.hero-section.panel {
-    min-height: 780px;
-}
-
 .hero-name {
     margin-top: 10px;
+    z-index: 10;
+    position: relative;
 }
 
 .hero-icon {
     font-size: 120px;
     text-align: center;
     line-height: 1;
+    position: relative;
+    z-index: 9;
 }
 
-.hero-section>h1 {
-    margin-top: 0px;
-}
-
-.hero-section h5 {
+.hero h5 {
     font-weight: 400;
     margin-top: 12px;
     margin-bottom: 2px;
 }
 
-.hero-section .section-label {
+.hero .section-label {
     color: #777;
     text-align: center;
     font-weight: 400;
@@ -134,30 +124,6 @@
 
 .hero-aside {
     max-height: 780px;
-}
-
-.hero-link {
-    position: absolute;
-    bottom: 10px;
-    left: 0.5em;
-    right: 0.5em;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    text-align: center;
-}
-
-.hero-link a {
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-}
-
-.hero-link>a:hover {
-    text-decoration: none;
-    background-color: white;
-    transition: background-color, 0.4s, ease;
 }
 
 .stat-bar {
@@ -190,6 +156,167 @@
 }
 
 
+a.panel {
+    position: relative;
+    display: block;
+    color: inherit;
+    height: 420px;
+    border: none;
+    overflow: hidden;
+    padding-bottom: 60px;
+}
+/* index page*/
+
+/* hero page */
+/* a.panel {
+    min-height: 780px;
+} */
+
+
+
+a.panel:hover {
+    text-decoration: none;
+}
+
+
+.summary-head {
+    padding: 30px 10px 10px 10px;
+    text-align: center;
+    position: relative;
+    transition: color 0.5s ease;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: grey;
+    transform-origin: 50% 0%;
+    transform: scaleY(0.1);
+    z-index: 5;
+    transition: transform 0.5s;
+}
+
+a.panel:hover .overlay {
+    transform: scaleY(1);
+}
+
+a.panel:hover .summary-head {
+    color: white;
+}
+
+.summary-body {
+    padding: 10px;
+    text-align: left;
+}
+
+hr.tight {
+    margin-top: 0px;
+}
+
+.genji {
+    background-color: #bae77a;
+}
+
+.mccree {
+    background-color: #795c42;
+}
+
+.pharah {
+    background-color: #1f73c3;
+}
+
+.reaper {
+    background-color: #5e5c50;
+}
+
+.soldier76 {
+    background-color: #525d9b;
+}
+
+.tracer {
+    background-color: #4dfffe;
+}
+
+.sombra {
+    background-color: #9765de;
+}
+
+.bastion {
+    background-color: #7a9767;
+}
+
+.hanzo {
+    background-color: #837c46;
+}
+
+.junkrat {
+    background-color: #c7712a;
+}
+
+.mei {
+    background-color: #555576;
+}
+
+.torbjorn {
+    background-color: #e9d282;
+}
+
+.widowmaker {
+    background-color: #171939;
+}
+
+.dva {
+    background-color: #feabe6;
+}
+
+.reinhardt {
+    background-color: #b9b5ad;
+}
+
+.roadhog {
+    background-color: #566565;
+}
+
+.winston {
+    background-color: #e9a92e;
+}
+
+.zarya {
+    background-color: #5588a2;
+}
+
+.orisa {
+    background-color: #97ab40;
+}
+
+.ana {
+    background-color: #6591ee;
+}
+
+.lucio {
+    background-color: #8de141;
+}
+
+.mercy {
+    background-color: #fedc57;
+}
+
+.symmetra {
+    background-color: #3cffff;
+}
+
+.zenyatta {
+    background-color: #6f241e;
+}
+
+
+
+
+
+
 /*================
   MEDIA QUERIES
  ===============*/
@@ -201,9 +328,8 @@
         margin-top: 20px;
     }
 
-    .hero-section>.panel {
-        position: relative;
-        height: 570px;
+    a.panel {
+        height: 600px;
     }
 
     .stat-bar {

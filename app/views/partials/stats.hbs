@@ -1,14 +1,15 @@
-<hr>
 {{#if heroPage}}
 	<h6 class="section-label text-uppercase">Hero VS All</h6>
 	{{else}}
 	<h6 class="section-label text-uppercase">Hero VS Selected</h6>
 {{/if}}
 {{#each hero.stats}}
-	{{#if this.value}}
-		<section class="hero-stat-section">
-			<h5>{{this.name}}</h5>
+	<section class="hero-stat-section">
+		<h5>{{this.name}}</h5>
+		{{#if this.value}}
 			<div class="stat-bar" data-stat="{{@key}}">{{this.value}}</div>
-		</section>
-	{{/if}}
+			{{else}}
+				<div class="stat-bar" data-stat="{{@key}}">0</div>
+		{{/if}}
+	</section>
 {{/each}}
