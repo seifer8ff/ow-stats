@@ -55,9 +55,8 @@ var heroMultiple = (function() {
 			}
 		});
 
-		// add touch feedback to hero sections on mobile
-		$("a.panel").on("touchstart", function(e) {
-			// $(this).toggleClass('clicked');
+		// add touch feedback to hero sections on mobile (triggers hover/focus/active state)
+		$(".hero-container").on("touchstart", "a.panel", function() {
 			console.log('touched');
 		});
 	}

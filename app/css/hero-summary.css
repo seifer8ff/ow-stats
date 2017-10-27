@@ -58,7 +58,8 @@ a.panel:hover .summary-head, a.panel:focus .summary-head, a.panel:active .summar
     padding: 16px 6%;
     text-align: center;
     position: relative;
-    transition: color 0.5s ease;
+    transition: color 0.5s ease, text-shadow 0.5s ease;
+    text-shadow: 0px 0px 0px black;
 }
 
 .summary-body {
@@ -78,10 +79,14 @@ a.panel:hover .summary-head, a.panel:focus .summary-head, a.panel:active .summar
 .hero-remove::before {
     position: absolute;
     padding: 16px;
-    background-image: radial-gradient(#F0F0F0 9px, transparent 1px);
+    background-image: radial-gradient(#F0F0F0 8px, transparent 1px);
     border-radius: 20px;
     top: -24px;
     right: -24px;
+}
+
+.hero-remove:hover::before {
+    background-image: radial-gradient(#F0F0F0 9px, transparent 1px);
 }
 
 .hero-remove:hover {
@@ -104,7 +109,7 @@ a.panel:hover .summary-head, a.panel:focus .summary-head, a.panel:active .summar
     top: 16px;
     left: 6%;
     font-size: 40px;
-    z-index: 9;
+    z-index: 12;
 }
 
 .hero-status {
