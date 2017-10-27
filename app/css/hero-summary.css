@@ -199,11 +199,11 @@ a.panel:hover, a.panel:focus, a.panel:active {
     transition: transform 0.5s;
 }
 
-a.panel:hover .overlay, a.panel:focus .overlay, a.panel:active .overlay {
+a.panel:hover .overlay, a.panel:focus .overlay, a.panel:active .overlay, a.panel.clicked .overlay {
     transform: scaleY(1);
 }
 
-a.panel:hover .summary-head {
+a.panel:hover .summary-head, a.panel:focus .summary-head, a.panel:active .summary-head, a.panel.clicked .summary-head {
     color: white;
 }
 
