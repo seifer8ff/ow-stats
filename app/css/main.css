@@ -1,5 +1,7 @@
 html, body {
-	min-height: 100%;
+    min-height: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 body {
@@ -9,50 +11,17 @@ body {
     background-size: cover;
 }
 
-html, body {
-    max-width: 100%;
-    overflow-x: hidden;
+hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-h1 {
-	text-align: center;
+hr.tight {
+    margin-top: 0px;
 }
 
-a:hover {
-    cursor: pointer;
-}
-
-/* ul > li > label {
-    width: 100%;
-}
-
-ul > li > label.btn {
-    border-radius: 0;
-} */
-
-label.btn input[type=checkbox] {
-    position: absolute;
-    clip: rect(0,0,0,0);
-    pointer-events: none;
-}
-
-#form-username {
-    margin-top: 3%;
-    text-align: center;
-}
-
-.error {
-    margin-top: 15%;
-}
-
- /*lightish blue: #405275*/
-.hero-grid .well {
+.translucent {
     background-color: rgba(255, 255, 255, .5);
-    margin-bottom: 0;
-}
-
-.hero-grid {
-    margin-bottom: 40px;
 }
 
 .loader {
@@ -79,6 +48,19 @@ label.btn input[type=checkbox] {
     animation: spin 1.2s linear infinite;
 }
 
+#form-username {
+    margin-top: 3%;
+    text-align: center;
+}
+
+.error {
+    margin-top: 15%;
+}
+
+
+
+ /* ----- ANIMATIONS ----- */
+
 @keyframes spin {
     from { transform: scale(1) rotate(0deg);}
     to { transform: scale(1) rotate(360deg);}
@@ -90,48 +72,6 @@ label.btn input[type=checkbox] {
 }
 
 
-/*=======================*/
-/*BOOTSTRAP OVERRIDES START */
-/*=======================*/
-
-hr {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.panel-main {
-    background-color: rgba(255, 255, 255, .5);
-    padding: 0px;
-    padding-bottom: 70px;
-}
-
-.jumbotron {
-    background-color: rgba(255, 255, 255, .5);
-}
-
-.btn:focus,.btn:active:focus,.btn.active:focus,
-.btn.focus,.btn:active.focus,.btn.active.focus {
-    outline: none;
-}
-
-/*btn-group dropdown overrides*/
-.btn-group .dropdown-menu {
-    padding: 0;
-}
-
-.dropdown-menu>.dropdown-menu-container>li:not(:first-child):not(:last-child):not(.dropdown-toggle)>label.btn {
-    border-radius: 0;
-}
-
-.dropdown-menu>.dropdown-menu-container>li:first-child:not(:last-child):not(.dropdown-toggle)>label.btn {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-}
-
-.dropdown-menu>.dropdown-menu-container>li:last-child:not(:first-child):not(.dropdown-toggle)>label.btn {
-    border-top-right-radius: 0;
-    border-top-left-radius: 0;
-}
 
 
 /*================

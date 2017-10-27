@@ -4,8 +4,8 @@
 	<h6 class="section-label text-uppercase">Hero VS Selected</h6>
 {{/if}}
 {{#each hero.stats}}
-	<section class="hero-stat-section">
-		<h5>{{this.name}}</h5>
+	<section class="stat-section">
+		<h5 class="stat-label">{{this.name}}</h5>
 		{{#if this.value}}
 			<div class="stat-bar" data-stat="{{@key}}">{{this.value}}</div>
 			{{else}}

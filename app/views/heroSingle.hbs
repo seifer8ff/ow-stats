@@ -1,7 +1,7 @@
-<div class="container hero-container">
+<div class="container hero">
 	<div class="row">
 		<article class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-5 col-lg-4 panel panel-default fade-in" id="{{ hero.normalizedName }}">
-			<h1>{{hero.name}}</h1>
+			<h1 class="text-center">{{hero.name}}</h1>
 			<hr class="visible-xs">
 			<img class="visible-xs img-rounded img-responsive hero-img fade-in" src="../img/ow-{{ hero.normalizedName }}-full.jpg">
 			<hr>
@@ -40,10 +40,6 @@
 					{{> noPlaytime}}
 				{{/if}}
 			{{/if}}
-			<div class="hero-link">
-				<hr>
-				<a href="/">Back to Heroes</a>
-			</div>
 		</article>
 		<aside class="hidden-xs col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-6 col-md-offset-1 col-lg-7 col-lg-offset-1 hero-aside">
 			<img class="img-rounded img-responsive hero-img fade-in" src="../img/ow-{{ hero.normalizedName }}-full.jpg">
