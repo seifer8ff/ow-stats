@@ -6,10 +6,14 @@
 {{#each hero.stats}}
 	<section class="stat-section">
 		<h5 class="stat-label">{{this.name}}</h5>
-		{{#if this.value}}
-			<div class="stat-bar" data-stat="{{@key}}">{{this.value}}</div>
-			{{else}}
-				<div class="stat-bar" data-stat="{{@key}}">0</div>
-		{{/if}}
+		<div class="stat-bar-container">
+			{{#if this.value}}
+				<div class="stat-bar" data-stat="{{@key}}"></div>
+				<span class="stat-value">{{this.value}}</span>
+				{{else}}
+					<div class="stat-bar" data-stat="{{@key}}"></div>
+					<span class="stat-value">0</span>
+			{{/if}}
+		</div>
 	</section>
 {{/each}}

@@ -145,25 +145,36 @@ a.panel:hover .summary-head, a.panel:focus .summary-head, a.panel:active .summar
     margin-bottom: 8px;
 }
 
+.stat-bar-container {
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+
 .stat-bar {
-    color: #fff;
-    padding: 4px;
-    text-align: left;
+    height: 16px;
     background-color: #f99e1a;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
     width: 100%;
-    line-height: 0.7em;
-    font-size: 12px;
+    transform: scaleX(1);
+    transform-origin: 0% 50%;
+    -webkit-transition: transform 1s ease-in-out;
+    -moz-transition: transform 1s ease-in-out;
+    -o-transition: transform 1s ease-in-out;
+    transition: transform 1s ease-in-out;
+    -webkit-animation: stat-bar-anim 2s ease-out;
+    animation: stat-bar-anim 2s ease-out
+}
 
-    -webkit-transition: width 1s ease-in-out;
-    -moz-transition: width 1s ease-in-out;
-    -o-transition: width 1s ease-in-out;
-    transition: width 1s ease-in-out;
-    -webkit-animation-name:stat-bar-anim;
-    -webkit-animation-duration:2s;
-    -webkit-animation-timing-function:ease-out;
+.stat-value {
+    position: absolute;
+    top: 0;
+    left: 4px;
+    color: #fff;
+    line-height: 16px;
+    font-size: 12px;
 }
 
 .stat-section:nth-child(even) .stat-bar {
@@ -252,7 +263,7 @@ a.panel:hover .summary-head, a.panel:focus .summary-head, a.panel:active .summar
 }
 
 @-webkit-keyframes stat-bar-anim {
-    0% { width:0%; }
+    0% { transform: scaleX(0); }
 }
 
 
@@ -296,8 +307,12 @@ a.panel:hover .summary-head, a.panel:focus .summary-head, a.panel:active .summar
     }
 
     .stat-bar {
-        padding: 4px;
-        line-height: 1em;
+        height: 24px;
+    }
+    
+    .stat-value {
+        left: 6px;
+        line-height: 24px;
         font-size: 14px;
     }
 

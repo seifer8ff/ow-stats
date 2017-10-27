@@ -43,20 +43,21 @@ var utils = (function() {
 	function updateStatBars(user) {
 		console.log("updating stat bars");
 		let statBars = document.getElementsByClassName("stat-bar");
+		let statValues = document.getElementsByClassName("stat-value");
 
 		for (let i = 0; i < statBars.length; i++) {
 			let thisStat = statBars[i].dataset.stat;
-			let thisStatValue = Number(statBars[i].textContent);
+			let thisStatValue = Number(statValues[i].textContent);
 			let width = calcStatBarWidth(thisStatValue, user.maxStats[thisStat].value);
 
-			statBars[i].style.width = width + "%"; 
+			statBars[i].style.transform = 'scaleX(' + width + ')'; 
 		}
 	}
 
 	// calculates the new width of the stat bar, with a minimum value for readability
 	function calcStatBarWidth(statValue, max) {
-		var width = statValue / max * 100;
-		if (width < 15) { width = 15 } 
+		var width = statValue / max;
+		if (width < .15) { width = .15 } 
 			return width;
 	}
 

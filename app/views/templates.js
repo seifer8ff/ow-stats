@@ -36,23 +36,6 @@ this["OW"]["templates"] = this["OW"]["templates"] || {};
 this["OW"]["templates"]["error"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<!-- error section -->\n<div class=\"container\">\n	<div class=\"jumbotron error\">\n		<h2 class=\"text-center\">Page Not Found</h2>\n		<hr>\n		<p class=\"text-center\">Something went wrong. The page you're looking for cannot be found.</p>\n	</div>\n</div>";
 },"useData":true});
-this["OW"]["templates"]["heroMultiple"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.compare : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-},"2":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return ((stack1 = container.invokePartial(partials.heroSummary,depth0,{"name":"heroSummary","hash":{"hero":depth0},"data":data,"indent":"\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "<div class=\"container\">\n"
-    + ((stack1 = container.invokePartial(partials.heroSelect,depth0,{"name":"heroSelect","data":data,"indent":"\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-    + "</div>\n<div class=\"container hero-container\">\n	<div class=\"row\" id=\"hero-multiple-parent\">\n"
-    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.heroes : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "	</div>\n</div>";
-},"usePartial":true,"useData":true});
 Handlebars.registerPartial("heroSelect", Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
@@ -100,6 +83,23 @@ Handlebars.registerPartial("heroSelect", Handlebars.template({"1":function(conta
     + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.sortedHeroes : depth0)) != null ? stack1.support : stack1),{"name":"each","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "					</ul>\n				</div>\n			</div>\n		</div>\n	</div>\n</div>";
 },"useData":true}));
+this["OW"]["templates"]["heroMultiple"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.compare : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"2":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return ((stack1 = container.invokePartial(partials.heroSummary,depth0,{"name":"heroSummary","hash":{"hero":depth0},"data":data,"indent":"\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "<div class=\"container\">\n"
+    + ((stack1 = container.invokePartial(partials.heroSelect,depth0,{"name":"heroSelect","data":data,"indent":"\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+    + "</div>\n<div class=\"container hero-container\">\n	<div class=\"row\" id=\"hero-multiple-parent\">\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.heroes : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "	</div>\n</div>";
+},"usePartial":true,"useData":true});
 Handlebars.registerPartial("heroSummary", Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -221,23 +221,23 @@ Handlebars.registerPartial("stats", Handlebars.template({"1":function(container,
 
   return "	<section class=\"stat-section\">\n		<h5 class=\"stat-label\">"
     + container.escapeExpression(container.lambda((depth0 != null ? depth0.name : depth0), depth0))
-    + "</h5>\n"
+    + "</h5>\n		<div class=\"stat-bar-container\">\n"
     + ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.value : depth0),{"name":"if","hash":{},"fn":container.program(6, data, 0),"inverse":container.program(8, data, 0),"data":data})) != null ? stack1 : "")
-    + "	</section>\n";
+    + "		</div>\n	</section>\n";
 },"6":function(container,depth0,helpers,partials,data) {
     var helper, alias1=container.escapeExpression;
 
-  return "			<div class=\"stat-bar\" data-stat=\""
+  return "				<div class=\"stat-bar\" data-stat=\""
     + alias1(((helper = (helper = helpers.key || (data && data.key)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"key","hash":{},"data":data}) : helper)))
-    + "\">"
+    + "\"></div>\n				<span class=\"stat-value\">"
     + alias1(container.lambda((depth0 != null ? depth0.value : depth0), depth0))
-    + "</div>\n";
+    + "</span>\n";
 },"8":function(container,depth0,helpers,partials,data) {
     var helper;
 
-  return "				<div class=\"stat-bar\" data-stat=\""
+  return "					<div class=\"stat-bar\" data-stat=\""
     + container.escapeExpression(((helper = (helper = helpers.key || (data && data.key)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"key","hash":{},"data":data}) : helper)))
-    + "\">0</div>\n";
+    + "\"></div>\n					<span class=\"stat-value\">0</span>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
