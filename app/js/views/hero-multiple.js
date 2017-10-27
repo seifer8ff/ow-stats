@@ -57,7 +57,8 @@ var heroMultiple = (function() {
 
 		// add touch feedback to hero sections on mobile
 		$("a.panel").on("touchstart", function(e) {
-			$(this).toggleClass('clicked');
+			// $(this).toggleClass('clicked');
+			console.log('touched');
 		});
 	}
 
