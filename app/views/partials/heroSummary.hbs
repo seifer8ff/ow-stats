@@ -1,12 +1,10 @@
 <article class="col-xs-6 col-sm-4 col-md-3 hero fade-in" id="{{hero.normalizedName}}">
+	<span class="glyphicon glyphicon-remove-circle hero-remove" aria-hidden="true" data-hero="{{hero.normalizedName}}"></span>
 	<a href="/hero?name={{hero.normalizedName}}" class="panel translucent">
 		<div class="summary-head">
 			<div class="overlay {{hero.normalizedName}}"></div>
-			<span class="glyphicon glyphicon-remove-circle hero-remove" aria-hidden="true" data-hero="{{hero.normalizedName}}"></span>
-			<div class="hidden-xs hero-icon ohi-{{hero.normalizedName}}"></div>
-			<h3 class="hero-name text-center hidden-xs">{{hero.name}}</h3>
-			<span class="hero-icon mobile ohi-{{hero.normalizedName}} hidden-sm hidden-md hidden-lg"></span>
-			<h3 class="hero-name mobile text-center hidden-sm hidden-md hidden-lg">{{hero.name}}</h3>
+			<div class="hero-icon ohi-{{hero.normalizedName}}"></div>
+			<h3 class="hero-name">{{hero.name}}</h3>
 		</div>
 		<hr class="tight">
 		<div class="summary-body">
