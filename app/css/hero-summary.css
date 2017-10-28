@@ -119,6 +119,7 @@ a.panel:hover .summary-head, a.panel:focus .summary-head, a.panel:active .summar
 
 .hero-status .glyphicon-alert {
     color: #f7615c;
+    width: 100%;
     font-size: 36px;
     margin-bottom: 8px;
     -webkit-animation: jiggle 1.5s ease-in-out infinite alternate;
