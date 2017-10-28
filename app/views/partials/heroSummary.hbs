@@ -1,13 +1,13 @@
 <article class="col-xs-6 col-sm-4 col-md-3 hero fade-in" id="{{hero.normalizedName}}">
 	<span class="glyphicon glyphicon-remove-circle hero-remove" aria-hidden="true" data-hero="{{hero.normalizedName}}"></span>
-	<a href="/hero?name={{hero.normalizedName}}" class="panel translucent">
-		<div class="summary-head">
+	<a href="/hero?name={{hero.normalizedName}}" class="panel">
+		<div class="title-container summary">
 			<div class="overlay {{hero.normalizedName}}"></div>
 			<div class="hero-icon ohi-{{hero.normalizedName}}"></div>
 			<h3 class="hero-name">{{hero.name}}</h3>
 		</div>
 		<hr class="tight">
-		<div class="summary-body">
+		<div class="body">
 			{{#if hero.stats.playtime.value}}
 				{{> stats}}
 			{{else}}

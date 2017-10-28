@@ -11,6 +11,11 @@ body {
     background-size: cover;
 }
 
+.panel {
+    position: relative;
+    border: none;
+}
+
 hr {
     margin-top: 10px;
     margin-bottom: 10px;

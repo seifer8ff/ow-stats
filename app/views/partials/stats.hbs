@@ -7,13 +7,16 @@
 	<section class="stat-section">
 		<h5 class="stat-label">{{this.name}}</h5>
 		<div class="stat-bar-container">
-			{{#if this.value}}
+		{{#if ../heroPage}}
+			<div class="stat-bar {{../hero.normalizedName}}" data-stat="{{@key}}"></div>
+			{{else}}
 				<div class="stat-bar" data-stat="{{@key}}"></div>
-				<span class="stat-value">{{this.value}}</span>
-				{{else}}
-					<div class="stat-bar" data-stat="{{@key}}"></div>
-					<span class="stat-value">0</span>
-			{{/if}}
+		{{/if}}
+		{{#if this.value}}
+			<span class="stat-value">{{this.value}}</span>
+			{{else}}
+				<span class="stat-value">0</span>
+		{{/if}}
 		</div>
 	</section>
 {{/each}}

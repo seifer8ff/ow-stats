@@ -23,7 +23,6 @@ a.panel {
     display: block;
     color: inherit;
     height: 330px;
-    border: none;
     overflow: hidden;
 }
 
@@ -35,9 +34,9 @@ a.panel:hover .overlay, a.panel:focus .overlay, a.panel:active .overlay {
     transform: scaleY(1);
 }
 
-a.panel:hover .summary-head, a.panel:focus .summary-head, a.panel:active .summary-head {
+a.panel:hover .title-container, a.panel:focus .title-container, a.panel:active .title-container {
     color: #F0F0F0;
-    text-shadow: 1px 1px 6px #AFAFAF;
+    text-shadow: 1px 1px 2px #737373;
 }
 
 .overlay {
@@ -46,6 +45,8 @@ a.panel:hover .summary-head, a.panel:focus .summary-head, a.panel:active .summar
     right: 0;
     bottom: 0;
     left: 0;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
     background-color: grey;
     transform-origin: 50% 0%;
     transform: scaleY(0.2);
@@ -53,16 +54,21 @@ a.panel:hover .summary-head, a.panel:focus .summary-head, a.panel:active .summar
     transition: transform 0.5s;
 }
 
-.summary-head {
-    height: 60px;
-    padding: 16px 6%;
+.overlay.fill {
+    -webkit-animation: overlay-fill 0.5s;
+    -webkit-animation-fill-mode: forwards;
+    animation: overlay-fill 0.5s;
+    animation-fill-mode: forwards;
+}
+
+.title-container {
     text-align: center;
     position: relative;
     transition: color 0.5s ease, text-shadow 0.5s ease;
-    text-shadow: 0px 0px 0px black;
+    text-shadow: none;
 }
 
-.summary-body {
+.body {
     padding: 10px;
     text-align: left;
 }
@@ -150,11 +156,16 @@ a.panel:hover .summary-head, a.panel:focus .summary-head, a.panel:active .summar
     position: relative;
     padding: 0;
     margin: 0;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    background-color: rgba(200, 200, 200, .5);
 }
 
 .stat-bar {
     height: 16px;
-    background-color: #f99e1a;
+    /* background-color: #f99e1a; */
+    background-color: #405275;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
@@ -178,9 +189,9 @@ a.panel:hover .summary-head, a.panel:focus .summary-head, a.panel:active .summar
     font-size: 12px;
 }
 
-.stat-section:nth-child(even) .stat-bar {
+/* .stat-section:nth-child(even) .stat-bar {
     background-color: #405275;
-}
+} */
 
 
 
@@ -218,8 +229,52 @@ a.panel:hover .summary-head, a.panel:focus .summary-head, a.panel:active .summar
 
 
 
+/* ----- HERO MULTIPLE VIEW ----- */
+
+.title-container.summary {
+    height: 60px;
+    padding: 16px 6%;
+}
+
+
 
  /* ----- HERO SINGLE VIEW ----- */
+
+.hero {
+    font-size: 16px;
+}
+
+.title-container.full {
+    height: 96px;
+    padding-top: 30px;
+    color: #F0F0F0;
+    text-shadow: 1px 1px 2px #737373;
+}
+
+.hero.single .body {
+    padding: 30px;
+    padding-top: 10px;
+}
+
+.hero-icon.full-page {
+    position: absolute;
+    top: -50px;
+    left: calc(50vw - 500px);
+    font-size: 1000px;
+    z-index: -5;
+    opacity: 0.1;
+}
+
+.title {
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: 36px;
+    z-index: 20;
+}
+
+
+
 
 .hero-aside {
     max-height: 780px;
@@ -231,6 +286,8 @@ a.panel:hover .summary-head, a.panel:focus .summary-head, a.panel:active .summar
     width: auto;
     max-height: 780px;
 }
+
+
 
 
 
@@ -267,6 +324,12 @@ a.panel:hover .summary-head, a.panel:focus .summary-head, a.panel:active .summar
     0% { transform: scaleX(0); }
 }
 
+@-webkit-keyframes overlay-fill {
+    100% { transform: scaleY(1); }
+}@keyframes overlay-fill {
+    100% { transform: scaleY(1); }
+}
+
 
 
 /*================
@@ -280,11 +343,9 @@ a.panel:hover .summary-head, a.panel:focus .summary-head, a.panel:active .summar
         height: 540px;
     }
 
-    .summary-head {
+    .title-container.summary {
         height: 220px;
         padding: 30px 20px 0px 20px;
-        position: relative;
-        transition: color 0.5s ease;
     }
 
     .hero-name {
@@ -355,7 +416,7 @@ a.panel:hover .summary-head, a.panel:focus .summary-head, a.panel:active .summar
 }
 
 .tracer {
-    background-color: #4dfffe;
+    background-color: #fccf35;
 }
 
 .sombra {
@@ -379,7 +440,7 @@ a.panel:hover .summary-head, a.panel:focus .summary-head, a.panel:active .summar
 }
 
 .torbjorn {
-    background-color: #e9d282;
+    background-color: #de584c;
 }
 
 .widowmaker {
@@ -419,11 +480,11 @@ a.panel:hover .summary-head, a.panel:focus .summary-head, a.panel:active .summar
 }
 
 .mercy {
-    background-color: #fedc57;
+    background-color: #f5e4a9;
 }
 
 .symmetra {
-    background-color: #3cffff;
+    background-color: #33b9f8;
 }
 
 .zenyatta {

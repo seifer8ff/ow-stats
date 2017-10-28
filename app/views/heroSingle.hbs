@@ -1,48 +1,64 @@
-<div class="container hero">
+<div class="container hero single">
 	<div class="row">
-		<article class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-5 col-lg-4 panel panel-default fade-in" id="{{ hero.normalizedName }}">
-			<h1 class="text-center">{{hero.name}}</h1>
-			<hr class="visible-xs">
-			<img class="visible-xs img-rounded img-responsive hero-img fade-in" src="../img/ow-{{ hero.normalizedName }}-full.jpg">
-			<hr>
-			<dl class="dl-horizontal">
-				<dt>Real Name</dt>
-				<dd>{{hero.data.realName}}</dd>
-				{{#if hero.data.age}}
-					<dt>Age</dt>
-					<dd>{{hero.data.age}}</dd>
-				{{/if}}
-				{{#if hero.data.affiliation}}
-					<dt>Prior Affiliation</dt>
-					<dd>{{hero.data.affiliation}}</dd>
-				{{/if}}
-				{{#if hero.data.base}}
-					<dt>Base of Operations</dt>
-					<dd>{{hero.data.base}}</dd>
-				{{/if}}
-			</dl>
-			<hr>
-			<p>{{hero.data.description}}</p>
-			<hr>
-			<h4 id="hero-health">Health: {{hero.data.health}}</h4>
-			{{#if hero.data.armor}}
-				<h4 id="hero-armor">Armor: {{hero.data.armor}}</h4>
-			{{/if}}
-			{{#if hero.data.shield}}
-				<h4 id="hero-shield">Shield: {{hero.data.shield}}</h4>
-			{{/if}}
-			{{#if noUser }}
-				{{> noStats}}
-			{{else}}
-				{{#if hero.stats.playtime.value}}
-					{{> stats this=hero heroPage=true}}
-				{{else}}
-					{{> noPlaytime}}
-				{{/if}}
-			{{/if}}
-		</article>
-		<aside class="hidden-xs col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-6 col-md-offset-1 col-lg-7 col-lg-offset-1 hero-aside">
-			<img class="img-rounded img-responsive hero-img fade-in" src="../img/ow-{{ hero.normalizedName }}-full.jpg">
-		</aside>
+		<div class="col-xs-12 col-sm-8 col-md-7">
+			<div class="panel">
+				<div class="title-container full">
+					<div class="overlay fill {{hero.normalizedName}}"></div>
+					<h1 class="title">{{hero.name}}</h1>
+				</div>
+				<hr class="tight">
+				<div class="body">
+					<dl class="dl-horizontal">
+						<dt>Real Name</dt>
+						<dd>{{hero.data.realName}}</dd>
+						{{#if hero.data.age}}
+							<dt>Age</dt>
+							<dd>{{hero.data.age}}</dd>
+						{{/if}}
+						{{#if hero.data.affiliation}}
+							<dt>Prior Affiliation</dt>
+							<dd>{{hero.data.affiliation}}</dd>
+						{{/if}}
+						{{#if hero.data.base}}
+							<dt>Base of Operations</dt>
+							<dd>{{hero.data.base}}</dd>
+						{{/if}}
+					</dl>
+					<hr>
+					<p>{{hero.data.description}}</p>
+					{{#if hero.data.armor}}
+						<h4 id="hero-armor">Armor: {{hero.data.armor}}</h4>
+					{{/if}}
+					{{#if hero.data.shield}}
+						<h4 id="hero-shield">Shield: {{hero.data.shield}}</h4>
+					{{/if}}
+					<hr>
+					{{!-- <div>LIST MOVES HERE WITH DESCRIPTONS ON CLICK</div>
+					<hr> --}}
+					<img class="img-rounded img-responsive" src="../img/ow-{{ hero.normalizedName }}-full.jpg">
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-4 col-md-4 col-md-offset-1">
+			<div class="panel">
+				<div class="title-container full">
+					<div class="overlay fill {{hero.normalizedName}}"></div>
+					<h2 class="title">Stats</h2>
+				</div>
+				<hr class="tight">
+				<div class="body">
+					{{#if noUser }}
+						{{> noStats}}
+					{{else}}
+						{{#if hero.stats.playtime.value}}
+							{{> stats this=hero heroPage=true}}
+						{{else}}
+							{{> noPlaytime}}
+						{{/if}}
+					{{/if}}
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
+<div class="hero-icon full-page ohi-{{hero.normalizedName}}"></div>
