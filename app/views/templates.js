@@ -176,7 +176,9 @@ this["OW"]["templates"]["heroSingle"] = Handlebars.template({"1":function(contai
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "<div class=\"container hero single\">\n	<div class=\"row\">\n		<div class=\"col-xs-12 col-sm-8 col-md-7\">\n			<div class=\"panel\">\n				<div class=\"title-container full\">\n					<div class=\"overlay fill "
+  return "<div class=\"hero-icon full-page ohi-"
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.normalizedName : stack1), depth0))
+    + "\"></div>\n<div class=\"container hero single\">\n	<div class=\"row\">\n		<div class=\"col-xs-12 col-sm-8 col-md-7\">\n			<div class=\"panel\">\n				<div class=\"title-container full\">\n					<div class=\"overlay fill "
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.normalizedName : stack1), depth0))
     + "\"></div>\n					<h1 class=\"title\">"
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.name : stack1), depth0))
@@ -197,9 +199,7 @@ this["OW"]["templates"]["heroSingle"] = Handlebars.template({"1":function(contai
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.normalizedName : stack1), depth0))
     + "\"></div>\n					<h2 class=\"title\">Stats</h2>\n				</div>\n				<hr class=\"tight\">\n				<div class=\"body\">\n"
     + ((stack1 = helpers["if"].call(alias3,(depth0 != null ? depth0.noUser : depth0),{"name":"if","hash":{},"fn":container.program(11, data, 0),"inverse":container.program(13, data, 0),"data":data})) != null ? stack1 : "")
-    + "				</div>\n			</div>\n		</div>\n	</div>\n</div>\n<div class=\"hero-icon full-page ohi-"
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.normalizedName : stack1), depth0))
-    + "\"></div>";
+    + "				</div>\n			</div>\n		</div>\n	</div>\n</div>";
 },"usePartial":true,"useData":true});
 Handlebars.registerPartial("loader", Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<div class=\"loader\">\n	<div class=\"spinner\"></div>\n</div>";
