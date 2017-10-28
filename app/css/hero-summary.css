@@ -35,7 +35,7 @@ a.panel:hover .overlay, a.panel:focus .overlay, a.panel:active .overlay {
 }
 
 a.panel:hover .title-container, a.panel:focus .title-container, a.panel:active .title-container {
-    color: #F0F0F0;
+    color: #fff;
     text-shadow: 1px 1px 2px #737373;
 }
 
@@ -247,7 +247,7 @@ a.panel:hover .title-container, a.panel:focus .title-container, a.panel:active .
 .title-container.full {
     height: 96px;
     padding-top: 30px;
-    color: #F0F0F0;
+    color: #fff;
     text-shadow: 1px 1px 2px #737373;
 }
 
@@ -271,20 +271,6 @@ a.panel:hover .title-container, a.panel:focus .title-container, a.panel:active .
     margin-bottom: 30px;
     font-size: 36px;
     z-index: 20;
-}
-
-
-
-
-.hero-aside {
-    max-height: 780px;
-}
-
-.hero-img {
-    margin-left: auto;
-    margin-right: auto;
-    width: auto;
-    max-height: 780px;
 }
 
 
