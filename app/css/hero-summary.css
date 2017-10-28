@@ -76,7 +76,7 @@ a.panel:hover .title-container, a.panel:focus .title-container, a.panel:active .
 .hero-remove {
     float: right;
     font-size: 20px;
-    background-color: rgba(255, 255, 255, .5);
+    background-color: #fff;
     color: #f7615c;
     transition: all 0.1s ease;
     z-index: 20;
@@ -85,14 +85,14 @@ a.panel:hover .title-container, a.panel:focus .title-container, a.panel:active .
 .hero-remove::before {
     position: absolute;
     padding: 16px;
-    background-image: radial-gradient(#F0F0F0 8px, transparent 1px);
+    background-image: radial-gradient(#fff 8px, transparent 1px);
     border-radius: 20px;
     top: -24px;
     right: -24px;
 }
 
 .hero-remove:hover::before {
-    background-image: radial-gradient(#F0F0F0 9px, transparent 1px);
+    background-image: radial-gradient(#fff 9px, transparent 1px);
 }
 
 .hero-remove:hover {
