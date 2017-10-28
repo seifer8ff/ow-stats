@@ -11,7 +11,8 @@
 	
 	function init() {
 		// get hero data if not cached, if expired, or if user is logged in and user has expired
-		if (!settings.heroes || Store.isExpired("heroes") || (settings.user && Store.isExpired("user"))) {
+		if (!settings.heroes || Store.isExpired("heroes") || !utils.hasStats(settings.heroes) || (settings.user && Store.isExpired("user"))) {
+			utils.showLoader();
 			apiHero.getHeroData()
 			.then(heroes => {
 				settings.heroes = heroes;
@@ -29,6 +30,7 @@
 				}
 			})
 			.then(() => {
+				utils.hideLoader();
 				initPage();
 			})
 		} else {

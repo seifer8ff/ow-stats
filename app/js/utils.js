@@ -39,6 +39,26 @@ var utils = (function() {
 		return user;
 	}
 
+	// check if stats have been saved for any heroes
+	function hasStats(heroes) {
+		if (!heroes) {
+			return false;
+		}
+
+		for (var hero in heroes) {
+			let thisHero = heroes[hero];
+
+			for (var stat in thisHero.stats) {
+				let thisStat = thisHero.stats[stat];
+
+				if (thisStat.value > 0) {
+					return true;
+				} 
+			}
+		}
+		return false;
+	}
+
 	// updates bar sizes based on hero stat vs max value of stat
 	function updateStatBars(user) {
 		console.log("updating stat bars");
@@ -134,6 +154,7 @@ var utils = (function() {
 
 	return {
 		updateMaxStats: updateMaxStats,
+		hasStats: hasStats,
 		updateStatBars: updateStatBars,
 		sortHeroes: sortHeroes,
 		showAlert: showAlert,
