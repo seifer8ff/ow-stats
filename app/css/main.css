@@ -57,6 +57,12 @@ hr.tight {
     margin-top: 15%;
 }
 
+.img-tall {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
 
 
  /* ----- ANIMATIONS ----- */
@@ -84,6 +90,13 @@ hr.tight {
     hr {
         margin-top: 20px;
         margin-bottom: 20px;
+    }
+
+    .img-tall {
+        max-height: 600px;
+        width: auto;
+        margin-left: auto;
+        margin-right: auto;
     }
 
 }
