@@ -41,7 +41,7 @@ var heroSingle = (function() {
 			let placeholder = document.getElementById("placeholder");
 
 			placeholder.insertAdjacentHTML("afterend", newSection);
-			placeholder.remove();
+			placeholder.parentNode.removeChild(placeholder);
 	
 			if (thisHero.stats.playtime.value !== null) {
 				settings.user = utils.updateMaxStats(settings.user, settings.heroes, true);

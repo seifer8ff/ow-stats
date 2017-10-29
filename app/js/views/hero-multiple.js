@@ -34,7 +34,7 @@ var heroMultiple = (function() {
 		let placeholder = document.getElementById("placeholder");
 
 		placeholder.insertAdjacentHTML("afterend", newSection);
-		placeholder.remove();
+		placeholder.parentNode.removeChild(placeholder);
 
 		settings.user = utils.updateMaxStats(settings.user, settings.heroes, false);
 		utils.updateStatBars(settings.user);
