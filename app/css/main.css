@@ -12,7 +12,10 @@ html, body {
 body {
 	padding-top: 85px;
     padding-bottom: 25px;
-    background-image: url("../img/OW-bg-pattern.svg");
+    background: url("../img/OW-bg-pattern.svg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
 }
 
