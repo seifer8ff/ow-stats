@@ -18,7 +18,7 @@
     text-align: left;
 }
 
-a.panel {
+.hero.panel {
     position: relative;
     display: block;
     color: inherit;
@@ -26,21 +26,21 @@ a.panel {
     overflow: hidden;
 }
 
-a.panel:hover, 
-a.panel:focus, 
-a.panel:active {
+.hero.panel:hover, 
+.hero.panel:focus, 
+.hero.panel:active {
     text-decoration: none;
 }
 
-a.panel:hover .overlay, 
-a.panel:focus .overlay, 
-a.panel:active .overlay {
+.hero.panel:hover .overlay, 
+.hero.panel:focus .overlay, 
+.hero.panel:active .overlay {
     transform: scaleY(1);
 }
 
-a.panel:hover .title-container, 
-a.panel:focus .title-container, 
-a.panel:active .title-container {
+.hero.panel:hover .title-container, 
+.hero.panel:focus .title-container, 
+.hero.panel:active .title-container {
     color: #fff;
     text-shadow: 1px 1px 2px #737373;
 }
@@ -250,6 +250,10 @@ a.panel:active .title-container {
     font-size: 16px;
 }
 
+.hero.panel.single:not(.placeholder) {
+    height: initial;
+}
+
 .title-container.full {
     height: 96px;
     padding-top: 30px;
@@ -280,6 +284,65 @@ a.panel:active .title-container {
 }
 
 
+
+
+/* ----- PLACEHOLDER ----- */
+
+.panel.placeholder {
+    background-color: rgba(177, 177, 177, 0.29);
+}
+
+.overlay.placeholder {
+    background-color: rgba(128, 128, 128, 0.47);
+}
+
+.spinner.placeholder {
+    position: absolute;
+    border-width: 7px;
+    height: 40px;
+    width: 40px;
+    top: 10px;
+    left: 6%;
+    animation: spin 2s linear infinite;
+}
+
+.hero.single .spinner.placeholder {
+    position: absolute;
+    border-width: 7px;
+    height: 40px;
+    width: 40px;
+    top: 29px;
+    left: 6%;
+    animation: spin 2s linear infinite;
+}
+
+hr.placeholder {
+    border-color: rgba(196, 196, 196, 0.7);
+}
+
+.stat-bar-container.placeholder {
+    margin-bottom: 30px;
+}
+
+.stat-bar-container.placeholder .stat-bar {
+    background-color: rgba(117, 117, 117, 0.4);
+}
+
+.stat-bar.empty {
+    transform: scaleX(0.15);
+}
+
+.stat-bar.quarter {
+    transform: scaleX(0.25);
+}
+
+.stat-bar.half {
+    transform: scaleX(0.5);
+}
+
+.stat-bar.seventy-five {
+    transform: scaleX(0.75);
+}
 
 
 
@@ -331,7 +394,7 @@ a.panel:active .title-container {
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
 
-    a.panel {
+    .hero.panel {
         height: 540px;
     }
 
@@ -368,6 +431,21 @@ a.panel:active .title-container {
         left: 6px;
         line-height: 24px;
         font-size: 14px;
+    }
+
+    .spinner.placeholder,
+    .hero.single .spinner.placeholder {
+        position: relative;
+        border-width: 16px;
+        left: 0;
+        margin-left: auto;
+        margin-right: auto;
+        height: 120px;
+        width: 120px;
+    }
+
+    .panel.stats.placeholder {
+        height: 540px;
     }
 
 }

@@ -31,8 +31,11 @@ var heroMultiple = (function() {
 		};
 
 		var newSection = OW.templates.heroMultiple(context);
+		let placeholder = document.getElementById("placeholder");
 
-		document.body.querySelector("main").insertAdjacentHTML("beforeend", newSection);
+		placeholder.insertAdjacentHTML("afterend", newSection);
+		placeholder.remove();
+
 		settings.user = utils.updateMaxStats(settings.user, settings.heroes, false);
 		utils.updateStatBars(settings.user);
 
@@ -56,7 +59,7 @@ var heroMultiple = (function() {
 		});
 
 		// add touch feedback to hero sections on mobile (triggers hover/focus/active state)
-		$(".hero-container").on("touchstart", "a.panel", function() {
+		$(".hero-container").on("touchstart", ".hero.panel", function() {
 			console.log('touched');
 		});
 	}

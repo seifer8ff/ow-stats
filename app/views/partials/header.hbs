@@ -2,43 +2,45 @@
 <ul class="nav navbar-nav">
 	<li class="dropdown">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Heroes <span class="caret"></span></a>
-		<ul class="dropdown-menu" id="hero-list">
-			<li>
-				<ul class="dropdown-inline">
-					<li class="dropdown-header section-label">OFFENSE</li>
-					{{#each sortedHeroes.offense}}
-						<li><a href="/hero?name={{this.normalizedName}}">{{this.name}}</a></li>
-					{{/each}}
-				</ul>
-				<ul class="dropdown-inline divider">
-					<li role="separator" class="divider-vertical"></li>
-				</ul>
-				<ul class="dropdown-inline">
-					<li class="dropdown-header section-label">DEFENSE</li>
-					{{#each sortedHeroes.defense}}
-						<li><a href="/hero?name={{this.normalizedName}}">{{this.name}}</a></li>
-					{{/each}}
-				</ul>
-				<ul class="dropdown-inline divider">
-					<li role="separator" class="divider-vertical"></li>
-				</ul>
-				<ul class="dropdown-inline">
-					<li class="dropdown-header section-label">TANK</li>
-					{{#each sortedHeroes.tank}}
-						<li><a href="/hero?name={{this.normalizedName}}">{{this.name}}</a></li>
-					{{/each}}
-				</ul>
-				<ul class="dropdown-inline divider">
-					<li role="separator" class="divider-vertical"></li>
-				</ul>
-				<ul class="dropdown-inline">
-					<li class="dropdown-header section-label">SUPPORT</li>
-					{{#each sortedHeroes.support}}
-						<li><a href="/hero?name={{this.normalizedName}}">{{this.name}}</a></li>
-					{{/each}}
-				</ul>
-			</li>
-		</ul>	
+		{{#if sortedHeroes }}
+			<ul class="dropdown-menu" id="hero-list">
+				<li>
+					<ul class="dropdown-inline">
+						<li class="dropdown-header section-label">OFFENSE</li>
+						{{#each sortedHeroes.offense}}
+							<li><a href="/hero?name={{this.normalizedName}}">{{this.name}}</a></li>
+						{{/each}}
+					</ul>
+					<ul class="dropdown-inline divider">
+						<li role="separator" class="divider-vertical"></li>
+					</ul>
+					<ul class="dropdown-inline">
+						<li class="dropdown-header section-label">DEFENSE</li>
+						{{#each sortedHeroes.defense}}
+							<li><a href="/hero?name={{this.normalizedName}}">{{this.name}}</a></li>
+						{{/each}}
+					</ul>
+					<ul class="dropdown-inline divider">
+						<li role="separator" class="divider-vertical"></li>
+					</ul>
+					<ul class="dropdown-inline">
+						<li class="dropdown-header section-label">TANK</li>
+						{{#each sortedHeroes.tank}}
+							<li><a href="/hero?name={{this.normalizedName}}">{{this.name}}</a></li>
+						{{/each}}
+					</ul>
+					<ul class="dropdown-inline divider">
+						<li role="separator" class="divider-vertical"></li>
+					</ul>
+					<ul class="dropdown-inline">
+						<li class="dropdown-header section-label">SUPPORT</li>
+						{{#each sortedHeroes.support}}
+							<li><a href="/hero?name={{this.normalizedName}}">{{this.name}}</a></li>
+						{{/each}}
+					</ul>
+				</li>
+			</ul>	
+		{{/if}}
 	</li>
 </ul>
 <ul class="nav navbar-nav navbar-right">

@@ -131,20 +131,25 @@ var utils = (function() {
 		}
 	}
 
-	function showLoader() {
-		var context = { }
+	function showPlaceholder() {
+		let content = document.getElementById("content");
+		let placeholder = document.getElementById("placeholder");
 
-		var newLoader = Handlebars.partials.loader(context);
-		document.body.insertAdjacentHTML("beforeend", newLoader);
+		if (content) {
+			content.classList.add("hide");
+		}
+
+		placeholder.classList.remove("hide");
 	}
 
-	function hideLoader() {
-		let loaders = document.getElementsByClassName("loader");
+	function hidePlaceholder() {
+		let content = document.getElementById("content");
+		let placeholder = document.getElementById("placeholder");
 
-		for (let i = 0; i < loaders.length; i++) {
-			loaders[i].innerHTML = "";
-			loaders[i].parentNode.removeChild(loaders[i]);
-			delete loaders[i];
+		placeholder.classList.add("hide");
+
+		if (content) {
+			content.classList.remove("hide");
 		}
 	}
 
@@ -159,8 +164,8 @@ var utils = (function() {
 		sortHeroes: sortHeroes,
 		showAlert: showAlert,
 		hideAlert: hideAlert,
-		showLoader: showLoader,
-		hideLoader: hideLoader
+		showPlaceholder: showPlaceholder,
+		hidePlaceholder: hidePlaceholder
 	}
 
 }());

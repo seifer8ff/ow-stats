@@ -23,6 +23,13 @@
 	<meta property="og:description" content="View and compare Overwatch hero stats.">
 	<meta property="og:site_name" content="Overwatch Stats">
 
+	<script>
+		// redirect to login page if user is not logged in
+		if (!localStorage.getItem("user") && window.location.href.indexOf('login') === -1) {
+			window.location.href = "/login";
+		}
+	</script>
+
 	<style>
 		html {
 			height: 100%;
@@ -78,6 +85,54 @@
 	</header>
 	<main>
 		<!-- PAGE CONTENT IS INSERTED HERE  -->
+		<div class="container hide" id="placeholder">
+			<div class="row">
+				<div class="col-xs-12 col-sm-8 col-md-7">
+					<div class="hero single panel placeholder">
+						<div class="title-container full">
+							<div class="overlay fill placeholder"></div>
+						</div>
+						<hr class="tight placeholder">
+						<div class="body">
+							<div class="spinner placeholder"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-md-4 col-md-offset-1">
+					<div class="panel stats placeholder">
+						<div class="title-container full">
+							<div class="overlay fill placeholder"></div>
+						</div>
+						<hr class="tight placeholder">
+						<div class="body">
+							<section class="stat-section">
+								<div class="stat-bar-container placeholder">
+									<div class="stat-bar half"></div>
+								</div>
+								<div class="stat-bar-container placeholder">
+									<div class="stat-bar quarter"></div>
+								</div>
+								<div class="stat-bar-container placeholder">
+									<div class="stat-bar seventy-five"></div>
+								</div>
+								<div class="stat-bar-container placeholder">
+									<div class="stat-bar empty"></div>
+								</div>
+								<div class="stat-bar-container placeholder">
+									<div class="stat-bar quarter"></div>
+								</div>
+								<div class="stat-bar-container placeholder">
+									<div class="stat-bar quarter"></div>
+								</div>
+								<div class="stat-bar-container placeholder">
+									<div class="stat-bar half"></div>
+								</div>
+							</section>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</main>
 
 	<!--build:js js/vendor.min.js -->

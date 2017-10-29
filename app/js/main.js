@@ -11,26 +11,24 @@
 	
 	function init() {
 		// get hero data if not cached, if expired, or if user is logged in and user has expired
-		if (!settings.heroes || Store.isExpired("heroes") || !utils.hasStats(settings.heroes) || (settings.user && Store.isExpired("user"))) {
-			utils.showLoader();
+		if (settings.user && (Store.isExpired("user") || Store.isExpired("heroes"))) {
+			utils.showPlaceholder();
+
 			apiHero.getHeroData()
 			.then(heroes => {
 				settings.heroes = heroes;
 				return heroes;
 			})
 			.then(heroes => {
-				// only get user stats if we have a user saved
-				if (settings.user) {
-					apiStats.init(heroes, settings.user);
-					return apiStats.getUserStats().then(heroes => {
-						settings.heroes = heroes;
-						settings.user = Store.getLocal("user");
-						return heroes;
-					})
-				}
+				apiStats.init(heroes, settings.user);
+				return apiStats.getUserStats().then(heroes => {
+					settings.heroes = heroes;
+					settings.user = Store.getLocal("user");
+					return heroes;
+				})
 			})
 			.then(() => {
-				utils.hideLoader();
+				utils.hidePlaceholder();
 				initPage();
 			})
 		} else {
@@ -40,11 +38,12 @@
 	}
 
 	function initPage() {
-		initHeader(settings.heroes, settings.user);
-		if (document.body.dataset.title === "hero-single") {
+		if (document.body.dataset.title === "hero-single" && settings.user) {
+			initHeader(settings.heroes, settings.user);
 			heroSingle.init(settings.heroes, settings.user);
 			heroSingle.initPage();
 		} else if (document.body.dataset.title === "hero-multiple" && settings.user) {
+			initHeader(settings.heroes, settings.user);
 			heroMultiple.init(settings.heroes, settings.user);
 			heroMultiple.initPage();
 		} else if (document.body.dataset.title === "login") {

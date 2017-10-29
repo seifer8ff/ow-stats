@@ -38,7 +38,10 @@ var heroSingle = (function() {
 	
 			// build hero info section and add to DOM
 			var newSection = OW.templates.heroSingle(context);
-			document.body.querySelector("main").insertAdjacentHTML("beforeend", newSection);
+			let placeholder = document.getElementById("placeholder");
+
+			placeholder.insertAdjacentHTML("afterend", newSection);
+			placeholder.remove();
 	
 			if (thisHero.stats.playtime.value !== null) {
 				settings.user = utils.updateMaxStats(settings.user, settings.heroes, true);
