@@ -78,6 +78,11 @@
 				window.location.reload(false); 
 			});
 		}
+
+		// add touch feedback to navbar brand on mobile (triggers hover/focus/active state)
+		$(".navbar-brand").on("touchstart", function() {
+			console.log('listening for touch events on navbar brand');
+		});
 	}
 
 }());

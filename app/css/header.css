@@ -88,7 +88,8 @@ label.btn input[type=checkbox] {
 }
 
 .navbar-inverse .navbar-brand:hover, 
-.navbar-inverse .navbar-brand:focus {
+.navbar-inverse .navbar-brand:focus,
+.navbar-inverse .navbar-brand:active {
   background-color: rgba(249, 158, 26, 1);
 }
 
