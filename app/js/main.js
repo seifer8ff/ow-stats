@@ -11,7 +11,7 @@
 	
 	function init() {
 		// get hero data if not cached, if expired, or if user is logged in and user has expired
-		if (settings.user && (Store.isExpired("user") || Store.isExpired("heroes"))) {
+		if (settings.user && (Store.isExpired("user") || Store.isExpired("heroes") || !utils.hasStats(settings.heroes))) {
 			utils.showPlaceholder();
 
 			apiHero.getHeroData()
