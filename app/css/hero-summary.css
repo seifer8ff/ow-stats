@@ -109,7 +109,7 @@
     color: red;
 }
 
-.hero-name {
+.title {
     position: relative;
     text-align: right;
     margin: 0px;
@@ -257,11 +257,11 @@
     height: initial;
 }
 
-.title-container.full {
+.title-container.fill {
     height: 96px;
     padding-top: 30px;
     color: #fff;
-    text-shadow: 1px 1px 2px #737373;
+    text-shadow: #737373 1px 1px 2px;
 }
 
 .hero.single .body {
@@ -278,12 +278,12 @@
     opacity: 0.1;
 }
 
-.title {
-    position: relative;
+.title.fill {
+    text-align: center;
     margin-top: 0;
     margin-bottom: 30px;
     font-size: 36px;
-    z-index: 20;
+    opacity: 0.99; /* Fix for mobile safari text-shadow rendering issue  */
 }
 
 
@@ -406,7 +406,7 @@ hr.placeholder {
         padding: 30px 20px 0px 20px;
     }
 
-    .hero-name {
+    .title {
         margin-top: 20px;
         margin-left: 0px;
         text-align: center;
