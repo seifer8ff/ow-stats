@@ -59,7 +59,7 @@ hr.tight {
 
 .img-tall {
     display: block;
-    min-height: 600px;
+    min-height: 300px;
     max-width: 100%;
     height: auto;
 }
