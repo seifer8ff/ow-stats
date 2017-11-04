@@ -2,7 +2,6 @@ var apiHero = (function() {
 	
 	var settings = {
 		heroAPIURL: "https://overwatch-api.net/api/v1/hero/",
-		heroes: Store.getLocal("heroes")
 	} 
 
 	function getHeroData() {
@@ -12,7 +11,6 @@ var apiHero = (function() {
 			.then(res => res.data)
 			.then(rawHeroData => processHeroData(rawHeroData))
 			.then(heroData => {
-				saveHeroData(heroData);
 				return resolve(heroData);
 			})
 			.catch(function(err) {
@@ -84,17 +82,6 @@ var apiHero = (function() {
 			default: 
 				hero.role = "hide"
 		}
-	}
-
-	function saveHeroData(heroes) {
-		console.log('saving hero data');
-		return new Promise(function(resolve) {
-			// prepare hero info data and save to local storage
-			Store.setLocal('heroes', heroes, 7 * 60 * 60 * 1000);
-			settings.heroes = heroes;
-			console.log('resolving');
-			return resolve(heroes);
-		});
 	}
 
 

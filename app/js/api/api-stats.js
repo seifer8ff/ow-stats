@@ -22,8 +22,8 @@ var apiStats = (function() {
 			.then(rawStats => filterUserRegion(rawStats))
 			.then(rawStats => processHeroStats(rawStats))
 			.then(rawStats => processUserStats(rawStats, false))
-			.then(() => {
-				return resolve(settings.heroes);
+			.then((statObj) => {
+				return resolve(statObj);
 			})
 			.catch(err => {
 				console.log("could not get user stats");
@@ -70,7 +70,6 @@ var apiStats = (function() {
 					console.log(settings.heroes[hero]);
 				}
 			}
-			Store.setLocal('heroes', settings.heroes, 7 * 60 * 60 * 1000);
 
 			return resolve(rawStats);
 		});
@@ -83,7 +82,10 @@ var apiStats = (function() {
 			utils.updateMaxStats(settings.user, settings.heroes, true);
 			Store.setLocal("user", settings.user, 60 * 60 * 60 * 1000);
 
-			return resolve(settings.user);
+			return resolve({
+				heroes: settings.heroes,
+				user: settings.user
+			});
 		});
 	}
 

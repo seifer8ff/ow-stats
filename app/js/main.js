@@ -14,18 +14,35 @@
 		if (settings.user && (Store.isExpired("user") || Store.isExpired("heroes") || !utils.hasStats(settings.heroes))) {
 			utils.showPlaceholder();
 
+			if (Store.isExpired("user")) {
+				console.log('user is expired');
+			}
+
+			if (Store.isExpired("heroes")) {
+				console.log('heroes are expired');
+			}
+
+			if (!utils.hasStats(settings.heroes)) {
+				console.log('do not have stats');
+				console.log(settings.heroes);
+			}
+
 			apiHero.getHeroData()
-			.then(heroes => {
-				settings.heroes = heroes;
-				return heroes;
+			// once we have hero info, get hero stats and then save combined heroes (and the user info)
+			.then(heroes => apiStats.init(heroes, settings.user))
+			.then(() => apiStats.getUserStats())
+			.then(statObj => {
+				console.log(statObj);
+				settings.heroes = statObj.heroes;
+				settings.user = statObj.user;
+				Store.setLocal('heroes', settings.heroes, 7 * 24 * 60 * 60 * 1000);
+				Store.setLocal('user', settings.user, 60 * 24 * 60 * 60 * 1000);
+	
+				return settings.heroes;
 			})
-			.then(heroes => {
-				apiStats.init(heroes, settings.user);
-				return apiStats.getUserStats().then(heroes => {
-					settings.heroes = heroes;
-					settings.user = Store.getLocal("user");
-					return heroes;
-				})
+			.catch(() => {
+				// if getting hero stats fails, use expired hero data
+				return settings.heroes;
 			})
 			.then(() => {
 				utils.hidePlaceholder();

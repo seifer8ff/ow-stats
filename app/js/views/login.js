@@ -48,12 +48,22 @@ var login = (function() {
 		newUser.url = newUser.url.replace("#", "-");
 
 		settings.user = newUser;
-		Store.setLocal("user", newUser, 60 * 60 * 60 * 1000);
+		Store.setLocal("user", newUser, 7 * 24 * 60 * 60 * 1000);
 
 		utils.showPlaceholder();
 		apiHero.getHeroData()
+		// once we have hero info, get hero stats and then save combined heroes (and the user info)
 		.then(heroes => apiStats.init(heroes, settings.user))
 		.then(() => apiStats.getUserStats())
+		.then(statObj => {
+			console.log(statObj);
+			settings.heroes = statObj.heroes;
+			settings.user = statObj.user;
+			Store.setLocal('heroes', settings.heroes, 7 * 24 * 60 * 60 * 1000);
+			Store.setLocal('user', settings.user, 60 * 24 * 60 * 60 * 1000);
+
+			return settings.heroes;
+		})
 		.then(() => redirect())
 		.catch(err => {
 			localStorage.removeItem("user");
