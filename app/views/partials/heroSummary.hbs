@@ -2,7 +2,7 @@
 	<span class="glyphicon glyphicon-remove-circle hero-remove" aria-hidden="true" data-hero="{{hero.normalizedName}}"></span>
 	<a href="/hero?name={{hero.normalizedName}}" class="hero panel">
 		<div class="title-container summary">
-			<div class="overlay {{hero.normalizedName}}"></div>
+			<div class="overlay top {{hero.normalizedName}}"></div>
 			<div class="hero-icon ohi-{{hero.normalizedName}}"></div>
 			<h3 class="title">{{hero.name}}</h3>
 		</div>
@@ -13,6 +13,10 @@
 			{{else}}
 				{{> noPlaytime}}
 			{{/if}}
+		</div>
+		<div class="link">
+			<div class="overlay bottom {{hero.normalizedName}}"></div>
+			<h5 class="link-text">See More</h6>
 		</div>
 	</a>
 </article>

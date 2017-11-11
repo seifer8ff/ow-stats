@@ -123,7 +123,7 @@ Handlebars.registerPartial("heroSummary", Handlebars.template({"1":function(cont
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.normalizedName : stack1), depth0))
     + "\"></span>\n	<a href=\"/hero?name="
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.normalizedName : stack1), depth0))
-    + "\" class=\"hero panel\">\n		<div class=\"title-container summary\">\n			<div class=\"overlay "
+    + "\" class=\"hero panel\">\n		<div class=\"title-container summary\">\n			<div class=\"overlay top "
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.normalizedName : stack1), depth0))
     + "\"></div>\n			<div class=\"hero-icon ohi-"
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.normalizedName : stack1), depth0))
@@ -131,7 +131,9 @@ Handlebars.registerPartial("heroSummary", Handlebars.template({"1":function(cont
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.name : stack1), depth0))
     + "</h3>\n		</div>\n		<hr class=\"tight\">\n		<div class=\"body\">\n"
     + ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.stats : stack1)) != null ? stack1.playtime : stack1)) != null ? stack1.value : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
-    + "		</div>\n	</a>\n</article>";
+    + "		</div>\n		<div class=\"link\">\n			<div class=\"overlay bottom "
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.hero : depth0)) != null ? stack1.normalizedName : stack1), depth0))
+    + "\"></div>\n			<h5 class=\"link-text\">See More</h6>\n		</div>\n	</a>\n</article>";
 },"usePartial":true,"useData":true}));
 this["OW"]["templates"]["heroSingle"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1;
