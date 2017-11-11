@@ -15,8 +15,8 @@
 					<div role="tabpanel" class="tab-pane active" id="hero-grid-offense">
 						<div class="btn-group btn-group-justified" role="group" aria-label="heroes">
 							{{#each sortedHeroes.offense}}
-								<label class="btn btn-default {{#if this.compare}}active{{/if}}">
-									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{this.compare}}>{{this.name}}
+								<label class="btn btn-default {{#if (heroSelected this.normalizedName @root.user)}}active{{/if}}">
+									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{heroSelected this.normalizedName @root.user}}>{{this.name}}
 								</label>
 							{{/each}}
 						</div>
@@ -24,8 +24,8 @@
 					<div role="tabpanel" class="tab-pane" id="hero-grid-defense">
 						<div class="btn-group btn-group-justified" role="group" aria-label="heroes">
 							{{#each sortedHeroes.defense}}
-								<label class="btn btn-default {{#if this.compare}}active{{/if}}">
-									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{this.compare}}>{{this.name}}
+								<label class="btn btn-default {{#if (heroSelected this.normalizedName @root.user)}}active{{/if}}">
+									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{heroSelected this.normalizedName @root.user}}>{{this.name}}
 								</label>
 							{{/each}}
 						</div>
@@ -33,8 +33,8 @@
 					<div role="tabpanel" class="tab-pane" id="hero-grid-tank">
 						<div class="btn-group btn-group-justified" role="group" aria-label="heroes">
 							{{#each sortedHeroes.tank}}
-								<label class="btn btn-default {{#if this.compare}}active{{/if}}">
-									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{this.compare}}>{{this.name}}
+								<label class="btn btn-default {{#if (heroSelected this.normalizedName @root.user)}}active{{/if}}">
+									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{heroSelected this.normalizedName @root.user}}>{{this.name}}
 								</label>
 							{{/each}}
 						</div>
@@ -42,8 +42,8 @@
 					<div role="tabpanel" class="tab-pane" id="hero-grid-support">
 						<div class="btn-group btn-group-justified" role="group" aria-label="heroes">
 							{{#each sortedHeroes.support}}
-								<label class="btn btn-default {{#if this.compare}}active{{/if}}">
-									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{this.compare}}>{{this.name}}
+								<label class="btn btn-default {{#if (heroSelected this.normalizedName @root.user)}}active{{/if}}">
+									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{heroSelected this.normalizedName @root.user}}>{{this.name}}
 								</label>
 							{{/each}}
 						</div>
@@ -67,8 +67,8 @@
 					<ul class="dropdown-menu">
 						{{#each sortedHeroes.offense}}
 							<li>
-								<label class="btn btn-default {{#if this.compare}}active{{/if}}">
-									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{this.compare}}>{{this.name}}
+								<label class="btn btn-default {{#if (heroSelected this.normalizedName @root.user)}}active{{/if}}">
+									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{heroSelected this.normalizedName @root.user}}>{{this.name}}
 								</label>
 							</li>
 						{{/each}}
@@ -81,8 +81,8 @@
 					<ul class="dropdown-menu">
 						{{#each sortedHeroes.defense}}
 							<li>
-								<label class="btn btn-default {{#if this.compare}}active{{/if}}">
-									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{this.compare}}>{{this.name}}
+								<label class="btn btn-default {{#if (heroSelected this.normalizedName @root.user)}}active{{/if}}">
+									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{heroSelected this.normalizedName @root.user}}>{{this.name}}
 								</label>
 							</li>
 						{{/each}}
@@ -95,8 +95,8 @@
 					<ul class="dropdown-menu">
 						{{#each sortedHeroes.tank}}
 							<li>
-								<label class="btn btn-default {{#if this.compare}}active{{/if}}">
-									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{this.compare}}>{{this.name}}
+								<label class="btn btn-default {{#if (heroSelected this.normalizedName @root.user)}}active{{/if}}">
+									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{heroSelected this.normalizedName @root.user}}>{{this.name}}
 								</label>
 							</li>
 						{{/each}}
@@ -109,8 +109,8 @@
 					<ul class="dropdown-menu">
 						{{#each sortedHeroes.support}}
 							<li>
-								<label class="btn btn-default {{#if this.compare}}active{{/if}}">
-									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{this.compare}}>{{this.name}}
+								<label class="btn btn-default {{#if (heroSelected this.normalizedName @root.user)}}active{{/if}}">
+									<input type="checkbox" class="hero-toggle" data-hero="{{this.normalizedName}}" checked={{heroSelected this.normalizedName @root.user}}>{{this.name}}
 								</label>
 							</li>
 						{{/each}}

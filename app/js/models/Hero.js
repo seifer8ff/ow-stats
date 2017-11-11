@@ -3,7 +3,6 @@ var Hero = function(options) {
 	this.normalizedName = normalizeString(options.name, true);
 	this.icon = '';
 	this.role = '';
-	this.compare = false;
 	this.data = {
 		realName: options.realName || null,
 		age: options.age || null,
@@ -34,11 +33,7 @@ var Hero = function(options) {
 		playtime: {
 			value: options.playtime || null,
 			name: 'Playtime'
-		},
-	}
-
-	if (this.normalizedName === 'junkrat' || this.normalizedName === 'symmetra' || this.normalizedName === 'mercy') {
-		this.compare = true;
+		}
 	}
 
 	function normalizeString(string, removeExtras) {

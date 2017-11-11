@@ -23,7 +23,7 @@ var utils = (function() {
 			let thisHero = heroes[hero];
 
 			// only consider heroes toggled on for comparison unless allHeroes is true
-			if (!thisHero.compare && !allHeroes) { 
+			if (!(thisHero.normalizedName in user.selectedHeroes) && !allHeroes) { 
 				continue;
 			}
 

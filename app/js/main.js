@@ -10,6 +10,21 @@
 
 	
 	function init() {
+		// check if all heroes have been removed from display and reset display if so
+		if (settings.user && settings.user.hasOwnProperty('selectedHeroes')) {
+			if (!Object.keys(settings.user.selectedHeroes).length) {
+				console.log('should reset heroes');
+				settings.user.selectedHeroes = {
+					soldier76: true,
+					junkrat: true,
+					dva: true,
+					mercy: true
+				};
+			}
+		} else if (window.location.href.indexOf('login') === -1) {
+			window.location.href = "/login";
+		}
+
 		// get hero data if not cached, if expired, or if user is logged in and user has expired
 		if (settings.user && (Store.isExpired("user") || Store.isExpired("heroes") || !utils.hasStats(settings.heroes))) {
 			utils.showPlaceholder();

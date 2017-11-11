@@ -5,7 +5,7 @@
 	<div class="container hero-container">
 		<div class="row" id="hero-multiple-parent">
 			{{#each heroes}}
-				{{#if this.compare}}
+				{{#if (heroSelected this.normalizedName @root.user)}}
 					{{> heroSummary hero=this}}
 				{{/if}}
 			{{/each}}

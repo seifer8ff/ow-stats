@@ -75,18 +75,18 @@ var heroMultiple = (function() {
 				heroToggles[i].parentNode.classList.toggle("active");
 			}
 
-			hero.compare = !hero.compare;
-			Store.setLocal("heroes", settings.heroes, 7 * 60 * 60 * 1000);
-
-			if (hero.compare) {
+			if (hero.normalizedName in settings.user.selectedHeroes) {
+				delete settings.user.selectedHeroes[hero.normalizedName];
+				removeHeroSection(hero);
+			} else {
+				settings.user.selectedHeroes[hero.normalizedName] = true;
 				addHeroSection(hero);
 				for (let i = 0; i < heroToggles.length; i++) {
 					heroToggles[i].disabled = false;
 				}
-			} else {
-				removeHeroSection(hero);
 			}
-			// anytime the heroDisplay array is changed, we need to get max stats of chosen heroes
+			Store.setLocal("user", settings.user, 7 * 60 * 60 * 1000);
+			// anytime the heroes displayed are changed we need to get max stats of chosen heroes
 			settings.user = utils.updateMaxStats(settings.user, settings.heroes, false);
 			utils.updateStatBars(settings.user);
 

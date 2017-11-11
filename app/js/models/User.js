@@ -23,7 +23,13 @@ var User = function(options) {
 			name: 'Max Playtime',
 			value: 0
 		}
-	}
+	};
+	this.selectedHeroes = {
+		soldier76: true,
+		junkrat: true,
+		dva: true,
+		mercy: true
+	};
 }
 	
 	

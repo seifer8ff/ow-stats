@@ -19,31 +19,32 @@ var babel = require('gulp-babel');
 var browserSync = require('browser-sync').create();
 
 
-// compiles templates and partial templates, then combines them and outputs to templates.js
+
+// compiles
 gulp.task('handlebars', function() {
   var partials = gulp.src(['app/views/partials/*.hbs'])
-    .pipe(handlebars({
-      handlebars: require('handlebars')
-    }))
-    .pipe(wrap('Handlebars.registerPartial(<%= processPartialName(file.relative) %>, Handlebars.template(<%= contents %>));', {}, {
-      imports: {
-        processPartialName: function(fileName) {
-          // Strip the extension and the underscore
-          // Escape the output with JSON.stringify
-          return JSON.stringify(path.basename(fileName, '.js'));
-        }
+  .pipe(handlebars({
+    handlebars: require('handlebars')
+  }))
+  .pipe(wrap('Handlebars.registerPartial(<%= processPartialName(file.relative) %>, Handlebars.template(<%= contents %>));', {}, {
+    imports: {
+      processPartialName: function(fileName) {
+        // Strip the extension and the underscore
+        // Escape the output with JSON.stringify
+        return JSON.stringify(path.basename(fileName, '.js'));
       }
-    }));
+    }
+  }));
 
   var templates = gulp.src('app/views/*.hbs')
-    .pipe(handlebars({
-      handlebars: require('handlebars')
-    }))
-    .pipe(wrap('Handlebars.template(<%= contents %>)'))
-    .pipe(declare({
-      namespace: 'OW.templates',
-      noRedeclare: true // Avoid duplicate declarations
-    }));
+  .pipe(handlebars({
+    handlebars: require('handlebars')
+  }))
+  .pipe(wrap('Handlebars.template(<%= contents %>)'))
+  .pipe(declare({
+    namespace: 'OW.templates',
+    noRedeclare: true // Avoid duplicate declarations
+  }));
 
   // Output both the partials and the templates as build/js/templates.js
   return merge(partials, templates)
